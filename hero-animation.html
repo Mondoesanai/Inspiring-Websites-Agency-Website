@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #08060f; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = canvas.width  = 1920;
+const H = canvas.height = 1080;
+
+const LOOP_SEC = 10;
+const FPS      = 30;
+const TOTAL    = LOOP_SEC * FPS; // 300 frames
+
+/* ─── Pre-compute tiling grain texture (512×512, 10 variants) ─── */
+const GRAIN_TILE     = 512;
+const GRAIN_VARIANTS = 10;
+const grainCanvases  = [];
+for (let v = 0; v < GRAIN_VARIANTS; v++) {
+  const gc   = document.createElement('canvas');
+  gc.width   = gc.height = GRAIN_TILE;
+  const gctx = gc.getContext('2d');
+  const id   = gctx.createImageData(GRAIN_TILE, GRAIN_TILE);
+  const d    = id.data;
+  for (let i = 0; i < d.length; i += 4) {
+    const n    = (Math.random() * 255) | 0;
+    d[i]       = d[i+1] = d[i+2] = n;
+    d[i+3]     = (Math.random() * 22) | 0;
+  }
+  gctx.putImageData(id, 0, 0);
+  grainCanvases.push(gc);
+}
+
+/* ─── Pre-compute grid ─── */
+const gridCanvas     = document.createElement('canvas');
+gridCanvas.width     = W; gridCanvas.height = H;
+const gctx2          = gridCanvas.getContext('2d');
+gctx2.strokeStyle    = 'rgba(240,220,255,0.016)';
+gctx2.lineWidth      = 1;
+const GRID           = 88;
+for (let x = 0; x <= W; x += GRID) {
+  gctx2.beginPath(); gctx2.moveTo(x + 0.5, 0); gctx2.lineTo(x + 0.5, H); gctx2.stroke();
+}
+for (let y = 0; y <= H; y += GRID) {
+  gctx2.beginPath(); gctx2.moveTo(0, y + 0.5); gctx2.lineTo(W, y + 0.5); gctx2.stroke();
+}
+
+let frame = 0;
+
+function draw() {
+  const t = (frame % TOTAL) / TOTAL;
+  const a = t * Math.PI * 2;
+
+  /* ── Base — very dark warm black with faint purple tint ── */
+  ctx.fillStyle = '#08060f';
+  ctx.fillRect(0, 0, W, H);
+
+  /* ── Orb 1 — large pink, upper-left ── */
+  {
+    const cx = W * (0.18 + 0.09 * Math.sin(a));
+    const cy = H * (0.24 + 0.07 * Math.cos(a * 1.07));
+    const g  = ctx.createRadialGradient(cx, cy, 0, cx, cy, 740);
+    g.addColorStop(0,    'rgba(236,72,153,0.24)');   // #EC4899 hot pink
+    g.addColorStop(0.28, 'rgba(236,72,153,0.11)');
+    g.addColorStop(0.60, 'rgba(236,72,153,0.04)');
+    g.addColorStop(1,    'rgba(236,72,153,0.00)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  /* ── Orb 2 — large purple, lower-right, opposite phase ── */
+  {
+    const cx = W * (0.80 + 0.06 * Math.sin(a + Math.PI));
+    const cy = H * (0.70 + 0.08 * Math.cos(a * 0.93 + Math.PI));
+    const g  = ctx.createRadialGradient(cx, cy, 0, cx, cy, 860);
+    g.addColorStop(0,    'rgba(139,92,246,0.22)');   // #8B5CF6 violet
+    g.addColorStop(0.38, 'rgba(139,92,246,0.09)');
+    g.addColorStop(0.70, 'rgba(139,92,246,0.03)');
+    g.addColorStop(1,    'rgba(139,92,246,0.00)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  /* ── Orb 3 — medium deep-violet, upper-right, slightly faster ── */
+  {
+    const cx = W * (0.82 + 0.05 * Math.cos(a * 1.35 + 1.1));
+    const cy = H * (0.17 + 0.06 * Math.sin(a * 1.35 + 0.4));
+    const g  = ctx.createRadialGradient(cx, cy, 0, cx, cy, 500);
+    g.addColorStop(0,    'rgba(168,85,247,0.18)');   // #A855F7 purple
+    g.addColorStop(0.48, 'rgba(168,85,247,0.06)');
+    g.addColorStop(1,    'rgba(168,85,247,0.00)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  /* ── Orb 4 — magenta accent, lower-left ── */
+  {
+    const cx = W * (0.12 + 0.04 * Math.cos(a * 0.7 + 2.0));
+    const cy = H * (0.76 + 0.05 * Math.sin(a * 0.7 + 0.8));
+    const g  = ctx.createRadialGradient(cx, cy, 0, cx, cy, 440);
+    g.addColorStop(0,    'rgba(217,70,239,0.12)');   // #D946EF fuchsia
+    g.addColorStop(0.55, 'rgba(217,70,239,0.04)');
+    g.addColorStop(1,    'rgba(217,70,239,0.00)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  /* ── Orb 5 — subtle center depth glow ── */
+  {
+    const pulse = 0.5 + 0.5 * Math.sin(a * 0.6);
+    const g = ctx.createRadialGradient(W * 0.5, H * 0.5, 0, W * 0.5, H * 0.5, 560);
+    g.addColorStop(0,    `rgba(139,92,246,${(0.04 + pulse * 0.03).toFixed(3)})`);
+    g.addColorStop(0.7,  'rgba(139,92,246,0.01)');
+    g.addColorStop(1,    'rgba(139,92,246,0.00)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  /* ── Atmospheric band 1 — slow oscillation ── */
+  {
+    const by = H * (0.35 + 0.28 * Math.sin(a));
+    const bh = H * 0.38;
+    const g  = ctx.createLinearGradient(0, by - bh, 0, by + bh);
+    g.addColorStop(0,   'rgba(236,72,153,0.000)');
+    g.addColorStop(0.5, 'rgba(236,72,153,0.022)');
+    g.addColorStop(1,   'rgba(236,72,153,0.000)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, by - bh, W, bh * 2);
+  }
+
+  /* ── Atmospheric band 2 — purple, opposite ── */
+  {
+    const by = H * (0.60 + 0.22 * Math.sin(a + Math.PI));
+    const bh = H * 0.28;
+    const g  = ctx.createLinearGradient(0, by - bh, 0, by + bh);
+    g.addColorStop(0,   'rgba(139,92,246,0.000)');
+    g.addColorStop(0.5, 'rgba(139,92,246,0.018)');
+    g.addColorStop(1,   'rgba(139,92,246,0.000)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, by - bh, W, bh * 2);
+  }
+
+  /* ── Top-edge corona — pink pulse ── */
+  {
+    const pulse = 0.5 + 0.5 * Math.sin(a * 1.5);
+    const g = ctx.createRadialGradient(W / 2, -H * 0.08, 0, W / 2, -H * 0.08, W * 0.65);
+    g.addColorStop(0,    `rgba(236,72,153,${(0.08 + pulse * 0.05).toFixed(3)})`);
+    g.addColorStop(0.35, `rgba(168,85,247,${(0.03 + pulse * 0.02).toFixed(3)})`);
+    g.addColorStop(1,    'rgba(139,92,246,0.000)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H * 0.52);
+  }
+
+  /* ── Sweeping diagonal shimmer ── */
+  {
+    const rx = W * (0.1 + 0.8 * ((t * 1.0) % 1.0));
+    const g  = ctx.createLinearGradient(rx - 200, 0, rx + 200, 0);
+    g.addColorStop(0,   'rgba(240,160,255,0.000)');
+    g.addColorStop(0.5, 'rgba(240,160,255,0.010)');
+    g.addColorStop(1,   'rgba(240,160,255,0.000)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  /* ── Grid ── */
+  ctx.globalAlpha = 1.0;
+  ctx.drawImage(gridCanvas, 0, 0);
+
+  /* ── Film grain ── */
+  const gi = Math.floor(frame / 3) % GRAIN_VARIANTS;
+  ctx.globalCompositeOperation = 'overlay';
+  ctx.globalAlpha = 0.030;
+  for (let tx = 0; tx < W; tx += GRAIN_TILE) {
+    for (let ty = 0; ty < H; ty += GRAIN_TILE) {
+      ctx.drawImage(grainCanvases[gi], tx, ty);
+    }
+  }
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.globalAlpha = 1.0;
+
+  /* ── Vignette ── */
+  {
+    const g = ctx.createRadialGradient(W / 2, H / 2, H * 0.22, W / 2, H / 2, H * 0.88);
+    g.addColorStop(0,    'rgba(0,0,0,0.00)');
+    g.addColorStop(0.55, 'rgba(0,0,0,0.20)');
+    g.addColorStop(1,    'rgba(0,0,0,0.82)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  /* ── Bottom fade ── */
+  {
+    const g = ctx.createLinearGradient(0, H * 0.70, 0, H);
+    g.addColorStop(0, 'rgba(0,0,0,0.00)');
+    g.addColorStop(1, 'rgba(0,0,0,0.60)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, H * 0.70, W, H * 0.30);
+  }
+
+  frame++;
+}
+
+/* ── Auto-animate ── */
+(function loop() { draw(); requestAnimationFrame(loop); })();
+
+/* ── Expose for recorder ── */
+window.__canvas      = canvas;
+window.__totalFrames = TOTAL;
+window.__fps         = FPS;
+</script>
+</body>
+</html>
