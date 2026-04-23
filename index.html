@@ -247,35 +247,459 @@
     /* ── Hero ── */
     .hero {
       position: relative;
-      padding: 148px 40px 100px;
+      min-height: 100vh;
+      padding: 0 40px;
       overflow: hidden;
+      display: flex;
+      align-items: center;
     }
 
     .hero-bg-glow {
       position: absolute;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 900px;
-      height: 700px;
-      background: radial-gradient(ellipse at 50% 0%,
-        rgba(143, 209, 79, 0.1) 0%,
-        rgba(143, 209, 79, 0.04) 40%,
+      top: -120px; left: -100px;
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse at 30% 30%,
+        rgba(143,209,79,0.13) 0%,
+        rgba(143,209,79,0.04) 40%,
         transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
     .hero-bg-glow-r {
       position: absolute;
-      top: 0; right: -200px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(ellipse at 80% 20%,
-        rgba(143, 209, 79, 0.055) 0%,
-        transparent 55%);
+      top: 20%; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse at 80% 30%,
+        rgba(143,209,79,0.09) 0%,
+        transparent 60%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── Hero 2-col ── */
+    .hero-2col {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Hero left ── */
+    .hero-h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+      color: #F5F7F6;
+      margin-bottom: 24px;
+    }
+
+    .hero-cycle-wrap {
+      display: block;
+      height: 1.08em;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-cycle-word {
+      display: block;
+      color: #8FD14F;
+      position: absolute;
+      top: 0; left: 0;
+      opacity: 0;
+      transform: translateY(110%);
+      transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.34,1.56,0.64,1);
+      white-space: nowrap;
+    }
+    .hero-cycle-word.active {
+      opacity: 1; transform: translateY(0);
+    }
+    .hero-cycle-word.exit {
+      opacity: 0; transform: translateY(-110%);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 1.4vw, 19px);
+      line-height: 1.7;
+      color: #A6B0AC;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .hero-trust {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .hero-trust span {
+      font-size: 13px;
+      font-weight: 600;
+      color: #A6B0AC;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-trust span::before {
+      content: '';
+      display: block;
+      width: 14px; height: 14px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238FD14F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+
+    /* ── Hero right: floating mockup ── */
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-mockup-glow {
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse at center,
+        rgba(143,209,79,0.18) 0%,
+        transparent 65%);
       pointer-events: none;
       z-index: 0;
+    }
+
+    @keyframes heroFloat {
+      0%,100% { transform: translateY(0) rotate(-0.5deg); }
+      50%      { transform: translateY(-18px) rotate(0.5deg); }
+    }
+    @keyframes chipFloat1 {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+    @keyframes chipFloat2 {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
+    }
+    @keyframes chipIn {
+      from { opacity: 0; transform: translateY(24px) scale(0.88); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .hero-mockup {
+      position: relative;
+      z-index: 1;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0b1410;
+      border: 1px solid rgba(143,209,79,0.25);
+      box-shadow:
+        0 40px 100px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(143,209,79,0.1),
+        0 0 80px rgba(143,209,79,0.08);
+      animation: heroFloat 7s ease-in-out infinite;
+      width: 100%;
+      max-width: 540px;
+    }
+
+    .hero-mockup-viewport {
+      position: relative;
+      width: 100%;
+      padding-top: 70%; /* aspect ratio */
+      overflow: hidden;
+    }
+    .hero-mockup-iframe-inner {
+      position: absolute;
+      top: 0; left: 0;
+      width: 1280px;
+      transform-origin: top left;
+      pointer-events: none;
+    }
+    .hero-mockup-iframe-inner iframe {
+      width: 100%;
+      height: 800px;
+      border: none;
+      display: block;
+      background: #070909;
+    }
+
+    .hero-chip {
+      position: absolute;
+      background: rgba(11,20,16,0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(143,209,79,0.3);
+      border-radius: 14px;
+      padding: 12px 18px;
+      z-index: 3;
+      animation: chipIn 0.7s ease both;
+    }
+    .hero-chip .chip-val {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #8FD14F;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .hero-chip .chip-lbl {
+      font-size: 11px;
+      color: #A6B0AC;
+      font-weight: 500;
+      margin-top: 3px;
+      white-space: nowrap;
+    }
+    .chip-1 { bottom: -20px; left: -36px; animation-delay:0.3s; animation: chipIn 0.7s 0.3s ease both, chipFloat1 5s 1s ease-in-out infinite; }
+    .chip-2 { top: 28px; right: -40px; animation-delay:0.5s; animation: chipIn 0.7s 0.5s ease both, chipFloat2 6s 0.5s ease-in-out infinite; }
+    .chip-3 { bottom: 60px; right: -50px; animation-delay:0.7s; animation: chipIn 0.7s 0.7s ease both, chipFloat1 7s 2s ease-in-out infinite; }
+
+    /* ── Work Reel ── */
+    .work-reel {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      background: #070909;
+    }
+
+    .work-slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+      pointer-events: none;
+    }
+    .work-slide.slide-prev {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+    .work-slide.slide-active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+
+    .slide-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 48px 80px 64px;
+      border-right: 1px solid #1e2c27;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(to right, #070909 85%, transparent);
+    }
+
+    .slide-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .slide-num {
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #F5F7F6;
+    }
+    .slide-num em {
+      color: #A6B0AC;
+      font-style: normal;
+    }
+    .slide-cat-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8FD14F;
+      background: rgba(143,209,79,0.1);
+      border: 1px solid rgba(143,209,79,0.22);
+      border-radius: 5px;
+      padding: 3px 9px;
+    }
+
+    .slide-name {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(30px, 2.8vw, 46px);
+      font-weight: 800;
+      color: #F5F7F6;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+    .slide-loc {
+      font-size: 13px;
+      color: #A6B0AC;
+      margin-bottom: 28px;
+    }
+
+    .slide-growth {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .growth-chip {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      background: rgba(143,209,79,0.07);
+      border: 1px solid rgba(143,209,79,0.18);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .growth-val {
+      font-family: 'Sora', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #8FD14F;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .growth-desc {
+      font-size: 13px;
+      color: #A6B0AC;
+      line-height: 1.4;
+    }
+
+    .slide-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #8FD14F;
+      color: #070909;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 13px 24px;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease;
+      width: fit-content;
+    }
+    .slide-explore:hover { background: #6FAF39; transform: translateY(-2px); }
+
+    .slide-browser-wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .slide-browser-wrap .card-browser-chrome {
+      flex-shrink: 0;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+    }
+    .slide-iframe-box {
+      flex: 1;
+      overflow: hidden;
+    }
+    .slide-iframe-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Reel navigation */
+    .reel-nav {
+      position: absolute;
+      bottom: 32px;
+      left: 0;
+      width: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 10;
+      padding: 0 48px;
+    }
+    .reel-arrow {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(26,35,32,0.8);
+      backdrop-filter: blur(8px);
+      border: 1px solid #26302D;
+      color: #F5F7F6;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.18s ease, border-color 0.18s ease;
+      flex-shrink: 0;
+    }
+    .reel-arrow:hover { background: rgba(143,209,79,0.12); border-color: rgba(143,209,79,0.4); }
+    .reel-dots-wrap {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+      justify-content: center;
+    }
+    .reel-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #26302D;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .reel-dot.active {
+      background: #8FD14F;
+      transform: scale(1.3);
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Hero mobile ── */
+    @media (max-width: 900px) {
+      .hero-2col {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 120px 0 60px;
+        text-align: center;
+      }
+      .hero-right { display: none; }
+      .hero-ctas { justify-content: center; }
+      .hero-trust { justify-content: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+    }
+
+    /* ── Work reel mobile ── */
+    @media (max-width: 768px) {
+      .work-slide { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+      .slide-info {
+        padding: 28px 24px 20px;
+        border-right: none;
+        border-bottom: 1px solid #1e2c27;
+        background: #070909;
+      }
+      .reel-nav { width: 100%; }
+      .slide-name { font-size: 26px; }
     }
 
     .hero-badge {
@@ -939,45 +1363,65 @@
   <div class="hero-bg-glow"></div>
   <div class="hero-bg-glow-r"></div>
 
-  <div style="max-width:880px;margin:0 auto;text-align:center;position:relative;z-index:1;">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      <span class="hero-badge-text">Web Design That Gets You More Clients</span>
+  <div class="hero-2col">
+    <!-- LEFT: Text -->
+    <div class="hero-left">
+      <div class="hero-badge reveal" style="display:inline-flex;">
+        <span class="hero-badge-dot"></span>
+        <span class="hero-badge-text">Premium Web Design</span>
+      </div>
+
+      <h1 class="hero-h1 reveal reveal-delay-1">
+        We Build Sites<br>That Get You<br>
+        <span class="hero-cycle-wrap" aria-live="polite">
+          <span class="hero-cycle-word active">More Clients.</span>
+          <span class="hero-cycle-word">More Calls.</span>
+          <span class="hero-cycle-word">More Revenue.</span>
+        </span>
+      </h1>
+
+      <p class="hero-sub reveal reveal-delay-2">
+        Premium websites that look incredible, rank on Google, and turn visitors into paying customers.
+      </p>
+
+      <div class="hero-ctas reveal reveal-delay-3">
+        <a href="#work" class="btn-green btn-green-lg">See Our Work</a>
+        <a href="#book-call" class="btn-ghost">Book a Free Call</a>
+      </div>
+
+      <div class="hero-trust reveal reveal-delay-4">
+        <span>14-Day Delivery</span>
+        <span>Google-Ready</span>
+        <span>You Own It</span>
+      </div>
     </div>
 
-    <h1 class="h-xl" style="margin-bottom:24px;line-height:1.06;">
-      Your Website Should Be<br>Getting You <span class="green-accent">More Clients.</span>
-    </h1>
-
-    <p class="body-lg" style="max-width:560px;margin:0 auto 20px;line-height:1.75;">
-      We build premium websites that look incredible, rank on Google, and turn visitors into booked appointments — not just a nice design that sits there.
-    </p>
-
-    <p style="font-family:'Sora',sans-serif;font-size:15px;font-weight:600;color:#8FD14F;letter-spacing:-0.01em;margin-bottom:40px;opacity:0.9;">
-      Roofing · Barbershops · Salons · Med Spas · Contractors · and more
-    </p>
-
-    <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;">
-      <a href="#work" class="btn-green btn-green-lg">See Our Work</a>
-      <a href="#book-call" class="btn-ghost">Book a Free Call</a>
-    </div>
-
-    <div class="hero-check-list">
-      <div class="hero-check-item">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        Delivered in 14 Days
+    <!-- RIGHT: Floating browser mockup -->
+    <div class="hero-right">
+      <div class="hero-mockup-glow"></div>
+      <div class="hero-mockup" id="hero-mockup">
+        <div class="card-browser-chrome">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <div class="chrome-url" id="hero-url">newvibezbarber.com</div>
+        </div>
+        <div class="hero-mockup-viewport">
+          <div class="hero-mockup-iframe-inner" id="hero-iframe-inner">
+            <iframe id="hero-frame" src="/new-vibez/" scrolling="no" loading="lazy" tabindex="-1" title="Site preview"></iframe>
+          </div>
+        </div>
       </div>
-      <div class="hero-check-item">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        Ranked on Google
+      <!-- Floating stat chips -->
+      <div class="hero-chip chip-1">
+        <div class="chip-val">3×</div>
+        <div class="chip-lbl">More Leads</div>
       </div>
-      <div class="hero-check-item">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        You Own It 100%
+      <div class="hero-chip chip-2">
+        <div class="chip-val">14d</div>
+        <div class="chip-lbl">Avg. Delivery</div>
       </div>
-      <div class="hero-check-item">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        No Templates. Ever.
+      <div class="hero-chip chip-3">
+        <div class="chip-val">★ 5.0</div>
+        <div class="chip-lbl">Client Rating</div>
       </div>
     </div>
   </div>
@@ -1010,132 +1454,139 @@
 
 
 <!-- ════════════════════════════════════════════════
-     PORTFOLIO / OUR WORK
+     OUR WORK — full-screen reel
 ════════════════════════════════════════════════ -->
-<section id="work" style="padding:100px 0 80px;background:#111816;border-top:1px solid #26302D;position:relative;z-index:1;overflow:hidden;">
-  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-    <div style="text-align:center;margin-bottom:56px;">
-      <div class="section-label" style="justify-content:center;">Our Work</div>
-      <h2 class="h-lg" style="margin-bottom:16px;">Real Sites.<br>Real Results.</h2>
-      <p class="body-lg" style="max-width:480px;margin:0 auto;">
-        Scroll through — then click any site to browse it live, right here.
-      </p>
+
+<!-- Section cover -->
+<div id="work" style="padding:80px 40px 60px;background:#111816;border-top:1px solid #26302D;text-align:center;position:relative;z-index:1;">
+  <div class="section-label reveal" style="justify-content:center;">Our Work</div>
+  <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:14px;">Real Sites.<br>Real Results.</h2>
+  <p class="body-lg reveal reveal-delay-2" style="max-width:420px;margin:0 auto 0;">Browse each site — fully interactive, right here.</p>
+</div>
+
+<!-- Fullscreen reel -->
+<div class="work-reel" id="work-reel" style="border-top:1px solid #1e2c27;">
+
+  <!-- ── Slide 1: New Vibez ── -->
+  <div class="work-slide slide-active" id="slide-0">
+    <div class="slide-info">
+      <div class="slide-meta">
+        <span class="slide-num">01 <em>/ 03</em></span>
+        <span class="slide-cat-tag">Barbershop</span>
+      </div>
+      <h3 class="slide-name">New Vibez<br>Barber Shop</h3>
+      <div class="slide-loc">📍 Milton, FL</div>
+      <div class="slide-growth">
+        <div class="growth-chip">
+          <span class="growth-val">+4</span>
+          <span class="growth-desc">New clients booked in first 2 weeks</span>
+        </div>
+        <div class="growth-chip">
+          <span class="growth-val">★★★★★</span>
+          <span class="growth-desc">Google reputation instantly elevated</span>
+        </div>
+      </div>
+      <button class="slide-explore" onclick="openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop')">
+        Explore Full Site
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
     </div>
-
-    <div class="portfolio-scroll" id="portfolio-scroll">
-
-      <!-- New Vibez -->
-      <div class="portfolio-card" data-url="/new-vibez/" data-name="New Vibez Barber Shop" data-cat="Barbershop">
-        <div class="card-browser-chrome">
-          <div class="chrome-dots"><span></span><span></span><span></span></div>
-          <div class="chrome-url">newvibezbarber.com</div>
-        </div>
-        <div class="card-viewport">
-          <div class="card-iframe-wrap">
-            <iframe src="/new-vibez/" scrolling="no" loading="lazy" tabindex="-1" title="New Vibez preview"></iframe>
-          </div>
-          <div class="card-hover-overlay">
-            <div class="card-industry">Barbershop · Milton, FL</div>
-            <div class="card-site-name">New Vibez</div>
-            <button class="card-preview-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              Preview Full Site
-            </button>
-          </div>
-        </div>
+    <div class="slide-browser-wrap">
+      <div class="card-browser-chrome">
+        <div class="chrome-dots"><span></span><span></span><span></span></div>
+        <div class="chrome-url">newvibezbarber.com</div>
       </div>
-
-      <!-- Salon UnWINE -->
-      <div class="portfolio-card" data-url="/salon-unwine/" data-name="Salon UnWINE &amp; Boutique" data-cat="Salon &amp; Boutique">
-        <div class="card-browser-chrome">
-          <div class="chrome-dots"><span></span><span></span><span></span></div>
-          <div class="chrome-url">salonunwine.com</div>
-        </div>
-        <div class="card-viewport">
-          <div class="card-iframe-wrap">
-            <iframe src="/salon-unwine/" scrolling="no" loading="lazy" tabindex="-1" title="Salon UnWINE preview"></iframe>
-          </div>
-          <div class="card-hover-overlay">
-            <div class="card-industry">Salon &amp; Boutique</div>
-            <div class="card-site-name">Salon UnWINE</div>
-            <button class="card-preview-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              Preview Full Site
-            </button>
-          </div>
-        </div>
+      <div class="slide-iframe-box">
+        <iframe src="/new-vibez/" title="New Vibez Barber Shop"></iframe>
       </div>
-
-      <!-- LUMIÈRE -->
-      <div class="portfolio-card" data-url="/luxury-brand/" data-name="LUMIÈRE" data-cat="Luxury Fashion">
-        <div class="card-browser-chrome">
-          <div class="chrome-dots"><span></span><span></span><span></span></div>
-          <div class="chrome-url">lumiereofficial.com</div>
-        </div>
-        <div class="card-viewport">
-          <div class="card-iframe-wrap">
-            <iframe src="/luxury-brand/" scrolling="no" loading="lazy" tabindex="-1" title="LUMIÈRE preview"></iframe>
-          </div>
-          <div class="card-hover-overlay">
-            <div class="card-industry">Luxury Fashion</div>
-            <div class="card-site-name">LUMIÈRE</div>
-            <button class="card-preview-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              Preview Full Site
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- YNG★LIFE -->
-      <div class="portfolio-card" data-url="/yng-life/" data-name="YNG★LIFE" data-cat="Streetwear Brand">
-        <div class="card-browser-chrome">
-          <div class="chrome-dots"><span></span><span></span><span></span></div>
-          <div class="chrome-url">ynglifeofficial.com</div>
-        </div>
-        <div class="card-viewport">
-          <div class="card-iframe-wrap">
-            <iframe src="/yng-life/" scrolling="no" loading="lazy" tabindex="-1" title="YNG LIFE preview"></iframe>
-          </div>
-          <div class="card-hover-overlay">
-            <div class="card-industry">Streetwear · Shopify Theme</div>
-            <div class="card-site-name">YNG★LIFE</div>
-            <button class="card-preview-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              Preview Full Site
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- You Inspire Now -->
-      <div class="portfolio-card" data-url="/you-inspire-now/" data-name="You Inspire Now" data-cat="Nonprofit">
-        <div class="card-browser-chrome">
-          <div class="chrome-dots"><span></span><span></span><span></span></div>
-          <div class="chrome-url">youinspirenow.org</div>
-        </div>
-        <div class="card-viewport">
-          <div class="card-iframe-wrap">
-            <iframe src="/you-inspire-now/" scrolling="no" loading="lazy" tabindex="-1" title="You Inspire Now preview"></iframe>
-          </div>
-          <div class="card-hover-overlay">
-            <div class="card-industry">Nonprofit Organization</div>
-            <div class="card-site-name">You Inspire Now</div>
-            <button class="card-preview-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              Preview Full Site
-            </button>
-          </div>
-        </div>
-      </div>
-
     </div>
-
-    <p style="text-align:center;font-size:13px;color:#A6B0AC;font-family:'Inter',sans-serif;margin-top:8px;">
-      Drag to scroll &nbsp;·&nbsp; Click any card to browse it live
-    </p>
   </div>
-</section>
+
+  <!-- ── Slide 2: Salon UnWINE ── -->
+  <div class="work-slide" id="slide-1">
+    <div class="slide-info">
+      <div class="slide-meta">
+        <span class="slide-num">02 <em>/ 03</em></span>
+        <span class="slide-cat-tag">Salon</span>
+      </div>
+      <h3 class="slide-name">Salon UnWINE<br>&amp; Boutique</h3>
+      <div class="slide-loc">📍 Pensacola, FL</div>
+      <div class="slide-growth">
+        <div class="growth-chip">
+          <span class="growth-val">3×</span>
+          <span class="growth-desc">More bookings since launch</span>
+        </div>
+        <div class="growth-chip">
+          <span class="growth-val">Day 1</span>
+          <span class="growth-desc">Clients booking online immediately</span>
+        </div>
+      </div>
+      <button class="slide-explore" onclick="openSitePreview('/salon-unwine/','Salon UnWINE &amp; Boutique','Salon &amp; Boutique')">
+        Explore Full Site
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+    <div class="slide-browser-wrap">
+      <div class="card-browser-chrome">
+        <div class="chrome-dots"><span></span><span></span><span></span></div>
+        <div class="chrome-url">salonunwine.com</div>
+      </div>
+      <div class="slide-iframe-box">
+        <iframe src="/salon-unwine/" title="Salon UnWINE"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Slide 3: You Inspire Now ── -->
+  <div class="work-slide" id="slide-2">
+    <div class="slide-info">
+      <div class="slide-meta">
+        <span class="slide-num">03 <em>/ 03</em></span>
+        <span class="slide-cat-tag">Nonprofit</span>
+      </div>
+      <h3 class="slide-name">You Inspire<br>Now</h3>
+      <div class="slide-loc">📍 Online · National</div>
+      <div class="slide-growth">
+        <div class="growth-chip">
+          <span class="growth-val">85%</span>
+          <span class="growth-desc">More donor page visits in 30 days</span>
+        </div>
+        <div class="growth-chip">
+          <span class="growth-val">6 pages</span>
+          <span class="growth-desc">Full multi-page nonprofit presence</span>
+        </div>
+      </div>
+      <button class="slide-explore" onclick="openSitePreview('/you-inspire-now/','You Inspire Now','Nonprofit')">
+        Explore Full Site
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+    <div class="slide-browser-wrap">
+      <div class="card-browser-chrome">
+        <div class="chrome-dots"><span></span><span></span><span></span></div>
+        <div class="chrome-url">youinspirenow.org</div>
+      </div>
+      <div class="slide-iframe-box">
+        <iframe src="/you-inspire-now/" title="You Inspire Now"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="reel-nav">
+    <button class="reel-arrow" id="reel-prev" aria-label="Previous site">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="reel-dots-wrap" id="reel-dots">
+      <button class="reel-dot active" data-to="0" aria-label="Site 1"></button>
+      <button class="reel-dot" data-to="1" aria-label="Site 2"></button>
+      <button class="reel-dot" data-to="2" aria-label="Site 3"></button>
+    </div>
+    <button class="reel-arrow" id="reel-next" aria-label="Next site">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+</div>
 
 <!-- ── Site Preview Modal ── -->
 <div id="site-modal" class="site-modal" aria-hidden="true" role="dialog">
@@ -1165,10 +1616,10 @@
 <section id="services" style="padding:104px 0;background:#070909;position:relative;z-index:1;">
   <div class="section-wrap">
     <div style="text-align:center;margin-bottom:64px;">
-      <div class="section-label" style="justify-content:center;">What We Build</div>
-      <h2 class="h-lg" style="margin-bottom:18px;">Every Site Built to<br>Generate Revenue</h2>
-      <p class="body-lg" style="max-width:520px;margin:0 auto;">
-        Not just design. We build authority-driven digital systems that move visitors toward action.
+      <div class="section-label reveal" style="justify-content:center;">What We Build</div>
+      <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:18px;">Every Site Built to<br>Generate Revenue</h2>
+      <p class="body-lg reveal reveal-delay-2" style="max-width:480px;margin:0 auto;">
+        Not just design — revenue machines that work 24/7.
       </p>
     </div>
 
@@ -1634,13 +2085,13 @@
 </footer>
 
 <!-- ════════════════════════════════════════════════
-     PORTFOLIO — modal + drag scroll
+     INTERACTIONS
 ════════════════════════════════════════════════ -->
 <script>
 (function () {
   'use strict';
 
-  /* ── Modal ── */
+  /* ════ MODAL ════ */
   var modal    = document.getElementById('site-modal');
   var frame    = document.getElementById('site-modal-frame');
   var urlEl    = document.getElementById('modal-url-text');
@@ -1648,73 +2099,216 @@
   var nameEl   = document.getElementById('modal-name');
   var closeBtn = document.getElementById('modal-close-btn');
 
-  function openPreview(url, name, cat) {
-    frame.src    = url;
+  window.openSitePreview = function (url, name, cat) {
+    frame.src = url;
     urlEl.textContent  = url;
     catEl.textContent  = cat;
     nameEl.textContent = name;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-  }
+  };
 
   function closePreview() {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    setTimeout(function () { frame.src = ''; }, 320);
+    setTimeout(function () { frame.src = ''; }, 350);
   }
 
-  closeBtn.addEventListener('click', closePreview);
+  if (closeBtn) closeBtn.addEventListener('click', closePreview);
+  if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) closePreview(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePreview(); });
 
-  modal.addEventListener('click', function (e) {
-    if (e.target === modal) closePreview();
-  });
 
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closePreview();
-  });
+  /* ════ WORK REEL ════ */
+  var slides   = document.querySelectorAll('.work-slide');
+  var dots     = document.querySelectorAll('.reel-dot');
+  var prevBtn  = document.getElementById('reel-prev');
+  var nextBtn  = document.getElementById('reel-next');
+  var current  = 0;
+  var total    = slides.length;
+  var animating = false;
 
-  /* ── Card click (distinguish from drag) ── */
-  var scroll = document.getElementById('portfolio-scroll');
-  var dragMoved = false;
+  function goTo(n) {
+    if (animating || n === current) return;
+    animating = true;
 
-  scroll.addEventListener('mousedown', function () { dragMoved = false; });
-  scroll.addEventListener('mousemove', function () { dragMoved = true; });
+    var dir = n > current ? 1 : -1;
+    var leaving = slides[current];
+    var entering = slides[n];
 
-  var cards = document.querySelectorAll('.portfolio-card');
-  cards.forEach(function (card) {
-    card.addEventListener('click', function (e) {
-      if (dragMoved) return;
-      var url  = card.getAttribute('data-url');
-      var name = card.getAttribute('data-name');
-      var cat  = card.getAttribute('data-cat');
-      openPreview(url, name, cat);
+    leaving.classList.remove('slide-active');
+    leaving.classList.add(dir > 0 ? 'slide-prev' : 'slide-next-exit');
+
+    entering.style.transform = dir > 0 ? 'translateX(60px)' : 'translateX(-60px)';
+    entering.style.opacity = '0';
+    entering.style.pointerEvents = 'all';
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        entering.style.transition = 'opacity 0.55s ease, transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94)';
+        entering.style.transform = 'translateX(0)';
+        entering.style.opacity = '1';
+      });
     });
+
+    dots[current].classList.remove('active');
+    dots[n].classList.add('active');
+    current = n;
+
+    setTimeout(function () {
+      leaving.style.display = '';
+      leaving.classList.remove('slide-prev', 'slide-next-exit');
+      entering.style.transition = '';
+      animating = false;
+    }, 600);
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', function () { goTo((current - 1 + total) % total); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { goTo((current + 1) % total); });
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () { goTo(parseInt(dot.getAttribute('data-to'))); });
   });
 
-  /* ── Drag to scroll ── */
-  var isDown = false, startX, startLeft;
-
-  scroll.addEventListener('mousedown', function (e) {
-    isDown    = true;
-    startX    = e.pageX - scroll.offsetLeft;
-    startLeft = scroll.scrollLeft;
-    scroll.style.cursor = 'grabbing';
+  // Keyboard arrow keys when reel is in view
+  document.addEventListener('keydown', function (e) {
+    var reel = document.getElementById('work-reel');
+    if (!reel) return;
+    var rect = reel.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      if (e.key === 'ArrowRight') goTo((current + 1) % total);
+      if (e.key === 'ArrowLeft')  goTo((current - 1 + total) % total);
+    }
   });
 
-  window.addEventListener('mouseup', function () {
-    isDown = false;
-    scroll.style.cursor = 'grab';
-  });
+  // Touch swipe on reel
+  var touchStartX = 0;
+  var reel = document.getElementById('work-reel');
+  if (reel) {
+    reel.addEventListener('touchstart', function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    reel.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) goTo(dx < 0 ? (current + 1) % total : (current - 1 + total) % total);
+    });
+  }
 
-  scroll.addEventListener('mousemove', function (e) {
-    if (!isDown) return;
-    e.preventDefault();
-    var x    = e.pageX - scroll.offsetLeft;
-    var walk = (x - startX) * 1.6;
-    scroll.scrollLeft = startLeft - walk;
-  });
+
+  /* ════ HERO CYCLING TEXT ════ */
+  var words   = document.querySelectorAll('.hero-cycle-word');
+  var wordIdx = 0;
+  if (words.length) {
+    setInterval(function () {
+      words[wordIdx].classList.remove('active');
+      words[wordIdx].classList.add('exit');
+      var leaving = words[wordIdx];
+      setTimeout(function () { leaving.classList.remove('exit'); }, 500);
+      wordIdx = (wordIdx + 1) % words.length;
+      words[wordIdx].classList.add('active');
+    }, 3000);
+  }
+
+
+  /* ════ HERO MOCKUP — fit iframe to viewport ════ */
+  function fitHeroMockup() {
+    var inner = document.getElementById('hero-iframe-inner');
+    if (!inner) return;
+    var mockup = inner.closest('.hero-mockup');
+    if (!mockup) return;
+    var w = mockup.offsetWidth;
+    if (!w) return;
+    var scale = w / 1280;
+    inner.style.transform = 'scale(' + scale + ')';
+    inner.style.transformOrigin = 'top left';
+    inner.style.width = '1280px';
+    var vpEl = mockup.querySelector('.hero-mockup-viewport');
+    if (vpEl) vpEl.style.height = Math.round(800 * scale) + 'px';
+  }
+  fitHeroMockup();
+  window.addEventListener('resize', fitHeroMockup);
+
+  // Cycle hero mockup through sites every 6s
+  var mockupSites = [
+    { src: '/new-vibez/',     url: 'newvibezbarber.com' },
+    { src: '/salon-unwine/',  url: 'salonunwine.com' },
+    { src: '/you-inspire-now/', url: 'youinspirenow.org' },
+  ];
+  var mockupIdx = 0;
+  var heroFrame = document.getElementById('hero-frame');
+  var heroUrl   = document.getElementById('hero-url');
+  if (heroFrame && heroUrl) {
+    setInterval(function () {
+      mockupIdx = (mockupIdx + 1) % mockupSites.length;
+      var site = mockupSites[mockupIdx];
+      heroFrame.style.opacity = '0';
+      heroFrame.style.transition = 'opacity 0.4s ease';
+      setTimeout(function () {
+        heroFrame.src = site.src;
+        heroUrl.textContent = site.url;
+        heroFrame.onload = function () {
+          heroFrame.style.opacity = '1';
+        };
+      }, 400);
+    }, 6000);
+  }
+
+
+  /* ════ SCROLL REVEAL ════ */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+
+  /* ════ COUNTER ANIMATION on stats bar ════ */
+  function animateCount(el, target, suffix) {
+    var start = 0;
+    var duration = 1400;
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      var val = Math.round(start + (target - start) * ease);
+      el.textContent = val + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var statsBar = document.querySelector('.stats-bar');
+  if (statsBar && 'IntersectionObserver' in window) {
+    var statsDone = false;
+    var statsIO = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting && !statsDone) {
+        statsDone = true;
+        var nums = document.querySelectorAll('.stat-number');
+        var data = [
+          { val: 150, suffix: '+' },
+          { val: 98,  suffix: '%' },
+          { val: 3,   suffix: '×' },
+          { val: 14,  suffix: 'd' },
+        ];
+        nums.forEach(function (el, i) {
+          if (data[i]) animateCount(el, data[i].val, data[i].suffix);
+        });
+        statsIO.disconnect();
+      }
+    }, { threshold: 0.5 });
+    statsIO.observe(statsBar);
+  }
 
 }());
 </script>
@@ -1792,7 +2386,7 @@
   }
 
   /* ── Boot all target sections ─────────────────── */
-  var selectors = ['.hero', '#work', '#services', '#results', '#faq', '.footer'];
+  var selectors = ['.hero', '#services', '#results', '#faq', '.footer'];
   var instances = [];
   selectors.forEach(function (sel) {
     var el = document.querySelector(sel);
