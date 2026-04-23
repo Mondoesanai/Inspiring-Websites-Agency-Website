@@ -1,0 +1,61 @@
+<div class="split-promo" aria-label="Featured categories">
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'tile' -%}
+      <a href="{{ block.settings.url }}" class="split-tile" {{ block.shopify_attributes }}
+        aria-label="{{ block.settings.title }}">
+
+        {%- if block.settings.image -%}
+          <img
+            src="{{ block.settings.image | img_url: '1200x' }}"
+            alt="{{ block.settings.image.alt | escape | default: block.settings.title }}"
+            loading="lazy" width="1200" height="900"
+          />
+        {%- else -%}
+          <div class="split-img-ph">
+            <span>{{ block.settings.title }}<br/>Upload image in Shopify Customizer</span>
+          </div>
+        {%- endif -%}
+
+        <div class="split-veil"></div>
+        <div class="split-content">
+          <p class="split-tag">{{ block.settings.tag }}</p>
+          <h3 class="split-title">{{ block.settings.title }}</h3>
+          <span class="split-link">{{ block.settings.cta }}</span>
+        </div>
+
+      </a>
+    {%- endif -%}
+  {%- endfor -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Split Promo",
+  "tag": "div",
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Promo Tile",
+      "settings": [
+        { "type": "image_picker", "id": "image",  "label": "Image"                                    },
+        { "type": "text",         "id": "tag",    "label": "Tag",    "default": "Featured"             },
+        { "type": "text",         "id": "title",  "label": "Title",  "default": "New Arrivals"         },
+        { "type": "text",         "id": "cta",    "label": "CTA Text","default": "Shop now"            },
+        { "type": "url",          "id": "url",    "label": "Link URL"                                  }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Promo",
+      "blocks": [
+        { "type": "tile", "settings": { "tag": "Just Dropped",  "title": "New Arrivals",  "cta": "Shop now" } },
+        { "type": "tile", "settings": { "tag": "Best Sellers",  "title": "Bestsellers",   "cta": "Shop now" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

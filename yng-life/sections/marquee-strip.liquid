@@ -1,0 +1,25 @@
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    {%- assign items = section.settings.items | split: '|' -%}
+    {%- for item in items -%}
+      <span class="marquee-item">{{ item | strip }}</span><span class="marquee-dot">★</span>
+    {%- endfor -%}
+    {%- for item in items -%}
+      <span class="marquee-item">{{ item | strip }}</span><span class="marquee-dot">★</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee Strip",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "textarea", "id": "items", "label": "Items (separate with |)",
+      "default": "New Arrivals | Custom Crafted | Made in Italy | Free Shipping USA · CAN · EU | Zero Tariffs | 100% Satisfaction Guaranteed | Limited Edition"
+    }
+  ],
+  "presets": [{ "name": "Marquee Strip" }]
+}
+{% endschema %}

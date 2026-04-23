@@ -1,0 +1,50 @@
+<section class="section-newsletter" aria-label="Newsletter">
+
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:700px;height:300px;
+    background:radial-gradient(ellipse,rgba(201,168,76,0.06) 0%,transparent 65%);
+    pointer-events:none;" aria-hidden="true"></div>
+
+  <div class="newsletter-inner">
+    <p class="rule-gold fade-up" style="justify-content:center;margin-bottom:20px;">{{ section.settings.eyebrow }}</p>
+    <h2 class="newsletter-title fade-up d1">{{ section.settings.heading }}</h2>
+    <p class="newsletter-body fade-up d2">{{ section.settings.body }}</p>
+
+    {%- form 'customer', id: 'newsletter-form-{{ section.id }}' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="newsletter-form fade-up d3">
+        <input type="email" name="contact[email]" class="email-input"
+          placeholder="{{ section.settings.placeholder }}"
+          aria-label="{{ section.settings.placeholder }}" required />
+        <div class="btn-magnetic" style="flex-shrink:0;">
+          <button type="submit" class="btn-dark" style="padding:14px 26px;white-space:nowrap;">
+            {{ section.settings.button_text }}
+          </button>
+        </div>
+      </div>
+      {%- if form.posted_successfully? -%}
+        <p style="font-family:'Montserrat',sans-serif;font-size:0.6rem;color:var(--gold-dark);margin-top:16px;letter-spacing:0.15em;">
+          Welcome to the family. ★
+        </p>
+      {%- endif -%}
+    {%- endform -%}
+
+    <p class="newsletter-fine fade-up d4">{{ section.settings.fine_print }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",     "default": "Stay Connected"                                                 },
+    { "type": "text",     "id": "heading",      "label": "Heading",     "default": "Join Our Email List"                                            },
+    { "type": "textarea", "id": "body",         "label": "Body",        "default": "Get exclusive deals and early access to new products. Be the first to know about drops, collaborations and limited releases." },
+    { "type": "text",     "id": "placeholder",  "label": "Placeholder", "default": "Email address"                                                  },
+    { "type": "text",     "id": "button_text",  "label": "Button",      "default": "Subscribe"                                                      },
+    { "type": "text",     "id": "fine_print",   "label": "Fine Print",  "default": "No spam. Unsubscribe anytime."                                  }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

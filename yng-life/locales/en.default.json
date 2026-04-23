@@ -1,0 +1,7 @@
+{
+  "general": { "accessibility": { "nav": "Main navigation", "skip_to_content": "Skip to content" } },
+  "products": { "product": { "add_to_cart": "Add to Cart", "buy_pair": "Buy Your Pair", "sold_out": "Sold Out", "unavailable": "Unavailable", "quantity": "Quantity", "size": "Size" } },
+  "cart": { "general": { "title": "Your Cart", "empty": "Your cart is empty.", "checkout": "Proceed to Checkout", "subtotal": "Subtotal" } },
+  "collections": { "general": { "all": "All Collections", "sort_by": "Sort By", "pieces": "Pieces" } },
+  "customer": { "newsletter": { "success": "Welcome to the family. ★", "error": "Please enter a valid email address." } }
+}

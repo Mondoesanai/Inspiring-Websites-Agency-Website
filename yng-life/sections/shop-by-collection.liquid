@@ -1,0 +1,95 @@
+<section class="section-collections" aria-label="Shop by collection">
+  <div class="container">
+
+    <div class="section-header fade-up">
+      <p class="rule-gold" style="justify-content:center;margin-bottom:14px;">{{ section.settings.eyebrow }}</p>
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="collection-grid">
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'collection_item' -%}
+
+          {%- assign col = collections[block.settings.collection] -%}
+          <a href="{{ col.url | default: '#' }}" class="collection-card fade-up {% cycle 'd1','d2','d3','d4' %}"
+            aria-label="{{ block.settings.label | default: col.title }}"
+            {{ block.shopify_attributes }}>
+
+            {%- if block.settings.image -%}
+              <img
+                src="{{ block.settings.image | img_url: '800x' }}"
+                alt="{{ block.settings.image.alt | escape | default: block.settings.label }}"
+                loading="lazy" width="800" height="1067"
+              />
+            {%- elsif col != blank and col.image -%}
+              <img
+                src="{{ col.image | img_url: '800x' }}"
+                alt="{{ col.image.alt | escape | default: col.title }}"
+                loading="lazy" width="800" height="1067"
+              />
+            {%- else -%}
+              <div class="coll-img-ph">
+                <span>{{ block.settings.label | default: col.title | default: "Collection" }}</span>
+              </div>
+            {%- endif -%}
+
+            <div class="coll-veil"></div>
+            <div class="coll-content">
+              <p class="coll-name">{{ block.settings.label | default: col.title }}</p>
+              {%- if col != blank -%}
+                <p class="coll-count">{{ col.products_count }} pieces</p>
+              {%- else -%}
+                <p class="coll-count">{{ block.settings.count_label }}</p>
+              {%- endif -%}
+            </div>
+
+          </a>
+
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop By Collection",
+  "tag": "section",
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "collection_item",
+      "name": "Collection Card",
+      "settings": [
+        { "type": "collection",   "id": "collection",   "label": "Collection"                              },
+        { "type": "text",         "id": "label",        "label": "Override Label"                          },
+        { "type": "text",         "id": "count_label",  "label": "Count Label (if no collection)", "default": "View all" },
+        { "type": "image_picker", "id": "image",        "label": "Override Image"                          },
+        { "type": "url",          "id": "url",          "label": "Override URL"                            }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "eyebrow",  "label": "Eyebrow",  "default": "Browse"               },
+    { "type": "text", "id": "heading",  "label": "Heading",  "default": "Shop by Collection"   }
+  ],
+  "presets": [
+    {
+      "name": "Shop By Collection",
+      "blocks": [
+        { "type": "collection_item", "settings": { "label": "Originals Collection"       } },
+        { "type": "collection_item", "settings": { "label": "Purses"                     } },
+        { "type": "collection_item", "settings": { "label": "Wondering-Whites"           } },
+        { "type": "collection_item", "settings": { "label": "Evergreen Collection"       } },
+        { "type": "collection_item", "settings": { "label": "Backpacks"                  } },
+        { "type": "collection_item", "settings": { "label": "Browntown Collection"       } },
+        { "type": "collection_item", "settings": { "label": "Midnight-Mist"              } },
+        { "type": "collection_item", "settings": { "label": "All Products"               } }
+      ]
+    }
+  ]
+}
+{% endschema %}

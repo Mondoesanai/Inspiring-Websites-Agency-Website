@@ -1,0 +1,97 @@
+<section id="products" class="section-products" aria-label="Featured products">
+  <div class="container">
+
+    <!-- Section header -->
+    <div class="section-header fade-up">
+      <p class="rule-gold" style="justify-content:center;margin-bottom:16px;">
+        {{ section.settings.eyebrow }}
+      </p>
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         PRODUCT GRID
+         ══════════════════════════════════════════════════
+         Shopify liquid pulls from the selected collection.
+         If no collection is set, placeholder cards render.
+         ────────────────────────────────────────────────── -->
+    <div class="product-grid" id="product-grid">
+
+      {%- assign featured_collection = collections[section.settings.collection] -%}
+      {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+
+        {%- for product in featured_collection.products limit: section.settings.products_count -%}
+          {%- render 'product-card', product: product -%}
+        {%- endfor -%}
+
+      {%- else -%}
+        {%- comment -%}
+          PLACEHOLDER: No collection selected.
+          Go to Shopify Admin → Online Store → Themes → Customize
+          and select a collection for this section.
+        {%- endcomment -%}
+        {%- for i in (1..section.settings.products_count) -%}
+          {%- render 'product-card', product: nil, placeholder_index: i -%}
+        {%- endfor -%}
+
+      {%- endif -%}
+
+    </div>
+    <!-- END PRODUCT GRID -->
+
+    <!-- Collection tabs (optional filter bar) -->
+    {%- if section.settings.show_tabs -%}
+    <div class="section-tabs" style="padding:0 0 40px;">
+      <div class="tab-bar fade-up">
+        <span class="tab-label">Browse</span>
+        <div class="tabs" role="tablist">
+          <button class="tab active" role="tab" aria-selected="true"
+            onclick="setTab(this)">All</button>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'tab' -%}
+              <button class="tab" role="tab" aria-selected="false"
+                data-collection="{{ block.settings.collection_handle }}"
+                onclick="setTab(this)">{{ block.settings.label }}</button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_view_all -%}
+      <div class="section-cta fade-up">
+        <a href="{{ routes.collections_url }}" class="btn-ghost">View Full Collection</a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Category Tab",
+      "settings": [
+        { "type": "text",       "id": "label",             "label": "Tab Label",          "default": "Ready-to-Wear" },
+        { "type": "collection", "id": "collection_handle", "label": "Linked Collection" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text",       "id": "eyebrow",        "label": "Eyebrow",              "default": "The Edit" },
+    { "type": "text",       "id": "heading",         "label": "Section Heading",      "default": "Featured Pieces" },
+    { "type": "collection", "id": "collection",      "label": "Featured Collection" },
+    { "type": "range",      "id": "products_count",  "label": "Number of Products",   "min": 2, "max": 12, "step": 1, "default": 6 },
+    { "type": "checkbox",   "id": "show_tabs",       "label": "Show Category Tabs",   "default": false },
+    { "type": "checkbox",   "id": "show_view_all",   "label": "Show View All Button", "default": true }
+  ],
+  "presets": [
+    { "name": "Featured Products" }
+  ]
+}
+{% endschema %}

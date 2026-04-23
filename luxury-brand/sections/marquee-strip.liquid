@@ -1,0 +1,33 @@
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    {%- assign items = section.settings.items | split: '|' -%}
+    {%- comment -%} First pass {%- endcomment -%}
+    {%- for item in items -%}
+      <span class="marquee-item">{{ item | strip }}</span>
+      <span class="marquee-dot">✦</span>
+    {%- endfor -%}
+    {%- comment -%} Duplicate for seamless loop {%- endcomment -%}
+    {%- for item in items -%}
+      <span class="marquee-item">{{ item | strip }}</span>
+      <span class="marquee-dot">✦</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee Strip",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "items",
+      "label": "Marquee Items (separate with |)",
+      "default": "New Arrivals | SS '26 Collection | Complimentary Shipping Over $500 | Limited Edition Pieces | Handcrafted in Italy | Bespoke Commissions Available"
+    }
+  ],
+  "presets": [
+    { "name": "Marquee Strip" }
+  ]
+}
+{% endschema %}

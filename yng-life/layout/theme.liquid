@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{{ page_description | escape }}" />
+  <title>
+    {%- if page_title == blank -%}{{ shop.name }}{%- else -%}{{ page_title }} — {{ shop.name }}{%- endif -%}
+  </title>
+  {{ content_for_header }}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div id="cursor-dot"  aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ── Free Shipping Banner ── -->
+  <div class="shipping-banner" role="marquee" aria-label="Shipping information">
+    ✈ Free Shipping to USA, CAN &amp; EU &nbsp;·&nbsp; Handcrafted in Italy &nbsp;·&nbsp; Zero Tariffs on All US Orders &nbsp;·&nbsp; 100% Satisfaction Guaranteed
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+
+    <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name }} home">
+      <span class="logo-badge" aria-hidden="true">
+        <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="11,2 13.5,8.5 20.5,9 15.5,13.5 17,20.5 11,17 5,20.5 6.5,13.5 1.5,9 8.5,8.5" fill="#C9A84C"/>
+        </svg>
+      </span>
+      YNG<span class="logo-star">★</span>LIFE
+    </a>
+
+    <div class="nav-links hide-mobile" role="menubar">
+      {%- for link in linklists['main-menu'].links -%}
+        <a href="{{ link.url }}" class="nav-link" role="menuitem"
+          {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+      {%- endfor -%}
+    </div>
+
+    <div class="nav-right">
+      <a href="{{ routes.cart_url }}" class="nav-cart hide-mobile" aria-label="Cart ({{ cart.item_count }} items)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+      <a href="{{ routes.collections_url }}" class="btn-dark hide-mobile" style="padding:10px 22px;font-size:0.54rem;">Shop</a>
+      <button id="nav-toggle" class="mobile-toggle"
+        aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
+    {%- for link in linklists['main-menu'].links -%}
+      <a href="{{ link.url }}" class="nav-link" onclick="closeMenu()">{{ link.title }}</a>
+    {%- endfor -%}
+    <a href="{{ routes.collections_url }}" class="btn-dark" onclick="closeMenu()">Shop</a>
+  </div>
+
+  <!-- ── Main Content ── -->
+  <main id="main-content" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

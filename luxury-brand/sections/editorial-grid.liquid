@@ -1,0 +1,92 @@
+<section class="section-editorial" aria-label="Editorial stories">
+
+  <!-- Header -->
+  <div class="editorial-header container fade-up">
+    <div>
+      <p class="rule-gold" style="justify-content:flex-start;margin-bottom:12px;">
+        {{ section.settings.eyebrow }}
+      </p>
+      <h2 class="editorial-headline">{{ section.settings.heading }}</h2>
+    </div>
+    {%- if section.settings.view_all_text != blank -%}
+      <a href="{{ section.settings.view_all_url }}" class="btn-ghost"
+        style="padding:10px 22px;font-size:0.54rem;">
+        {{ section.settings.view_all_text }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  <!-- Editorial grid -->
+  <div class="editorial-grid">
+
+    {%- for block in section.blocks -%}
+      {%- assign is_tall = forloop.first -%}
+
+      <div class="ed-card {% if is_tall %}ed-card-tall{% endif %} fade-up {% if forloop.index == 2 %}d1{% elsif forloop.index == 3 %}d2{% endif %}"
+        {{ block.shopify_attributes }}>
+
+        <div class="ed-img-zone">
+          {%- if block.settings.image -%}
+            <img
+              src="{{ block.settings.image | img_url: '1200x' }}"
+              alt="{{ block.settings.image.alt | escape }}"
+              loading="lazy"
+              style="width:100%;height:100%;object-fit:cover;"
+            />
+          {%- else -%}
+            <div class="ed-img-placeholder">
+              Editorial Image<br/>
+              {%- if is_tall -%}1200 × 1600 px{%- else -%}800 × 640 px{%- endif -%}
+            </div>
+          {%- endif -%}
+          <div class="ed-overlay"></div>
+          <div class="ed-content">
+            <p class="ed-tag">{{ block.settings.tag }}</p>
+            <h3 class="ed-title">{{ block.settings.title }}</h3>
+          </div>
+        </div>
+
+      </div>
+
+    {%- endfor -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial Grid",
+  "tag": "section",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Editorial Story",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image",
+          "info": "First card: 1200×1600 px. Others: 800×640 px" },
+        { "type": "text", "id": "tag",   "label": "Tag",   "default": "Feature"      },
+        { "type": "text", "id": "title", "label": "Title", "default": "Story Title"  },
+        { "type": "url",  "id": "url",   "label": "Link URL"                         }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "eyebrow",       "label": "Eyebrow",       "default": "Editorial"         },
+    { "type": "text", "id": "heading",        "label": "Heading",        "default": "The Lookbook"      },
+    { "type": "text", "id": "view_all_text",  "label": "View All Text",  "default": "View All Stories"  },
+    { "type": "url",  "id": "view_all_url",   "label": "View All URL"                                   }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Grid",
+      "blocks": [
+        { "type": "story", "settings": { "tag": "Feature",    "title": "The Art of Quiet Power"  } },
+        { "type": "story", "settings": { "tag": "Collection", "title": "Golden Hours"            } },
+        { "type": "story", "settings": { "tag": "Spotlight",  "title": "The Obsidian Edit"       } },
+        { "type": "story", "settings": { "tag": "Craft",      "title": "An Artisan's Hand"       } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,65 @@
+<section class="section-newsletter" aria-label="Newsletter signup">
+
+  <!-- Ambient glow -->
+  <div aria-hidden="true" style="
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:800px;height:400px;
+    background:radial-gradient(ellipse, rgba(200,169,126,0.07) 0%, transparent 65%);
+    pointer-events:none;">
+  </div>
+
+  <div class="container" style="max-width:520px;position:relative;">
+
+    <p class="rule-gold fade-up" style="justify-content:center;margin-bottom:22px;">
+      {{ section.settings.eyebrow }}
+    </p>
+
+    <h2 class="newsletter-title fade-up d1">{{ section.settings.heading }}</h2>
+
+    <p class="newsletter-body fade-up d2">{{ section.settings.body }}</p>
+
+    {%- form 'customer', id: 'newsletter-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="newsletter-form fade-up d3">
+        <input
+          type="email"
+          name="contact[email]"
+          class="email-input"
+          placeholder="{{ section.settings.placeholder }}"
+          aria-label="{{ section.settings.placeholder }}"
+          required
+        />
+        <button type="submit" class="btn-primary" style="white-space:nowrap;padding:16px 28px;flex-shrink:0;">
+          {{ section.settings.button_text }}
+        </button>
+      </div>
+
+      {%- if form.posted_successfully? -%}
+        <p style="font-family:'Montserrat',sans-serif;font-size:0.6rem;color:var(--gold-dark);margin-top:16px;letter-spacing:0.15em;">
+          Thank you for joining.
+        </p>
+      {%- endif -%}
+    {%- endform -%}
+
+    <p class="newsletter-fine fade-up d4">{{ section.settings.fine_print }}</p>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",      "label": "Eyebrow",      "default": "Private Access"                                                    },
+    { "type": "text",     "id": "heading",       "label": "Heading",       "default": "Enter the Inner Circle"                                            },
+    { "type": "textarea", "id": "body",          "label": "Body Text",     "default": "First access to new collections, private events, and the rare opportunity to commission bespoke pieces." },
+    { "type": "text",     "id": "placeholder",   "label": "Input Placeholder", "default": "Your email address"                                            },
+    { "type": "text",     "id": "button_text",   "label": "Button Text",   "default": "Join"                                                              },
+    { "type": "text",     "id": "fine_print",    "label": "Fine Print",    "default": "By joining you agree to receive occasional correspondence of consequence." }
+  ],
+  "presets": [
+    { "name": "Newsletter" }
+  ]
+}
+{% endschema %}

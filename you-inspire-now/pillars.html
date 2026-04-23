@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Pillars — You Inspire Now</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Lato', sans-serif; background: #FFF9FE; color: #2D1B4E; overflow-x: hidden; }
+
+  .nav-link { position: relative; font-size: 0.85rem; letter-spacing: 0.05em; font-weight: 700; color: #FAF5FF; text-transform: uppercase; transition: color 0.3s ease; text-decoration: none; }
+  .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #06B6D4; transition: width 0.3s ease; }
+  .nav-link:hover { color: #06B6D4; }
+  .nav-link:hover::after { width: 100%; }
+  .nav-link.active { color: #06B6D4; }
+  .nav-link.active::after { width: 100%; }
+
+  .page-hero {
+    background: linear-gradient(160deg, #2D0A5E 0%, #6B21A8 35%, #9333EA 62%, #0EA5E9 85%, #06D6A0 100%);
+    padding: 9rem 2rem 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 80% 30%, #06B6D420, transparent),
+                radial-gradient(ellipse 40% 60% at 10% 80%, #A855F720, transparent);
+  }
+
+  .section-tag { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: #9333EA; font-weight: 700; margin-bottom: 0.75rem; display: block; }
+
+  .pillar-section {
+    padding: 6rem 2rem;
+    position: relative;
+  }
+  .pillar-section:nth-child(odd) { background: white; }
+  .pillar-section:nth-child(even) { background: #FAF5FF; }
+
+  .pillar-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    color: var(--accent, #06B6D4);
+    opacity: 0.08;
+    font-weight: 700;
+    line-height: 1;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+
+  .pillar-icon-lg {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: var(--icon-bg, #FAF5FF);
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, #F472B6, #EC4899);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    box-shadow: 0 8px 32px rgba(244,114,182,0.5);
+  }
+  .btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 16px 48px rgba(244,114,182,0.6); }
+
+  .truth-pill {
+    display: inline-block;
+    padding: 0.6rem 1.25rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: white;
+    background: var(--bg, #7C3AED);
+    margin: 0.3rem;
+  }
+
+  footer { background: linear-gradient(160deg, #2D0A5E, #4C1D95); color: #FAF5FF70; padding: 4rem 2rem 2rem; }
+  .footer-link { color: #FAF5FF70; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .footer-link:hover { color: #06B6D4; }
+  .scrolled-nav { background: rgba(45,10,94,0.95) !important; backdrop-filter: blur(20px); box-shadow: 0 4px 32px #00000030; }
+  .grain { position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav id="mainNav" style="position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.25rem 2rem;transition:all 0.3s ease;background:transparent;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html"><img src="assets/yin-logo.png" alt="You Inspire Now" style="height:44px;filter:brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255,255,255,0.3));"></a>
+    <div style="display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="pillars.html" class="nav-link active">Our Pillars</a>
+      <a href="community.html" class="nav-link">Community</a>
+      <a href="resources.html" class="nav-link">Resources</a>
+      <a href="go-inspire-now.html" style="display:inline-block;padding:0.5rem 1.25rem;background:linear-gradient(135deg,#F472B6,#9333EA);border-radius:100px;color:#fff;font-size:0.82rem;font-weight:700;text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;box-shadow:0 4px 16px rgba(244,114,182,0.45);transition:transform 0.2s;">Go Inspire Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div style="position:relative;z-index:1;max-width:700px;margin:0 auto;">
+    <span class="section-tag" style="color:#fde68a;">Our Foundation</span>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4rem);color:#FAF5FF;font-weight:700;letter-spacing:-0.02em;line-height:1.15;margin-bottom:1.25rem;">
+      Five Pillars.<br><em style="color:#06B6D4;">One Unshakeable Foundation.</em>
+    </h1>
+    <p style="font-size:1.1rem;color:#FAF5FFbb;line-height:1.8;font-weight:300;">
+      Everything we do flows from these five pillars. They are not programs — they are the heartbeat of a movement designed to meet women exactly where they are.
+    </p>
+  </div>
+</section>
+
+<!-- PILLAR NAV -->
+<div style="background:linear-gradient(135deg,#7C3AED,#A855F7 50%,#06B6D4);padding:1.5rem 2rem;position:sticky;top:72px;z-index:100;">
+  <div style="max-width:900px;margin:0 auto;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;">
+    <a href="#identity" style="color:#FAF5FF;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;padding:0.4rem 0.8rem;border-radius:100px;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='#06B6D4';this.style.color='#2D0A5E';" onmouseout="this.style.background='transparent';this.style.color='#FAF5FF';">Identity</a>
+    <a href="#purpose" style="color:#FAF5FF;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;padding:0.4rem 0.8rem;border-radius:100px;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='#06B6D4';this.style.color='#2D0A5E';" onmouseout="this.style.background='transparent';this.style.color='#FAF5FF';">Purpose</a>
+    <a href="#resilience" style="color:#FAF5FF;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;padding:0.4rem 0.8rem;border-radius:100px;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='#06B6D4';this.style.color='#2D0A5E';" onmouseout="this.style.background='transparent';this.style.color='#FAF5FF';">Resilience</a>
+    <a href="#community" style="color:#FAF5FF;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;padding:0.4rem 0.8rem;border-radius:100px;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='#06B6D4';this.style.color='#2D0A5E';" onmouseout="this.style.background='transparent';this.style.color='#FAF5FF';">Community</a>
+    <a href="#wholeness" style="color:#FAF5FF;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;padding:0.4rem 0.8rem;border-radius:100px;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='#06B6D4';this.style.color='#2D0A5E';" onmouseout="this.style.background='transparent';this.style.color='#FAF5FF';">Wholeness</a>
+  </div>
+</div>
+
+<!-- IDENTITY -->
+<section id="identity" class="pillar-section" style="--accent:#9333EA;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;">
+    <div class="pillar-number" style="--accent:#9333EA;">01</div>
+    <div>
+      <span class="section-tag" style="color:#9333EA;">Pillar One</span>
+      <div class="pillar-icon-lg" style="--icon-bg:#FAF5FF;">👑</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:#2D0A5E;font-weight:700;letter-spacing:-0.02em;margin-bottom:1.25rem;">Identity</h2>
+      <p style="font-size:1.05rem;color:#6B4C9A;line-height:1.85;margin-bottom:1.25rem;font-weight:300;">
+        Before anything else — before purpose, before community, before the next step — you have to know who you are. Not who the world says you are. Not who your past has told you you are. <em>Who you truly are.</em>
+      </p>
+      <p style="font-size:1.05rem;color:#6B4C9A;line-height:1.85;margin-bottom:2rem;font-weight:300;">
+        You Inspire Now exists, in part, to help women strip away the performance, the shame, and the confusion — and come home to their God-given identity. Value that cannot be earned and cannot be taken away.
+      </p>
+      <div style="margin-bottom:2rem;">
+        <span class="truth-pill" style="--bg:#7C3AED;">You are not your mistakes</span>
+        <span class="truth-pill" style="--bg:#2D0A5E;">You are not your worst day</span>
+        <span class="truth-pill" style="--bg:#A855F7;">You are seen and known</span>
+      </div>
+    </div>
+    <div style="background:linear-gradient(135deg,#9333EA,#A855F7);border-radius:24px;padding:3rem;color:white;text-align:center;">
+      <p style="font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;line-height:1.6;color:#FAF5FF;margin-bottom:1.5rem;">
+        "You were created with purpose, and your past does not get the final word."
+      </p>
+      <p style="color:#06B6D4;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Identity &amp; Worth</p>
+    </div>
+  </div>
+</section>
+
+<!-- PURPOSE -->
+<section id="purpose" class="pillar-section" style="--accent:#06B6D4;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;">
+    <div class="pillar-number" style="color:#06B6D4;">02</div>
+    <div style="background:linear-gradient(135deg,#06B6D4,#0EA5E9);border-radius:24px;padding:3rem;color:white;text-align:center;">
+      <p style="font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;line-height:1.6;color:#FAF5FF;margin-bottom:1.5rem;">
+        "There is still purpose on your life. Your story is still being written."
+      </p>
+      <p style="color:#2D0A5E;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Purpose &amp; Calling</p>
+    </div>
+    <div>
+      <span class="section-tag">Pillar Two</span>
+      <div class="pillar-icon-lg" style="--icon-bg:#06B6D410;">🌿</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:#2D0A5E;font-weight:700;letter-spacing:-0.02em;margin-bottom:1.25rem;">Purpose</h2>
+      <p style="font-size:1.05rem;color:#6B4C9A;line-height:1.85;margin-bottom:1.25rem;font-weight:300;">
+        You were not created to drift. You were made with intention, given gifts the world needs, and called toward an assignment that only you can carry. Purpose is not a destination — it is the direction you move when you know who you are.
+      </p>
+      <p style="font-size:1.05rem;color:#6B4C9A;line-height:1.85;margin-bottom:2rem;font-weight:300;">
+        This pillar invites women to stop waiting for perfect conditions and start moving toward the life they were created for — one courageous step at a time.
+      </p>
+      <div style="margin-bottom:2rem;">
+        <span class="truth-pill" style="--bg:#06B6D4;">Your calling is real</span>
+        <span class="truth-pill" style="--bg:#0EA5E9;">You were made with intention</span>
+        <span class="truth-pill" style="--bg:#2D0A5E;">Move forward with clarity</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESILIENCE -->
+<section id="resilience" class="pillar-section">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;">
+    <div class="pillar-number" style="color:#F472B6;">03</div>
+    <div>
+      <span class="section-tag" style="color:#F472B6;">Pillar Three</span>
+      <div class="pillar-icon-lg" style="--icon-bg:#F472B615;">💪</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:#2D0A5E;font-weight:700;letter-spacing:-0.02em;margin-bottom:1.25rem;">Resilience</h2>
+      <p style="font-size:1.05rem;color:#6B4C9A;line-height:1.85;margin-bottom:1.25rem;font-weight:300;">
+        Resilience is not pretending the pain did not happen. It is allowing honest healing to happen — and then rising anyway. It is the courage to take the next step even when everything in you wants to stop.
+      </p>
+      <p style="font-size:1.05rem;color:#6B4C9A;line-height:1.85;margin-bottom:2rem;font-weight:300;">
+        We build resilience by honoring struggle without glorifying victimhood — by saying "this was hard" and also "I am still here, and I am still becoming."
+      </p>
+      <div style="margin-bottom:2rem;">
+        <span class="truth-pill" style="--bg:#F472B6;">Your healing is real</span>
+        <span class="truth-pill" style="--bg:#EC4899;">Strength is built in surrender</span>
+        <span class="truth-pill" style="--bg:#2D0A5E;">You can rise again</span>
+      </div>
+    </div>
+    <div style="background:linear-gradient(135deg,#F472B6,#EC4899);border-radius:24px;padding:3rem;color:white;text-align:center;">
+      <p style="font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;line-height:1.6;color:#FAF5FF;margin-bottom:1.5rem;">
+        "Your healing matters. Your story matters. You matter."
+      </p>
+      <p style="color:#fde68a;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Resilience &amp; Becoming</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community" class="pillar-section">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;">
+    <div class="pillar-number" style="color:#FBBF24;">04</div>
+    <div style="background:linear-gradient(90deg,#FBBF24,#F59E0B);border-radius:24px;padding:3rem;color:white;text-align:center;">
+      <p style="font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;line-height:1.6;color:#FAF5FF;margin-bottom:1.5rem;">
+        "You are not alone. You were never meant to walk this road by yourself."
+      </p>
+      <p style="color:#2D0A5E;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Community &amp; Connection</p>
+    </div>
+    <div>
+      <span class="section-tag" style="color:#FBBF24;">Pillar Four</span>
+      <div class="pillar-icon-lg" style="--icon-bg:#FBBF2410;">🤝</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:#2D0A5E;font-weight:700;letter-spacing:-0.02em;margin-bottom:1.25rem;">Community</h2>
+      <p style="font-size:1.05rem;color:#6B4C9A;line-height:1.85;margin-bottom:1.25rem;font-weight:300;">
+        Isolation is one of the enemy's most powerful tools. Community is one of God's most powerful responses. When women gather to encourage, support, and hold each other accountable, something transformational happens.
+      </p>
+      <p style="font-size:1.05rem;color:#6B4C9A;line-height:1.85;margin-bottom:2rem;font-weight:300;">
+        You Inspire Now creates spaces where women feel truly seen, deeply connected, and consistently encouraged — not just in the good seasons, but especially in the hard ones.
+      </p>
+      <div style="margin-bottom:2rem;">
+        <span class="truth-pill" style="--bg:#FBBF24;">You belong here</span>
+        <span class="truth-pill" style="--bg:#2D0A5E;">You are seen and welcomed</span>
+        <span class="truth-pill" style="--bg:#F59E0B;">We grow together</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHOLENESS -->
+<section id="wholeness" class="pillar-section">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;">
+    <div class="pillar-number" style="color:#10B981;">05</div>
+    <div>
+      <span class="section-tag" style="color:#10B981;">Pillar Five</span>
+      <div class="pillar-icon-lg" style="--icon-bg:#10B98110;">✨</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:#2D0A5E;font-weight:700;letter-spacing:-0.02em;margin-bottom:1.25rem;">Wholeness</h2>
+      <p style="font-size:1.05rem;color:#6B4C9A;line-height:1.85;margin-bottom:1.25rem;font-weight:300;">
+        Wholeness is not perfection. It is the ongoing journey of becoming fully yourself — in your faith, your health, your family, your leadership, and your everyday life. Every area matters. You cannot thrive in one while ignoring the others.
+      </p>
+      <p style="font-size:1.05rem;color:#6B4C9A;line-height:1.85;margin-bottom:2rem;font-weight:300;">
+        You Inspire Now supports growth across every dimension of a woman's life — because you were not made to be a fraction of yourself. You were made to be whole.
+      </p>
+      <div style="margin-bottom:2rem;">
+        <span class="truth-pill" style="--bg:#2D0A5E;">Faith</span>
+        <span class="truth-pill" style="--bg:#7C3AED;">Health</span>
+        <span class="truth-pill" style="--bg:#A855F7;">Family</span>
+        <span class="truth-pill" style="--bg:#10B981;">Leadership</span>
+        <span class="truth-pill" style="--bg:#06D6A0;">Everyday Life</span>
+      </div>
+    </div>
+    <div style="background:linear-gradient(135deg,#10B981,#06D6A0);border-radius:24px;padding:3rem;color:white;text-align:center;">
+      <p style="font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;line-height:1.6;color:#FAF5FF;margin-bottom:1.5rem;">
+        "You were made to thrive — in every area, in every season, with your whole heart."
+      </p>
+      <p style="color:#2D0A5E;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Wholeness &amp; Flourishing</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,#F472B6,#A855F7 50%,#06B6D4);padding:6rem 2rem;text-align:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 50%,#ffffff15,transparent);"></div>
+  <div style="max-width:600px;margin:0 auto;position:relative;z-index:1;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:#FAF5FF;font-weight:700;margin-bottom:1rem;">Ready to Move Forward?</h2>
+    <p style="color:#FAF5FFcc;line-height:1.8;margin-bottom:2.5rem;font-size:1.05rem;">Join a community of women who are rising, healing, and becoming — together.</p>
+    <a href="community.html" style="display:inline-block;padding:1rem 2.5rem;background:#2D0A5E;color:#FAF5FF;font-weight:700;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;border-radius:100px;text-decoration:none;box-shadow:0 8px 32px #00000030;transition:transform 0.25s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">Join the Community</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem;">
+      <div>
+        <img src="assets/yin-logo.png" alt="You Inspire Now" style="height:44px;filter:brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255,255,255,0.3));opacity:0.9;margin-bottom:1rem;">
+        <p style="font-size:0.9rem;line-height:1.75;max-width:300px;">Faith-rooted encouragement for women becoming who they were created to be.</p>
+      </div>
+      <div>
+        <h4 style="color:#FAF5FF;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;margin-bottom:1.25rem;">Navigate</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;">
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="about.html" class="footer-link">About</a></li>
+          <li><a href="pillars.html" class="footer-link">Our Pillars</a></li>
+          <li><a href="community.html" class="footer-link">Community</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:#FAF5FF;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;margin-bottom:1.25rem;">Resources</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;">
+          <li><a href="resources.html" class="footer-link">Encouragement</a></li>
+          <li><a href="resources.html" class="footer-link">Faith &amp; Surrender</a></li>
+          <li><a href="resources.html" class="footer-link">Health &amp; Wholeness</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:#FAF5FF;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;margin-bottom:1.25rem;">Give</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;">
+          <li><a href="go-inspire-now.html" class="footer-link" style="color:#06B6D4;">Go Inspire Now</a></li>
+          <li><a href="go-inspire-now.html" class="footer-link">Donate</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top:1px solid #ffffff10;padding-top:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+      <p style="font-size:0.8rem;">© 2026 You Inspire Now. All rights reserved.</p>
+      <p style="font-size:0.8rem;">Faith · Identity · Purpose · Resilience · Community · Wholeness</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 80) nav.classList.add('scrolled-nav');
+  else nav.classList.remove('scrolled-nav');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<section id="hero" class="has-grain" aria-label="Hero">
+
+  <!-- ── HERO MEDIA ──────────────────────────────────────
+       Upload a hero image in the Shopify theme customizer.
+       Recommended: 2700 × 3600 px, portrait editorial photo.
+       ─────────────────────────────────────────────────── -->
+  <div class="hero-media">
+    {%- if section.settings.hero_image -%}
+      <img
+        src="{{ section.settings.hero_image | img_url: '2400x' }}"
+        srcset="{{ section.settings.hero_image | img_url: '1200x' }} 1200w,
+                {{ section.settings.hero_image | img_url: '1800x' }} 1800w,
+                {{ section.settings.hero_image | img_url: '2400x' }} 2400w"
+        sizes="52vw"
+        alt="{{ section.settings.hero_image.alt | escape }}"
+        loading="eager"
+        fetchpriority="high"
+      />
+    {%- else -%}
+      <div class="hero-img-placeholder">
+        <span>Hero Editorial Photo<br/>Upload in Shopify Customizer<br/>Recommended: 2700 × 3600 px</span>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="hero-veil" aria-hidden="true"></div>
+
+  <!-- Side season label -->
+  <p class="hide-mobile" aria-hidden="true" style="
+    position:absolute;right:-8px;top:50%;
+    transform:translateY(-50%) rotate(90deg);
+    transform-origin:center;z-index:10;
+    font-family:'Montserrat',sans-serif;
+    font-size:0.42rem;letter-spacing:0.42em;text-transform:uppercase;
+    color:var(--text-faint);white-space:nowrap;">
+    {{ section.settings.side_label }}
+  </p>
+
+  <!-- Hero content -->
+  <div class="hero-content">
+
+    <p class="hero-eyebrow fade-up">{{ section.settings.eyebrow }}</p>
+
+    <h1 class="hero-title fade-up d1">
+      {{ section.settings.headline | newline_to_br }}
+    </h1>
+
+    <p class="hero-sub fade-up d2">{{ section.settings.subtext }}</p>
+
+    <div class="hero-btns fade-up d3">
+      {%- if section.settings.cta_primary_text != blank -%}
+        <a href="{{ section.settings.cta_primary_url }}" class="btn-primary">
+          {{ section.settings.cta_primary_text }}
+        </a>
+      {%- endif -%}
+      {%- if section.settings.cta_secondary_text != blank -%}
+        <a href="{{ section.settings.cta_secondary_url }}" class="btn-ghost">
+          {{ section.settings.cta_secondary_text }}
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-cue" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image",
+      "info": "Recommended: 2700 × 3600 px portrait editorial photo"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "New Collection — 2026"
+    },
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Headline (use new lines for line breaks)",
+      "default": "Wear\nLight\nItself"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Crafted for those who understand that true luxury is felt before it is seen. The SS '26 collection arrives — singular, inevitable."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "Primary Button Text",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "Primary Button URL"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_text",
+      "label": "Secondary Button Text",
+      "default": "Our Maison"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "Secondary Button URL"
+    },
+    {
+      "type": "text",
+      "id": "side_label",
+      "label": "Vertical Side Label",
+      "default": "SS '26 Collection · The Luminous Edit"
+    }
+  ],
+  "presets": [
+    { "name": "Hero Banner" }
+  ]
+}
+{% endschema %}

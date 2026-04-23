@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — You Inspire Now</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Lato',sans-serif;background:#FFF9FE;color:#2D0A5E;overflow-x:hidden;}
+:root{--dp:#2D0A5E;--vi:#7C3AED;--vi2:#A855F7;--cy:#06B6D4;--pk:#EC4899;--pk2:#F472B6;--go:#FBBF24;--cr:#FFF9FE;--lv:#FAF5FF;}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.1rem 2.5rem;
+  background:transparent;transition:background 0.3s,box-shadow 0.3s;}
+#nav.scrolled{background:rgba(28,4,60,0.96);backdrop-filter:blur(20px);box-shadow:0 4px 32px rgba(0,0,0,0.25);}
+.nav-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo img{height:52px;display:block;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-a{font-size:0.67rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;
+  color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;position:relative;}
+.nav-a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--cy);transition:width 0.2s;}
+.nav-a:hover{color:#fff;}.nav-a:hover::after,.nav-a.active::after{width:100%;}
+.nav-a.active{color:var(--cy);}
+.nav-pill{display:inline-block;padding:0.48rem 1.3rem;background:linear-gradient(135deg,var(--pk),var(--vi));color:#fff;font-size:0.67rem;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;text-decoration:none;box-shadow:0 4px 16px rgba(236,72,153,0.45);transition:transform 0.2s,box-shadow 0.2s;}
+.nav-pill:hover{transform:scale(1.06);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.nav-burger span{display:block;width:22px;height:2px;background:#fff;}
+
+/* PAGE HERO */
+.page-hero{background:linear-gradient(148deg,#180330 0%,#2D0A5E 35%,#4C1D95 65%,#083A50 100%);
+  padding:9rem 2.5rem 6rem;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 80% at 80% 30%,rgba(6,182,212,0.14),transparent),
+             radial-gradient(ellipse 40% 60% at 15% 80%,rgba(168,85,247,0.12),transparent);}
+.ph-in{position:relative;z-index:1;max-width:720px;margin:0 auto;}
+.ph-ey{font-size:0.58rem;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(251,191,36,0.9);display:block;margin-bottom:1rem;}
+.ph-h{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.2rem);
+  color:#fff;font-weight:700;letter-spacing:-0.02em;line-height:1.1;margin-bottom:1.25rem;}
+.ph-h em{font-style:italic;color:#A8E6E3;display:block;}
+.ph-sub{font-size:1.05rem;color:rgba(255,255,255,0.68);line-height:1.88;font-weight:300;}
+
+/* SHARED */
+.sec{padding:6.5rem 2.5rem;}
+.sec-in{max-width:1100px;margin:0 auto;}
+.ey{font-size:0.6rem;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;color:var(--vi);display:block;margin-bottom:0.65rem;}
+.sh2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-0.025em;line-height:1.12;color:var(--dp);margin-bottom:1rem;}
+.sh2 em{font-style:italic;color:var(--cy);}
+.bp{font-size:0.97rem;color:rgba(45,10,94,0.55);line-height:1.9;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* FOUNDER STORY */
+#story{background:#fff;}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:5.5rem;align-items:center;}
+.story-body p{font-size:1.02rem;color:rgba(45,10,94,0.6);line-height:1.9;margin-bottom:1.4rem;font-weight:300;}
+.story-quote{font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;
+  color:var(--dp);line-height:1.75;border-left:4px solid var(--cy);padding-left:1.5rem;
+  margin:0.5rem 0;}
+.story-card{background:linear-gradient(135deg,#5B1D9E,var(--vi2) 55%,var(--cy));
+  border-radius:22px;padding:3rem 2.5rem;color:#fff;position:relative;overflow:hidden;}
+.story-card::before{content:'';position:absolute;top:-40%;right:-20%;width:320px;height:320px;
+  background:radial-gradient(circle,rgba(6,182,212,0.22),transparent 70%);border-radius:50%;}
+.story-card-in{position:relative;z-index:1;}
+.story-card-icon{font-size:2.5rem;margin-bottom:1.25rem;display:block;}
+.story-card-h{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;
+  color:#fff;margin-bottom:1rem;line-height:1.25;}
+.story-card-p{color:rgba(255,255,255,0.8);line-height:1.85;font-size:0.95rem;margin-bottom:1.25rem;}
+.story-card-tag{font-size:0.65rem;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;color:#A8E6E3;}
+
+/* MISSION + VALUES */
+#mission{background:var(--lv);}
+.values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:2.75rem;}
+.val-card{background:#fff;border-radius:14px;padding:2rem;border-left:4px solid var(--ac);
+  box-shadow:0 4px 24px rgba(45,10,94,0.06);transition:transform 0.3s cubic-bezier(.34,1.56,.64,1);}
+.val-card:hover{transform:translateY(-5px);}
+.val-h{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--dp);font-weight:700;margin-bottom:0.65rem;}
+.val-p{font-size:0.88rem;color:rgba(45,10,94,0.56);line-height:1.75;}
+
+/* WHO WE SERVE */
+#audience{background:#fff;}
+.aud-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:3rem;}
+.aud-item{display:flex;gap:1.25rem;align-items:flex-start;padding:1.75rem;
+  background:var(--lv);border-radius:14px;
+  transition:transform 0.3s cubic-bezier(.34,1.56,.64,1),box-shadow 0.3s;}
+.aud-item:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(45,10,94,0.1);}
+.aud-icon{font-size:1.8rem;flex-shrink:0;margin-top:0.1rem;}
+.aud-h{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--dp);font-weight:700;margin-bottom:0.4rem;}
+.aud-p{font-size:0.87rem;color:rgba(45,10,94,0.56);line-height:1.72;}
+
+/* PILLARS */
+#pillars{background:var(--cr);}
+.pillar-row{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+  padding:4rem 0;border-bottom:1px solid rgba(45,10,94,0.07);position:relative;}
+.pillar-row:last-child{border-bottom:none;padding-bottom:0;}
+.pillar-row.flip .pillar-content{order:2;}
+.pillar-row.flip .pillar-visual{order:1;}
+.pillar-num-bg{position:absolute;top:2rem;right:2rem;font-family:'Playfair Display',serif;
+  font-size:9rem;font-weight:700;color:rgba(45,10,94,0.04);line-height:1;pointer-events:none;}
+.pillar-icon-wrap{width:64px;height:64px;border-radius:18px;display:flex;align-items:center;
+  justify-content:center;font-size:1.9rem;background:var(--ic);margin-bottom:1.4rem;}
+.pillar-h{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.5rem);
+  font-weight:700;color:var(--dp);letter-spacing:-0.02em;margin-bottom:1rem;}
+.pillar-p{font-size:0.97rem;color:rgba(45,10,94,0.56);line-height:1.9;margin-bottom:1.4rem;font-weight:300;}
+.truth-pills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
+.tp{display:inline-block;padding:0.5rem 1.1rem;border-radius:100px;
+  font-size:0.8rem;font-style:italic;color:#fff;background:var(--tc);}
+.pillar-visual{background:var(--grad);border-radius:20px;padding:2.75rem;color:#fff;
+  text-align:center;position:relative;overflow:hidden;}
+.pillar-visual::before{content:'';position:absolute;top:-30%;right:-20%;width:250px;height:250px;
+  background:radial-gradient(circle,rgba(255,255,255,0.1),transparent 70%);border-radius:50%;}
+.pillar-visual-q{font-family:'Playfair Display',serif;font-size:1.35rem;font-style:italic;
+  color:#fff;line-height:1.65;margin-bottom:1.25rem;position:relative;z-index:1;}
+.pillar-visual-tag{font-size:0.68rem;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.6);position:relative;z-index:1;}
+
+/* PROMISE */
+.promise{background:linear-gradient(135deg,#5B1D9E,var(--vi2) 50%,var(--cy));
+  padding:6.5rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
+.promise::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 70% at 50% 50%,rgba(255,255,255,0.09),transparent);}
+.promise-in{max-width:680px;margin:0 auto;position:relative;z-index:1;}
+.promise-ey{font-size:0.6rem;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(251,191,36,0.85);display:block;margin-bottom:0.65rem;}
+.promise-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);
+  color:#fff;font-weight:700;letter-spacing:-0.025em;margin-bottom:1.25rem;line-height:1.12;}
+.promise-h em{font-style:italic;color:var(--go);}
+.promise-p{color:rgba(255,255,255,0.82);line-height:1.9;margin-bottom:2.25rem;font-size:1rem;}
+.btn-pk{display:inline-block;padding:1rem 2.5rem;background:linear-gradient(135deg,var(--pk),var(--pk2));
+  color:#fff;font-weight:900;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;
+  border-radius:100px;text-decoration:none;box-shadow:0 8px 32px rgba(236,72,153,0.45);
+  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.btn-pk:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 48px rgba(236,72,153,0.6);}
+
+/* FOOTER */
+footer{background:linear-gradient(160deg,#180330,#2D0A5E);padding:4rem 2.5rem 2rem;}
+.ft-in{max-width:1200px;margin:0 auto;}
+.ft-bot{border-top:1px solid rgba(255,255,255,0.07);padding-top:1.5rem;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.ft-copy{font-size:0.7rem;color:rgba(255,255,255,0.2);}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .story-grid,.pillar-row{grid-template-columns:1fr;gap:2.5rem;}
+  .pillar-row.flip .pillar-content,.pillar-row.flip .pillar-visual{order:unset;}
+  .values-grid,.aud-grid{grid-template-columns:1fr;}
+  .pillar-num-bg{display:none;}
+}
+@media(max-width:600px){
+  #nav{padding:0.8rem 1.25rem;}
+  .nav-links{display:none;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(28,4,60,0.98);padding:1.5rem;gap:1.1rem;z-index:499;}
+  .nav-a{font-size:0.85rem;}
+  .nav-burger{display:flex;}
+  .sec{padding:4.5rem 1.25rem;}
+  .page-hero{padding:7.5rem 1.25rem 4rem;}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html"><img src="assets/yin-logo.png" alt="You Inspire Now" style="height:52px;display:block;filter:brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255,255,255,0.2));"></a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-a">Home</a>
+      <a href="about.html" class="nav-a active">About</a>
+      <a href="events.html" class="nav-a">Events</a>
+      <a href="go-inspire-now.html" class="nav-pill">Go Inspire Now ♥</a>
+    </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="ph-in">
+    <span class="ph-ey">Our Story</span>
+    <h1 class="ph-h">A Faith-Rooted<em>Movement for Women</em></h1>
+    <p class="ph-sub">Born from a personal turning point — a story of overcoming brokenness and finding renewed purpose — You Inspire Now exists to be the support every woman deserves.</p>
+  </div>
+</section>
+
+<!-- FOUNDER STORY -->
+<section id="story" class="sec">
+  <div class="sec-in">
+    <div class="story-grid">
+      <div class="story-body reveal">
+        <span class="ey">The Founder Story</span>
+        <h2 class="sh2">From Brokenness<br>to <em>Becoming</em></h2>
+        <p>There was a season of confusion, shame, unhealthy patterns, and living for outward performance. A season where identity was buried under expectation and pain.</p>
+        <p>Then came a turning point. A surrender. An inward healing that changed everything. From that place of restored identity and discovered purpose, You Inspire Now was born — not as a polished program, but as a personal mission.</p>
+        <blockquote class="story-quote">"What I found on the other side of surrender, I needed to pass on. No woman should have to find her way through the dark alone."</blockquote>
+      </div>
+      <div class="story-card reveal" style="transition-delay:0.12s">
+        <div class="story-card-in">
+          <span class="story-card-icon">🌸</span>
+          <h3 class="story-card-h">The Heart Behind the Mission</h3>
+          <p class="story-card-p">You Inspire Now is not a program. It is a presence — a trusted space where women discover that their past does not erase their purpose, and their healing is possible, real, and worth every step.</p>
+          <div class="story-card-tag">Faith · Healing · Identity · Purpose</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION + VALUES -->
+<section id="mission" class="sec">
+  <div class="sec-in">
+    <div class="reveal" style="max-width:700px;margin:0 auto 0;text-align:center;">
+      <span class="ey">Our Mission</span>
+      <h2 class="sh2">Who We Are and <em>What We Stand For</em></h2>
+      <p class="bp" style="max-width:620px;margin:0 auto;">To inspire women through encouragement, empowerment, community, mentorship, and supportive connections that build resilience, strengthen identity and purpose, and help women move forward with confidence.</p>
+    </div>
+    <div class="values-grid">
+      <div class="val-card reveal" style="--ac:#7C3AED;">
+        <div class="val-h">Faith-Centered</div>
+        <p class="val-p">Rooted in the belief that every woman was created with purpose, value, and an irreplaceable story worth telling.</p>
+      </div>
+      <div class="val-card reveal" style="--ac:#06B6D4;transition-delay:0.08s">
+        <div class="val-h">Warm &amp; Personal</div>
+        <p class="val-p">Like a trusted sister with conviction — never cold, corporate, or distant. Always real, honest, and human.</p>
+      </div>
+      <div class="val-card reveal" style="--ac:#EC4899;transition-delay:0.16s">
+        <div class="val-h">Identity-Centered</div>
+        <p class="val-p">We do not focus on performance. We anchor in truth — who you truly are matters more than what you've done or where you've been.</p>
+      </div>
+      <div class="val-card reveal" style="--ac:#FBBF24;transition-delay:0.24s">
+        <div class="val-h">Growth-Focused</div>
+        <p class="val-p">We center growth, surrender, courage, and becoming — not perfection. Every single step forward counts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section id="audience" class="sec">
+  <div class="sec-in">
+    <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+      <span class="ey">Our Audience</span>
+      <h2 class="sh2">We Were <em>Built for You</em></h2>
+      <p class="bp" style="max-width:520px;margin:0 auto;">You Inspire Now was built for real women in real seasons — not idealized versions, but honest, beautiful, complex women becoming.</p>
+    </div>
+    <div class="aud-grid">
+      <div class="aud-item reveal">
+        <div class="aud-icon">🌿</div>
+        <div>
+          <div class="aud-h">Women feeling stuck or unseen</div>
+          <p class="aud-p">Overwhelmed or disconnected from their true identity — searching for clarity, direction, and a community that truly sees them.</p>
+        </div>
+      </div>
+      <div class="aud-item reveal" style="transition-delay:0.08s">
+        <div class="aud-icon">👩‍👧</div>
+        <div>
+          <div class="aud-h">Mothers in the trenches</div>
+          <p class="aud-p">Seeking support, hope, practical resources, and renewed strength for the beautiful but demanding everyday journey of motherhood.</p>
+        </div>
+      </div>
+      <div class="aud-item reveal" style="transition-delay:0.16s">
+        <div class="aud-icon">💜</div>
+        <div>
+          <div class="aud-h">Women healing from past wounds</div>
+          <p class="aud-p">From shame, abandonment, confusion, or performance-based living — finding truth, freedom, and the courage to move forward.</p>
+        </div>
+      </div>
+      <div class="aud-item reveal" style="transition-delay:0.24s">
+        <div class="aud-icon">🙏</div>
+        <div>
+          <div class="aud-h">Women drawn to faith &amp; purpose</div>
+          <p class="aud-p">Growing in faith, personal health, family, leadership, and leaning deeper into the calling and assignment on their lives.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIVE PILLARS -->
+<section id="pillars" class="sec">
+  <div class="sec-in">
+    <div class="reveal" style="text-align:center;max-width:580px;margin:0 auto 4rem;">
+      <span class="ey">Our Foundation</span>
+      <h2 class="sh2">Five Pillars.<em>One Unshakeable Foundation.</em></h2>
+      <p class="bp">Everything we do flows from these pillars. They are not programs — they are the heartbeat of a movement designed to meet women exactly where they are.</p>
+    </div>
+
+    <!-- Identity -->
+    <div class="pillar-row reveal">
+      <div class="pillar-num-bg">01</div>
+      <div class="pillar-content">
+        <span class="ey" style="color:#9333EA;">Pillar One</span>
+        <div class="pillar-icon-wrap" style="--ic:#FAF5FF;">👑</div>
+        <h3 class="pillar-h">Identity</h3>
+        <p class="pillar-p">Before anything else — before purpose, before community, before the next step — you have to know who you are. Not who the world says. Not who your past has told you. <em>Who you truly are.</em></p>
+        <p class="pillar-p">You Inspire Now exists to help women strip away the performance, the shame, and the confusion — and come home to their God-given identity. Value that cannot be earned and cannot be taken away.</p>
+        <div class="truth-pills">
+          <span class="tp" style="--tc:#7C3AED;">You are not your mistakes</span>
+          <span class="tp" style="--tc:#4C1D95;">You are not your worst day</span>
+          <span class="tp" style="--tc:#A855F7;">You are seen and known</span>
+        </div>
+      </div>
+      <div class="pillar-visual" style="--grad:linear-gradient(135deg,#9333EA,#A855F7);">
+        <p class="pillar-visual-q">"You were created with purpose, and your past does not get the final word."</p>
+        <div class="pillar-visual-tag">Identity &amp; Worth</div>
+      </div>
+    </div>
+
+    <!-- Purpose -->
+    <div class="pillar-row flip reveal">
+      <div class="pillar-num-bg">02</div>
+      <div class="pillar-visual" style="--grad:linear-gradient(135deg,#06B6D4,#0EA5E9);">
+        <p class="pillar-visual-q">"There is still purpose on your life. Your story is still being written."</p>
+        <div class="pillar-visual-tag">Purpose &amp; Calling</div>
+      </div>
+      <div class="pillar-content">
+        <span class="ey" style="color:#06B6D4;">Pillar Two</span>
+        <div class="pillar-icon-wrap" style="--ic:#F0FDFE;">🌿</div>
+        <h3 class="pillar-h">Purpose</h3>
+        <p class="pillar-p">You were not created to drift. You were made with intention, given gifts the world needs, and called toward an assignment that only you can carry. Purpose is not a destination — it is the direction you move when you know who you are.</p>
+        <p class="pillar-p">This pillar invites women to stop waiting for perfect conditions and start moving toward the life they were created for — one courageous step at a time.</p>
+        <div class="truth-pills">
+          <span class="tp" style="--tc:#06B6D4;">Your calling is real</span>
+          <span class="tp" style="--tc:#0EA5E9;">You were made with intention</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resilience -->
+    <div class="pillar-row reveal">
+      <div class="pillar-num-bg">03</div>
+      <div class="pillar-content">
+        <span class="ey" style="color:#EC4899;">Pillar Three</span>
+        <div class="pillar-icon-wrap" style="--ic:#FFF0F8;">💪</div>
+        <h3 class="pillar-h">Resilience</h3>
+        <p class="pillar-p">Resilience is not pretending the pain did not happen. It is allowing honest healing to take place — and then rising anyway. It is the courage to take the next step even when everything in you wants to stop.</p>
+        <p class="pillar-p">We build resilience by honoring struggle without glorifying victimhood — by saying "this was hard" and also "I am still here, and I am still becoming."</p>
+        <div class="truth-pills">
+          <span class="tp" style="--tc:#EC4899;">Your healing is real</span>
+          <span class="tp" style="--tc:#F472B6;">Rising is possible</span>
+        </div>
+      </div>
+      <div class="pillar-visual" style="--grad:linear-gradient(135deg,#BE185D,#EC4899);">
+        <p class="pillar-visual-q">"This is your time to rise, heal, and move forward. You were made for this moment."</p>
+        <div class="pillar-visual-tag">Resilience &amp; Becoming</div>
+      </div>
+    </div>
+
+    <!-- Community -->
+    <div class="pillar-row flip reveal">
+      <div class="pillar-num-bg">04</div>
+      <div class="pillar-visual" style="--grad:linear-gradient(135deg,#B45309,#FBBF24);">
+        <p class="pillar-visual-q" style="color:#2D0A5E;">"Every woman who walks through our community comes as she is — and leaves stronger, brighter, and more herself."</p>
+        <div class="pillar-visual-tag" style="color:#7C3AED;">Community &amp; Connection</div>
+      </div>
+      <div class="pillar-content">
+        <span class="ey" style="color:#D97706;">Pillar Four</span>
+        <div class="pillar-icon-wrap" style="--ic:#FFFBEB;">🤝</div>
+        <h3 class="pillar-h">Community</h3>
+        <p class="pillar-p">You were not designed to do life alone. Community is where transformation accelerates — where iron sharpens iron, where tears are met with presence, and where victories are celebrated by women who truly know you.</p>
+        <p class="pillar-p">Our community creates spaces where women feel genuinely seen, consistently encouraged, and deeply connected.</p>
+        <div class="truth-pills">
+          <span class="tp" style="--tc:#D97706;">You belong here</span>
+          <span class="tp" style="--tc:#B45309;">You are not alone</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wholeness -->
+    <div class="pillar-row reveal">
+      <div class="pillar-num-bg">05</div>
+      <div class="pillar-content">
+        <span class="ey" style="color:#059669;">Pillar Five</span>
+        <div class="pillar-icon-wrap" style="--ic:#F0FDF9;">✨</div>
+        <h3 class="pillar-h">Wholeness</h3>
+        <p class="pillar-p">Wholeness is not perfection. It is the integration of all the parts of you — faith, health, family, leadership, and purpose — growing together in alignment. It is becoming fully yourself, without apology.</p>
+        <p class="pillar-p">We support women in their pursuit of wholeness across every dimension of life, because you deserve to thrive in every area, not just survive in some.</p>
+        <div class="truth-pills">
+          <span class="tp" style="--tc:#059669;">All of you matters</span>
+          <span class="tp" style="--tc:#10B981;">Wholeness is possible</span>
+        </div>
+      </div>
+      <div class="pillar-visual" style="--grad:linear-gradient(135deg,#065F46,#10B981);">
+        <p class="pillar-visual-q">"Wholeness is not a destination — it is how you walk forward, integrated and free."</p>
+        <div class="pillar-visual-tag">Wholeness &amp; Growth</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMISE -->
+<div class="promise">
+  <div class="promise-in reveal">
+    <span class="promise-ey">Our Promise</span>
+    <h2 class="promise-h">You Leave Here<em>Seen, Strengthened, and Called Forward</em></h2>
+    <p class="promise-p">Hope. Courage. Belonging. Clarity. Renewed confidence. That is what every woman who walks through our doors deserves — and what You Inspire Now is committed to delivering.</p>
+    <a href="events.html" class="btn-pk">Explore Our Events ✨</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-in">
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 You Inspire Now. All rights reserved.</p>
+      <p class="ft-copy">Faith · Identity · Purpose · Resilience · Community · Wholeness ✨</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+document.getElementById('nav-burger').addEventListener('click', () =>
+  document.getElementById('nav-links').classList.toggle('open'));
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

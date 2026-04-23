@@ -1,0 +1,82 @@
+<footer id="contact" aria-label="Footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div>
+        <a href="{{ routes.root_url }}" class="footer-logo" aria-label="{{ shop.name }} home">
+          <span style="font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#F4F1ED;">
+            YNG<span style="color:var(--gold);">★</span>LIFE
+          </span>
+        </a>
+        <p class="footer-tagline">{{ section.settings.tagline }}</p>
+      </div>
+
+      <!-- Link columns -->
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'link_column' -%}
+          <div {{ block.shopify_attributes }}>
+            <h4 class="footer-col-title">{{ block.settings.heading }}</h4>
+            <ul class="footer-links">
+              {%- for link in linklists[block.settings.menu].links -%}
+                <li><a href="{{ link.url }}" class="footer-link">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      <div class="footer-social">
+        {%- if section.settings.instagram != blank -%}
+          <a href="{{ section.settings.instagram }}" target="_blank" rel="noopener">Instagram</a><span>·</span>
+        {%- endif -%}
+        {%- if section.settings.tiktok != blank -%}
+          <a href="{{ section.settings.tiktok }}" target="_blank" rel="noopener">TikTok</a><span>·</span>
+        {%- endif -%}
+        {%- if section.settings.twitter != blank -%}
+          <a href="{{ section.settings.twitter }}" target="_blank" rel="noopener">X / Twitter</a>
+        {%- endif -%}
+      </div>
+      <p class="footer-credit">Designed with intention ★</p>
+    </div>
+
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "section",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Link Column",
+      "settings": [
+        { "type": "text",      "id": "heading", "label": "Column Title", "default": "Collections"   },
+        { "type": "link_list", "id": "menu",    "label": "Menu"                                      }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "textarea", "id": "tagline",   "label": "Brand Tagline", "default": "Pure elegance. Every detail infused with purpose." },
+    { "type": "url",      "id": "instagram", "label": "Instagram URL" },
+    { "type": "url",      "id": "tiktok",    "label": "TikTok URL"    },
+    { "type": "url",      "id": "twitter",   "label": "X / Twitter URL" }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "link_column", "settings": { "heading": "Collections" } },
+        { "type": "link_column", "settings": { "heading": "Help"        } },
+        { "type": "link_column", "settings": { "heading": "About"       } }
+      ]
+    }
+  ]
+}
+{% endschema %}

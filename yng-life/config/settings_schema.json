@@ -1,0 +1,34 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name":    "YNG★LIFE",
+    "theme_version": "1.0.0",
+    "theme_author":  "Inspiring Websites"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "text",  "id": "shop_name",   "label": "Shop Name Override", "default": "YNG★LIFE"   },
+      { "type": "color", "id": "color_gold",   "label": "Gold Accent",        "default": "#C9A84C"     },
+      { "type": "color", "id": "color_bg",     "label": "Background",         "default": "#F4F1ED"     },
+      { "type": "color", "id": "color_black",  "label": "Black",              "default": "#0B0B0B"     },
+      { "type": "color", "id": "color_text",   "label": "Text",               "default": "#111010"     }
+    ]
+  },
+  {
+    "name": "Shipping & Trust",
+    "settings": [
+      { "type": "checkbox", "id": "show_shipping_banner",   "label": "Show free shipping banner",       "default": true    },
+      { "type": "text",     "id": "shipping_banner_text",   "label": "Shipping banner text",            "default": "✈ Free Shipping to USA, CAN & EU · Handcrafted in Italy · Zero Tariffs on All US Orders" },
+      { "type": "checkbox", "id": "show_made_in_italy",     "label": "Show Made in Italy badge",         "default": true    },
+      { "type": "checkbox", "id": "show_satisfaction_badge","label": "Show Satisfaction Guarantee badge","default": true    }
+    ]
+  },
+  {
+    "name": "Currency",
+    "settings": [
+      { "type": "checkbox", "id": "show_eur",      "label": "Show EUR estimate on product pages", "default": true },
+      { "type": "text",     "id": "currency_note", "label": "Currency note",                     "default": "Prices shown in USD. EUR estimates are approximate." }
+    ]
+  }
+]

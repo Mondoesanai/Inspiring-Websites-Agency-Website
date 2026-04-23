@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Luxury Site — LUMIÈRE</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Theme CSS (same file used by Shopify theme) -->
+  <link rel="stylesheet" href="assets/theme.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  NAVIGATION  [layout/theme.liquid]                     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<nav id="main-nav" role="navigation" aria-label="Main navigation">
+
+  <a href="#" class="logo" aria-label="Lumière home">Lumière<em>.</em></a>
+
+  <div class="nav-links hide-mobile" role="menubar">
+    <a href="#collections" class="nav-link" role="menuitem">Collections</a>
+    <a href="#about"       class="nav-link" role="menuitem">Maison</a>
+    <a href="#editorial"   class="nav-link" role="menuitem">Editorial</a>
+    <a href="#contact"     class="nav-link" role="menuitem">Contact</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="#products" class="btn-shop hide-mobile">Shop</a>
+    <button id="nav-toggle" class="mobile-toggle"
+      aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
+  <a href="#collections" class="nav-link" onclick="closeMenu()">Collections</a>
+  <a href="#about"       class="nav-link" onclick="closeMenu()">Maison</a>
+  <a href="#editorial"   class="nav-link" onclick="closeMenu()">Editorial</a>
+  <a href="#contact"     class="nav-link" onclick="closeMenu()">Contact</a>
+  <a href="#products"    class="btn-shop" onclick="closeMenu()">Shop</a>
+</div>
+
+
+<main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO  [sections/hero-banner.liquid]
+       ═══════════════════════════════════════════════════════ -->
+  <section id="hero" class="has-grain" aria-label="Hero">
+
+    <div class="hero-media" aria-hidden="true">
+      <!-- PLACEHOLDER: Replace with editorial photo in Shopify customizer -->
+      <div class="hero-img-placeholder">
+        <span>Hero Editorial Photo<br/>Upload in Shopify Customizer<br/>Recommended: 2700 × 3600 px</span>
+      </div>
+    </div>
+
+    <div class="hero-veil" aria-hidden="true"></div>
+
+    <p class="hide-mobile" aria-hidden="true" style="
+      position:absolute;right:-8px;top:50%;
+      transform:translateY(-50%) rotate(90deg);transform-origin:center;z-index:10;
+      font-family:'Montserrat',sans-serif;font-size:0.42rem;letter-spacing:0.42em;
+      text-transform:uppercase;color:var(--text-faint);white-space:nowrap;">
+      SS '26 Collection &nbsp;·&nbsp; The Luminous Edit
+    </p>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-up">New Collection — 2026</p>
+      <h1 class="hero-title fade-up d1">Wear<br/><em>Light</em><br/>Itself</h1>
+      <p class="hero-sub fade-up d2">
+        Crafted for those who understand that true luxury is felt before it is seen.
+        The SS '26 collection arrives — singular, inevitable.
+      </p>
+      <div class="hero-btns fade-up d3">
+        <a href="#products" class="btn-primary">Explore Collection</a>
+        <a href="#about"    class="btn-ghost">Our Maison</a>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       MARQUEE  [sections/marquee-strip.liquid]
+       ═══════════════════════════════════════════════════════ -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">New Arrivals</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">SS '26 Collection</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Complimentary Shipping Over $500</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Limited Edition Pieces</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Handcrafted in Italy</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Bespoke Commissions Available</span><span class="marquee-dot">✦</span>
+      <!-- Duplicate for loop -->
+      <span class="marquee-item">New Arrivals</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">SS '26 Collection</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Complimentary Shipping Over $500</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Limited Edition Pieces</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Handcrafted in Italy</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Bespoke Commissions Available</span><span class="marquee-dot">✦</span>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       BRAND STATEMENT  [sections/brand-statement.liquid]
+       ═══════════════════════════════════════════════════════ -->
+  <section id="about" class="section-brand" aria-label="About the Maison">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      width:700px;height:400px;
+      background:radial-gradient(ellipse,rgba(200,169,126,0.07) 0%,transparent 65%);
+      pointer-events:none;" aria-hidden="true"></div>
+
+    <div class="container" style="max-width:800px;position:relative;">
+      <p class="rule-gold fade-up" style="justify-content:center;margin-bottom:36px;">Notre Maison</p>
+      <h2 class="brand-quote fade-up d1">
+        "Luxury is not a necessity<br/>
+        <em>to me — it is an art."</em>
+      </h2>
+      <div class="divider fade-up d2" style="margin-bottom:36px;"></div>
+      <p class="brand-body fade-up d3">
+        Born from an obsession with perfection, Lumière exists for those who demand more
+        from the world — and receive it. Each piece a collaboration between master artisans
+        and the finest materials on earth.
+      </p>
+      <a href="#" class="btn-ghost fade-up d4">Discover the Maison</a>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       COLLECTION TABS  (part of featured-products section)
+       ═══════════════════════════════════════════════════════ -->
+  <section id="collections" class="section-tabs container" aria-label="Collections filter">
+    <div class="tab-bar fade-up">
+      <span class="tab-label">Browse</span>
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" aria-selected="true"  onclick="setTab(this)">All</button>
+        <button class="tab"        role="tab" aria-selected="false" onclick="setTab(this)">Ready-to-Wear</button>
+        <button class="tab"        role="tab" aria-selected="false" onclick="setTab(this)">Accessories</button>
+        <button class="tab"        role="tab" aria-selected="false" onclick="setTab(this)">Footwear</button>
+        <button class="tab"        role="tab" aria-selected="false" onclick="setTab(this)">Fine Jewelry</button>
+        <button class="tab"        role="tab" aria-selected="false" onclick="setTab(this)">Fragrance</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       ★ PRODUCT SECTION  [sections/featured-products.liquid]
+         + snippet: snippets/product-card.liquid
+       ═══════════════════════════════════════════════════════
+       SHOPIFY INTEGRATION:
+       - Select a collection in the Shopify theme customizer
+       - Each card below → {% render 'product-card', product: product %}
+       - Card images → product.featured_image | img_url
+       ═══════════════════════════════════════════════════════ -->
+  <section id="products" class="section-products" aria-label="Featured products">
+    <div class="container">
+
+      <div class="section-header fade-up">
+        <p class="rule-gold" style="justify-content:center;margin-bottom:16px;">The Edit</p>
+        <h2 class="section-title">Featured Pieces</h2>
+      </div>
+
+      <!-- PRODUCT GRID ─────────────────────────────────── -->
+      <div class="product-grid" id="product-grid">
+
+        <!-- Card 1 -->
+        <div class="product-card fade-up" tabindex="0" role="button"
+          aria-label="The Luminous Coat" data-product-id="luminous-coat">
+          <div class="product-img-zone">
+            <div class="product-img-placeholder">Product Image<br/>800 × 1067 px</div>
+            <div class="product-img-hover-veil"></div>
+            <div class="quick-add"><button class="quick-add-btn">Add to Cart</button></div>
+          </div>
+          <div class="product-info">
+            <p class="product-category">Ready-to-Wear</p>
+            <h3 class="product-name">The Luminous Coat</h3>
+            <p class="product-price">$3,800</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="product-card fade-up d1" tabindex="0" role="button"
+          aria-label="Noir Evening Bag" data-product-id="noir-evening-bag">
+          <div class="product-img-zone">
+            <div class="product-img-placeholder">Product Image<br/>800 × 1067 px</div>
+            <div class="product-img-hover-veil"></div>
+            <div class="quick-add"><button class="quick-add-btn">Add to Cart</button></div>
+          </div>
+          <div class="product-info">
+            <p class="product-category">Accessories</p>
+            <h3 class="product-name">Noir Evening Bag</h3>
+            <p class="product-price">$2,200</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="product-card fade-up d2" tabindex="0" role="button"
+          aria-label="Gold Pavé Cuff" data-product-id="gold-pave-cuff">
+          <div class="product-img-zone">
+            <div class="product-img-placeholder">Product Image<br/>800 × 1067 px</div>
+            <div class="product-img-hover-veil"></div>
+            <div class="quick-add"><button class="quick-add-btn">Add to Cart</button></div>
+          </div>
+          <div class="product-info">
+            <p class="product-category">Fine Jewelry</p>
+            <h3 class="product-name">Gold Pavé Cuff</h3>
+            <p class="product-price">$8,500</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="product-card fade-up" tabindex="0" role="button"
+          aria-label="Silk Bias Dress" data-product-id="silk-bias-dress">
+          <div class="product-img-zone">
+            <div class="product-img-placeholder">Product Image<br/>800 × 1067 px</div>
+            <div class="product-img-hover-veil"></div>
+            <div class="quick-add"><button class="quick-add-btn">Add to Cart</button></div>
+          </div>
+          <div class="product-info">
+            <p class="product-category">Ready-to-Wear</p>
+            <h3 class="product-name">Silk Bias Dress</h3>
+            <p class="product-price">$4,600</p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="product-card fade-up d1" tabindex="0" role="button"
+          aria-label="Obsidian Mule" data-product-id="obsidian-mule">
+          <div class="product-img-zone">
+            <div class="product-img-placeholder">Product Image<br/>800 × 1067 px</div>
+            <div class="product-img-hover-veil"></div>
+            <div class="quick-add"><button class="quick-add-btn">Add to Cart</button></div>
+          </div>
+          <div class="product-info">
+            <p class="product-category">Footwear</p>
+            <h3 class="product-name">Obsidian Mule</h3>
+            <p class="product-price">$1,950</p>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="product-card fade-up d2" tabindex="0" role="button"
+          aria-label="No. 1 Eau de Parfum" data-product-id="no-1-parfum">
+          <div class="product-img-zone">
+            <div class="product-img-placeholder">Product Image<br/>800 × 1067 px</div>
+            <div class="product-img-hover-veil"></div>
+            <div class="quick-add"><button class="quick-add-btn">Add to Cart</button></div>
+          </div>
+          <div class="product-info">
+            <p class="product-category">Fragrance</p>
+            <h3 class="product-name">No. 1 Eau de Parfum</h3>
+            <p class="product-price">$620</p>
+          </div>
+        </div>
+
+      </div>
+      <!-- END PRODUCT GRID -->
+
+      <div class="section-cta fade-up">
+        <a href="#" class="btn-ghost">View Full Collection</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       EDITORIAL  [sections/editorial-grid.liquid]
+       ═══════════════════════════════════════════════════════ -->
+  <section id="editorial" class="section-editorial" aria-label="Editorial stories">
+
+    <div class="editorial-header container fade-up">
+      <div>
+        <p class="rule-gold" style="justify-content:flex-start;margin-bottom:12px;">Editorial</p>
+        <h2 class="editorial-headline">The Lookbook</h2>
+      </div>
+      <a href="#" class="btn-ghost" style="padding:10px 22px;font-size:0.54rem;">View All Stories</a>
+    </div>
+
+    <div class="editorial-grid">
+
+      <div class="ed-card ed-card-tall fade-up">
+        <div class="ed-img-zone">
+          <div class="ed-img-placeholder">Editorial Image<br/>1200 × 1600 px</div>
+          <div class="ed-overlay"></div>
+          <div class="ed-content"><p class="ed-tag">Feature</p><h3 class="ed-title">The Art of<br/><em>Quiet Power</em></h3></div>
+        </div>
+      </div>
+
+      <div class="ed-card fade-up d1">
+        <div class="ed-img-zone">
+          <div class="ed-img-placeholder">Editorial Image<br/>800 × 640 px</div>
+          <div class="ed-overlay"></div>
+          <div class="ed-content"><p class="ed-tag">Collection</p><h3 class="ed-title">Golden Hours</h3></div>
+        </div>
+      </div>
+
+      <div class="ed-card fade-up d2">
+        <div class="ed-img-zone">
+          <div class="ed-img-placeholder">Editorial Image<br/>800 × 640 px</div>
+          <div class="ed-overlay"></div>
+          <div class="ed-content"><p class="ed-tag">Spotlight</p><h3 class="ed-title">The Obsidian Edit</h3></div>
+        </div>
+      </div>
+
+      <div class="ed-card fade-up d1">
+        <div class="ed-img-zone">
+          <div class="ed-img-placeholder">Editorial Image<br/>800 × 640 px</div>
+          <div class="ed-overlay"></div>
+          <div class="ed-content"><p class="ed-tag">Craft</p><h3 class="ed-title">An Artisan's Hand</h3></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       NEWSLETTER  [sections/newsletter.liquid]
+       ═══════════════════════════════════════════════════════ -->
+  <section class="section-newsletter" aria-label="Newsletter">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      width:800px;height:400px;
+      background:radial-gradient(ellipse,rgba(200,169,126,0.07) 0%,transparent 65%);
+      pointer-events:none;" aria-hidden="true"></div>
+
+    <div class="container" style="max-width:520px;position:relative;">
+      <p class="rule-gold fade-up" style="justify-content:center;margin-bottom:22px;">Private Access</p>
+      <h2 class="newsletter-title fade-up d1">Enter the Inner Circle</h2>
+      <p class="newsletter-body fade-up d2">
+        First access to new collections, private events, and the rare
+        opportunity to commission bespoke pieces.
+      </p>
+      <form class="newsletter-form fade-up d3" onsubmit="return false;">
+        <input type="email" class="email-input" placeholder="Your email address" aria-label="Email" />
+        <button type="submit" class="btn-primary" style="white-space:nowrap;padding:16px 28px;flex-shrink:0;">Join</button>
+      </form>
+      <p class="newsletter-fine fade-up d4">
+        By joining you agree to receive occasional correspondence of consequence.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER  [sections/footer.liquid]
+       ═══════════════════════════════════════════════════════ -->
+  <footer id="contact" aria-label="Footer">
+    <div class="container">
+
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="logo">Lumière<em>.</em></a>
+          <p class="footer-tagline">A house built on the belief that beauty, at its most refined, transcends adornment.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Collections</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Ready-to-Wear</a></li>
+            <li><a href="#" class="footer-link">Accessories</a></li>
+            <li><a href="#" class="footer-link">Fine Jewelry</a></li>
+            <li><a href="#" class="footer-link">Footwear</a></li>
+            <li><a href="#" class="footer-link">Fragrance</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Maison</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Our Story</a></li>
+            <li><a href="#" class="footer-link">Editorial</a></li>
+            <li><a href="#" class="footer-link">Bespoke</a></li>
+            <li><a href="#" class="footer-link">Artisans</a></li>
+            <li><a href="#" class="footer-link">Sustainability</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Client Care</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Contact Us</a></li>
+            <li><a href="#" class="footer-link">Sizing Guide</a></li>
+            <li><a href="#" class="footer-link">Shipping & Returns</a></li>
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer-link">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Lumière. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#">Instagram</a><span>·</span>
+          <a href="#">Pinterest</a><span>·</span>
+          <a href="#">TikTok</a>
+        </div>
+        <p class="footer-credit">Designed with intention</p>
+      </div>
+
+    </div>
+  </footer>
+
+</main>
+
+<script src="assets/theme.js" defer></script>
+</body>
+</html>

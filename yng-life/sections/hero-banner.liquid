@@ -1,0 +1,112 @@
+<section id="hero" class="has-grain" aria-label="Hero">
+
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-spotlight" aria-hidden="true"></div>
+
+  <!-- HERO MEDIA — Upload in Shopify customizer -->
+  <div class="hero-media" aria-hidden="true">
+    {%- if section.settings.hero_image -%}
+      <img
+        src="{{ section.settings.hero_image | img_url: '2400x' }}"
+        srcset="{{ section.settings.hero_image | img_url: '1200x' }} 1200w,
+                {{ section.settings.hero_image | img_url: '1800x' }} 1800w,
+                {{ section.settings.hero_image | img_url: '2400x' }} 2400w"
+        sizes="50vw"
+        alt="{{ section.settings.hero_image.alt | escape }}"
+        loading="eager" fetchpriority="high"
+        width="1200" height="1600"
+      />
+    {%- else -%}
+      <div class="hero-img-ph">
+        <span>Hero Editorial Photo<br/>Upload in Shopify Customizer<br/>Recommended: 2700 × 3600 px</span>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="hero-veil" aria-hidden="true"></div>
+
+  <div class="hero-content">
+
+    <p class="hero-kicker fade-up">{{ section.settings.kicker }}</p>
+
+    <h1 class="hero-title fade-up d1">
+      <strong>{{ section.settings.pre_headline }}</strong>
+      {{ section.settings.headline_line1 }}<br/>
+      <em>{{ section.settings.headline_em }}</em>
+    </h1>
+
+    <p class="hero-sub fade-up d2">{{ section.settings.subtext }}</p>
+
+    <div class="hero-badges fade-up d3">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'badge' -%}
+          <span class="hero-badge" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="hero-btns fade-up d4">
+      {%- if section.settings.cta_primary_text != blank -%}
+        <div class="btn-magnetic">
+          <a href="{{ section.settings.cta_primary_url }}" class="btn-primary">
+            {{ section.settings.cta_primary_text }}
+          </a>
+        </div>
+      {%- endif -%}
+      {%- if section.settings.cta_secondary_text != blank -%}
+        <div class="btn-magnetic">
+          <a href="{{ section.settings.cta_secondary_url }}" class="btn-ghost"
+            style="color:#F4F1ED;border-color:rgba(244,241,237,0.25);">
+            {{ section.settings.cta_secondary_text }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Trust Badge",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Badge Text", "default": "Custom Crafted" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "image_picker", "id": "hero_image",          "label": "Hero Image",           "info": "Recommended: 2700 × 3600 px portrait" },
+    { "type": "text",         "id": "kicker",              "label": "Kicker Text",           "default": "New Collection — 2026"              },
+    { "type": "text",         "id": "pre_headline",        "label": "Pre-headline (small)",  "default": "YNG★LIFE M.I."                      },
+    { "type": "text",         "id": "headline_line1",      "label": "Headline Line 1",       "default": "Pure"                               },
+    { "type": "text",         "id": "headline_em",         "label": "Headline Line 2 (gold italic)", "default": "Elegance"                   },
+    { "type": "textarea",     "id": "subtext",             "label": "Subtext",               "default": "Every detail infused with purpose. Handcrafted in Italy from the world's finest materials." },
+    { "type": "text",         "id": "cta_primary_text",    "label": "Primary Button Text",   "default": "Shop Collection"                   },
+    { "type": "url",          "id": "cta_primary_url",     "label": "Primary Button URL"                                                     },
+    { "type": "text",         "id": "cta_secondary_text",  "label": "Secondary Button Text", "default": "View Lookbook"                     },
+    { "type": "url",          "id": "cta_secondary_url",   "label": "Secondary Button URL"                                                   }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "blocks": [
+        { "type": "badge", "settings": { "text": "Custom Crafted"   } },
+        { "type": "badge", "settings": { "text": "Made in Italy"    } },
+        { "type": "badge", "settings": { "text": "Free USA Shipping"} }
+      ]
+    }
+  ]
+}
+{% endschema %}

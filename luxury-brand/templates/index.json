@@ -1,0 +1,88 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "New Collection — 2026",
+        "headline": "Wear\nLight\nItself",
+        "subtext": "Crafted for those who understand that true luxury is felt before it is seen. The SS '26 collection arrives — singular, inevitable.",
+        "cta_primary_text": "Explore Collection",
+        "cta_primary_url": "/collections/all",
+        "cta_secondary_text": "Our Maison",
+        "cta_secondary_url": "/pages/about",
+        "side_label": "SS '26 Collection · The Luminous Edit"
+      }
+    },
+    "marquee": {
+      "type": "marquee-strip",
+      "settings": {
+        "items": "New Arrivals | SS '26 Collection | Complimentary Shipping Over $500 | Limited Edition Pieces | Handcrafted in Italy | Bespoke Commissions Available"
+      }
+    },
+    "brand": {
+      "type": "brand-statement",
+      "settings": {
+        "eyebrow": "Notre Maison",
+        "quote": "\"Luxury is not a necessity\nto me — it is an art.\"",
+        "body": "Born from an obsession with perfection, Lumière exists for those who demand more from the world — and receive it. Each piece a collaboration between master artisans and the finest materials on earth.",
+        "cta_text": "Discover the Maison",
+        "cta_url": "/pages/about"
+      }
+    },
+    "products": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "The Edit",
+        "heading": "Featured Pieces",
+        "products_count": 6,
+        "show_tabs": false,
+        "show_view_all": true
+      }
+    },
+    "editorial": {
+      "type": "editorial-grid",
+      "blocks": {
+        "story-1": {
+          "type": "story",
+          "settings": { "tag": "Feature",    "title": "The Art of Quiet Power" }
+        },
+        "story-2": {
+          "type": "story",
+          "settings": { "tag": "Collection", "title": "Golden Hours"           }
+        },
+        "story-3": {
+          "type": "story",
+          "settings": { "tag": "Spotlight",  "title": "The Obsidian Edit"      }
+        },
+        "story-4": {
+          "type": "story",
+          "settings": { "tag": "Craft",      "title": "An Artisan's Hand"      }
+        }
+      },
+      "block_order": ["story-1","story-2","story-3","story-4"],
+      "settings": {
+        "eyebrow": "Editorial",
+        "heading": "The Lookbook",
+        "view_all_text": "View All Stories"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Private Access",
+        "heading": "Enter the Inner Circle",
+        "body": "First access to new collections, private events, and the rare opportunity to commission bespoke pieces.",
+        "placeholder": "Your email address",
+        "button_text": "Join",
+        "fine_print": "By joining you agree to receive occasional correspondence of consequence."
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "tagline": "A house built on the belief that beauty, at its most refined, transcends adornment."
+      }
+    }
+  },
+  "order": ["hero","marquee","brand","products","editorial","newsletter","footer"]
+}

@@ -1,0 +1,40 @@
+{
+  "general": {
+    "accessibility": {
+      "nav":         "Main navigation",
+      "skip_to_content": "Skip to content"
+    },
+    "currency": {
+      "checkout": "Checkout in {{ currency }}"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart":   "Add to Cart",
+      "sold_out":      "Sold Out",
+      "unavailable":   "Unavailable",
+      "quantity":      "Quantity",
+      "description":   "Description"
+    }
+  },
+  "cart": {
+    "general": {
+      "title":    "Your Cart",
+      "empty":    "Your cart is empty.",
+      "checkout": "Proceed to Checkout",
+      "subtotal": "Subtotal"
+    }
+  },
+  "collections": {
+    "general": {
+      "all":    "All Collections",
+      "sort_by": "Sort By"
+    }
+  },
+  "customer": {
+    "newsletter": {
+      "success": "Thank you for joining.",
+      "error":   "Please enter a valid email address."
+    }
+  }
+}

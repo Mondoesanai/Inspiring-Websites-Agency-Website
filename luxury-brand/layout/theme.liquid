@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{{ page_description | escape }}" />
+
+  <title>
+    {%- if page_title == blank -%}
+      {{ shop.name }}
+    {%- else -%}
+      {{ page_title }} — {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {{ content_for_header }}
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Theme CSS -->
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════════════════ -->
+  <nav id="main-nav" role="navigation" aria-label="{{ 'general.accessibility.nav' | t | default: 'Main navigation' }}">
+
+    <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name }} home">
+      {{ settings.logo_text | default: shop.name }}<em>.</em>
+    </a>
+
+    <!-- Desktop links -->
+    <div class="nav-links hide-mobile" role="menubar">
+      {%- for link in linklists['main-menu'].links -%}
+        <a href="{{ link.url }}" class="nav-link" role="menuitem"
+          {% if link.active %}aria-current="page"{% endif %}>
+          {{ link.title }}
+        </a>
+      {%- endfor -%}
+    </div>
+
+    <div class="nav-right">
+      <a href="{{ routes.collections_url }}" class="btn-shop hide-mobile">Shop</a>
+
+      <!-- Mobile toggle -->
+      <button id="nav-toggle" class="mobile-toggle"
+        aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    {%- for link in linklists['main-menu'].links -%}
+      <a href="{{ link.url }}" class="nav-link" onclick="closeMenu()">{{ link.title }}</a>
+    {%- endfor -%}
+    <a href="{{ routes.collections_url }}" class="btn-shop" onclick="closeMenu()">Shop</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════════════════ -->
+  <main id="main-content" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- Theme JS -->
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+</body>
+</html>

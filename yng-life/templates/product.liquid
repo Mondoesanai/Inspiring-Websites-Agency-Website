@@ -1,0 +1,235 @@
+{% comment %} Template: product.liquid {% endcomment %}
+
+<div class="product-page-wrap">
+  <div class="container">
+    <div class="product-page-grid">
+
+      <!-- ── GALLERY ──────────────────────────────────────── -->
+      <div>
+        <div class="gallery-main">
+          {%- if product.featured_image -%}
+            <img
+              id="gallery-main-img"
+              src="{{ product.featured_image | img_url: '1200x1200', crop: 'center' }}"
+              alt="{{ product.featured_image.alt | escape | default: product.title }}"
+              loading="eager" fetchpriority="high"
+              width="1200" height="1200"
+            />
+          {%- else -%}
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bg-marble);">
+              <span style="font-family:'Montserrat',sans-serif;font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-faint);">No Image</span>
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if product.images.size > 1 -%}
+          <div class="gallery-thumbs">
+            {%- for image in product.images limit: 8 -%}
+              <div class="gallery-thumb {% if forloop.first %}active{% endif %}"
+                onclick="document.getElementById('gallery-main-img').src='{{ image | img_url: '1200x1200', crop: 'center' }}'">
+                <img src="{{ image | img_url: '64x64', crop: 'center' }}"
+                  alt="{{ image.alt | escape }}" width="64" height="64" loading="lazy" />
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- ── PRODUCT DETAILS ───────────────────────────────── -->
+      <div style="padding-top:0;">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" style="margin-bottom:20px;font-family:'Montserrat',sans-serif;font-size:0.46rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-faint);">
+          <a href="{{ routes.root_url }}" style="color:var(--text-faint);transition:color 0.3s;">Home</a>
+          <span style="margin:0 8px;color:var(--border-gold);">·</span>
+          <a href="{{ product.collections.first.url }}" style="color:var(--text-faint);transition:color 0.3s;">{{ product.collections.first.title }}</a>
+          <span style="margin:0 8px;color:var(--border-gold);">·</span>
+          <span style="color:var(--gold-dark);">{{ product.title }}</span>
+        </nav>
+
+        <p class="product-brand-name">YNG★LIFE</p>
+        <h1 class="product-title-lg">{{ product.title }}</h1>
+        <p class="product-subtitle">{{ product.type }}</p>
+
+        <!-- Trust badges -->
+        <div class="product-badges">
+          <span class="product-badge">✦ Custom Crafted</span>
+          <span class="product-badge">🇮🇹 Made in Italy</span>
+          <span class="product-badge">✦ Satisfaction Guaranteed</span>
+          <span class="product-badge">↩ Free Returns</span>
+        </div>
+
+        <!-- Price block with currency selector -->
+        <div class="price-block">
+          <p class="price-main">
+            <span class="price-currency" id="price-currency-symbol">$</span><span id="price-display" data-usd="{{ product.price | money_without_currency }}">{{ product.price | money_without_currency }}</span>
+          </p>
+          <div class="currency-tabs" role="group" aria-label="Select currency">
+            <button class="currency-btn active" onclick="setCurrency(this,'USD')" aria-pressed="true">USD</button>
+            <button class="currency-btn" onclick="setCurrency(this,'EUR')" aria-pressed="false">EUR</button>
+            <button class="currency-btn" onclick="setCurrency(this,'GBP')" aria-pressed="false">GBP</button>
+          </div>
+          <p class="price-converted" id="price-converted"></p>
+        </div>
+        {%- if product.compare_at_price > product.price -%}
+          <p style="font-family:'Montserrat',sans-serif;font-size:0.56rem;color:var(--text-faint);text-decoration:line-through;margin-bottom:8px;">
+            Was: {{ product.compare_at_price | money }}
+          </p>
+        {%- endif -%}
+
+        {%- form 'product', product, id: 'product-form', novalidate: true -%}
+
+          <!-- Size chart -->
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              {%- if option.name == 'Size' or option.name == 'Shoe Size' -%}
+
+                <div class="size-section">
+                  <div class="size-label">
+                    <span>Select Size</span>
+                    <span class="size-chart-link" onclick="document.getElementById('size-chart-modal').style.display='flex'">Sizing Guide →</span>
+                  </div>
+
+                  <!-- EU / US / UK tabs -->
+                  <div class="size-tabs" role="tablist">
+                    <button class="size-tab active" role="tab" aria-selected="true"
+                      data-system="us" onclick="setSizeTab(this)">US</button>
+                    <button class="size-tab" role="tab" aria-selected="false"
+                      data-system="eu" onclick="setSizeTab(this)">EU</button>
+                    <button class="size-tab" role="tab" aria-selected="false"
+                      data-system="uk" onclick="setSizeTab(this)">UK</button>
+                  </div>
+
+                  <!-- US sizes (default visible) -->
+                  <div class="size-options size-options-group" data-system="us" style="display:flex;">
+                    {%- for value in option.values -%}
+                      <button type="button" class="size-btn" data-value="{{ value | escape }}">{{ value }}</button>
+                    {%- endfor -%}
+                  </div>
+                  <!-- EU sizes -->
+                  <div class="size-options size-options-group" data-system="eu" style="display:none;">
+                    {%- for value in option.values -%}
+                      {%- assign eu = value | plus: 32 -%}
+                      <button type="button" class="size-btn" data-value="{{ value | escape }}">{{ eu }}</button>
+                    {%- endfor -%}
+                  </div>
+                  <!-- UK sizes -->
+                  <div class="size-options size-options-group" data-system="uk" style="display:none;">
+                    {%- for value in option.values -%}
+                      {%- assign uk = value | minus: 0.5 -%}
+                      <button type="button" class="size-btn" data-value="{{ value | escape }}">{{ uk }}</button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+
+              {%- else -%}
+                <!-- Non-size variant options -->
+                <div style="margin-bottom:20px;">
+                  <p class="size-label">{{ option.name }}</p>
+                  <div class="size-options">
+                    {%- for value in option.values -%}
+                      <button type="button" class="size-btn {% if option.selected_value == value %}active{% endif %}"
+                        data-value="{{ value | escape }}">{{ value }}</button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <input type="hidden" name="id" id="variant-id"
+            value="{{ product.selected_or_first_available_variant.id }}">
+
+          <div class="btn-magnetic" style="display:block;margin-top:28px;">
+            <button type="submit" id="add-to-cart-btn"
+              class="btn-dark" style="width:100%;justify-content:center;padding:18px;font-size:0.6rem;letter-spacing:0.35em;"
+              {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+              {%- if product.selected_or_first_available_variant.available -%}
+                Buy Your Pair
+              {%- else -%}
+                Sold Out
+              {%- endif -%}
+            </button>
+          </div>
+
+        {%- endform -%}
+
+        <!-- Guarantee -->
+        <div class="guarantee-row">
+          <span class="guarantee-icon">★</span>
+          <p class="guarantee-text">
+            <strong>100% Satisfaction Guaranteed.</strong>
+            Love your shoes or send them back for free. Once you buy a pair, the custom shoes are manufactured and shipped to you.
+          </p>
+        </div>
+
+        <!-- Share -->
+        <div class="share-row">
+          <span>Share</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ product.url }}" target="_blank" class="share-icon" aria-label="Share on Facebook">f</a>
+          <a href="https://pinterest.com/pin/create/button/?url={{ shop.url }}{{ product.url }}" target="_blank" class="share-icon" aria-label="Share on Pinterest">P</a>
+          <a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ product.url }}" target="_blank" class="share-icon" aria-label="Share on X">X</a>
+        </div>
+
+        <!-- Description -->
+        {%- if product.description != blank -%}
+          <div class="product-desc-section">
+            <h4>Details</h4>
+            <div class="product-desc-body">{{ product.description }}</div>
+          </div>
+        {%- endif -%}
+
+        <!-- Italian craftsmanship note -->
+        <div class="product-desc-section">
+          <h4>Handcrafted in Italy</h4>
+          <p class="product-desc-body">
+            These custom shoes are handmade by master Italian craftsmen from pristine Italian leather.
+            Each designer pair is a one-of-a-kind, combining handcrafting tradition, quality and modern
+            style for a product that's perfectly Italian.
+          </p>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:16px;">
+            <span style="font-size:1.4rem;">🇮🇹</span>
+            <span style="font-family:'Montserrat',sans-serif;font-size:0.5rem;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-muted);">100% Certified<br/>Made in Italy</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Size Chart Modal -->
+<div id="size-chart-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(11,11,11,0.8);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+  <div style="background:var(--bg);max-width:560px;width:90%;padding:40px;position:relative;max-height:80vh;overflow-y:auto;">
+    <button onclick="document.getElementById('size-chart-modal').style.display='none'"
+      style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-muted);">✕</button>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;margin-bottom:24px;">Sizing Guide</h3>
+    <table style="width:100%;border-collapse:collapse;font-family:'Montserrat',sans-serif;font-size:0.58rem;letter-spacing:0.1em;">
+      <thead>
+        <tr style="border-bottom:1px solid var(--border);">
+          <th style="text-align:left;padding:10px 0;text-transform:uppercase;letter-spacing:0.28em;color:var(--gold-dark);">US</th>
+          <th style="text-align:left;padding:10px 0;text-transform:uppercase;letter-spacing:0.28em;color:var(--gold-dark);">EU</th>
+          <th style="text-align:left;padding:10px 0;text-transform:uppercase;letter-spacing:0.28em;color:var(--gold-dark);">UK</th>
+          <th style="text-align:left;padding:10px 0;text-transform:uppercase;letter-spacing:0.28em;color:var(--gold-dark);">CM</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- assign us_sizes = '6,7,8,9,10,11,12,13' | split: ',' -%}
+        {%- assign eu_sizes = '38,39,40,41,42,43,44,45' | split: ',' -%}
+        {%- assign uk_sizes = '5,6,7,8,9,10,11,12' | split: ',' -%}
+        {%- assign cm_sizes = '24,25,26,27,27.5,28.5,29.5,30' | split: ',' -%}
+        {%- for i in (0..7) -%}
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:10px 0;color:var(--text);">{{ us_sizes[i] }}</td>
+            <td style="padding:10px 0;color:var(--text);">{{ eu_sizes[i] }}</td>
+            <td style="padding:10px 0;color:var(--text);">{{ uk_sizes[i] }}</td>
+            <td style="padding:10px 0;color:var(--text-muted);">{{ cm_sizes[i] }} cm</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    <p style="margin-top:20px;font-family:'Montserrat',sans-serif;font-size:0.56rem;color:var(--text-muted);line-height:1.8;">
+      When in between sizes, we recommend sizing up. For questions, contact our team.
+    </p>
+  </div>
+</div>

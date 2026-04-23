@@ -1,0 +1,93 @@
+{%- comment -%}
+  Snippet: product-card.liquid
+  Usage:  {% render 'product-card', product: product %}
+          {% render 'product-card', product: nil, placeholder_index: 1 %}
+
+  When product is nil, renders a styled placeholder card.
+{%- endcomment -%}
+
+{%- if product != nil -%}
+
+  <div class="product-card fade-up"
+    tabindex="0"
+    role="button"
+    aria-label="View {{ product.title | escape }}"
+    data-product-id="{{ product.handle }}"
+    onclick="window.location.href='{{ product.url }}'">
+
+    <div class="product-img-zone">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | img_url: '600x' }}"
+          srcset="{{ product.featured_image | img_url: '400x' }} 400w,
+                  {{ product.featured_image | img_url: '600x' }} 600w,
+                  {{ product.featured_image | img_url: '900x' }} 900w"
+          sizes="(max-width: 540px) 100vw, (max-width: 900px) 50vw, 33vw"
+          alt="{{ product.featured_image.alt | escape }}"
+          loading="lazy"
+        />
+      {%- else -%}
+        <div class="product-img-placeholder">No Image<br/>Add in Shopify Admin</div>
+      {%- endif -%}
+      <div class="product-img-hover-veil"></div>
+      <div class="quick-add">
+        {%- form 'product', product, id: 'quick-add-form' -%}
+          <input type="hidden" name="id"
+            value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="quick-add-btn"
+            {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+            {%- if product.selected_or_first_available_variant.available -%}
+              Add to Cart
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+
+    <div class="product-info">
+      <p class="product-category">{{ product.type }}</p>
+      <h3 class="product-name">{{ product.title }}</h3>
+      <p class="product-price">
+        {%- if product.compare_at_price > product.price -%}
+          <span style="text-decoration:line-through;color:var(--silver);margin-right:8px;">
+            {{ product.compare_at_price | money }}
+          </span>
+        {%- endif -%}
+        {{ product.price | money }}
+      </p>
+    </div>
+
+  </div>
+
+{%- else -%}
+
+  {%- comment -%} Placeholder card — shown when no collection is selected {%- endcomment -%}
+  {%- assign placeholder_names = 'The Luminous Coat,Noir Evening Bag,Gold Pavé Cuff,Silk Bias Dress,Obsidian Mule,No. 1 Eau de Parfum' | split: ',' -%}
+  {%- assign placeholder_cats  = 'Ready-to-Wear,Accessories,Fine Jewelry,Ready-to-Wear,Footwear,Fragrance'                     | split: ',' -%}
+  {%- assign placeholder_prices = '$3,800,$2,200,$8,500,$4,600,$1,950,$620'                                                      | split: ',' -%}
+  {%- assign idx = placeholder_index | minus: 1 -%}
+
+  <div class="product-card fade-up"
+    data-product-id="placeholder-{{ placeholder_index }}">
+
+    <div class="product-img-zone">
+      <div class="product-img-placeholder">
+        Product Image<br/>800 × 1067 px<br/>Upload via Shopify Admin
+      </div>
+      <div class="product-img-hover-veil"></div>
+      <div class="quick-add">
+        <button class="quick-add-btn" type="button">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <p class="product-category">{{ placeholder_cats[idx] }}</p>
+      <h3 class="product-name">{{ placeholder_names[idx] }}</h3>
+      <p class="product-price">{{ placeholder_prices[idx] }}</p>
+    </div>
+
+  </div>
+
+{%- endif -%}

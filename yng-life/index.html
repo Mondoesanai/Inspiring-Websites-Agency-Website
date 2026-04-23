@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YNG★LIFE — Luxury Fashion</title>
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/theme.css" />
+
+  <style>
+  /* ══════════════════════════════════════════════════════════
+     HERO — Dark luxury centered
+     ══════════════════════════════════════════════════════════ */
+  #hero {
+    background: #0A0907 !important;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh;
+  }
+  /* Carbon-weave diagonal texture from shoe upper */
+  .hero-carbon {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(45deg,
+        rgba(201,168,76,0.024) 0px, rgba(201,168,76,0.024) 1px,
+        transparent 1px, transparent 12px),
+      repeating-linear-gradient(-45deg,
+        rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px,
+        transparent 1px, transparent 12px);
+    background-size: 17px 17px;
+  }
+  /* Animated gold sheen sweeping across */
+  .hero-sheen {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(112deg,
+      transparent 0%, transparent 30%,
+      rgba(201,168,76,0.06) 50%,
+      transparent 70%, transparent 100%);
+    background-size: 300% 100%;
+    animation: sheenMove 8s ease-in-out infinite;
+  }
+  @keyframes sheenMove {
+    0%,100% { background-position: 200% 0; }
+    50%      { background-position: -100% 0; }
+  }
+  /* Deep center glow */
+  .hero-glow-c {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%,
+      rgba(201,168,76,0.06) 0%, transparent 70%);
+  }
+  /* Bottom gold horizon line */
+  .hero-horizon {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+    height: 1px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 25%,
+      rgba(250,220,120,0.9) 50%, var(--gold) 75%, transparent 100%);
+    opacity: 0.5;
+  }
+  /* Centered content wrapper */
+  .hero-content-centered {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 0 40px 120px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  /* Eyebrow ornament */
+  .hero-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.44rem; font-weight: 400;
+    letter-spacing: 0.7em; text-transform: uppercase;
+    color: rgba(201,168,76,0.55);
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 48px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; display: block; flex: 0 0 36px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.4));
+  }
+  .hero-eyebrow::after { transform: scaleX(-1); }
+  /* Main logo wordmark — large, centered */
+  .hero-logo-wrap {
+    margin-bottom: 36px;
+  }
+  .hero-logo-img {
+    height: clamp(52px, 9vw, 96px);
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.96;
+  }
+  /* Thin gold separator */
+  .hero-sep {
+    width: 1px; height: 56px;
+    background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.55), transparent);
+    margin: 0 auto 40px;
+  }
+  /* Display tagline */
+  .hero-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4.5vw, 4rem);
+    font-weight: 300; line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: rgba(250,250,247,0.88);
+    margin-bottom: 18px;
+  }
+  .hero-display em {
+    color: var(--gold); font-style: italic;
+  }
+  /* Sub tagline */
+  .hero-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.58rem; font-weight: 300; letter-spacing: 0.22em;
+    line-height: 2; color: rgba(250,250,247,0.32);
+    text-transform: uppercase;
+    max-width: 420px; margin: 0 auto 60px;
+  }
+  /* CTA row */
+  .hero-btns-center { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  /* Primary: gold fill */
+  .btn-hero-gold {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.5rem; font-weight: 500; letter-spacing: 0.42em; text-transform: uppercase;
+    text-decoration: none; display: inline-flex; align-items: center;
+    padding: 17px 44px;
+    background: var(--gold);
+    color: #0A0907;
+    border: 1.5px solid var(--gold);
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+  }
+  .btn-hero-gold:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-1px); }
+  /* Ghost: white outline */
+  .btn-hero-ghost {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.5rem; font-weight: 400; letter-spacing: 0.42em; text-transform: uppercase;
+    text-decoration: none; display: inline-flex; align-items: center;
+    padding: 17px 44px;
+    background: transparent;
+    color: rgba(250,250,247,0.72);
+    border: 1px solid rgba(250,250,247,0.22);
+    transition: border-color 0.3s, color 0.3s, transform 0.2s;
+  }
+  .btn-hero-ghost:hover { border-color: rgba(201,168,76,0.5); color: var(--gold); transform: translateY(-1px); }
+
+  /* NAV LOGO — white on dark hero, dark once scrolled */
+  .logo-img-dark { filter: brightness(0) invert(1) !important; transition: filter 0.4s; }
+  #main-nav.nav--scrolled .logo-img-dark { filter: none !important; }
+
+  /* Override the light veil for dark hero */
+  #hero .hero-veil { background: none !important; }
+  #hero .hero-bg-layer { background: #0A0907 !important; }
+  #hero .hero-marble { opacity: 0 !important; }
+  #hero .hero-media { display: none; }
+  /* Remove old hero-kicker / hero-h1 classes if inherited */
+  .hero-h1 { display: none; }
+
+  /* ══════════════════════════════════════════════════════════
+     NAV OVERRIDE — Editorial centered logo + mega menu
+     ══════════════════════════════════════════════════════════ */
+  #main-nav {
+    padding: 0 52px !important;
+    height: 68px;
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  #main-nav.scrolled {
+    background: rgba(10,9,7,0.96) !important;
+    backdrop-filter: blur(20px) !important;
+    padding: 0 52px !important;
+    box-shadow: 0 1px 0 rgba(201,168,76,0.12) !important;
+  }
+  #main-nav.nav-dark { background: transparent !important; }
+  .nav-left { display: flex; align-items: stretch; gap: 0; }
+  .nav-logo-link { display: flex; justify-content: center; }
+  .nav-logo-link .logo-img {
+    height: 38px; filter: brightness(0) invert(1); opacity: 0.92;
+    transition: opacity 0.3s;
+  }
+  .nav-logo-link:hover .logo-img { opacity: 1; }
+  #main-nav .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
+  .nav-icon-btn {
+    background: none; border: none; padding: 5px;
+    color: rgba(250,250,247,0.68); cursor: none;
+    display: flex; align-items: center; justify-content: center;
+    transition: color 0.3s;
+  }
+  .nav-icon-btn:hover { color: var(--gold); }
+  #main-nav .nav-link, .nav-link--mega { color: rgba(250,250,247,0.68); }
+  #main-nav .nav-link:hover, .nav-link--mega:hover { color: var(--gold); }
+  #main-nav .nav-link::after { background: var(--gold); }
+  /* Each nav item stretches full nav height — closes the hover gap */
+  .nav-mega-item {
+    position: relative;
+    align-self: stretch; display: flex; align-items: center;
+    padding: 0 14px;
+  }
+  .nav-link--mega {
+    background: none; border: none;
+    font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    cursor: none; padding: 0; position: relative; transition: color 0.3s;
+    white-space: nowrap;
+  }
+  .nav-link--mega::after {
+    content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px;
+    background: var(--gold); transition: width 0.4s var(--ease-spring);
+  }
+  .nav-link--mega:hover::after,
+  .nav-mega-item:hover .nav-link--mega::after { width: 100%; }
+  .nav-mega-item:hover .nav-link--mega { color: var(--gold); }
+  /* Fix non-mega nav links spacing inside .nav-left */
+  .nav-left > .nav-link {
+    padding: 0 14px;
+    display: flex; align-items: center; align-self: stretch;
+    white-space: nowrap;
+  }
+  /* ── All mega panels (full-width) — shown via JS .is-open class ── */
+  .mega-panel {
+    position: fixed; top: 68px; left: 0; right: 0; z-index: 999;
+    background: rgba(250,250,247,0.99);
+    backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(201,168,76,0.18);
+    box-shadow: 0 24px 80px rgba(13,12,10,0.14);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transform: translateY(-4px);
+    transition: opacity 0.28s var(--ease-spring), transform 0.28s var(--ease-spring), visibility 0s 0.28s;
+    cursor: none;
+  }
+  .mega-panel.is-open {
+    opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0);
+    transition: opacity 0.28s var(--ease-spring), transform 0.28s var(--ease-spring), visibility 0s 0s;
+  }
+  /* Force cursor:none on everything inside panels */
+  .mega-panel *, .mega-panel a, .mega-panel button { cursor: none !important; }
+  /* Cursor always has dark outline — visible on any background */
+  #cursor-dot  { box-shadow: 0 0 0 1.5px rgba(10,9,7,0.35) !important; }
+  #cursor-ring { box-shadow: 0 0 0 1px rgba(10,9,7,0.12) !important; }
+  .mega-panel-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 52px;
+    display: grid; grid-template-columns: 240px 1fr;
+  }
+  .mega-col { padding: 36px 36px 36px 0; border-right: 1px solid rgba(13,12,10,0.08); }
+  .mega-col-heading {
+    font-family: 'Montserrat', sans-serif; font-size: 0.4rem;
+    letter-spacing: 0.6em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 18px;
+  }
+  .mega-col-link {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400;
+    color: var(--text); padding: 9px 0; border-bottom: 1px solid rgba(13,12,10,0.06);
+    transition: color 0.2s, padding-left 0.25s;
+  }
+  .mega-col-link:hover { color: var(--gold-dark); padding-left: 8px; }
+  .mega-col-link span { font-family: 'Montserrat', sans-serif; font-size: 0.42rem; color: var(--text-muted); letter-spacing: 0.06em; }
+  .mega-col-link:hover span { color: var(--gold-dark); }
+  .mega-view-all {
+    margin-top: 14px; border-bottom: none !important;
+    font-family: 'Montserrat', sans-serif !important; font-size: 0.42rem !important;
+    font-weight: 500 !important; letter-spacing: 0.3em !important;
+    text-transform: uppercase !important; color: var(--gold-dark) !important; padding: 8px 0 !important;
+  }
+  .mega-products { padding: 36px 0 36px 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .mega-product-card { cursor: none; transition: transform 0.3s var(--ease-spring); }
+  .mega-product-card:hover { transform: translateY(-3px); }
+  .mega-product-img { aspect-ratio: 3/4; overflow: hidden; margin-bottom: 10px; }
+  .mega-product-ph {
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    background: var(--bg-cream);
+  }
+  .mega-product-ph span {
+    font-family: 'Montserrat', sans-serif; font-size: 0.36rem;
+    letter-spacing: 0.18em; color: var(--text-faint); text-align: center; text-transform: uppercase; line-height: 2.2;
+  }
+  .mega-product-name { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--text); margin-bottom: 4px; font-weight: 400; }
+  .mega-product-price { font-family: 'Montserrat', sans-serif; font-size: 0.41rem; letter-spacing: 0.1em; color: var(--gold-dark); }
+
+  /* ══════════════════════════════════════════════════════════
+     HERO — Editorial full-bleed (Atelier style)
+     ══════════════════════════════════════════════════════════ */
+  /* Override the dark centered hero completely */
+  #hero {
+    position: relative !important; height: 100vh !important; min-height: 600px;
+    overflow: hidden !important; background: #0A0907 !important;
+    display: block !important;
+  }
+  #hero .hero-bg-layer, #hero .hero-marble, #hero .hero-carbon,
+  #hero .hero-sheen, #hero .hero-glow-c, #hero .hero-veil,
+  #hero .hero-horizon, #hero .hero-content-centered, #hero .scroll-cue { display: none !important; }
+  .hero-editorial-img {
+    position: absolute; inset: 0; z-index: 1; overflow: hidden;
+    background: linear-gradient(160deg, #2e2318 0%, #1a1209 45%, #0a0907 100%);
+  }
+  .hero-editorial-img::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+  .hero-editorial-img::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.5) 30%, rgba(250,220,120,0.7) 50%, rgba(201,168,76,0.5) 70%, transparent);
+  }
+  .hero-editorial-veil {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background:
+      linear-gradient(to top, rgba(10,9,7,0.88) 0%, rgba(10,9,7,0.48) 25%, rgba(10,9,7,0.12) 52%, transparent 80%),
+      linear-gradient(to right, rgba(10,9,7,0.18) 0%, transparent 50%);
+  }
+  .hero-editorial-text { position: absolute; z-index: 10; bottom: 13vh; left: 9vw; }
+  .hero-editorial-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.6rem, 8.5vw, 9rem);
+    font-weight: 300; line-height: 1.0; letter-spacing: -0.025em;
+    color: rgba(250,250,247,0.92);
+  }
+  .hero-editorial-headline em { color: var(--gold); font-style: italic; }
+  .hero-editorial-scroll {
+    position: absolute; z-index: 10; bottom: 44px; right: 9vw;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .hero-editorial-scroll-label {
+    font-family: 'Montserrat', sans-serif; font-size: 0.36rem;
+    letter-spacing: 0.45em; text-transform: uppercase;
+    color: rgba(250,250,247,0.38); writing-mode: vertical-rl;
+  }
+  .hero-editorial-scroll-line {
+    width: 1px; height: 56px;
+    background: linear-gradient(to bottom, rgba(201,168,76,0.6), transparent);
+    animation: scrollPulse2 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse2 { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+  @media (max-width: 768px) {
+    .hero-editorial-text { left: 6vw; bottom: 12vh; }
+    .hero-editorial-headline { font-size: clamp(2.6rem, 10vw, 4rem); }
+    .hero-editorial-scroll { display: none; }
+    #main-nav { padding: 0 22px !important; }
+    .nav-left.hide-mobile { display: none; }
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     FUTURE DROPS — Gold spotlight + drawing canvas
+     ══════════════════════════════════════════════════════════ */
+  .future-spotlight {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 65%);
+    transition: background 0.06s linear;
+  }
+  /* Canvas sits ABOVE all future-drops content so trail is visible over product cards */
+  .future-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; }
+  .section-future { position: relative; overflow: hidden; }
+  .future-inner { position: relative; z-index: 3 !important; }
+  .future-ambient { z-index: 0 !important; }
+
+  /* ══════════════════════════════════════════════════════════
+     PHILOSOPHY — canvas drawing section (dark)
+     ══════════════════════════════════════════════════════════ */
+  .section-philosophy {
+    padding: 140px 48px;
+    background: var(--bg-dark);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .philosophy-glow {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 900px; height: 500px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .philosophy-spotlight {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(ellipse 50% 60% at var(--px,50%) var(--py,50%),
+      rgba(201,168,76,0.20) 0%, rgba(201,168,76,0.07) 35%, transparent 65%);
+    transition: background 0.05s linear;
+  }
+  /* Canvas sits ABOVE inner text so trail is visible everywhere in section */
+  .philosophy-canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    z-index: 9; pointer-events: none;
+  }
+  .philosophy-inner { position: relative; z-index: 7; max-width: 820px; margin: 0 auto; }
+  .philosophy-line {
+    width: 1px; height: 64px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 0 auto 44px;
+  }
+  .philosophy-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    font-weight: 300; line-height: 1.12;
+    letter-spacing: -0.02em; color: var(--bg); margin-bottom: 36px;
+  }
+  .philosophy-quote em { color: var(--gold); font-style: italic; }
+  .philosophy-byline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.5rem; font-weight: 400;
+    letter-spacing: 0.52em; text-transform: uppercase;
+    color: rgba(201,168,76,0.45);
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     FEATURED DROP
+     ══════════════════════════════════════════════════════════ */
+  .section-drop {
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    min-height: 70vh; background: var(--bg);
+  }
+  @media (max-width: 900px) { .section-drop { grid-template-columns: 1fr; } }
+  .drop-img {
+    position: relative; overflow: hidden;
+    background: var(--bg-cream); min-height: 440px;
+  }
+  .drop-img-ph {
+    width: 100%; height: 100%; min-height: 440px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg-stone);
+  }
+  .drop-img-ph span {
+    font-family: 'Montserrat', sans-serif; font-size: 0.44rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--text-faint); text-align: center; line-height: 2.2;
+  }
+  .drop-gold-accent {
+    position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .drop-copy {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 64px 72px; background: var(--bg-warm); position: relative;
+  }
+  @media (max-width: 768px) { .drop-copy { padding: 48px 28px; } }
+  .drop-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(6rem, 14vw, 12rem); font-weight: 300; line-height: 0.8;
+    color: var(--bg-stone); letter-spacing: -0.04em;
+    position: absolute; top: 40px; right: 60px;
+    pointer-events: none; user-select: none;
+  }
+  .drop-season {
+    font-family: 'Montserrat', sans-serif; font-size: 0.48rem;
+    letter-spacing: 0.52em; text-transform: uppercase;
+    color: var(--gold-dark); margin-bottom: 24px; position: relative; z-index: 1;
+  }
+  .drop-desc {
+    font-family: 'Montserrat', sans-serif; font-size: 0.68rem;
+    font-weight: 300; line-height: 2; letter-spacing: 0.07em;
+    color: var(--text-muted); max-width: 320px; margin-bottom: 44px;
+    position: relative; z-index: 1;
+  }
+  .drop-price-row {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 36px; position: relative; z-index: 1;
+  }
+  .drop-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-weight: 300; color: var(--text); letter-spacing: -0.02em;
+  }
+  .drop-currency {
+    font-family: 'Montserrat', sans-serif; font-size: 0.58rem;
+    font-weight: 300; color: var(--text-muted); letter-spacing: 0.15em;
+  }
+  .drop-btns { display: flex; gap: 12px; flex-wrap: wrap; position: relative; z-index: 1; }
+
+  /* ══════════════════════════════════════════════════════════
+     ORIGINALS — Atelier-style editorial showcase
+     ══════════════════════════════════════════════════════════ */
+  .section-originals {
+    background: var(--bg); padding: 120px 0 0;
+  }
+  .originals-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 0 80px 72px; gap: 40px;
+  }
+  @media (max-width: 900px) { .originals-header { flex-direction: column; padding: 0 28px 48px; align-items: flex-start; } }
+  .originals-title-block { flex: 1; }
+  .originals-eyebrow {
+    font-family: 'Montserrat', sans-serif; font-size: 0.46rem;
+    letter-spacing: 0.52em; text-transform: uppercase; color: var(--gold-dark);
+    margin-bottom: 20px;
+  }
+  .originals-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 6vw, 6rem);
+    font-weight: 300; line-height: 0.9;
+    letter-spacing: -0.025em; color: var(--text);
+  }
+  .originals-title em { color: var(--gold); font-style: italic; }
+  .originals-desc-block { max-width: 340px; flex-shrink: 0; }
+  .originals-desc {
+    font-family: 'Montserrat', sans-serif; font-size: 0.67rem;
+    font-weight: 300; line-height: 2.1; letter-spacing: 0.06em;
+    color: var(--text-muted); margin-bottom: 32px;
+  }
+  /* ── Originals product showcase grid ── */
+  .originals-showcase {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 3px;
+    background: var(--border-warm);
+    margin: 0;
+  }
+  @media (max-width: 768px) { .originals-showcase { grid-template-columns: 1fr; } }
+  /* Main large panel */
+  .originals-showcase-main {
+    position: relative; overflow: hidden;
+    aspect-ratio: 4/5;
+    background: var(--bg-stone);
+    cursor: pointer;
+  }
+  .originals-showcase-main:hover .originals-showcase-overlay { opacity: 1; }
+  /* Right column stack */
+  .originals-showcase-stack {
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  /* Individual sub-panels */
+  .originals-showcase-sub {
+    position: relative; overflow: hidden;
+    flex: 1;
+    background: var(--bg-cream);
+    cursor: pointer;
+  }
+  .originals-showcase-sub:hover .originals-showcase-overlay { opacity: 1; }
+  /* Placeholder fill */
+  .originals-showcase-ph {
+    width: 100%; height: 100%; min-height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 8px;
+    position: relative;
+  }
+  .originals-showcase-ph::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(90deg,
+        rgba(201,168,76,0.05) 0px, rgba(201,168,76,0.05) 1px,
+        transparent 1px, transparent 24px);
+  }
+  .originals-showcase-ph span {
+    font-family: 'Montserrat', sans-serif; font-size: 0.42rem;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--text-faint); text-align: center; line-height: 2.4;
+    position: relative; z-index: 1;
+  }
+  /* Dark overlay on hover */
+  .originals-showcase-overlay {
+    position: absolute; inset: 0; z-index: 3;
+    background: rgba(10,9,7,0.32);
+    opacity: 0; transition: opacity 0.4s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .originals-showcase-overlay span {
+    font-family: 'Montserrat', sans-serif; font-size: 0.44rem;
+    letter-spacing: 0.45em; text-transform: uppercase;
+    color: rgba(250,250,247,0.9);
+    border: 1px solid rgba(250,250,247,0.35);
+    padding: 10px 24px;
+  }
+  /* Tag bar at bottom of each panel */
+  .originals-showcase-tag {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+    background: linear-gradient(to top, rgba(10,9,7,0.65) 0%, transparent 100%);
+    padding: 44px 24px 20px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .originals-showcase-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 400;
+    color: rgba(250,250,247,0.92); line-height: 1.2;
+  }
+  .originals-showcase-price {
+    font-family: 'Montserrat', sans-serif; font-size: 0.5rem;
+    font-weight: 400; color: var(--gold); letter-spacing: 0.1em;
+  }
+  /* Variant list — Atelier-style */
+  .originals-variants {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+  }
+  @media (max-width: 900px) { .originals-variants { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .originals-variants { grid-template-columns: 1fr; } }
+  .originals-variant {
+    padding: 36px 40px; border-right: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    text-decoration: none; transition: background 0.3s;
+  }
+  .originals-variant:last-child { border-right: none; }
+  .originals-variant:hover { background: var(--gold-pale); }
+  .originals-var-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-weight: 400; color: var(--text);
+  }
+  .originals-var-price {
+    font-family: 'Montserrat', sans-serif; font-size: 0.52rem;
+    font-weight: 400; color: var(--gold-dark); letter-spacing: 0.1em;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     STATS STRIP
+     ══════════════════════════════════════════════════════════ */
+  .section-stats {
+    padding: 72px 48px; background: var(--bg-warm);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  }
+  @media (max-width: 720px) { .section-stats { grid-template-columns: repeat(2, 1fr); padding: 48px 24px; } }
+  .stat-cell {
+    text-align: center; padding: 44px 24px;
+    background: var(--bg-cream); border: 1px solid var(--border-warm);
+  }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.4rem); font-weight: 300;
+    color: var(--gold-dark); letter-spacing: -0.03em; margin-bottom: 10px;
+  }
+  .stat-label {
+    font-family: 'Montserrat', sans-serif; font-size: 0.46rem;
+    font-weight: 400; letter-spacing: 0.38em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     FUTURE DROPS — Mystery teaser
+     ══════════════════════════════════════════════════════════ */
+  .section-future {
+    background: #050504;
+    position: relative; overflow: hidden;
+    padding: 120px 0 100px;
+  }
+  /* Carbon weave again — shoe upper texture */
+  .section-future::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(45deg,
+        rgba(201,168,76,0.022) 0px, rgba(201,168,76,0.022) 1px,
+        transparent 1px, transparent 10px),
+      repeating-linear-gradient(-45deg,
+        rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px,
+        transparent 1px, transparent 10px);
+    background-size: 14px 14px;
+  }
+  /* Ambient glow */
+  .future-ambient {
+    position: absolute; width: 1000px; height: 600px;
+    left: 50%; top: 50%; transform: translate(-50%,-50%);
+    background: radial-gradient(ellipse, rgba(201,168,76,0.05) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .future-inner { position: relative; z-index: 2; }
+
+  /* Header */
+  .future-header {
+    text-align: center; margin-bottom: 80px;
+    padding: 0 48px;
+  }
+  .future-label {
+    font-family: 'Montserrat', sans-serif; font-size: 0.46rem;
+    letter-spacing: 0.65em; text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+    margin-bottom: 24px;
+  }
+  .future-label::before, .future-label::after {
+    content: ''; display: block; width: 44px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold));
+  }
+  .future-label::after { transform: scaleX(-1); }
+  .future-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 6vw, 5.8rem);
+    font-weight: 300; letter-spacing: -0.02em;
+    color: rgba(250,250,247,0.85);
+    position: relative;
+  }
+  /* Revealed text mask on hover */
+  .future-title span {
+    background: linear-gradient(135deg, var(--bg) 0%, var(--gold-light) 40%, var(--bg) 70%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    animation: shimmerText 4s ease-in-out infinite;
+  }
+  @keyframes shimmerText {
+    0%,100% { background-position: 150% 0; }
+    50%      { background-position: -50% 0; }
+  }
+
+  /* Spinning circular badge */
+  .future-badge-wrap {
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 80px; width: 180px; height: 180px;
+    position: relative;
+  }
+  .future-badge-svg {
+    position: absolute; inset: 0; animation: spinBadge 20s linear infinite;
+  }
+  @keyframes spinBadge { to { transform: rotate(360deg); } }
+  .future-badge-center {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300;
+    color: rgba(201,168,76,0.35);
+    display: flex; align-items: center; justify-content: center;
+    width: 80px; height: 80px; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.15);
+    transition: color 0.5s, border-color 0.5s;
+    animation: breathe 3s ease-in-out infinite;
+  }
+  @keyframes breathe { 0%,100% { opacity: 0.35; } 50% { opacity: 0.7; } }
+
+  /* Teaser cards */
+  .future-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    padding: 0;
+  }
+  @media (max-width: 900px) { .future-cards { grid-template-columns: 1fr; } }
+  .future-card {
+    position: relative; overflow: hidden;
+    aspect-ratio: 3/4; background: #131210;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 32px;
+    cursor: default;
+    border: 1px solid rgba(201,168,76,0.07);
+  }
+  /* Frosted veil — like classified document */
+  .future-card-veil {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(5,5,4,0.88) 0%, rgba(5,5,4,0.3) 55%, rgba(5,5,4,0.08) 100%);
+    transition: background 0.6s;
+  }
+  .future-card:hover .future-card-veil {
+    background: linear-gradient(to top, rgba(5,5,4,0.92) 0%, rgba(5,5,4,0.45) 60%, rgba(5,5,4,0.05) 100%);
+  }
+  .future-card-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* Placeholder silhouette */
+  .future-card-bg-ph {
+    width: 55%; height: 65%;
+    background: linear-gradient(160deg, rgba(201,168,76,0.09) 0%, rgba(201,168,76,0.03) 60%, transparent 100%);
+    border-radius: 2px;
+    border: 1px solid rgba(201,168,76,0.1);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .future-card-bg-ph span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 300;
+    color: rgba(201,168,76,0.18);
+    letter-spacing: -0.04em;
+  }
+  /* Classified badge */
+  .future-card-classified {
+    position: absolute; top: 24px; right: 24px; z-index: 4;
+    font-family: 'Montserrat', sans-serif; font-size: 0.38rem;
+    font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase;
+    color: rgba(201,168,76,0.5); border: 1px solid rgba(201,168,76,0.2);
+    padding: 4px 10px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .future-card-classified::before {
+    content: ''; display: block; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--gold); opacity: 0.5;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100% { opacity: 0.2; } 50% { opacity: 0.8; } }
+  /* Card content */
+  .future-card-content { position: relative; z-index: 4; }
+  .future-card-num {
+    font-family: 'Montserrat', sans-serif; font-size: 0.42rem;
+    letter-spacing: 0.4em; color: var(--gold); margin-bottom: 12px;
+    opacity: 0.6;
+  }
+  .future-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300; color: rgba(250,250,247,0.75);
+    line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 20px;
+    /* Partially visible — like a document being revealed */
+    overflow: hidden;
+  }
+  /* Redaction bars on hover reveal */
+  .future-card-redact {
+    display: inline-block; position: relative;
+  }
+  .future-card-redact::after {
+    content: ''; position: absolute; inset: 2px 0;
+    background: rgba(5,5,4,0.85);
+    transition: width 0.8s var(--ease-spring);
+  }
+  .future-card:hover .future-card-redact::after { width: 0; }
+  .future-card-date {
+    font-family: 'Montserrat', sans-serif; font-size: 0.52rem;
+    font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 6px;
+  }
+  .future-card-status {
+    font-family: 'Montserrat', sans-serif; font-size: 0.42rem;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: rgba(250,250,247,0.2);
+  }
+  /* Gold bottom border revealed on hover */
+  .future-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    transform: scaleX(0); transition: transform 0.6s var(--ease-spring);
+  }
+  .future-card:hover::after { transform: scaleX(1); }
+
+  /* Bottom CTA */
+  .future-cta {
+    text-align: center; padding: 72px 48px 0; position: relative; z-index: 2;
+  }
+  .future-cta-text {
+    font-family: 'Montserrat', sans-serif; font-size: 0.52rem;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: rgba(250,250,247,0.18); margin-bottom: 28px;
+  }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION — Editorial: left-links · center-logo · right-icons ═ -->
+<nav id="main-nav" role="navigation" aria-label="Main navigation">
+
+  <!-- Left: all nav items with dropdowns -->
+  <div class="nav-left hide-mobile">
+
+    <!-- THE ORIGINALS — full mega menu -->
+    <div class="nav-mega-item">
+      <button class="nav-link--mega" aria-haspopup="true">The Originals</button>
+      <div class="mega-panel" role="region" aria-label="Originals collection">
+        <div class="mega-panel-inner">
+          <div class="mega-col">
+            <p class="mega-col-heading">Collection</p>
+            <a href="#" class="mega-col-link">M.I. — Obsidian / Gold <span>$275</span></a>
+            <a href="#" class="mega-col-link">Collector's Edition <span>$275</span></a>
+            <a href="#" class="mega-col-link">M.I. — Custom Order <span>Inquire</span></a>
+            <a href="#originals" class="mega-col-link mega-view-all">View Full Collection →</a>
+          </div>
+          <div class="mega-products">
+            <a href="#" class="mega-product-card">
+              <div class="mega-product-img"><div class="mega-product-ph"><span>M.I.<br>Obsidian / Gold</span></div></div>
+              <p class="mega-product-name">M.I. — Obsidian / Gold</p>
+              <p class="mega-product-price">$275 USD</p>
+            </a>
+            <a href="#" class="mega-product-card">
+              <div class="mega-product-img"><div class="mega-product-ph"><span>Collector's<br>Edition</span></div></div>
+              <p class="mega-product-name">Collector's Edition</p>
+              <p class="mega-product-price">$275 USD</p>
+            </a>
+            <a href="#" class="mega-product-card">
+              <div class="mega-product-img"><div class="mega-product-ph"><span>Custom<br>Order</span></div></div>
+              <p class="mega-product-name">M.I. — Custom Order</p>
+              <p class="mega-product-price">Inquire</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED — full mega panel -->
+    <div class="nav-mega-item">
+      <button class="nav-link--mega" aria-haspopup="true">Featured</button>
+      <div class="mega-panel" role="region" aria-label="Featured drop">
+        <div class="mega-panel-inner">
+          <div class="mega-col">
+            <p class="mega-col-heading">Featured Drop</p>
+            <a href="#drop" class="mega-col-link">M.I. Monument High Top <span>$275</span></a>
+            <a href="#drop" class="mega-col-link">Obsidian / Gold Colorway <span>Limited</span></a>
+            <a href="#drop" class="mega-col-link">Collector's Edition <span>$275</span></a>
+            <a href="#drop" class="mega-col-link mega-view-all">Shop Featured Drop →</a>
+          </div>
+          <div class="mega-products">
+            <a href="#drop" class="mega-product-card">
+              <div class="mega-product-img"><div class="mega-product-ph"><span>M.I. Monument<br>High Top</span></div></div>
+              <p class="mega-product-name">M.I. — Obsidian / Gold</p>
+              <p class="mega-product-price">$275 USD</p>
+            </a>
+            <a href="#drop" class="mega-product-card">
+              <div class="mega-product-img"><div class="mega-product-ph"><span>Collector's<br>Edition</span></div></div>
+              <p class="mega-product-name">Collector's Edition</p>
+              <p class="mega-product-price">$275 USD</p>
+            </a>
+            <a href="#drop" class="mega-product-card">
+              <div class="mega-product-img"><div class="mega-product-ph"><span>Obsidian /<br>Gold</span></div></div>
+              <p class="mega-product-name">M.I. — Custom Order</p>
+              <p class="mega-product-price">Inquire</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMING SOON — full mega panel -->
+    <div class="nav-mega-item">
+      <button class="nav-link--mega" aria-haspopup="true">Coming Soon</button>
+      <div class="mega-panel" role="region" aria-label="Upcoming drops">
+        <div class="mega-panel-inner">
+          <div class="mega-col">
+            <p class="mega-col-heading">Future Drops</p>
+            <a href="#future" class="mega-col-link">Drop 002 — Browntown <span>2026</span></a>
+            <a href="#future" class="mega-col-link">Drop 003 — Evergreen <span>2026</span></a>
+            <a href="#future" class="mega-col-link">Drop 004 — Midnight‑Mist <span>2026</span></a>
+            <a href="#newsletter" class="mega-col-link mega-view-all">Notify Me First →</a>
+          </div>
+          <div class="mega-products">
+            <a href="#future" class="mega-product-card">
+              <div class="mega-product-img" style="background:#131210;border:1px solid rgba(201,168,76,0.12);">
+                <div class="mega-product-ph" style="background:#131210;"><span style="color:rgba(201,168,76,0.45);">II<br>Classified</span></div>
+              </div>
+              <p class="mega-product-name" style="color:var(--text-muted);">Browntown</p>
+              <p class="mega-product-price">Coming 2026</p>
+            </a>
+            <a href="#future" class="mega-product-card">
+              <div class="mega-product-img" style="background:#131210;border:1px solid rgba(201,168,76,0.12);">
+                <div class="mega-product-ph" style="background:#131210;"><span style="color:rgba(201,168,76,0.45);">III<br>Classified</span></div>
+              </div>
+              <p class="mega-product-name" style="color:var(--text-muted);">Evergreen</p>
+              <p class="mega-product-price">Coming 2026</p>
+            </a>
+            <a href="#future" class="mega-product-card">
+              <div class="mega-product-img" style="background:#131210;border:1px solid rgba(201,168,76,0.12);">
+                <div class="mega-product-ph" style="background:#131210;"><span style="color:rgba(201,168,76,0.45);">IV<br>Classified</span></div>
+              </div>
+              <p class="mega-product-name" style="color:var(--text-muted);">Midnight‑Mist</p>
+              <p class="mega-product-price">Coming 2026</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT — full mega panel -->
+    <div class="nav-mega-item">
+      <button class="nav-link--mega" aria-haspopup="true">Contact</button>
+      <div class="mega-panel" role="region" aria-label="Contact">
+        <div class="mega-panel-inner">
+          <div class="mega-col">
+            <p class="mega-col-heading">Support</p>
+            <a href="#newsletter" class="mega-col-link">Join the Newsletter <span>Early access</span></a>
+            <a href="#contact"    class="mega-col-link">Sizing &amp; FAQ <span>Help</span></a>
+            <a href="#contact"    class="mega-col-link">Custom Orders <span>Inquire</span></a>
+            <a href="#contact"    class="mega-col-link mega-view-all">Contact Us →</a>
+          </div>
+          <div class="mega-products" style="display:flex;flex-direction:column;justify-content:center;gap:0;padding:36px 40px;">
+            <p style="font-family:'Montserrat',sans-serif;font-size:0.4rem;letter-spacing:0.6em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:20px;">Follow YNG★LIFE</p>
+            <a href="#" class="mega-col-link" style="font-size:1.15rem;">Instagram <span>@ynglife</span></a>
+            <a href="#" class="mega-col-link" style="font-size:1.15rem;">TikTok <span>@ynglife</span></a>
+            <a href="#" class="mega-col-link" style="font-size:1.15rem;">X / Twitter <span>@ynglife</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Center: Logo -->
+  <a href="#" class="nav-logo-link" aria-label="YNG★LIFE home">
+    <img src="assets/logo.png" alt="YNG★LIFE" class="logo-img" />
+  </a>
+
+  <!-- Right: Icons -->
+  <div class="nav-right">
+    <button class="nav-icon-btn hide-mobile" aria-label="Search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+    </button>
+    <a href="#" class="nav-icon-btn hide-mobile" aria-label="Account">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+      </svg>
+    </a>
+    <a href="#" class="nav-icon-btn nav-cart" aria-label="Cart (0 items)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <span class="cart-count">0</span>
+    </a>
+    <button id="nav-toggle" class="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+</nav>
+<style>@media (min-width: 769px) { .mobile-toggle { display: none !important; } }</style>
+
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
+  <a href="#originals" class="nav-link" onclick="closeMenu()">The Originals</a>
+  <a href="#drop"      class="nav-link" onclick="closeMenu()">Featured</a>
+  <a href="#future"    class="nav-link" onclick="closeMenu()">Coming Soon</a>
+  <a href="#contact"   class="nav-link" onclick="closeMenu()">Contact</a>
+  <a href="#drop"      class="btn-primary" onclick="closeMenu()" style="padding:14px 36px;margin-top:12px;">Shop Now</a>
+</div>
+
+<main>
+
+<!-- ═══ HERO — Editorial full-bleed (Atelier reference style) ═══ -->
+<!-- sections/hero-banner.liquid -->
+<section id="hero" aria-label="Hero banner">
+
+  <!-- Replace this div's background with the real image in Shopify -->
+  <!-- {{ section.settings.hero_image | img_url: 'master' | img_tag }} -->
+  <div class="hero-editorial-img" aria-hidden="true"></div>
+
+  <!-- Gradient veil for text legibility -->
+  <div class="hero-editorial-veil" aria-hidden="true"></div>
+
+  <!-- Editorial headline — minimal, lower-left -->
+  <div class="hero-editorial-text">
+    <h1 class="hero-editorial-headline fade-up in">
+      Pure elegance. <em>Redefined.</em>
+    </h1>
+  </div>
+
+  <!-- Subtle vertical scroll cue — lower-right -->
+  <div class="hero-editorial-scroll" aria-hidden="true">
+    <span class="hero-editorial-scroll-label">Scroll</span>
+    <div class="hero-editorial-scroll-line"></div>
+  </div>
+
+</section>
+
+
+<!-- ═══ MARQUEE ══════════════════════════════════════════════ -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">YNG★LIFE</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Italian Heritage</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Handcrafted Luxury</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Limited Edition</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Monument High Top</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Custom Made</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Artisan Quality</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">YNG★LIFE</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Italian Heritage</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Handcrafted Luxury</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Limited Edition</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Monument High Top</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Custom Made</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Artisan Quality</span><span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+
+<!-- ═══ PHILOSOPHY — Canvas drawing section ═════════════════ -->
+<!-- sections/brand-philosophy.liquid -->
+<section class="section-philosophy" aria-label="Brand philosophy">
+  <div class="philosophy-glow"      aria-hidden="true"></div>
+  <div class="philosophy-spotlight" aria-hidden="true"></div>
+  <div class="philosophy-inner">
+    <img src="assets/logo.png" alt="YNG★LIFE"
+      style="height:34px;width:auto;filter:brightness(0) invert(1);margin:0 auto 32px;display:block;opacity:0.45;" />
+    <div class="philosophy-line fade-up" aria-hidden="true"></div>
+    <p class="philosophy-quote fade-up d1">
+      Wear it like<br/><em>you mean it.</em>
+    </p>
+    <p class="philosophy-byline fade-up d2">YNG★LIFE — New York · Italy · The World</p>
+  </div>
+</section>
+
+
+<!-- ═══ TRUST STRIP ══════════════════════════════════════════ -->
+<div class="trust-strip" aria-label="Why YNG★LIFE">
+  <div class="trust-item fade-up">
+    <span class="trust-icon">✦</span>
+    <div>
+      <p class="trust-title">100% Satisfied</p>
+      <p class="trust-body">Love your shoes or we'll refund or replace for free — no questions asked.</p>
+    </div>
+  </div>
+  <div class="trust-item fade-up d1">
+    <span class="trust-icon">↩</span>
+    <div>
+      <p class="trust-title">Free Returns</p>
+      <p class="trust-body">Send your shoes back on us. We pay for returns from anywhere in the world.</p>
+    </div>
+  </div>
+  <div class="trust-item fade-up d2">
+    <span class="trust-icon">🇮🇹</span>
+    <div>
+      <p class="trust-title">Made in Italy</p>
+      <p class="trust-body">Handcrafted by master Italian craftsmen from pristine, certified Italian leather.</p>
+    </div>
+  </div>
+  <div class="trust-item fade-up d3">
+    <span class="trust-icon">◈</span>
+    <div>
+      <p class="trust-title">Limited Edition</p>
+      <p class="trust-body">Each designer pair is a one-of-a-kind combining tradition, quality and modern style.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ THE ORIGINALS — Atelier-style collection showcase ════ -->
+<!-- sections/originals-collection.liquid -->
+<section id="originals" class="section-originals" aria-label="The Originals Collection">
+
+  <div class="originals-header">
+    <div class="originals-title-block">
+      <p class="originals-eyebrow fade-up">The Only Collection</p>
+      <h2 class="originals-title fade-up d1">
+        The<br/><em>Originals</em>
+      </h2>
+    </div>
+    <div class="originals-desc-block fade-up d2">
+      <p class="originals-desc">
+        One collection. One vision. The YNG★LIFE M.I. Monument High Top is our singular statement — obsidian upper, gold metallic sole, handmade by Italian craftsmen from the finest materials on earth.
+      </p>
+      <div class="btn-magnetic" style="display:inline-block;">
+        <a href="#" class="btn-primary">Shop the Originals</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product showcase grid -->
+  <div class="originals-showcase">
+
+    <!-- Large main panel — flagship -->
+    <div class="originals-showcase-main fade-left">
+      <div class="originals-showcase-ph">
+        <span>M.I. — Obsidian / Gold<br/>Product Photo · Upload in Shopify</span>
+      </div>
+      <div class="originals-showcase-overlay"><span>View Product</span></div>
+      <div class="originals-showcase-tag">
+        <span class="originals-showcase-label">M.I. — Obsidian / Gold</span>
+        <span class="originals-showcase-price">$275</span>
+      </div>
+    </div>
+
+    <!-- Right stack — two secondary panels -->
+    <div class="originals-showcase-stack">
+      <div class="originals-showcase-sub fade-up d1">
+        <div class="originals-showcase-ph">
+          <span>Collector's Edition<br/>Product Photo · Upload in Shopify</span>
+        </div>
+        <div class="originals-showcase-overlay"><span>View Product</span></div>
+        <div class="originals-showcase-tag">
+          <span class="originals-showcase-label">Collector's Edition</span>
+          <span class="originals-showcase-price">$275</span>
+        </div>
+      </div>
+      <div class="originals-showcase-sub fade-up d2">
+        <div class="originals-showcase-ph">
+          <span>Custom Order<br/>Made to Order · Inquire</span>
+        </div>
+        <div class="originals-showcase-overlay"><span>Inquire</span></div>
+        <div class="originals-showcase-tag">
+          <span class="originals-showcase-label">M.I. — Custom Order</span>
+          <span class="originals-showcase-price">Inquire</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Variant/colorway list — Atelier style -->
+  <div class="originals-variants">
+    <a href="#" class="originals-variant fade-up">
+      <span class="originals-var-name">M.I. — Obsidian / Gold</span>
+      <span class="originals-var-price">$275</span>
+    </a>
+    <a href="#" class="originals-variant fade-up d1">
+      <span class="originals-var-name">M.I. — Collector's Edition</span>
+      <span class="originals-var-price">$275</span>
+    </a>
+    <a href="#" class="originals-variant fade-up d2">
+      <span class="originals-var-name">M.I. — Custom Order</span>
+      <span class="originals-var-price">Inquire</span>
+    </a>
+    <a href="#" class="originals-variant fade-up d3">
+      <span class="originals-var-name">View Full Collection →</span>
+      <span class="originals-var-price"></span>
+    </a>
+  </div>
+
+</section>
+
+
+<!-- ═══ FEATURED DROP ════════════════════════════════════════ -->
+<!-- sections/featured-drop.liquid -->
+<section id="drop" class="section-drop" aria-label="Featured drop">
+
+  <div class="drop-img fade-left">
+    <div class="drop-img-ph">
+      <span>Product Photo<br/>Obsidian / Gold Colorway<br/>Upload in Shopify Customizer</span>
+    </div>
+    <div class="drop-gold-accent" aria-hidden="true"></div>
+  </div>
+
+  <div class="drop-copy">
+    <span class="drop-number" aria-hidden="true">01</span>
+    <p class="drop-season fade-up">Featured Drop</p>
+    <div class="fade-up d1" style="margin-bottom:28px;">
+      <img src="assets/logo.png" alt="YNG★LIFE"
+        style="height:40px;width:auto;display:block;margin-bottom:10px;" />
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,4.4rem);font-style:italic;color:var(--gold);line-height:0.9;letter-spacing:-0.02em;">M.I.</p>
+      <p style="font-family:'Montserrat',sans-serif;font-size:0.44rem;letter-spacing:0.44em;text-transform:uppercase;color:var(--text-muted);margin-top:8px;">Monument High Top</p>
+    </div>
+    <p class="drop-desc fade-up d2">
+      The Monument High Top. Handcrafted in Italy from premium leather.
+      A limited-edition silhouette combining handcrafting tradition,
+      quality and modern style for a product that's perfectly Italian.
+    </p>
+    <div class="drop-price-row fade-up d3">
+      <span class="drop-price">$275</span>
+      <span class="drop-currency">USD</span>
+    </div>
+    <div class="drop-btns fade-up d4">
+      <div class="btn-magnetic">
+        <a href="#" class="btn-primary">Buy Your Pair</a>
+      </div>
+      <div class="btn-magnetic">
+        <a href="#" class="btn-outline">View Details</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══ PRODUCT GRID ══════════════════════════════════════════ -->
+<!-- sections/new-arrivals.liquid -->
+<section class="section-products" aria-label="New arrivals" style="padding-top:100px;">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="rule-gold">Just Dropped</p>
+      <h2 class="section-title">New Arrivals</h2>
+    </div>
+    <div class="product-grid" id="product-grid">
+
+      <div class="product-card fade-up" tabindex="0" role="button" aria-label="YNG★LIFE M.I. — $275">
+        <div class="product-img-zone">
+          <div class="product-img-ph"><span>Product Image<br/>800 × 1000 px</span></div>
+          <span class="new-ribbon">New</span>
+          <div class="product-img-veil"></div>
+          <div class="quick-add">
+            <button class="quick-add-btn" onclick="event.stopPropagation();">Buy Your Pair</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <p class="product-collection">The Originals</p>
+          <h3 class="product-name">YNG★LIFE M.I.</h3>
+          <p class="product-price">$275</p>
+        </div>
+      </div>
+
+      <div class="product-card fade-up d1" tabindex="0" role="button">
+        <div class="product-img-zone">
+          <div class="product-img-ph"><span>Product Image<br/>800 × 1000 px</span></div>
+          <span class="sold-ribbon">Sold Out</span>
+          <div class="product-img-veil"></div>
+          <div class="quick-add">
+            <button class="quick-add-btn" disabled onclick="event.stopPropagation();">Sold Out</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <p class="product-collection">The Originals</p>
+          <h3 class="product-name">M.I. — Collector's Edition</h3>
+          <p class="product-price">$275</p>
+        </div>
+      </div>
+
+      <div class="product-card fade-up d2" tabindex="0" role="button">
+        <div class="product-img-zone">
+          <div class="product-img-ph"><span>Product Image<br/>800 × 1000 px</span></div>
+          <span class="sold-ribbon">Sold Out</span>
+          <div class="product-img-veil"></div>
+          <div class="quick-add">
+            <button class="quick-add-btn" disabled onclick="event.stopPropagation();">Sold Out</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <p class="product-collection">The Originals</p>
+          <h3 class="product-name">M.I. — Custom Order</h3>
+          <p class="product-price">Inquire</p>
+        </div>
+      </div>
+
+      <div class="product-card fade-up d3" tabindex="0" role="button">
+        <div class="product-img-zone">
+          <div class="product-img-ph"><span>Product Image<br/>800 × 1000 px</span></div>
+          <span class="new-ribbon">New</span>
+          <div class="product-img-veil"></div>
+          <div class="quick-add">
+            <button class="quick-add-btn" onclick="event.stopPropagation();">Buy Your Pair</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <p class="product-collection">The Originals</p>
+          <h3 class="product-name">M.I. — Obsidian / Gold</h3>
+          <p class="product-price">$275</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-cta fade-up" style="padding:64px 0 20px;">
+      <a href="#" style="
+        display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+        font-family: 'Montserrat', sans-serif; font-size: 0.56rem; font-weight: 500;
+        letter-spacing: 0.5em; text-transform: uppercase; text-decoration: none;
+        padding: 22px 72px;
+        background: var(--gold);
+        color: #0A0907;
+        border: 2px solid var(--gold);
+        transition: background 0.3s, transform 0.25s;
+        width: min(520px, 90%);
+      " onmouseover="this.style.background='transparent';this.style.color='var(--gold-dark)'"
+         onmouseout="this.style.background='var(--gold)';this.style.color='#0A0907'">
+        View All Products &nbsp;→
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ═══ FUTURE DROPS — Mystery teaser ════════════════════════ -->
+<!-- sections/future-drops.liquid -->
+<section id="future" class="section-future" aria-label="Future collections">
+  <div class="future-ambient" aria-hidden="true"></div>
+  <div class="future-spotlight" aria-hidden="true"></div>
+  <div class="future-inner">
+
+    <div class="future-header fade-up">
+      <p class="future-label">What's Next</p>
+      <h2 class="future-title">
+        <span>Future Drops</span>
+      </h2>
+    </div>
+
+    <!-- Spinning badge -->
+    <div class="future-badge-wrap fade-up d1" aria-hidden="true">
+      <svg class="future-badge-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="badge-circle" d="M 100,100 m -72,0 a 72,72 0 1,1 144,0 a 72,72 0 1,1 -144,0"/>
+        </defs>
+        <text font-family="Montserrat, sans-serif" font-size="9.5" font-weight="400" letter-spacing="5" fill="rgba(201,168,76,0.55)" text-transform="uppercase">
+          <textPath href="#badge-circle">UPCOMING · YNG★LIFE · FUTURE DROPS · STAY READY ·</textPath>
+        </text>
+      </svg>
+      <div class="future-badge-center">?</div>
+    </div>
+
+    <!-- Teaser cards -->
+    <div class="future-cards">
+
+      <div class="future-card fade-up">
+        <div class="future-card-bg">
+          <div class="future-card-bg-ph"><span>II</span></div>
+        </div>
+        <div class="future-card-veil"></div>
+        <div class="future-card-classified">Classified</div>
+        <div class="future-card-content">
+          <p class="future-card-num">Drop 002</p>
+          <p class="future-card-name">
+            <span class="future-card-redact">Browntown</span>
+          </p>
+          <p class="future-card-date">Coming — 2026</p>
+          <p class="future-card-status">Hover to reveal</p>
+        </div>
+      </div>
+
+      <div class="future-card fade-up d1">
+        <div class="future-card-bg">
+          <div class="future-card-bg-ph"><span>III</span></div>
+        </div>
+        <div class="future-card-veil"></div>
+        <div class="future-card-classified">Classified</div>
+        <div class="future-card-content">
+          <p class="future-card-num">Drop 003</p>
+          <p class="future-card-name">
+            <span class="future-card-redact">Evergreen</span>
+          </p>
+          <p class="future-card-date">Coming — 2026</p>
+          <p class="future-card-status">Hover to reveal</p>
+        </div>
+      </div>
+
+      <div class="future-card fade-up d2">
+        <div class="future-card-bg">
+          <div class="future-card-bg-ph"><span>IV</span></div>
+        </div>
+        <div class="future-card-veil"></div>
+        <div class="future-card-classified">Classified</div>
+        <div class="future-card-content">
+          <p class="future-card-num">Drop 004</p>
+          <p class="future-card-name">
+            <span class="future-card-redact">Midnight‑Mist</span>
+          </p>
+          <p class="future-card-date">Coming — 2026</p>
+          <p class="future-card-status">Hover to reveal</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="future-cta fade-up">
+      <p class="future-cta-text">Register your interest to be notified first</p>
+      <div class="btn-magnetic" style="display:inline-block;">
+        <a href="#newsletter" class="btn-dark-outline">Notify Me →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ NEWSLETTER ════════════════════════════════════════════ -->
+<!-- sections/newsletter.liquid -->
+<section id="newsletter" class="section-newsletter" aria-label="Newsletter signup">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:700px;height:300px;
+    background:radial-gradient(ellipse,rgba(201,168,76,0.05) 0%,transparent 65%);
+    pointer-events:none;" aria-hidden="true"></div>
+
+  <div class="newsletter-inner">
+    <img src="assets/logo.png" alt="YNG★LIFE"
+      class="fade-up" style="height:36px;width:auto;margin:0 auto 28px;display:block;opacity:0.35;" />
+    <p class="rule-gold fade-up d1" style="justify-content:center;margin-bottom:20px;">Stay in the Loop</p>
+    <h2 class="newsletter-title fade-up d2">Join the World of YNG★LIFE</h2>
+    <p class="newsletter-body fade-up d3">
+      Early access to drops, exclusive behind-the-scenes from Italy,
+      and first look at every new collection.
+    </p>
+    <form class="newsletter-form fade-up d4" onsubmit="return false;">
+      <input type="email" class="email-input" placeholder="Your email address" aria-label="Email address" />
+      <div class="btn-magnetic" style="flex-shrink:0;margin-left:12px;">
+        <button type="submit" class="btn-primary" style="padding:14px 28px;white-space:nowrap;">Join</button>
+      </div>
+    </form>
+    <p class="newsletter-fine fade-up d5">No spam, ever. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+<!-- sections/footer.liquid -->
+<footer id="contact" aria-label="Footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div>
+        <img src="assets/logo.png" alt="YNG★LIFE" class="footer-logo-img" />
+        <p class="footer-tagline">Luxury fashion rooted in Italian craftsmanship. Every piece tells a story.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">Collections</h4>
+        <ul class="footer-links">
+          <li><a href="#originals" class="footer-link">The Originals</a></li>
+          <li><a href="#drop"      class="footer-link">M.I. Monument High Top</a></li>
+          <li><a href="#future"    class="footer-link">Coming Soon</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">Help</h4>
+        <ul class="footer-links">
+          <li><a href="#" class="footer-link">Sizing Guide</a></li>
+          <li><a href="#" class="footer-link">Shipping &amp; Returns</a></li>
+          <li><a href="#" class="footer-link">FAQ</a></li>
+          <li><a href="#" class="footer-link">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">About</h4>
+        <ul class="footer-links">
+          <li><a href="#" class="footer-link">Our Story</a></li>
+          <li><a href="#" class="footer-link">The Craft</a></li>
+          <li><a href="#" class="footer-link">Privacy Policy</a></li>
+          <li><a href="#" class="footer-link">Terms of Service</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 YNG★LIFE. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a><span>·</span>
+        <a href="#">TikTok</a><span>·</span>
+        <a href="#">X / Twitter</a>
+      </div>
+      <p class="footer-credit">Made with intention ★</p>
+    </div>
+  </div>
+</footer>
+
+</main>
+<script src="assets/theme.js" defer></script>
+<script>
+(function() {
+  'use strict';
+  var isMobile = !window.matchMedia('(hover: hover)').matches;
+
+  /* ── Gold trail factory — reusable for any section ── */
+  function initGoldTrail(section, opts) {
+    if (!section) return;
+    var FADE = opts.fade || 2400;
+    var spotlight = opts.spotlight || null;
+
+    // Spotlight follows mouse
+    if (spotlight) {
+      section.addEventListener('mousemove', function(e) {
+        var r = section.getBoundingClientRect();
+        var x = ((e.clientX - r.left) / r.width) * 100;
+        var y = ((e.clientY - r.top) / r.height) * 100;
+        spotlight.style.background = 'radial-gradient(ellipse 42% 52% at ' + x + '% ' + y + '%, rgba(201,168,76,0.13) 0%, rgba(201,168,76,0.04) 42%, transparent 65%)';
+      });
+      section.addEventListener('mouseleave', function() {
+        spotlight.style.background = 'radial-gradient(ellipse 50% 50% at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 65%)';
+      });
+    }
+
+    // Drawing canvas
+    var cvs = document.createElement('canvas');
+    cvs.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:' + (opts.zIndex || 6) + ';';
+    if (opts.prepend) {
+      section.insertBefore(cvs, section.firstChild);
+    } else {
+      section.appendChild(cvs);
+    }
+    var ctx = cvs.getContext('2d');
+
+    var resize = function() {
+      var r = section.getBoundingClientRect();
+      cvs.width = r.width; cvs.height = r.height;
+    };
+    resize();
+    new ResizeObserver(resize).observe(section);
+
+    var trail = [];
+    var inSection = false;
+
+    // mouseenter/leave on SECTION to track if we're inside
+    section.addEventListener('mouseenter', function() { inSection = true; });
+    section.addEventListener('mouseleave', function() {
+      inSection = false;
+      trail.push({ brk: true, t: Date.now() });
+    });
+    // mousemove fires from section AND all children (events bubble up)
+    // Works over product cards, text, everything inside the section
+    section.addEventListener('mousemove', function(e) {
+      if (!inSection) return;
+      var r = section.getBoundingClientRect();
+      var x = e.clientX - r.left, y = e.clientY - r.top;
+      // Clamp to section bounds (safety for fixed-position children)
+      if (x < 0 || y < 0 || x > r.width || y > r.height) return;
+      trail.push({ x: x, y: y, t: Date.now() });
+    });
+
+    (function draw() {
+      requestAnimationFrame(draw);
+      var now = Date.now();
+      while (trail.length && now - trail[0].t > FADE) trail.shift();
+      ctx.clearRect(0, 0, cvs.width, cvs.height);
+      if (trail.length < 2) return;
+      for (var i = 1; i < trail.length; i++) {
+        var p0 = trail[i-1], p1 = trail[i];
+        if (p0.brk || p1.brk) continue;
+        var age = (now - p1.t) / FADE;
+        var alpha = Math.pow(1 - age, 1.5) * 0.92;
+        var lw = 2.8 * (1 - age * 0.4);
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.quadraticCurveTo(p0.x, p0.y, (p0.x + p1.x) / 2, (p0.y + p1.y) / 2);
+        ctx.strokeStyle = 'rgba(201,168,76,' + alpha + ')';
+        ctx.lineWidth = lw;
+        ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        ctx.shadowColor = 'rgba(220,185,90,' + (alpha * 0.7) + ')';
+        ctx.shadowBlur = 14 * (1 - age);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      }
+    })();
+  }
+
+  /* ── Mega menu — JS .is-open management (prevents gap-disappear) ── */
+  (function() {
+    var hideTimers = new Map();
+    var activePanel = null;
+
+    // Lazy cursor refs — cursor elements are AFTER this script in DOM
+    function getCursor() {
+      return {
+        dot:  document.getElementById('cursor-dot'),
+        ring: document.getElementById('cursor-ring')
+      };
+    }
+
+    function setCursorForPanel() {
+      var c = getCursor();
+      if (c.dot)  { c.dot.style.background  = '#9E7828'; c.dot.style.width  = '10px'; c.dot.style.height = '10px'; }
+      if (c.ring) { c.ring.style.borderColor = '#9E7828'; c.ring.style.opacity = '0.65'; c.ring.style.width = '38px'; c.ring.style.height = '38px'; }
+    }
+
+    function resetCursor() {
+      var c = getCursor();
+      if (c.dot)  { c.dot.style.background  = ''; c.dot.style.width  = ''; c.dot.style.height = ''; }
+      if (c.ring) { c.ring.style.borderColor = ''; c.ring.style.opacity = ''; c.ring.style.width = ''; c.ring.style.height = ''; }
+    }
+
+    document.querySelectorAll('.nav-mega-item').forEach(function(item) {
+      var panel = item.querySelector('.mega-panel');
+      if (!panel) return;
+
+      function show() {
+        // Cancel any pending hide for this item
+        if (hideTimers.has(item)) { clearTimeout(hideTimers.get(item)); hideTimers.delete(item); }
+        // Close other open panels immediately
+        if (activePanel && activePanel !== panel) {
+          activePanel.classList.remove('is-open');
+          activePanel.parentElement.classList.remove('mega-item--active');
+        }
+        activePanel = panel;
+        panel.classList.add('is-open');
+        item.classList.add('mega-item--active');
+        setCursorForPanel();
+      }
+
+      function hide() {
+        // Delay hide so mouse can travel from nav item to panel
+        var t = setTimeout(function() {
+          panel.classList.remove('is-open');
+          item.classList.remove('mega-item--active');
+          if (activePanel === panel) {
+            activePanel = null;
+            resetCursor();
+          }
+        }, 200);
+        hideTimers.set(item, t);
+      }
+
+      item.addEventListener('mouseenter', show);
+      item.addEventListener('mouseleave', hide);
+      panel.addEventListener('mouseenter', show);
+      panel.addEventListener('mouseleave', hide);
+    });
+
+    // Click outside closes all panels
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-mega-item')) {
+        document.querySelectorAll('.mega-panel.is-open').forEach(function(p) {
+          p.classList.remove('is-open');
+          p.parentElement.classList.remove('mega-item--active');
+        });
+        activePanel = null;
+        resetCursor();
+      }
+    });
+  })();
+
+  /* ── Gold trails — document.mousemove for guaranteed capture ── */
+  function initGoldTrailV2(section, opts) {
+    if (!section || isMobile) return;
+    var FADE = opts.fade || 2400;
+    var spotlight = opts.spotlight || null;
+
+    if (spotlight) {
+      document.addEventListener('mousemove', function(e) {
+        var r = section.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
+        var x = ((e.clientX - r.left) / r.width) * 100;
+        var y = ((e.clientY - r.top) / r.height) * 100;
+        spotlight.style.background = 'radial-gradient(ellipse 42% 52% at ' + x + '% ' + y + '%, rgba(201,168,76,0.15) 0%, rgba(201,168,76,0.05) 42%, transparent 65%)';
+      });
+    }
+
+    var cvs = document.createElement('canvas');
+    cvs.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:' + (opts.zIndex || 10) + ';';
+    section.insertBefore(cvs, section.firstChild);
+    var ctx = cvs.getContext('2d');
+
+    function resize() {
+      var r = section.getBoundingClientRect();
+      var dpr = window.devicePixelRatio || 1;
+      cvs.width  = r.width  * dpr;
+      cvs.height = r.height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    resize();
+    new ResizeObserver(resize).observe(section);
+
+    var trail = [];
+
+    // document-level — no mouseenter needed, always fires
+    document.addEventListener('mousemove', function(e) {
+      var r = section.getBoundingClientRect();
+      var x = e.clientX - r.left;
+      var y = e.clientY - r.top;
+      if (x >= 0 && y >= 0 && x <= r.width && y <= r.height) {
+        trail.push({ x: x, y: y, t: Date.now() });
+      } else if (trail.length && !trail[trail.length - 1].brk) {
+        trail.push({ brk: true, t: Date.now() });
+      }
+    });
+
+    (function draw() {
+      requestAnimationFrame(draw);
+      var now = Date.now();
+      while (trail.length && now - trail[0].t > FADE) trail.shift();
+      var dpr = window.devicePixelRatio || 1;
+      ctx.clearRect(0, 0, cvs.width / dpr, cvs.height / dpr);
+      if (trail.length < 2) return;
+      for (var i = 1; i < trail.length; i++) {
+        var p0 = trail[i-1], p1 = trail[i];
+        if (p0.brk || p1.brk) continue;
+        var age   = (now - p1.t) / FADE;
+        var alpha = Math.pow(1 - age, 1.4) * 0.94;
+        var lw    = 3.0 * (1 - age * 0.35);
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.quadraticCurveTo((p0.x + p1.x) / 2, (p0.y + p1.y) / 2, p1.x, p1.y);
+        ctx.strokeStyle    = 'rgba(201,168,76,' + alpha + ')';
+        ctx.lineWidth      = lw;
+        ctx.lineCap        = 'round';
+        ctx.lineJoin       = 'round';
+        ctx.shadowColor    = 'rgba(230,195,90,' + (alpha * 0.75) + ')';
+        ctx.shadowBlur     = 16 * (1 - age);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      }
+    })();
+  }
+
+  var futureSection = document.getElementById('future');
+  var philoSection  = document.querySelector('.section-philosophy');
+
+  if (futureSection) {
+    initGoldTrailV2(futureSection, {
+      spotlight: futureSection.querySelector('.future-spotlight'),
+      fade: 2800, zIndex: 10
+    });
+  }
+  if (philoSection) {
+    initGoldTrailV2(philoSection, { fade: 2400, zIndex: 9 });
+  }
+
+})();
+</script>
+
+<!-- Cursor elements LAST in DOM — paints after all backdrop-filter layers (Chrome stacking fix) -->
+<div id="cursor-dot"   aria-hidden="true" style="z-index:2147483647;will-change:transform;transform:translateZ(0) translate(-50%,-50%)"></div>
+<div id="cursor-ring"  aria-hidden="true" style="z-index:2147483646;will-change:transform;transform:translateZ(0) translate(-50%,-50%)"></div>
+<div id="cursor-label" aria-hidden="true" style="z-index:2147483647">View</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+{%- comment -%}
+  Snippet: product-card.liquid
+  Usage (real product):   {% render 'product-card', product: product %}
+  Usage (placeholder):    {% render 'product-card', product: nil, placeholder_index: 1 %}
+
+  BUG FIX: The image zone always has min-height + background-color.
+  Real images use object-fit:cover with explicit width/height.
+  The grid can NEVER collapse to zero height.
+{%- endcomment -%}
+
+{%- if product != nil -%}
+
+  {%- assign is_sold_out = false -%}
+  {%- unless product.available -%}{%- assign is_sold_out = true -%}{%- endunless -%}
+
+  <div class="product-card fade-up"
+    role="button" tabindex="0"
+    aria-label="View {{ product.title | escape }}"
+    data-product-id="{{ product.handle }}"
+    onclick="window.location.href='{{ product.url }}'">
+
+    <div class="product-img-zone">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}"
+          srcset="{{ product.featured_image | img_url: '400x400', crop: 'center' }} 400w,
+                  {{ product.featured_image | img_url: '600x600', crop: 'center' }} 600w,
+                  {{ product.featured_image | img_url: '900x900', crop: 'center' }} 900w"
+          sizes="(max-width:420px) 100vw, (max-width:768px) 50vw, (max-width:1100px) 33vw, 25vw"
+          alt="{{ product.featured_image.alt | escape | default: product.title }}"
+          width="600" height="600"
+          loading="lazy"
+        />
+      {%- else -%}
+        <div class="product-img-ph">
+          <span>{{ product.title }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if is_sold_out -%}
+        <span class="sold-ribbon">Sold Out</span>
+      {%- elsif product.created_at > 'now' | date: '%s' | minus: 604800 -%}
+        <span class="new-ribbon">New</span>
+      {%- endif -%}
+
+      <div class="product-img-veil"></div>
+
+      <div class="quick-add">
+        {%- form 'product', product -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="quick-add-btn"
+            {% if is_sold_out %}disabled{% endif %}
+            onclick="event.stopPropagation();">
+            {%- if is_sold_out -%}Sold Out{%- else -%}Add to Cart{%- endif -%}
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+
+    <div class="product-info">
+      <p class="product-collection">{{ product.type | default: product.collections.first.title }}</p>
+      <h3 class="product-name">{{ product.title }}</h3>
+      <p class="product-price">
+        {%- if product.compare_at_price > product.price -%}
+          <del>{{ product.compare_at_price | money }}</del>
+        {%- endif -%}
+        {{ product.price | money }}
+      </p>
+    </div>
+
+  </div>
+
+{%- else -%}
+
+  {%- comment -%}
+    PLACEHOLDER — shown when no collection is selected in Shopify customizer.
+    Remove once real products are connected.
+  {%- endcomment -%}
+
+  {%- assign ph_names   = 'YNG★LIFE M.I.,Original High Top,Browntown Sneaker,Original Purse,Monument Backpack,Wondering-White High' | split: ',' -%}
+  {%- assign ph_types   = 'Shoes,Shoes,Shoes,Purses,Backpacks,Shoes'                                                                  | split: ',' -%}
+  {%- assign ph_prices  = '$275,$0.00,$0.00,$0.00,$0.00,$0.00'                                                                         | split: ',' -%}
+  {%- assign idx = placeholder_index | default: 1 | minus: 1 -%}
+
+  <div class="product-card fade-up"
+    data-product-id="placeholder-{{ placeholder_index }}">
+
+    <div class="product-img-zone">
+      <div class="product-img-ph">
+        <span>Product Image<br/>Upload via Shopify Admin</span>
+      </div>
+      <div class="product-img-veil"></div>
+      <div class="quick-add">
+        <button class="quick-add-btn" type="button" onclick="event.stopPropagation();">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <p class="product-collection">{{ ph_types[idx] }}</p>
+      <h3 class="product-name">{{ ph_names[idx] }}</h3>
+      <p class="product-price">{{ ph_prices[idx] }}</p>
+    </div>
+
+  </div>
+
+{%- endif -%}

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Go Inspire Now — Give &amp; Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Lato',sans-serif;background:#FFF9FE;color:#2D0A5E;overflow-x:hidden;}
+:root{
+  --dp:#2D0A5E;--vi:#7C3AED;--vi2:#A855F7;
+  --cy:#06B6D4;--pk:#EC4899;--pk2:#F472B6;
+  --go:#FBBF24;--cr:#FFF9FE;--lv:#FAF5FF;
+}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");}
+
+/* ══ NAV ══ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.1rem 2.5rem;
+  background:transparent;transition:background 0.3s,box-shadow 0.3s;}
+#nav.scrolled{background:rgba(28,4,60,0.96);backdrop-filter:blur(20px);
+  box-shadow:0 4px 32px rgba(0,0,0,0.25);}
+.nav-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo img{height:52px;display:block;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-a{font-size:0.67rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;
+  color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;position:relative;}
+.nav-a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;
+  background:var(--cy);transition:width 0.2s;}
+.nav-a:hover{color:#fff;}.nav-a:hover::after,.nav-a.active::after{width:100%;}
+.nav-a.active{color:var(--cy);}
+.nav-pill{display:inline-block;padding:0.48rem 1.3rem;
+  background:linear-gradient(135deg,var(--pk),var(--vi));color:#fff;
+  font-size:0.67rem;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;
+  border-radius:100px;text-decoration:none;
+  box-shadow:0 4px 16px rgba(236,72,153,0.45);
+  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.nav-pill:hover{transform:scale(1.06);box-shadow:0 8px 28px rgba(236,72,153,0.6);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.nav-burger span{display:block;width:22px;height:2px;background:#fff;}
+
+/* ══ HERO ══ */
+#hero{min-height:88vh;display:flex;align-items:center;padding:8rem 2.5rem 5.5rem;
+  position:relative;overflow:hidden;
+  background:linear-gradient(148deg,#1A0040 0%,#3B0F7A 40%,#BE185D 75%,#EC4899 100%);}
+.h-orb{position:absolute;border-radius:50%;pointer-events:none;}
+.h-orb1{width:700px;height:700px;top:-200px;right:-150px;
+  background:radial-gradient(circle,rgba(251,191,36,0.15) 0%,transparent 70%);
+  animation:fl 12s ease-in-out infinite;}
+.h-orb2{width:450px;height:450px;bottom:-120px;left:-80px;
+  background:radial-gradient(circle,rgba(168,85,247,0.18) 0%,transparent 70%);
+  animation:fl 16s ease-in-out infinite reverse;}
+.h-orb3{width:280px;height:280px;top:40%;left:44%;
+  background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%);
+  animation:fl 9s ease-in-out infinite;}
+@keyframes fl{0%,100%{transform:translateY(0);}50%{transform:translateY(-28px);}}
+.h-noise{position:absolute;inset:0;opacity:0.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;}
+.h-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:center;position:relative;z-index:2;width:100%;}
+.h-tag{display:inline-flex;align-items:center;gap:0.55rem;font-size:0.58rem;font-weight:900;
+  letter-spacing:0.25em;text-transform:uppercase;color:rgba(251,191,36,0.9);
+  border:1px solid rgba(251,191,36,0.3);padding:0.38rem 1.1rem;border-radius:100px;
+  margin-bottom:1.6rem;background:rgba(251,191,36,0.06);}
+.h-dot{width:6px;height:6px;border-radius:50%;background:var(--go);
+  animation:pu 2s infinite;}
+@keyframes pu{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.25;transform:scale(0.5);}}
+.h-h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,4.4rem);
+  font-weight:700;line-height:1.06;letter-spacing:-0.025em;color:#fff;margin-bottom:1.3rem;}
+.h-h1 em{color:#FCD5E8;font-style:italic;display:block;}
+.h-sub{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,0.68);
+  line-height:1.9;max-width:480px;margin-bottom:2.3rem;}
+.btn-go{display:inline-block;padding:1.05rem 2.6rem;
+  background:linear-gradient(135deg,#FBBF24,#F59E0B);color:#2D0A5E;
+  font-weight:900;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
+  border-radius:100px;text-decoration:none;
+  box-shadow:0 8px 32px rgba(251,191,36,0.5);
+  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.btn-go:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 16px 48px rgba(251,191,36,0.7);}
+.btn-gh{display:inline-block;padding:0.95rem 2.3rem;
+  background:rgba(255,255,255,0.1);color:#fff;
+  font-weight:700;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
+  border-radius:100px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.35);
+  backdrop-filter:blur(4px);transition:background 0.2s,transform 0.2s;}
+.btn-gh:hover{background:rgba(255,255,255,0.22);transform:translateY(-2px);}
+.h-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);
+  border-radius:22px;padding:2.5rem;backdrop-filter:blur(18px);position:relative;overflow:hidden;}
+.h-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;
+  border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.2),transparent 70%);}
+.h-card-icon{font-size:2.75rem;display:block;margin-bottom:1.1rem;}
+.h-card-q{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;
+  color:#fff;line-height:1.65;margin-bottom:1.6rem;}
+.h-card-q em{color:#FDE68A;font-style:normal;}
+.h-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.h-stat{text-align:center;background:rgba(255,255,255,0.08);border-radius:14px;padding:1.2rem 1rem;}
+.h-stat-n{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;
+  color:var(--go);letter-spacing:-0.02em;line-height:1;}
+.h-stat-l{font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);margin-top:0.35rem;}
+
+/* ══ SHARED ══ */
+.sec{padding:6.5rem 2.5rem;}
+.sec-in{max-width:1200px;margin:0 auto;}
+.ey{font-size:0.6rem;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--vi);display:block;margin-bottom:0.65rem;}
+.sh2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  letter-spacing:-0.025em;line-height:1.12;color:var(--dp);margin-bottom:1rem;}
+.sh2 em{font-style:italic;color:var(--pk);}
+.bp{font-size:0.97rem;color:rgba(45,10,94,0.55);line-height:1.9;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ══ MISSION LINK ══ */
+.mission-link{background:#FAF5FF;padding:5rem 2.5rem;}
+.ml-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:center;}
+.ml-card{background:linear-gradient(145deg,#3B0F7A,#BE185D);border-radius:20px;
+  padding:3rem;position:relative;overflow:hidden;}
+.ml-card::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;
+  border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,0.2),transparent 70%);}
+.ml-logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;
+  color:#fff;margin-bottom:0.4rem;position:relative;z-index:1;}
+.ml-logo em{color:#FDE68A;font-style:italic;}
+.ml-sub{font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);margin-bottom:1.5rem;position:relative;z-index:1;}
+.ml-desc{font-size:0.9rem;color:rgba(255,255,255,0.72);line-height:1.8;
+  position:relative;z-index:1;}
+.ml-right h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;
+  color:var(--dp);line-height:1.2;letter-spacing:-0.02em;margin-bottom:1rem;}
+.ml-right h3 em{color:var(--pk);font-style:italic;}
+.ml-right p{font-size:0.95rem;color:rgba(45,10,94,0.55);line-height:1.85;margin-bottom:1.6rem;}
+.btn-pk-out{display:inline-block;padding:0.9rem 2.2rem;
+  border:2px solid var(--pk);color:var(--pk);
+  font-weight:900;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
+  border-radius:100px;text-decoration:none;
+  transition:background 0.2s,color 0.2s,transform 0.2s;}
+.btn-pk-out:hover{background:var(--pk);color:#fff;transform:translateY(-2px);}
+
+/* ══ HOW GIVING WORKS ══ */
+.how-sec{background:#fff;padding:6.5rem 2.5rem;}
+.how-in{max-width:1100px;margin:0 auto;}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem;}
+.how-step{position:relative;padding:2.5rem 2rem;border-radius:20px;
+  background:var(--lv);border:1.5px solid rgba(168,85,247,0.1);
+  transition:transform 0.25s cubic-bezier(.34,1.56,.64,1),box-shadow 0.25s;}
+.how-step:hover{transform:translateY(-6px);box-shadow:0 20px 56px rgba(45,10,94,0.1);}
+.how-num{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;
+  color:rgba(168,85,247,0.15);line-height:1;margin-bottom:1rem;letter-spacing:-0.03em;}
+.how-ico{font-size:2rem;margin-bottom:1rem;display:block;}
+.how-step h4{font-size:1rem;font-weight:900;color:var(--dp);margin-bottom:0.6rem;}
+.how-step p{font-size:0.86rem;color:rgba(45,10,94,0.52);line-height:1.75;}
+
+/* ══ IMPACT SECTION ══ */
+.impact-sec{background:linear-gradient(148deg,#2D0A5E,#4C1D95 50%,#BE185D 100%);
+  padding:6.5rem 2.5rem;position:relative;overflow:hidden;}
+.impact-sec::before{content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:0.04;background-size:200px;}
+.impact-in{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:4rem;}
+.impact-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);
+  border-radius:18px;padding:2.5rem 2rem;text-align:center;backdrop-filter:blur(8px);}
+.impact-ico{font-size:2.5rem;margin-bottom:1rem;display:block;}
+.impact-h{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;
+  color:#fff;margin-bottom:0.5rem;line-height:1.3;}
+.impact-p{font-size:0.83rem;color:rgba(255,255,255,0.58);line-height:1.75;}
+
+/* ══ GIVE OPTIONS ══ */
+.give-sec{background:#FFF9FE;padding:6.5rem 2.5rem;}
+.give-in{max-width:900px;margin:0 auto;text-align:center;}
+.give-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;}
+.give-card{border-radius:20px;padding:2.5rem 2rem;border:2px solid transparent;
+  transition:transform 0.25s cubic-bezier(.34,1.56,.64,1),box-shadow 0.25s,border-color 0.2s;}
+.give-card:hover{transform:translateY(-6px);border-color:var(--pk);
+  box-shadow:0 20px 56px rgba(236,72,153,0.12);}
+.gc-1{background:linear-gradient(145deg,#FAF5FF,#F3E8FF);}
+.gc-2{background:linear-gradient(145deg,#FFF0F6,#FCE7F3);border-color:var(--pk);}
+.gc-3{background:linear-gradient(145deg,#FFFBEB,#FEF9C3);}
+.gc-amt{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;
+  color:var(--dp);letter-spacing:-0.025em;line-height:1;margin-bottom:0.4rem;}
+.gc-label{font-size:0.62rem;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--vi);margin-bottom:1.1rem;display:block;}
+.gc-desc{font-size:0.84rem;color:rgba(45,10,94,0.52);line-height:1.7;margin-bottom:1.5rem;}
+.gc-badge{display:inline-block;font-size:0.55rem;font-weight:900;letter-spacing:0.14em;
+  text-transform:uppercase;padding:0.25rem 0.75rem;border-radius:100px;
+  background:rgba(236,72,153,0.14);color:var(--pk);}
+.give-cta-wrap{margin-top:3rem;}
+.btn-give{display:inline-block;padding:1.1rem 3rem;
+  background:linear-gradient(135deg,var(--pk),var(--vi));color:#fff;
+  font-weight:900;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;
+  border-radius:100px;text-decoration:none;
+  box-shadow:0 8px 32px rgba(236,72,153,0.45);
+  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.btn-give:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 16px 48px rgba(236,72,153,0.6);}
+.give-note{font-size:0.75rem;color:rgba(45,10,94,0.38);margin-top:1.2rem;line-height:1.6;}
+
+/* ══ FOOTER ══ */
+footer{background:var(--dp);padding:4rem 2.5rem 2.5rem;}
+.ft-in{max-width:1200px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;
+  padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08);}
+.ft-brand p{font-size:0.86rem;color:rgba(255,255,255,0.45);line-height:1.9;margin-top:1rem;}
+.ft-brand img{height:48px;filter:brightness(0) invert(1);opacity:0.8;}
+.ft-col h4{font-size:0.58rem;font-weight:900;letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);margin-bottom:1.1rem;}
+.ft-links{display:flex;flex-direction:column;gap:0.65rem;}
+.ft-links a{font-size:0.84rem;color:rgba(255,255,255,0.52);text-decoration:none;transition:color 0.2s;}
+.ft-links a:hover{color:#fff;}
+.ft-bot{padding-top:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;}
+.ft-copy{font-size:0.75rem;color:rgba(255,255,255,0.25);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1024px){
+  .h-grid{grid-template-columns:1fr;}
+  .h-card{display:none;}
+  .ml-in{grid-template-columns:1fr;}
+  .how-steps{grid-template-columns:1fr 1fr;}
+  .impact-grid{grid-template-columns:repeat(2,1fr);}
+  .give-cards{grid-template-columns:1fr 1fr;}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+}
+@media(max-width:600px){
+  #hero{padding:7rem 1.5rem 4rem;}
+  .mission-link,.how-sec,.give-sec{padding:4.5rem 1.5rem;}
+  .how-steps{grid-template-columns:1fr;}
+  .impact-grid{grid-template-columns:1fr 1fr;}
+  .give-cards{grid-template-columns:1fr;}
+  .ft-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;
+    top:0;left:0;right:0;bottom:0;background:rgba(28,4,60,0.97);
+    align-items:center;justify-content:center;gap:1.6rem;z-index:400;}
+  .nav-a{font-size:1.1rem;}
+  .nav-burger{display:flex;}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a class="nav-logo" href="index.html"><img src="assets/yin-logo.png" alt="You Inspire Now"></a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-a">Home</a>
+      <a href="about.html" class="nav-a">About</a>
+      <a href="events.html" class="nav-a">Events</a>
+      <a href="go-inspire-now.html" class="nav-pill" style="background:linear-gradient(135deg,#FBBF24,#F59E0B);color:#2D0A5E;box-shadow:0 4px 16px rgba(251,191,36,0.5);">Go Inspire Now ♥</a>
+    </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="h-orb h-orb1"></div>
+  <div class="h-orb h-orb2"></div>
+  <div class="h-orb h-orb3"></div>
+  <div class="h-noise"></div>
+  <div class="h-grid">
+    <div>
+      <div class="h-tag"><span class="h-dot"></span> Giving &amp; Impact</div>
+      <h1 class="h-h1">Your Gift <em>Inspires Change</em></h1>
+      <p class="h-sub">Go Inspire Now is the giving arm of You Inspire Now — a place where your generosity becomes someone else's breakthrough. Every donation funds real transformation in real lives.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+        <a href="#give" class="btn-go">Give Now ♥</a>
+        <a href="#impact" class="btn-gh">See the Impact</a>
+      </div>
+    </div>
+    <div class="h-card">
+      <span class="h-card-icon">♥</span>
+      <p class="h-card-q">"When you give to Go Inspire Now, you are not just donating — you are <em>sending someone into their breakthrough.</em>"</p>
+      <div class="h-stat-row">
+        <div class="h-stat">
+          <div class="h-stat-n">Lives</div>
+          <div class="h-stat-l">Impacted</div>
+        </div>
+        <div class="h-stat">
+          <div class="h-stat-n">Faith</div>
+          <div class="h-stat-l">Rooted</div>
+        </div>
+        <div class="h-stat" style="grid-column:1/-1;">
+          <div class="h-stat-n">100%</div>
+          <div class="h-stat-l">Goes to the Mission</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION LINK -->
+<section class="mission-link">
+  <div class="ml-in reveal">
+    <div class="ml-card">
+      <div class="ml-logo">Go <em>Inspire</em> Now</div>
+      <div class="ml-sub">The Giving Arm</div>
+      <p class="ml-desc">Go Inspire Now exists to fund the mission — equipping women with the resources, experiences, and community they need to heal, grow, and step into purpose. Everything we do here flows back to the women we serve.</p>
+    </div>
+    <div class="ml-right">
+      <h3>Why <em>Giving Matters</em> Here</h3>
+      <p>You Inspire Now is built on the belief that every woman deserves access to transformation — not just those who can afford it. Your generosity is what makes that possible. It funds events, resources, and outreach that reach women who otherwise would never have the chance.</p>
+      <p>This is not charity. This is investment in a person's destiny. And the return on that investment ripples for generations.</p>
+      <a href="#give" class="btn-pk-out">Make a Donation</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW GIVING WORKS -->
+<section class="how-sec">
+  <div class="how-in">
+    <div class="reveal" style="text-align:center;max-width:540px;margin:0 auto;">
+      <span class="ey">Simple &amp; Transparent</span>
+      <h2 class="sh2">How Your Gift <em>Gets There</em></h2>
+      <p class="bp" style="margin-top:0.75rem;">No guessing. No overhead mystery. Here is exactly how your donation moves from your hands to someone's breakthrough.</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step reveal">
+        <div class="how-num">01</div>
+        <span class="how-ico">💳</span>
+        <h4>You Give</h4>
+        <p>Choose your giving level and complete your secure donation. Every amount is significant — even the smallest gift carries real weight in this mission.</p>
+      </div>
+      <div class="how-step reveal" style="transition-delay:0.12s;">
+        <div class="how-num">02</div>
+        <span class="how-ico">🌱</span>
+        <h4>It's Invested</h4>
+        <p>Your gift goes directly toward event scholarships, outreach programs, resources, and community-building — places where transformation actually happens.</p>
+      </div>
+      <div class="how-step reveal" style="transition-delay:0.24s;">
+        <div class="how-num">03</div>
+        <span class="how-ico">✨</span>
+        <h4>Lives Change</h4>
+        <p>A woman who could not afford to come — attends. A couple on the edge of giving up — reconnects. A life that felt purposeless — finds its calling. That is your gift at work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact" class="impact-sec">
+  <div class="impact-in">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto 1rem;">
+      <span class="ey" style="color:rgba(251,191,36,0.8);">Where Your Gift Goes</span>
+      <h2 class="sh2" style="color:#fff;">Every Dollar <em style="color:#FCD5E8;">Has a Destination</em></h2>
+      <p style="color:rgba(255,255,255,0.58);font-size:0.96rem;line-height:1.85;margin-top:0.75rem;">Your generosity is not abstract. Here is what it actually funds.</p>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-card reveal">
+        <span class="impact-ico">🎟️</span>
+        <h3 class="impact-h">Event Scholarships</h3>
+        <p class="impact-p">Covering registration costs so women who need these experiences most are never turned away by finances.</p>
+      </div>
+      <div class="impact-card reveal" style="transition-delay:0.1s;">
+        <span class="impact-ico">📖</span>
+        <h3 class="impact-h">Resources &amp; Materials</h3>
+        <p class="impact-p">Workbooks, devotionals, and faith-based tools that women can take home and continue their growth journey.</p>
+      </div>
+      <div class="impact-card reveal" style="transition-delay:0.2s;">
+        <span class="impact-ico">🌍</span>
+        <h3 class="impact-h">Outreach Programs</h3>
+        <p class="impact-p">Taking the mission beyond the stage — into communities, neighborhoods, and places where inspiration is needed most.</p>
+      </div>
+      <div class="impact-card reveal" style="transition-delay:0.3s;">
+        <span class="impact-ico">🤝</span>
+        <h3 class="impact-h">Community Building</h3>
+        <p class="impact-p">Investing in the infrastructure of connection — so women never have to walk their journey alone after the event ends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIVE OPTIONS -->
+<section id="give" class="give-sec">
+  <div class="give-in">
+    <div class="reveal">
+      <span class="ey">Choose Your Level</span>
+      <h2 class="sh2">Give What's <em>On Your Heart</em></h2>
+      <p class="bp" style="margin-top:0.75rem;max-width:480px;margin-left:auto;margin-right:auto;">Every gift is an act of faith. Whether it is $25 or $250, it is planting something real in someone's life.</p>
+    </div>
+    <div class="give-cards">
+      <div class="gc-1 give-card reveal">
+        <div class="gc-amt">$25</div>
+        <span class="gc-label">Seed</span>
+        <p class="gc-desc">Provides resource materials for one woman entering her healing journey — a devotional, a workbook, a lifeline.</p>
+      </div>
+      <div class="gc-2 give-card reveal" style="transition-delay:0.1s;">
+        <div class="gc-amt">$100</div>
+        <span class="gc-label">Invest</span>
+        <p class="gc-desc">Helps sponsor partial event registration for a woman who cannot afford to attend — getting her in the room that changes her life.</p>
+        <span class="gc-badge">Most Meaningful</span>
+      </div>
+      <div class="gc-3 give-card reveal" style="transition-delay:0.2s;">
+        <div class="gc-amt">$250</div>
+        <span class="gc-label">Sponsor</span>
+        <p class="gc-desc">Fully sponsors one woman's entire event experience — from registration to resources to follow-up community access.</p>
+      </div>
+    </div>
+    <div class="give-cta-wrap reveal" style="transition-delay:0.3s;">
+      <a href="#" class="btn-give">Give Now — Every Amount Counts ♥</a>
+      <p class="give-note">Secure giving powered by Go Inspire Now. All donations support the You Inspire Now mission.<br>Questions? Reach out at hello@youinspirenow.com</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-in">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <img src="assets/yin-logo.png" alt="You Inspire Now">
+        <p>Faith-rooted encouragement for women becoming who they were created to be. 🌸</p>
+      </div>
+      <div class="ft-col">
+        <h4>Navigate</h4>
+        <div class="ft-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="events.html">Events</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Events</h4>
+        <div class="ft-links">
+          <a href="events.html#marriage">Extreme Marriage Challenge</a>
+          <a href="events.html#adventure">Adventure Odyssey</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Give</h4>
+        <div class="ft-links">
+          <a href="go-inspire-now.html" style="color:#F9A8D4;">Go Inspire Now ♥</a>
+          <a href="#give">Donate</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 You Inspire Now. All rights reserved.</p>
+      <p class="ft-copy">Faith · Identity · Purpose · Resilience · Community · Wholeness ✨</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+document.getElementById('nav-burger').addEventListener('click', () =>
+  document.getElementById('nav-links').classList.toggle('open'));
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

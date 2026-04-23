@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Inspire Now — Faith. Identity. Purpose.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Lato',sans-serif;background:#FFF9FE;color:#2D0A5E;overflow-x:hidden;}
+:root{
+  --dp:#2D0A5E;--vi:#7C3AED;--vi2:#A855F7;
+  --cy:#06B6D4;--pk:#EC4899;--pk2:#F472B6;
+  --go:#FBBF24;--cr:#FFF9FE;--lv:#FAF5FF;
+}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");}
+
+/* ══ NAV ══ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.1rem 2.5rem;
+  background:transparent;transition:background 0.3s,box-shadow 0.3s;}
+#nav.scrolled{background:rgba(28,4,60,0.96);backdrop-filter:blur(20px);
+  box-shadow:0 4px 32px rgba(0,0,0,0.25);}
+.nav-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo img{height:52px;display:block;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-a{font-size:0.67rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;
+  color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;position:relative;}
+.nav-a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;
+  background:var(--cy);transition:width 0.2s;}
+.nav-a:hover{color:#fff;}.nav-a:hover::after,.nav-a.active::after{width:100%;}
+.nav-a.active{color:var(--cy);}
+.nav-pill{display:inline-block;padding:0.48rem 1.3rem;
+  background:linear-gradient(135deg,var(--pk),var(--vi));color:#fff;
+  font-size:0.67rem;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;
+  border-radius:100px;text-decoration:none;
+  box-shadow:0 4px 16px rgba(236,72,153,0.45);
+  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.nav-pill:hover{transform:scale(1.06);box-shadow:0 8px 28px rgba(236,72,153,0.6);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.nav-burger span{display:block;width:22px;height:2px;background:#fff;}
+
+/* ══ HERO ══ */
+#hero{min-height:100vh;display:flex;align-items:center;padding:7rem 2.5rem 5rem;
+  position:relative;overflow:hidden;
+  background:linear-gradient(148deg,#180330 0%,#2D0A5E 35%,#4C1D95 65%,#083A50 100%);}
+.h-orb{position:absolute;border-radius:50%;pointer-events:none;}
+.h-orb1{width:700px;height:700px;top:-220px;right:-180px;
+  background:radial-gradient(circle,rgba(6,182,212,0.17) 0%,transparent 70%);
+  animation:fl 10s ease-in-out infinite;}
+.h-orb2{width:500px;height:500px;bottom:-120px;left:-100px;
+  background:radial-gradient(circle,rgba(236,72,153,0.14) 0%,transparent 70%);
+  animation:fl 14s ease-in-out infinite reverse;}
+.h-orb3{width:300px;height:300px;top:35%;left:42%;
+  background:radial-gradient(circle,rgba(168,85,247,0.12) 0%,transparent 70%);
+  animation:fl 8s ease-in-out infinite;}
+@keyframes fl{0%,100%{transform:translateY(0);}50%{transform:translateY(-24px);}}
+.h-noise{position:absolute;inset:0;opacity:0.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;}
+.h-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:center;position:relative;z-index:2;width:100%;}
+.h-tag{display:inline-flex;align-items:center;gap:0.55rem;font-size:0.58rem;font-weight:900;
+  letter-spacing:0.25em;text-transform:uppercase;color:rgba(251,191,36,0.9);
+  border:1px solid rgba(251,191,36,0.3);padding:0.38rem 1.1rem;border-radius:100px;
+  margin-bottom:1.6rem;background:rgba(251,191,36,0.06);}
+.h-dot{width:6px;height:6px;border-radius:50%;background:var(--go);
+  animation:pu 2s infinite;}
+@keyframes pu{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.25;transform:scale(0.5);}}
+.h-h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,4.5rem);
+  font-weight:700;line-height:1.06;letter-spacing:-0.025em;color:#fff;margin-bottom:1.3rem;}
+.h-h1 em{color:#A8E6E3;font-style:italic;display:block;}
+.h-sub{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,0.68);
+  line-height:1.9;max-width:480px;margin-bottom:2.3rem;}
+.h-btns{display:flex;flex-wrap:wrap;gap:1rem;}
+.btn-pk{display:inline-block;padding:0.95rem 2.3rem;
+  background:linear-gradient(135deg,var(--pk),var(--pk2));color:#fff;
+  font-weight:900;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
+  border-radius:100px;text-decoration:none;
+  box-shadow:0 8px 32px rgba(236,72,153,0.45);
+  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.btn-pk:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 48px rgba(236,72,153,0.6);}
+.btn-gh{display:inline-block;padding:0.95rem 2.3rem;
+  background:rgba(255,255,255,0.1);color:#fff;
+  font-weight:700;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
+  border-radius:100px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.35);
+  backdrop-filter:blur(4px);transition:background 0.2s,transform 0.2s;}
+.btn-gh:hover{background:rgba(255,255,255,0.22);transform:translateY(-2px);}
+/* hero right card */
+.h-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+  border-radius:22px;padding:2.5rem;backdrop-filter:blur(18px);position:relative;overflow:hidden;}
+.h-card::before{content:'';position:absolute;top:-70px;right:-70px;width:220px;height:220px;
+  border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,0.2),transparent 70%);}
+.h-card-icon{font-size:2.75rem;display:block;margin-bottom:1.1rem;}
+.h-card-q{font-family:'Playfair Display',serif;font-size:1.25rem;font-style:italic;
+  color:#fff;line-height:1.65;margin-bottom:1.4rem;}
+.h-card-q em{color:#A8E6E3;font-style:normal;}
+.h-badges{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.hb{font-size:0.57rem;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;
+  padding:0.28rem 0.78rem;border-radius:100px;}
+.hb-vi{background:rgba(168,85,247,0.22);color:#D8B4FE;}
+.hb-cy{background:rgba(6,182,212,0.18);color:#A5F3FC;}
+.hb-pk{background:rgba(236,72,153,0.18);color:#FBCFE8;}
+.hb-go{background:rgba(251,191,36,0.18);color:#FDE68A;}
+
+/* ══ SHARED ══ */
+.sec{padding:6.5rem 2.5rem;}
+.sec-in{max-width:1200px;margin:0 auto;}
+.ey{font-size:0.6rem;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--vi);display:block;margin-bottom:0.65rem;}
+.sh2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  letter-spacing:-0.025em;line-height:1.12;color:var(--dp);margin-bottom:1rem;}
+.sh2 em{font-style:italic;color:var(--cy);}
+.bp{font-size:0.97rem;color:rgba(45,10,94,0.55);line-height:1.9;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ══ MISSION BAND ══ */
+.mission{background:linear-gradient(135deg,#3B0F7A,#7C3AED 50%,#0882A0);
+  padding:5.5rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
+.mission::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 80% at 80% 50%,rgba(255,255,255,0.07),transparent);}
+.mission-q{font-family:'Playfair Display',serif;font-size:clamp(1.25rem,2.8vw,1.95rem);
+  color:#fff;font-style:italic;line-height:1.72;max-width:830px;margin:0 auto;
+  position:relative;z-index:1;}
+.mission-q strong{color:var(--go);font-style:normal;}
+
+/* ══ PILLARS ══ */
+#pillars{background:var(--lv);}
+.p-grid{margin-top:3.5rem;display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem;}
+.p-card{background:#fff;border-radius:16px;padding:2rem 1.5rem;position:relative;overflow:hidden;
+  box-shadow:0 4px 28px rgba(45,10,94,0.07);
+  transition:transform 0.3s cubic-bezier(.34,1.56,.64,1),box-shadow 0.3s;}
+.p-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--ac);}
+.p-card:hover{transform:translateY(-8px);box-shadow:0 20px 56px rgba(45,10,94,0.14);}
+.p-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;
+  justify-content:center;font-size:1.45rem;background:var(--ic);margin-bottom:1rem;}
+.p-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;
+  color:var(--dp);margin-bottom:0.55rem;}
+.p-text{font-size:0.8rem;color:rgba(45,10,94,0.55);line-height:1.75;}
+.p-lnk{display:inline-block;margin-top:0.9rem;font-size:0.65rem;font-weight:900;
+  letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:opacity 0.2s;}
+.p-lnk:hover{opacity:0.7;}
+
+/* ══ TRANSFORMATION ══ */
+#transform{background:linear-gradient(150deg,#180330,#2D0A5E 40%,#4C1D95 80%,#083A50);}
+.tf-in{max-width:860px;margin:0 auto;}
+.tf-ey{font-size:0.6rem;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(251,191,36,0.85);display:block;margin-bottom:0.65rem;text-align:center;}
+.tf-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);
+  font-weight:700;color:#fff;letter-spacing:-0.025em;text-align:center;margin-bottom:4rem;}
+.tf-h em{font-style:italic;color:#A8E6E3;}
+.tf-row{display:flex;align-items:center;gap:2.5rem;padding:2rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.07);}
+.tf-row:last-child{border-bottom:none;}
+.tf-num{font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:700;
+  color:rgba(255,255,255,0.06);min-width:78px;line-height:1;letter-spacing:-0.03em;}
+.tf-label{flex:1;}
+.tf-from{font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);margin-bottom:0.35rem;}
+.tf-to{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.8vw,2rem);
+  font-weight:700;color:#fff;line-height:1.15;}
+.tf-to em{font-style:italic;color:#A8E6E3;}
+
+/* ══ EVENTS ══ */
+#events{background:#fff;}
+.ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3.5rem;}
+.ev-card{border-radius:22px;overflow:hidden;position:relative;
+  box-shadow:0 12px 50px rgba(45,10,94,0.1);
+  transition:transform 0.35s cubic-bezier(.34,1.56,.64,1),box-shadow 0.35s;
+  text-decoration:none;display:flex;flex-direction:column;}
+.ev-card:hover{transform:translateY(-10px);box-shadow:0 32px 80px rgba(45,10,94,0.18);}
+.ev-top{padding:3rem 2.5rem 2.5rem;flex:1;position:relative;overflow:hidden;}
+.ev-top::after{content:'';position:absolute;bottom:-40px;right:-40px;
+  width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.07);}
+.ev-icon{font-size:3rem;display:block;margin-bottom:1.25rem;}
+.ev-badge{display:inline-block;font-size:0.54rem;font-weight:900;letter-spacing:0.2em;
+  text-transform:uppercase;padding:0.28rem 0.75rem;border-radius:100px;
+  background:rgba(255,255,255,0.18);color:rgba(255,255,255,0.9);margin-bottom:0.9rem;}
+.ev-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;
+  color:#fff;line-height:1.15;margin-bottom:0.75rem;}
+.ev-desc{font-size:0.87rem;color:rgba(255,255,255,0.72);line-height:1.82;}
+.ev-bot{padding:1.2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(255,255,255,0.12);
+  font-size:0.64rem;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.85);}
+.ev-marriage .ev-top{background:linear-gradient(145deg,#2D0A5E,#7C3AED);}
+.ev-marriage .ev-bot{background:rgba(0,0,0,0.22);}
+.ev-adventure .ev-top{background:linear-gradient(145deg,#083A50,#06B6D4);}
+.ev-adventure .ev-bot{background:rgba(0,0,0,0.22);}
+
+/* ══ TRUTHS ══ */
+#truths{background:var(--cr);}
+.q-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;}
+.q-card{background:#fff;border-radius:18px;padding:2.5rem 2rem;position:relative;
+  box-shadow:0 4px 24px rgba(45,10,94,0.06);overflow:hidden;}
+.q-card::before{content:'"';position:absolute;top:-0.75rem;left:1.5rem;
+  font-family:'Playfair Display',serif;font-size:7rem;color:var(--lv);line-height:1;
+  pointer-events:none;}
+.q-bar{height:4px;border-radius:2px;width:40px;margin-bottom:1.5rem;}
+.q-text{font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;
+  color:var(--dp);line-height:1.78;padding-top:1.1rem;margin-bottom:1.1rem;}
+.q-lbl{font-size:0.62rem;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;}
+
+/* ══ CTA BAND ══ */
+.cta-band{background:linear-gradient(135deg,var(--pk2),var(--vi2) 50%,var(--cy));
+  padding:6.5rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 75% at 50% 50%,rgba(255,255,255,0.1),transparent);}
+.cta-in{max-width:680px;margin:0 auto;position:relative;z-index:1;}
+.cta-ey{font-size:0.6rem;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(255,255,255,0.8);display:block;margin-bottom:0.65rem;}
+.cta-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);
+  font-weight:700;color:#fff;letter-spacing:-0.025em;margin-bottom:1rem;line-height:1.1;}
+.cta-p{font-size:1rem;color:rgba(255,255,255,0.9);line-height:1.85;margin-bottom:2.25rem;}
+.btn-wh{display:inline-block;padding:1rem 2.75rem;background:rgba(255,255,255,0.96);
+  color:var(--vi);font-weight:900;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;
+  border-radius:100px;text-decoration:none;
+  box-shadow:0 8px 32px rgba(0,0,0,0.15);
+  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.btn-wh:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 48px rgba(0,0,0,0.22);}
+
+/* ══ FOOTER ══ */
+footer{background:linear-gradient(160deg,#180330,#2D0A5E);padding:5rem 2.5rem 2.5rem;}
+.ft-in{max-width:1200px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3.5rem;margin-bottom:3.5rem;}
+.ft-brand img{height:52px;filter:brightness(0) invert(1);opacity:0.9;margin-bottom:1rem;display:block;}
+.ft-brand p{font-size:0.82rem;color:rgba(255,255,255,0.3);line-height:1.85;max-width:260px;}
+.ft-col h4{font-size:0.58rem;font-weight:900;letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(251,191,36,0.6);margin-bottom:1.1rem;}
+.ft-links{display:flex;flex-direction:column;gap:0.6rem;}
+.ft-links a{font-size:0.82rem;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s;}
+.ft-links a:hover{color:#fff;}
+.ft-bot{border-top:1px solid rgba(255,255,255,0.07);padding-top:1.75rem;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.ft-copy{font-size:0.7rem;color:rgba(255,255,255,0.2);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1024px){
+  .p-grid{grid-template-columns:repeat(3,1fr);}
+  .ft-grid{grid-template-columns:1fr 1fr 1fr;}
+}
+@media(max-width:860px){
+  .h-grid{grid-template-columns:1fr;}
+  .h-right{display:none;}
+  .ev-grid{grid-template-columns:1fr;}
+  .q-grid{grid-template-columns:1fr 1fr;}
+  .p-grid{grid-template-columns:repeat(2,1fr);}
+  .ft-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  #nav{padding:0.8rem 1.25rem;}
+  .nav-links{display:none;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;
+    top:70px;left:0;right:0;background:rgba(28,4,60,0.98);
+    padding:1.5rem;gap:1.1rem;z-index:499;box-shadow:0 12px 40px rgba(0,0,0,0.3);}
+  .nav-a{font-size:0.85rem;}
+  .nav-burger{display:flex;}
+  .sec{padding:4.5rem 1.25rem;}
+  .p-grid{grid-template-columns:1fr;}
+  .q-grid{grid-template-columns:1fr;}
+  .ft-grid{grid-template-columns:1fr;gap:2rem;}
+  .ft-bot{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html"><img src="assets/yin-logo.png" alt="You Inspire Now" style="height:52px;display:block;filter:brightness(0) invert(1) drop-shadow(0 2px 8px rgba(255,255,255,0.2));"></a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-a active">Home</a>
+      <a href="about.html" class="nav-a">About</a>
+      <a href="events.html" class="nav-a">Events</a>
+      <a href="go-inspire-now.html" class="nav-pill">Go Inspire Now ♥</a>
+    </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="h-orb h-orb1"></div>
+  <div class="h-orb h-orb2"></div>
+  <div class="h-orb h-orb3"></div>
+  <div class="h-noise"></div>
+  <div class="h-grid">
+    <div>
+      <div class="h-tag"><span class="h-dot"></span>Faith · Identity · Purpose · Becoming</div>
+      <h1 class="h-h1">Your Story Still<em>Carries Purpose</em></h1>
+      <p class="h-sub">You are not alone. You are not disqualified by what you have walked through. This is a space for women ready to rise, heal, and move forward — with confidence and joy.</p>
+      <div class="h-btns">
+        <a href="events.html" class="btn-pk">✨ Explore Events</a>
+        <a href="about.html" class="btn-gh">Our Story</a>
+      </div>
+    </div>
+    <div class="h-right">
+      <div class="h-card">
+        <span class="h-card-icon">🌸</span>
+        <p class="h-card-q">"You were made with intention, given gifts the world needs, and called toward an assignment that <em>only you can carry.</em>"</p>
+        <div class="h-badges">
+          <span class="hb hb-vi">Identity</span>
+          <span class="hb hb-cy">Purpose</span>
+          <span class="hb hb-pk">Resilience</span>
+          <span class="hb hb-go">Becoming</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<div class="mission">
+  <p class="mission-q">"To inspire women through encouragement, empowerment, community, and mentorship — building resilience, strengthening identity and purpose, helping women move forward with <strong>confidence and joy.</strong>"</p>
+</div>
+
+<!-- PILLARS -->
+<section id="pillars" class="sec">
+  <div class="sec-in">
+    <div class="reveal" style="text-align:center;max-width:580px;margin:0 auto 0;">
+      <span class="ey">What We Stand For</span>
+      <h2 class="sh2">Built on Five Unshakeable <em>Pillars</em></h2>
+      <p class="bp">Everything we do flows from these foundations — designed to meet you exactly where you are.</p>
+    </div>
+    <div class="p-grid">
+      <div class="p-card reveal" style="--ac:linear-gradient(90deg,#9333EA,#A855F7);--ic:#FAF5FF;">
+        <div class="p-icon">👑</div>
+        <div class="p-title">Identity</div>
+        <p class="p-text">Helping you rediscover who you truly are — beyond performance, titles, or the past.</p>
+        <a href="about.html" class="p-lnk" style="color:#9333EA;">Explore →</a>
+      </div>
+      <div class="p-card reveal" style="--ac:linear-gradient(90deg,#06B6D4,#0EA5E9);--ic:#F0FDFE;transition-delay:0.08s">
+        <div class="p-icon">🌿</div>
+        <div class="p-title">Purpose</div>
+        <p class="p-text">Encouraging you to move toward the life and assignment you were created for.</p>
+        <a href="about.html" class="p-lnk" style="color:#06B6D4;">Explore →</a>
+      </div>
+      <div class="p-card reveal" style="--ac:linear-gradient(90deg,#F472B6,#EC4899);--ic:#FFF0F8;transition-delay:0.16s">
+        <div class="p-icon">💪</div>
+        <div class="p-title">Resilience</div>
+        <p class="p-text">Building strength through healing, honesty, and courageous next steps forward.</p>
+        <a href="about.html" class="p-lnk" style="color:#EC4899;">Explore →</a>
+      </div>
+      <div class="p-card reveal" style="--ac:linear-gradient(90deg,#FBBF24,#F59E0B);--ic:#FFFBEB;transition-delay:0.24s">
+        <div class="p-icon">🤝</div>
+        <div class="p-title">Community</div>
+        <p class="p-text">Creating spaces where women feel truly seen, connected, and consistently encouraged.</p>
+        <a href="about.html" class="p-lnk" style="color:#D97706;">Explore →</a>
+      </div>
+      <div class="p-card reveal" style="--ac:linear-gradient(90deg,#10B981,#06D6A0);--ic:#F0FDF9;transition-delay:0.32s">
+        <div class="p-icon">✨</div>
+        <div class="p-title">Wholeness</div>
+        <p class="p-text">Supporting growth across faith, health, family, leadership, and everyday life.</p>
+        <a href="about.html" class="p-lnk" style="color:#059669;">Explore →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSFORMATION -->
+<section id="transform" class="sec">
+  <div class="tf-in">
+    <div class="reveal">
+      <span class="tf-ey">The Central Transformation</span>
+      <h2 class="tf-h">This Is What <em>Becoming</em> Looks Like</h2>
+    </div>
+    <div class="tf-row reveal"><div class="tf-num">01</div><div class="tf-label"><div class="tf-from">From</div><div class="tf-to">Unseen → <em>Deeply Seen ✨</em></div></div></div>
+    <div class="tf-row reveal" style="transition-delay:0.1s"><div class="tf-num">02</div><div class="tf-label"><div class="tf-from">From</div><div class="tf-to">Exhausted → <em>Strengthened 💪</em></div></div></div>
+    <div class="tf-row reveal" style="transition-delay:0.2s"><div class="tf-num">03</div><div class="tf-label"><div class="tf-from">From</div><div class="tf-to">Confused → <em>Absolutely Clear 🌟</em></div></div></div>
+    <div class="tf-row reveal" style="transition-delay:0.3s"><div class="tf-num">04</div><div class="tf-label"><div class="tf-from">From</div><div class="tf-to">Surviving → <em>Fully Becoming 🌸</em></div></div></div>
+  </div>
+</section>
+
+<!-- EVENTS PREVIEW -->
+<section id="events" class="sec">
+  <div class="sec-in">
+    <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:3.5rem;">
+      <div>
+        <span class="ey">Upcoming Experiences</span>
+        <h2 class="sh2">Events That <em>Change You</em></h2>
+      </div>
+      <a href="events.html" style="font-size:0.67rem;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:var(--vi);text-decoration:none;padding:0.65rem 1.5rem;border:1.5px solid rgba(124,58,237,0.3);border-radius:100px;transition:background 0.2s,color 0.2s,border-color 0.2s;" onmouseover="this.style.background='var(--vi)';this.style.color='#fff';this.style.borderColor='var(--vi)';" onmouseout="this.style.background='';this.style.color='var(--vi)';this.style.borderColor='rgba(124,58,237,0.3)';">All Events →</a>
+    </div>
+    <div class="ev-grid">
+      <a href="events.html#marriage" class="ev-card ev-marriage reveal">
+        <div class="ev-top">
+          <span class="ev-icon">💍</span>
+          <span class="ev-badge">Couples Experience</span>
+          <div class="ev-title">Extreme Marriage Challenge</div>
+          <p class="ev-desc">A transformative couples experience designed to push beyond comfort zones — deepening communication, reigniting connection, and building a stronger foundation. This is not a seminar. This is a challenge that changes everything.</p>
+        </div>
+        <div class="ev-bot">Learn More &amp; Register <span>→</span></div>
+      </a>
+      <a href="events.html#adventure" class="ev-card ev-adventure reveal" style="transition-delay:0.12s">
+        <div class="ev-top">
+          <span class="ev-icon">🌄</span>
+          <span class="ev-badge">Women's Experience</span>
+          <div class="ev-title">Adventure Odyssey</div>
+          <p class="ev-desc">An outdoor journey built for women ready to conquer new terrain, face their fears, and discover strength they didn't know they had. Adventure is the setting. Transformation is the destination.</p>
+        </div>
+        <div class="ev-bot">Learn More &amp; Register <span>→</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUTHS -->
+<section id="truths" class="sec">
+  <div class="sec-in">
+    <div class="reveal" style="text-align:center;max-width:540px;margin:0 auto 3.5rem;">
+      <span class="ey">Truths to Hold On To</span>
+      <h2 class="sh2">Words That Meet You <em>Where You Are</em></h2>
+    </div>
+    <div class="q-grid">
+      <div class="q-card reveal">
+        <div class="q-bar" style="background:#9333EA;"></div>
+        <p class="q-text">You are not disqualified by what you have walked through. Your past does not get the final word.</p>
+        <div class="q-lbl" style="color:#9333EA;">Identity &amp; Worth 👑</div>
+      </div>
+      <div class="q-card reveal" style="transition-delay:0.1s">
+        <div class="q-bar" style="background:#EC4899;"></div>
+        <p class="q-text">There is still purpose on your life. Your healing matters. Your story matters. You matter.</p>
+        <div class="q-lbl" style="color:#EC4899;">Purpose &amp; Calling 🌿</div>
+      </div>
+      <div class="q-card reveal" style="transition-delay:0.2s">
+        <div class="q-bar" style="background:#06B6D4;"></div>
+        <p class="q-text">This is your time to rise, heal, and move forward with confidence. You were made for this moment.</p>
+        <div class="q-lbl" style="color:#06B6D4;">Resilience &amp; Becoming 💪</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-in reveal">
+    <span class="cta-ey">Your Next Step</span>
+    <h2 class="cta-h">This Is Your Time<br>to Move Forward ✨</h2>
+    <p class="cta-p">Your story is still being written. This is your time to rise, heal, and step into everything you were created for.</p>
+    <a href="about.html" class="btn-wh">Discover Your Next Step</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-in">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <img src="assets/yin-logo.png" alt="You Inspire Now">
+        <p>Faith-rooted encouragement for women becoming who they were created to be. 🌸</p>
+      </div>
+      <div class="ft-col">
+        <h4>Navigate</h4>
+        <div class="ft-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="events.html">Events</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Events</h4>
+        <div class="ft-links">
+          <a href="events.html#marriage">Extreme Marriage Challenge</a>
+          <a href="events.html#adventure">Adventure Odyssey</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Give</h4>
+        <div class="ft-links">
+          <a href="go-inspire-now.html" style="color:#F9A8D4;">Go Inspire Now ♥</a>
+          <a href="go-inspire-now.html">Donate</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 You Inspire Now. All rights reserved.</p>
+      <p class="ft-copy">Faith · Identity · Purpose · Resilience · Community · Wholeness ✨</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+document.getElementById('nav-burger').addEventListener('click', () =>
+  document.getElementById('nav-links').classList.toggle('open'));
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

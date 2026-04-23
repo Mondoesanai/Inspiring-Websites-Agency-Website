@@ -1,0 +1,116 @@
+{% comment %}
+  Template: product.liquid
+  Maps to: /products/:handle
+  Shopify docs: https://shopify.dev/docs/themes/architecture/templates/product
+{% endcomment %}
+
+<div class="product-page">
+  <div class="container">
+    <div class="product-page-grid">
+
+      <!-- ── PRODUCT GALLERY ─────────────────────────── -->
+      <div class="product-gallery">
+        {% for image in product.images %}
+          <div class="gallery-item" style="margin-bottom:4px;">
+            <img
+              src="{{ image | img_url: '1200x' }}"
+              srcset="{{ image | img_url: '600x' }} 600w, {{ image | img_url: '1200x' }} 1200w"
+              alt="{{ image.alt | escape }}"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+            />
+          </div>
+        {% else %}
+          <div style="aspect-ratio:3/4;background:var(--bg-cream);display:flex;align-items:center;justify-content:center;">
+            <p style="font-family:'Montserrat',sans-serif;font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--silver);">No Image</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- ── PRODUCT INFO ────────────────────────────── -->
+      <div class="product-details" style="padding-top:120px;">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" style="margin-bottom:24px;">
+          <a href="{{ routes.root_url }}"
+            style="font-family:'Montserrat',sans-serif;font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-faint);">
+            Home
+          </a>
+          <span style="color:var(--border-gold);margin:0 8px;">·</span>
+          <a href="{{ product.collections.first.url }}"
+            style="font-family:'Montserrat',sans-serif;font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-faint);">
+            {{ product.collections.first.title }}
+          </a>
+          <span style="color:var(--border-gold);margin:0 8px;">·</span>
+          <span style="font-family:'Montserrat',sans-serif;font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dark);">
+            {{ product.title }}
+          </span>
+        </nav>
+
+        <p class="product-category">{{ product.type }}</p>
+        <h1 class="product-title">{{ product.title }}</h1>
+        <p class="product-price-lg" id="product-price">
+          {% if product.compare_at_price > product.price %}
+            <span style="text-decoration:line-through;color:var(--silver);margin-right:10px;">
+              {{ product.compare_at_price | money }}
+            </span>
+          {% endif %}
+          {{ product.price | money }}
+        </p>
+
+        {% form 'product', product, id: 'product-form', novalidate: true %}
+
+          <!-- Variant options -->
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              <div class="variant-group">
+                <label class="variant-label">{{ option.name }}</label>
+                <div class="variant-options">
+                  {% for value in option.values %}
+                    <button type="button"
+                      class="variant-btn {% if option.selected_value == value %}active{% endif %}"
+                      data-option="{{ option.name | escape }}"
+                      data-value="{{ value | escape }}">
+                      {{ value }}
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          {% endunless %}
+
+          <input type="hidden" name="id" id="variant-id"
+            value="{{ product.selected_or_first_available_variant.id }}">
+
+          <button type="submit" class="btn-primary add-to-cart-btn"
+            id="add-to-cart"
+            {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+            {% if product.selected_or_first_available_variant.available %}
+              Add to Cart
+            {% else %}
+              Sold Out
+            {% endif %}
+          </button>
+
+        {% endform %}
+
+        <!-- Product description -->
+        {% if product.description != blank %}
+          <div class="product-description">
+            {{ product.description }}
+          </div>
+        {% endif %}
+
+        <!-- Material / care meta fields (optional) -->
+        {% if product.metafields.custom.material != blank %}
+          <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);">
+            <p style="font-family:'Montserrat',sans-serif;font-size:0.5rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:8px;">Material</p>
+            <p style="font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:300;line-height:1.8;color:var(--text-muted);">
+              {{ product.metafields.custom.material }}
+            </p>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>

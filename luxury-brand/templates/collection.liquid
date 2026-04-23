@@ -1,0 +1,65 @@
+{% comment %}
+  Template: collection.liquid
+  Maps to: /collections/:handle
+{% endcomment %}
+
+<div class="collection-page">
+
+  <!-- Collection header -->
+  <div class="collection-header">
+    <p class="rule-gold" style="justify-content:center;margin-bottom:16px;">
+      Collection
+    </p>
+    <h1 class="section-title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <p class="collection-desc">{{ collection.description }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Filter / sort (optional) -->
+  <div class="container" style="margin-bottom:32px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--border);">
+      <p style="font-family:'Montserrat',sans-serif;font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-faint);">
+        {{ collection.products_count }} Pieces
+      </p>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <label for="sort-by" style="font-family:'Montserrat',sans-serif;font-size:0.48rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-faint);">Sort</label>
+        <select id="sort-by" name="sort_by"
+          onchange="window.location.href = window.location.pathname + '?sort_by=' + this.value"
+          style="font-family:'Montserrat',sans-serif;font-size:0.48rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);background:transparent;border:1px solid var(--border);padding:6px 12px;cursor:pointer;outline:none;">
+          <option value="manual"         {% if collection.sort_by == 'manual' %}selected{% endif %}>Featured</option>
+          <option value="price-ascending"{% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+          <option value="price-descending"{% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+          <option value="created-descending"{% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product grid -->
+  <div class="container">
+    {% paginate collection.products by 12 %}
+
+      <div class="product-grid">
+        {% for product in collection.products %}
+          {% render 'product-card', product: product %}
+        {% else %}
+          <p style="grid-column:1/-1;text-align:center;padding:80px 0;
+            font-family:'Montserrat',sans-serif;font-size:0.65rem;
+            letter-spacing:0.2em;color:var(--text-faint);">
+            No products in this collection yet.
+          </p>
+        {% endfor %}
+      </div>
+
+      <!-- Pagination -->
+      {% if paginate.pages > 1 %}
+        <div class="pagination" style="text-align:center;padding:60px 0 0;">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endif %}
+
+    {% endpaginate %}
+  </div>
+
+</div>
