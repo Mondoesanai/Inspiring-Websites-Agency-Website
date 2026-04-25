@@ -40,7 +40,7 @@ await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
 await new Promise(r => setTimeout(r, 600));
 // Force all fade animations to be visible for full-page screenshots
 await page.evaluate(() => {
-  document.querySelectorAll('.fade-up, .fade-left, .fade-right, .reveal').forEach(el => el.classList.add('in'));
+  document.querySelectorAll('.fade-up, .fade-left, .fade-right, .reveal, .reveal-left, .reveal-right').forEach(el => el.classList.add('in'));
   // Hide popup overlay so hero is visible in screenshot
   const popup = document.getElementById('popup-overlay');
   if (popup) popup.classList.add('hidden');
