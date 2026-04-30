@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms &amp; Conditions — Inspiring Websites</title>
+  <meta name="description" content="Terms and Conditions for Inspiring Websites — the rules and agreements that govern our services." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#070909',
+            graphite: '#111816',
+            steel: '#A6B0AC',
+            green: '#8FD14F',
+          },
+          fontFamily: {
+            sora: ['Sora', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #070909;
+      color: #E8EDEA;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    /* NAV */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,9,9,0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(143,209,79,0.08);
+    }
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #F5F7F6;
+      text-decoration: none;
+    }
+    .nav-logo span { color: #8FD14F; }
+    .nav-back {
+      font-size: 13px;
+      color: #8FD14F;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 0.75; }
+
+    /* HERO BAND */
+    .page-hero {
+      padding: 72px 24px 56px;
+      text-align: center;
+      border-bottom: 1px solid #1A221E;
+    }
+    .page-tag {
+      display: inline-block;
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8FD14F;
+      background: rgba(143,209,79,0.08);
+      border: 1px solid rgba(143,209,79,0.18);
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+    .page-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #F5F7F6;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .page-updated {
+      font-size: 13px;
+      color: #5C6B65;
+      font-style: italic;
+    }
+
+    /* CONTENT */
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+    }
+    .toc {
+      background: #111816;
+      border: 1px solid #1A221E;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 56px;
+    }
+    .toc-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8FD14F;
+      margin-bottom: 16px;
+    }
+    .toc ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      counter-reset: toc-counter;
+    }
+    .toc li {
+      counter-increment: toc-counter;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .toc li::before {
+      content: counter(toc-counter, decimal-leading-zero);
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #3D4D47;
+      flex-shrink: 0;
+    }
+    .toc a {
+      font-size: 14px;
+      color: #A6B0AC;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc a:hover { color: #8FD14F; }
+
+    .section-block { margin-bottom: 52px; }
+    .section-block h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #F5F7F6;
+      margin-bottom: 16px;
+      border-top: 1px solid #1A221E;
+      padding-top: 20px;
+    }
+    .section-block p {
+      font-size: 15px;
+      color: #A6B0AC;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .section-block ul, .section-block ol {
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 16px;
+    }
+    .section-block ul li {
+      font-size: 15px;
+      color: #A6B0AC;
+      line-height: 1.7;
+      padding-left: 20px;
+      position: relative;
+    }
+    .section-block ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #8FD14F;
+    }
+    .section-block a {
+      color: #8FD14F;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(143,209,79,0.25);
+      transition: border-color 0.2s;
+    }
+    .section-block a:hover { border-color: #8FD14F; }
+    .highlight-box {
+      background: rgba(143,209,79,0.05);
+      border: 1px solid rgba(143,209,79,0.15);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .highlight-box p { margin-bottom: 0; color: #C8D4CC; }
+    .warning-box {
+      background: rgba(255,180,50,0.04);
+      border: 1px solid rgba(255,180,50,0.15);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .warning-box p { margin-bottom: 0; color: #C8D4CC; font-size: 14px; }
+
+    /* FOOTER */
+    .page-footer {
+      border-top: 1px solid #1A221E;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .page-footer p { font-size: 13px; color: #5C6B65; }
+    .page-footer a { color: #8FD14F; text-decoration: none; }
+    .page-footer a:hover { text-decoration: underline; }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-wrap">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Inspiring<span>Websites</span></a>
+    <a href="/" class="nav-back">← Back to Home</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-tag">Legal</div>
+  <h1 class="page-title">Terms &amp; Conditions</h1>
+  <p class="page-updated">Last updated: April 30, 2026</p>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#agreement">Agreement to Terms</a></li>
+      <li><a href="#services">Our Services</a></li>
+      <li><a href="#project-process">Project Process &amp; Deliverables</a></li>
+      <li><a href="#payment">Payment Terms</a></li>
+      <li><a href="#revisions">Revisions &amp; Change Requests</a></li>
+      <li><a href="#client-responsibilities">Client Responsibilities</a></li>
+      <li><a href="#intellectual-property">Intellectual Property</a></li>
+      <li><a href="#confidentiality">Confidentiality</a></li>
+      <li><a href="#warranties">Warranties &amp; Disclaimers</a></li>
+      <li><a href="#limitation">Limitation of Liability</a></li>
+      <li><a href="#termination">Termination</a></li>
+      <li><a href="#governing-law">Governing Law</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+
+  <div class="warning-box" style="margin-bottom:52px;">
+    <p><strong style="color:#F5F7F6;">Please read these Terms carefully.</strong> By engaging our services or using our website, you agree to be bound by these Terms and Conditions. If you do not agree, please do not proceed.</p>
+  </div>
+
+  <div id="agreement" class="section-block">
+    <h2>1. Agreement to Terms</h2>
+    <p>These Terms and Conditions ("Terms") govern your use of the Inspiring Websites website at <strong style="color:#F5F7F6;">inspiringwebsites.org</strong> and any services provided by Inspiring Websites ("we," "us," "our").</p>
+    <p>By accessing our website, requesting a quote, signing a project agreement, or making a payment, you confirm that you have read, understood, and agreed to these Terms. These Terms apply to all visitors, clients, and anyone who engages with our services.</p>
+  </div>
+
+  <div id="services" class="section-block">
+    <h2>2. Our Services</h2>
+    <p>Inspiring Websites provides the following services:</p>
+    <ul>
+      <li>Custom website design and development</li>
+      <li>Landing page design and conversion optimization</li>
+      <li>E-commerce website builds</li>
+      <li>Search engine optimization (SEO)</li>
+      <li>Website maintenance and support packages</li>
+      <li>Branding and digital identity consulting</li>
+    </ul>
+    <p>The specific scope of work for any project will be defined in a separate project agreement or proposal. These Terms apply in conjunction with any such agreement.</p>
+    <p>We reserve the right to refuse service to anyone for any reason at our discretion.</p>
+  </div>
+
+  <div id="project-process" class="section-block">
+    <h2>3. Project Process &amp; Deliverables</h2>
+    <p>All projects begin with a discovery call or consultation to define goals and scope. Project deliverables, timelines, and milestones are outlined in a project proposal or statement of work.</p>
+    <p><strong style="color:#F5F7F6;">Timelines:</strong> Estimated timelines are provided in good faith. Delays caused by client unresponsiveness, late content delivery, or scope changes may extend the project timeline. We are not liable for missed business outcomes due to project delays where the delay was caused or contributed to by the client.</p>
+    <p><strong style="color:#F5F7F6;">Deliverables:</strong> Final deliverables are transferred to the client upon receipt of full payment. Until full payment is received, all work remains the property of Inspiring Websites.</p>
+    <p><strong style="color:#F5F7F6;">Approval:</strong> The client is responsible for reviewing and approving all deliverables at each milestone. Approval may be provided verbally, via email, or by written sign-off. Approved work that requires later revisions may be subject to additional charges.</p>
+  </div>
+
+  <div id="payment" class="section-block">
+    <h2>4. Payment Terms</h2>
+    <p>Payment terms are specified in each project proposal. Standard terms are:</p>
+    <ul>
+      <li><strong style="color:#F5F7F6;">Deposit:</strong> A non-refundable deposit (typically 50%) is due before work begins. This secures your project slot on our schedule.</li>
+      <li><strong style="color:#F5F7F6;">Final payment:</strong> The remaining balance is due upon project completion, before final files are transferred or the site goes live.</li>
+      <li><strong style="color:#F5F7F6;">Retainer/maintenance plans:</strong> Billed monthly in advance. Cancellations require 30 days written notice.</li>
+    </ul>
+    <p>Late payments may result in a pause of project work. Outstanding invoices past 15 days may incur a 1.5% monthly late fee. Projects with overdue balances past 30 days may be cancelled without refund of the deposit.</p>
+    <p>All prices are in US Dollars unless otherwise stated.</p>
+  </div>
+
+  <div id="revisions" class="section-block">
+    <h2>5. Revisions &amp; Change Requests</h2>
+    <p>Each project includes a defined number of revision rounds as specified in the project proposal. Revisions within this scope are included in the project price.</p>
+    <p>Requests that fall outside the agreed scope — including new features, structural redesigns, or additional pages not in the original proposal — will be quoted separately and are subject to additional fees.</p>
+    <p>Revision requests must be submitted in a single, consolidated communication per round. Multiple separate revision requests may count as multiple revision rounds.</p>
+  </div>
+
+  <div id="client-responsibilities" class="section-block">
+    <h2>6. Client Responsibilities</h2>
+    <p>A successful project depends on both parties. As a client, you agree to:</p>
+    <ul>
+      <li>Provide all required content (text, images, logos, brand assets) in a timely manner</li>
+      <li>Ensure you have the legal right to use any materials you provide us</li>
+      <li>Respond to questions, proofs, and requests within a reasonable time (typically 5 business days)</li>
+      <li>Provide honest and accurate information about your business and goals</li>
+      <li>Designate a single point of contact for approvals to avoid conflicting feedback</li>
+    </ul>
+    <p>You are solely responsible for ensuring the accuracy of all content on your website. We are not liable for errors in content that you have provided or approved.</p>
+  </div>
+
+  <div id="intellectual-property" class="section-block">
+    <h2>7. Intellectual Property</h2>
+    <p><strong style="color:#F5F7F6;">Your content:</strong> You retain full ownership of all content, branding, logos, and materials you provide to us.</p>
+    <p><strong style="color:#F5F7F6;">Finished deliverables:</strong> Upon receipt of full payment, you receive a license to use the completed website and design assets for your business. You may not resell or sublicense deliverables to third parties without our written permission.</p>
+    <p><strong style="color:#F5F7F6;">Our portfolio rights:</strong> We reserve the right to display completed projects in our portfolio, on our website, and in marketing materials. If confidentiality is required, please notify us in writing before project commencement.</p>
+    <p><strong style="color:#F5F7F6;">Third-party assets:</strong> If third-party assets (stock photos, fonts, plugins) are used, their respective licenses apply. We will inform you of any assets that require ongoing licensing fees.</p>
+  </div>
+
+  <div id="confidentiality" class="section-block">
+    <h2>8. Confidentiality</h2>
+    <p>Both parties agree to keep confidential any proprietary, sensitive, or non-public information shared during the course of our work together.</p>
+    <p>This includes business strategies, pricing, client lists, unreleased products, and any information explicitly marked as confidential. This obligation survives the end of any project or business relationship.</p>
+  </div>
+
+  <div id="warranties" class="section-block">
+    <h2>9. Warranties &amp; Disclaimers</h2>
+    <p>We take pride in our work and stand behind what we build. However:</p>
+    <ul>
+      <li>We do not guarantee specific business outcomes (e.g., sales, rankings, leads) resulting from a website we build. Results depend on many factors outside our control, including your market, offer, and follow-through.</li>
+      <li>Websites are built to work correctly at the time of delivery. We are not responsible for issues arising from third-party platform changes, browser updates, or hosting problems after handoff.</li>
+      <li>Our website and services are provided "as is" without warranties of any kind beyond what is expressly stated in your project agreement.</li>
+    </ul>
+    <div class="highlight-box">
+      <p>That said — we genuinely care about your results. If something isn't working after launch, reach out to us. We'll do our best to help.</p>
+    </div>
+  </div>
+
+  <div id="limitation" class="section-block">
+    <h2>10. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, Inspiring Websites and its team members shall not be liable for any indirect, incidental, special, consequential, or punitive damages — including loss of profits, data, or business — arising from your use of our services or website.</p>
+    <p>Our total liability for any claim related to our services shall not exceed the total amount you paid to us for the project in question.</p>
+    <p>Some jurisdictions do not allow limitations on implied warranties or liability, so the above may not fully apply to you.</p>
+  </div>
+
+  <div id="termination" class="section-block">
+    <h2>11. Termination</h2>
+    <p><strong style="color:#F5F7F6;">By the client:</strong> You may cancel a project at any time by providing written notice. The non-refundable deposit will not be returned. For work completed beyond the deposit scope, you will be billed for time and work delivered to date at our standard hourly rate.</p>
+    <p><strong style="color:#F5F7F6;">By Inspiring Websites:</strong> We reserve the right to terminate any project or refuse service if:</p>
+    <ul>
+      <li>Payment is not received within the agreed terms</li>
+      <li>The client engages in abusive, threatening, or inappropriate behavior</li>
+      <li>The requested work would require us to violate laws or ethical standards</li>
+    </ul>
+    <p>In the event we terminate without cause, we will refund any unused portion of deposits for work not yet started.</p>
+  </div>
+
+  <div id="governing-law" class="section-block">
+    <h2>12. Governing Law</h2>
+    <p>These Terms shall be governed by and construed in accordance with the laws of the United States. Any disputes that cannot be resolved informally will be submitted to binding arbitration or the appropriate court in the jurisdiction where Inspiring Websites operates.</p>
+    <p>We encourage clients to contact us directly to resolve any disagreements before pursuing formal action. We're reasonable people and prefer to work things out.</p>
+  </div>
+
+  <div id="contact" class="section-block">
+    <h2>13. Contact</h2>
+    <p>Questions about these Terms? We're easy to reach.</p>
+    <div class="highlight-box">
+      <p><strong style="color:#F5F7F6;">Inspiring Websites</strong><br />
+      Email: <a href="mailto:info@inspiringwebsites.org">info@inspiringwebsites.org</a><br />
+      Website: <a href="https://inspiringwebsites.org">inspiringwebsites.org</a><br />
+      Booking: <a href="https://booking.inspiringwebsites.org">booking.inspiringwebsites.org</a></p>
+    </div>
+    <p>If you believe any part of these Terms is unclear or unfair, please let us know. We update these Terms periodically and feedback from clients helps us improve them.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
+    <a href="mailto:info@inspiringwebsites.org">Contact</a>
+  </div>
+  <p style="margin-top:16px;">© 2026 Inspiring Websites. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

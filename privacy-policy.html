@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Inspiring Websites</title>
+  <meta name="description" content="Privacy Policy for Inspiring Websites — how we collect, use, and protect your information." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#070909',
+            graphite: '#111816',
+            steel: '#A6B0AC',
+            green: '#8FD14F',
+          },
+          fontFamily: {
+            sora: ['Sora', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #070909;
+      color: #E8EDEA;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    /* NAV */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,9,9,0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(143,209,79,0.08);
+    }
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #F5F7F6;
+      text-decoration: none;
+    }
+    .nav-logo span { color: #8FD14F; }
+    .nav-back {
+      font-size: 13px;
+      color: #8FD14F;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 0.75; }
+
+    /* HERO BAND */
+    .page-hero {
+      padding: 72px 24px 56px;
+      text-align: center;
+      border-bottom: 1px solid #1A221E;
+    }
+    .page-tag {
+      display: inline-block;
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8FD14F;
+      background: rgba(143,209,79,0.08);
+      border: 1px solid rgba(143,209,79,0.18);
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+    .page-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #F5F7F6;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .page-updated {
+      font-size: 13px;
+      color: #5C6B65;
+      font-style: italic;
+    }
+
+    /* CONTENT */
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+    }
+    .toc {
+      background: #111816;
+      border: 1px solid #1A221E;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 56px;
+    }
+    .toc-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8FD14F;
+      margin-bottom: 16px;
+    }
+    .toc ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      counter-reset: toc-counter;
+    }
+    .toc li {
+      counter-increment: toc-counter;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .toc li::before {
+      content: counter(toc-counter, decimal-leading-zero);
+      font-family: 'Sora', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #3D4D47;
+      flex-shrink: 0;
+    }
+    .toc a {
+      font-size: 14px;
+      color: #A6B0AC;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc a:hover { color: #8FD14F; }
+
+    .section-block { margin-bottom: 52px; }
+    .section-block h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #F5F7F6;
+      margin-bottom: 16px;
+      padding-top: 8px;
+      border-top: 1px solid #1A221E;
+      padding-top: 20px;
+    }
+    .section-block p {
+      font-size: 15px;
+      color: #A6B0AC;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .section-block ul, .section-block ol {
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 16px;
+    }
+    .section-block ul li {
+      font-size: 15px;
+      color: #A6B0AC;
+      line-height: 1.7;
+      padding-left: 20px;
+      position: relative;
+    }
+    .section-block ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #8FD14F;
+    }
+    .section-block a {
+      color: #8FD14F;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(143,209,79,0.25);
+      transition: border-color 0.2s;
+    }
+    .section-block a:hover { border-color: #8FD14F; }
+    .highlight-box {
+      background: rgba(143,209,79,0.05);
+      border: 1px solid rgba(143,209,79,0.15);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .highlight-box p { margin-bottom: 0; color: #C8D4CC; }
+
+    /* FOOTER */
+    .page-footer {
+      border-top: 1px solid #1A221E;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .page-footer p { font-size: 13px; color: #5C6B65; }
+    .page-footer a { color: #8FD14F; text-decoration: none; }
+    .page-footer a:hover { text-decoration: underline; }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-wrap">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Inspiring<span>Websites</span></a>
+    <a href="/" class="nav-back">← Back to Home</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-tag">Legal</div>
+  <h1 class="page-title">Privacy Policy</h1>
+  <p class="page-updated">Last updated: April 30, 2026</p>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#who-we-are">Who We Are</a></li>
+      <li><a href="#info-we-collect">Information We Collect</a></li>
+      <li><a href="#how-we-use">How We Use Your Information</a></li>
+      <li><a href="#sms">SMS / Text Message Communications</a></li>
+      <li><a href="#sharing">How We Share Your Information</a></li>
+      <li><a href="#cookies">Cookies &amp; Tracking</a></li>
+      <li><a href="#data-retention">Data Retention</a></li>
+      <li><a href="#your-rights">Your Rights</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#third-party">Third-Party Links</a></li>
+      <li><a href="#children">Children's Privacy</a></li>
+      <li><a href="#changes">Changes to This Policy</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <div class="highlight-box" style="margin-bottom:52px;">
+    <p>Your privacy matters. This policy explains clearly what data we collect, why we collect it, and how we protect it. We don't sell your information — ever.</p>
+  </div>
+
+  <div id="who-we-are" class="section-block">
+    <h2>1. Who We Are</h2>
+    <p>Inspiring Websites ("we," "us," or "our") is a web design and digital marketing agency based in the United States. We build high-performance websites and digital presences for small businesses and service providers.</p>
+    <p>Our website is <strong style="color:#F5F7F6;">inspiringwebsites.org</strong>. If you have any questions about this policy, reach us at <a href="mailto:info@inspiringwebsites.org">info@inspiringwebsites.org</a>.</p>
+  </div>
+
+  <div id="info-we-collect" class="section-block">
+    <h2>2. Information We Collect</h2>
+    <p>We collect information in two ways: information you give us directly, and information collected automatically when you visit our site.</p>
+    <p><strong style="color:#F5F7F6;">Information you provide:</strong></p>
+    <ul>
+      <li>Name and contact details (email, phone) when you fill out a contact or inquiry form</li>
+      <li>Business information you share during onboarding or consultation calls</li>
+      <li>Messages or notes you send via email or our booking system</li>
+      <li>Payment details processed securely through our third-party payment processor (we do not store card numbers)</li>
+    </ul>
+    <p><strong style="color:#F5F7F6;">Information collected automatically:</strong></p>
+    <ul>
+      <li>IP address and approximate geographic location</li>
+      <li>Browser type, device type, and operating system</li>
+      <li>Pages visited, time on page, and referring URLs</li>
+      <li>Interaction data such as clicks and scroll depth (via analytics tools)</li>
+    </ul>
+  </div>
+
+  <div id="how-we-use" class="section-block">
+    <h2>3. How We Use Your Information</h2>
+    <p>We use your information strictly to run our business and serve you better:</p>
+    <ul>
+      <li>To respond to your inquiries and schedule consultations</li>
+      <li>To deliver the web design and digital services you've hired us for</li>
+      <li>To send project updates, invoices, and relevant communications</li>
+      <li>To improve our website and understand what resonates with visitors</li>
+      <li>To send occasional marketing emails — only if you've opted in (you can opt out anytime)</li>
+      <li>To comply with legal obligations</li>
+    </ul>
+    <p>We will never use your information for purposes beyond what is described here without asking for your consent first.</p>
+  </div>
+
+  <div id="sms" class="section-block">
+    <h2>3a. SMS / Text Message Communications</h2>
+    <p>By providing your phone number and opting in to SMS communications from Inspiring Websites, you consent to receive text messages related to:</p>
+    <ul>
+      <li>Project updates and status notifications</li>
+      <li>Appointment reminders and scheduling confirmations</li>
+      <li>Responses to your inquiries</li>
+      <li>Promotional offers and company news (only if you explicitly opted in)</li>
+    </ul>
+    <div class="highlight-box">
+      <p><strong style="color:#F5F7F6;">Message frequency varies.</strong> Message and data rates may apply. Text <strong style="color:#F5F7F6;">STOP</strong> at any time to opt out of SMS messages. Text <strong style="color:#F5F7F6;">HELP</strong> for assistance. Opting out of SMS will not affect your ability to receive service.</p>
+    </div>
+    <p>We do not share your phone number with third parties for their own marketing purposes. Your mobile information will not be sold, shared, rented, or otherwise disclosed to third parties for marketing or promotional purposes. All of the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
+    <p>To opt out of SMS at any time, reply <strong style="color:#F5F7F6;">STOP</strong> to any message or email us at <a href="mailto:info@inspiringwebsites.org">info@inspiringwebsites.org</a>.</p>
+  </div>
+
+  <div id="sharing" class="section-block">
+    <h2>4. How We Share Your Information</h2>
+    <p>We do not sell, rent, or trade your personal information. Period.</p>
+    <p>We may share your data only in these limited circumstances:</p>
+    <ul>
+      <li><strong style="color:#F5F7F6;">Service providers:</strong> Third-party tools we use to operate (e.g., hosting, email delivery, scheduling, analytics). These vendors are contractually required to protect your data.</li>
+      <li><strong style="color:#F5F7F6;">Legal requirements:</strong> If required by law, court order, or to protect the rights and safety of our users or the public.</li>
+      <li><strong style="color:#F5F7F6;">Business transfer:</strong> If Inspiring Websites is acquired or merges with another entity, your data may transfer as part of that transaction. We will notify you beforehand.</li>
+    </ul>
+  </div>
+
+  <div id="cookies" class="section-block">
+    <h2>5. Cookies &amp; Tracking</h2>
+    <p>Our website uses cookies and similar tracking technologies to improve your experience and analyze site performance.</p>
+    <p><strong style="color:#F5F7F6;">Types of cookies we use:</strong></p>
+    <ul>
+      <li><strong style="color:#F5F7F6;">Essential cookies:</strong> Required for the site to function correctly. Cannot be disabled.</li>
+      <li><strong style="color:#F5F7F6;">Analytics cookies:</strong> Help us understand traffic and usage patterns (e.g., Google Analytics). These are anonymized.</li>
+      <li><strong style="color:#F5F7F6;">Marketing cookies:</strong> Used only if you interact with ads or retargeting pixels.</li>
+    </ul>
+    <p>You can control cookies through your browser settings. Disabling cookies may affect some functionality of our site.</p>
+  </div>
+
+  <div id="data-retention" class="section-block">
+    <h2>6. Data Retention</h2>
+    <p>We retain your personal information for as long as necessary to provide our services and fulfill the purposes described in this policy, typically:</p>
+    <ul>
+      <li>Client project files and communications: retained for 3 years after project completion</li>
+      <li>Marketing contact data: retained until you unsubscribe</li>
+      <li>Analytics data: retained for up to 26 months per Google Analytics defaults</li>
+    </ul>
+    <p>You may request deletion of your data at any time by contacting us at <a href="mailto:info@inspiringwebsites.org">info@inspiringwebsites.org</a>.</p>
+  </div>
+
+  <div id="your-rights" class="section-block">
+    <h2>7. Your Rights</h2>
+    <p>Depending on where you live, you may have the following rights regarding your personal data:</p>
+    <ul>
+      <li><strong style="color:#F5F7F6;">Access:</strong> Request a copy of the data we hold about you</li>
+      <li><strong style="color:#F5F7F6;">Correction:</strong> Ask us to update inaccurate or incomplete information</li>
+      <li><strong style="color:#F5F7F6;">Deletion:</strong> Request that we delete your personal data</li>
+      <li><strong style="color:#F5F7F6;">Opt-out:</strong> Unsubscribe from marketing emails at any time</li>
+      <li><strong style="color:#F5F7F6;">Portability:</strong> Request your data in a portable format</li>
+    </ul>
+    <p>To exercise any of these rights, email us at <a href="mailto:info@inspiringwebsites.org">info@inspiringwebsites.org</a>. We'll respond within 30 days.</p>
+  </div>
+
+  <div id="security" class="section-block">
+    <h2>8. Security</h2>
+    <p>We take reasonable technical and organizational measures to protect your information from unauthorized access, loss, or misuse. These include:</p>
+    <ul>
+      <li>HTTPS encryption on all pages</li>
+      <li>Limited access to personal data — only team members who need it to do their job</li>
+      <li>Secure, reputable third-party processors for payments and communications</li>
+    </ul>
+    <p>No method of transmission over the internet is 100% secure. We cannot guarantee absolute security, but we are committed to protecting your data with industry-standard practices.</p>
+  </div>
+
+  <div id="third-party" class="section-block">
+    <h2>9. Third-Party Links</h2>
+    <p>Our website may contain links to third-party websites, demo sites, or client portfolios. We are not responsible for the privacy practices of those sites. We encourage you to review their privacy policies before providing any personal information.</p>
+  </div>
+
+  <div id="children" class="section-block">
+    <h2>10. Children's Privacy</h2>
+    <p>Our services are not directed to children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal data, please contact us immediately and we will take steps to delete it.</p>
+  </div>
+
+  <div id="changes" class="section-block">
+    <h2>11. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. When we do, we'll update the "Last updated" date at the top of this page. For significant changes, we may notify active clients by email. Continued use of our site after any change constitutes acceptance of the updated policy.</p>
+  </div>
+
+  <div id="contact" class="section-block">
+    <h2>12. Contact Us</h2>
+    <p>Have questions or concerns about your privacy? We're here.</p>
+    <div class="highlight-box">
+      <p><strong style="color:#F5F7F6;">Inspiring Websites</strong><br />
+      Email: <a href="mailto:info@inspiringwebsites.org">info@inspiringwebsites.org</a><br />
+      Website: <a href="https://inspiringwebsites.org">inspiringwebsites.org</a><br />
+      Booking: <a href="https://booking.inspiringwebsites.org">booking.inspiringwebsites.org</a></p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
+    <a href="mailto:info@inspiringwebsites.org">Contact</a>
+  </div>
+  <p style="margin-top:16px;">© 2026 Inspiring Websites. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
