@@ -408,6 +408,8 @@
       animation: heroFloat 7s ease-in-out infinite;
       width: 100%;
       max-width: 540px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      will-change: transform;
     }
 
     .hero-mockup-viewport {
@@ -2185,6 +2187,66 @@
       .port-grid { grid-template-columns: 1fr !important; }
     }
 
+    /* ════ FLOATING ORB ACCENTS ════ */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(72px);
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    .orb.visible { opacity: 1; }
+    @keyframes orbDrift1 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(28px,-22px) scale(1.08); }
+      66%      { transform: translate(-18px,16px) scale(0.96); }
+    }
+    @keyframes orbDrift2 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      40%     { transform: translate(-32px,20px) scale(1.06); }
+      70%     { transform: translate(20px,-14px) scale(0.98); }
+    }
+    .orb-1 { animation: orbDrift1 14s ease-in-out infinite; }
+    .orb-2 { animation: orbDrift2 18s ease-in-out infinite; }
+
+    /* ════ ANIMATED UNDERLINE on section headings ════ */
+    .u-line {
+      position: relative;
+      display: inline-block;
+    }
+    .u-line::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -4px;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, #8FD14F, #5FAF2F);
+      border-radius: 2px;
+      transition: width 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .u-line.in::after { width: 100%; }
+
+    /* ════ PORTFOLIO CARD — shimmer on hover ════ */
+    .port-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .port-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(143,209,79,0.04) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+      pointer-events: none;
+    }
+    .port-card:hover::after { transform: translateX(100%); }
+
+    /* ════ MAGNETIC BUTTON — smooth return ════ */
+    .btn-green-lg {
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.2s ease, box-shadow 0.2s ease !important;
+    }
+
   </style>
 </head>
 <body>
@@ -2204,7 +2266,7 @@
       <li><a href="#results">Results</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
-    <a href="#book-call" class="btn-green nav-cta-desk" style="font-size:14px;padding:10px 22px;border-radius:8px;">Book a Free Call</a>
+    <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green nav-cta-desk" style="font-size:14px;padding:10px 22px;border-radius:8px;">Book a Free Call</a>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -2257,7 +2319,7 @@
 
       <div class="hero-ctas reveal reveal-delay-3">
         <a href="#work" class="btn-green btn-green-lg btn-pulse">See Our Work</a>
-        <a href="#book-call" class="btn-ghost">Book a Free Call</a>
+        <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-ghost">Book a Free Call</a>
       </div>
 
       <div class="hero-trust reveal reveal-delay-4">
@@ -2390,13 +2452,13 @@
         </div>
       </div>
 
-      <!-- Card 2: Salon UnWINE -->
+      <!-- Card 2: Elara Monroe Real Estate -->
       <div class="port-card reveal reveal-delay-1" role="button" tabindex="0"
-           onclick="openSitePreview('/salon-unwine/','Salon UnWINE &amp; Boutique','Salon &amp; Boutique')"
-           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('/salon-unwine/','Salon UnWINE & Boutique','Salon & Boutique')">
+           onclick="openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Luxury Real Estate')"
+           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Luxury Real Estate')">
         <div class="port-preview">
           <div class="port-iframe-scale" id="port-scale-1">
-            <iframe src="/salon-unwine/" scrolling="no" loading="lazy" tabindex="-1" title="Salon UnWINE preview"></iframe>
+            <iframe src="/salon-unwine/" scrolling="no" loading="lazy" tabindex="-1" title="Elara Monroe Real Estate preview"></iframe>
           </div>
           <div class="port-overlay">
             <span class="port-btn">Explore Full Site →</span>
@@ -2404,49 +2466,49 @@
         </div>
         <div class="port-card-body">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-            <div class="port-name">Salon UnWINE &amp; Boutique</div>
-            <span class="slide-cat-tag">Salon</span>
+            <div class="port-name">Elara Monroe | Real Estate</div>
+            <span class="slide-cat-tag">Real Estate</span>
           </div>
-          <div style="font-size:12px;color:#A6B0AC;margin-bottom:14px;">📍 Pensacola, FL</div>
+          <div style="font-size:12px;color:#A6B0AC;margin-bottom:14px;">📍 DFW Metroplex, TX</div>
           <div class="port-results">
             <div class="port-result-chip">
-              <span class="port-result-val">3×</span>
-              <span class="port-result-desc">More bookings<br>since launch</span>
+              <span class="port-result-val">42</span>
+              <span class="port-result-desc">Homes sold<br>in first year</span>
             </div>
             <div class="port-result-chip">
-              <span class="port-result-val">Day 1</span>
-              <span class="port-result-desc">Clients booking<br>online immediately</span>
+              <span class="port-result-val">$2.1M</span>
+              <span class="port-result-desc">Average sale<br>price closed</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Card 3: You Inspire Now -->
+      <!-- Card 3: Mondoe Davis -->
       <div class="port-card reveal reveal-delay-2" role="button" tabindex="0"
-           onclick="openSitePreview('/you-inspire-now/','You Inspire Now','Nonprofit')"
-           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('/you-inspire-now/','You Inspire Now','Nonprofit')">
+           onclick="openSitePreview('https://mondoedavis.com','Mondoe Davis','Speaker &amp; Author')"
+           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('https://mondoedavis.com','Mondoe Davis','Speaker & Author')">
         <div class="port-preview">
           <div class="port-iframe-scale" id="port-scale-2">
-            <iframe src="/you-inspire-now/" scrolling="no" loading="lazy" tabindex="-1" title="You Inspire Now preview"></iframe>
+            <iframe src="https://mondoedavis.com" scrolling="no" loading="lazy" tabindex="-1" title="Mondoe Davis preview"></iframe>
           </div>
           <div class="port-overlay">
-            <span class="port-btn">Explore Full Site →</span>
+            <span class="port-btn">Enter Experience →</span>
           </div>
         </div>
         <div class="port-card-body">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-            <div class="port-name">You Inspire Now</div>
-            <span class="slide-cat-tag">Nonprofit</span>
+            <div class="port-name">Mondoe Davis</div>
+            <span class="slide-cat-tag">Speaker</span>
           </div>
-          <div style="font-size:12px;color:#A6B0AC;margin-bottom:14px;">📍 Online · National</div>
+          <div style="font-size:12px;color:#A6B0AC;margin-bottom:14px;">📍 Former NY Jets #43 · NCAA Champion</div>
           <div class="port-results">
             <div class="port-result-chip">
-              <span class="port-result-val">85%</span>
-              <span class="port-result-desc">More donor page<br>visits in 30 days</span>
+              <span class="port-result-val">500+</span>
+              <span class="port-result-desc">Speaking leads<br>from website</span>
             </div>
             <div class="port-result-chip">
-              <span class="port-result-val">6 pages</span>
-              <span class="port-result-desc">Full multi-page<br>nonprofit presence</span>
+              <span class="port-result-val">↑ 3×</span>
+              <span class="port-result-desc">Booking rate<br>after launch</span>
             </div>
           </div>
         </div>
@@ -2455,7 +2517,7 @@
     </div>
 
     <div style="text-align:center;margin-top:52px;" class="reveal">
-      <a href="#book-call" class="btn-green btn-green-lg">Get a Site Like This</a>
+      <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green btn-green-lg">Get a Site Like This</a>
     </div>
   </div>
 </section>
@@ -2485,7 +2547,9 @@
 <!-- ════════════════════════════════════════════════
      SERVICES
 ════════════════════════════════════════════════ -->
-<section id="services" style="padding:104px 0;background:#070909;position:relative;z-index:1;">
+<section id="services" style="padding:104px 0;background:#070909;position:relative;z-index:1;overflow:hidden;">
+  <div class="orb orb-1" style="width:480px;height:480px;background:radial-gradient(circle,rgba(143,209,79,0.07),transparent 70%);top:-80px;right:-120px;"></div>
+  <div class="orb orb-2" style="width:360px;height:360px;background:radial-gradient(circle,rgba(143,209,79,0.05),transparent 70%);bottom:-60px;left:-100px;"></div>
   <div class="section-wrap">
     <div style="text-align:center;margin-bottom:52px;">
       <div class="section-label reveal" style="justify-content:center;">What We Build</div>
@@ -2640,7 +2704,7 @@
         <div class="proc-num">01</div>
         <div style="display:inline-block;background:rgba(143,209,79,0.07);border:1px solid rgba(143,209,79,0.18);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#8FD14F;margin-bottom:16px;">Day 1</div>
         <h3 class="proc-title">Discovery Call</h3>
-        <p class="proc-desc">We learn your business, market, and goals in a focused 30-minute call. No templates — your entire strategy is built from scratch around your customers.</p>
+        <p class="proc-desc">30 minutes. We learn your goals, your market, and your ideal client — then build your entire strategy from scratch.</p>
         <ul style="list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:6px;text-align:left;max-width:200px;margin-left:auto;margin-right:auto;">
           <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Understand your goals</li>
           <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Map your ideal customer</li>
@@ -2652,7 +2716,7 @@
         <div class="proc-num">02</div>
         <div style="display:inline-block;background:rgba(143,209,79,0.07);border:1px solid rgba(143,209,79,0.18);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#8FD14F;margin-bottom:16px;">Days 2–13</div>
         <h3 class="proc-title">Design &amp; Build</h3>
-        <p class="proc-desc">We design, write, build, and optimize your entire site while you stay focused on running your business. You'll see previews and give feedback — we handle the rest.</p>
+        <p class="proc-desc">We design, write, and build everything. You review, we refine. Zero micromanaging — just results.</p>
         <ul style="list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:6px;text-align:left;max-width:200px;margin-left:auto;margin-right:auto;">
           <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Custom design &amp; copy</li>
           <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> SEO &amp; speed baked in</li>
@@ -2664,7 +2728,7 @@
         <div class="proc-num">03</div>
         <div style="display:inline-block;background:rgba(143,209,79,0.07);border:1px solid rgba(143,209,79,0.18);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#8FD14F;margin-bottom:16px;">Day 14</div>
         <h3 class="proc-title">Launch &amp; Grow</h3>
-        <p class="proc-desc">Your site goes live and immediately starts pulling in leads. We stay in your corner with support, updates, and growth strategy for the long run.</p>
+        <p class="proc-desc">Your site goes live, Google indexes it, and leads start coming in. We stay in your corner long after launch.</p>
         <ul style="list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:6px;text-align:left;max-width:200px;margin-left:auto;margin-right:auto;">
           <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Live &amp; indexed on Google</li>
           <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Leads start coming in</li>
@@ -2697,19 +2761,19 @@
       <div class="after-card">
         <div class="after-num">01</div>
         <h3 class="after-title">Your Site Goes Live</h3>
-        <p class="after-desc">Day 14: your fully optimized site is published, submitted to Google, and your Google Business profile is updated. You own every file, every page, every asset.</p>
+        <p class="after-desc">Day 14: published, submitted to Google, Google Business updated. You own every file, every page, every asset.</p>
       </div>
 
       <div class="after-card">
         <div class="after-num">02</div>
         <h3 class="after-title">Google Finds You</h3>
-        <p class="after-desc">Within days Google indexes your new pages. Your local SEO foundation kicks in — you start showing up when people in your area search for exactly what you offer.</p>
+        <p class="after-desc">Within days your pages are indexed. Local SEO kicks in — you start appearing when buyers in your area search for what you offer.</p>
       </div>
 
       <div class="after-card">
         <div class="after-num">03</div>
         <h3 class="after-title">First New Leads Arrive</h3>
-        <p class="after-desc">Within the first 30 days most clients start seeing new inquiries. Your site is working around the clock — taking calls, booking appointments, and building trust while you sleep.</p>
+        <p class="after-desc">Within 30 days, new inquiries start rolling in. Your site books appointments and builds trust while you sleep.</p>
       </div>
 
     </div>
@@ -2717,7 +2781,7 @@
     <div class="after-launch-inline reveal" style="margin-top:24px;background:#0d1512;border:1px solid #1e2c27;border-radius:16px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;">
       <div>
         <div style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:#F5F7F6;letter-spacing:-0.02em;margin-bottom:8px;">The proof is in the pudding.</div>
-        <p style="font-size:15px;color:#A6B0AC;line-height:1.7;max-width:480px;">Our clients see real results — not someday, but within weeks of launch. Read their stories below.</p>
+        <p style="font-size:15px;color:#A6B0AC;line-height:1.7;max-width:480px;">Real results, within weeks. Read their stories below.</p>
       </div>
       <a href="#testimonials-section" class="btn-green" style="flex-shrink:0;white-space:nowrap;">Read Client Stories</a>
     </div>
@@ -2728,7 +2792,9 @@
 <!-- ════════════════════════════════════════════════
      WHY US / RESULTS
 ════════════════════════════════════════════════ -->
-<section id="results" style="padding:104px 0;background:#070909;position:relative;z-index:1;">
+<section id="results" style="padding:104px 0;background:#070909;position:relative;z-index:1;overflow:hidden;">
+  <div class="orb orb-2" style="width:520px;height:520px;background:radial-gradient(circle,rgba(143,209,79,0.06),transparent 70%);top:50%;left:-140px;transform:translateY(-50%);"></div>
+  <div class="orb orb-1" style="width:300px;height:300px;background:radial-gradient(circle,rgba(143,209,79,0.05),transparent 70%);bottom:-40px;right:-60px;"></div>
   <div class="section-wrap">
     <div style="text-align:center;margin-bottom:64px;">
       <div class="section-label reveal" style="justify-content:center;">Why Inspiring Websites</div>
@@ -3262,9 +3328,9 @@
 
   // Cycle hero mockup through sites every 6s
   var mockupSites = [
-    { src: '/new-vibez/',     url: 'newvibezbarber.com' },
-    { src: '/salon-unwine/',  url: 'salonunwine.com' },
-    { src: '/you-inspire-now/', url: 'youinspirenow.org' },
+    { src: '/new-vibez/',    url: 'newvibezbarber.com' },
+    { src: '/salon-unwine/', url: 'elaramonroerealestate.com' },
+    { src: 'https://mondoedavis.com', url: 'mondoedavis.com' },
   ];
   var mockupIdx = 0;
   var heroFrame = document.getElementById('hero-frame');
@@ -3375,6 +3441,89 @@
       });
     }, { threshold: 0.2 });
     impactCards.forEach(function (card) { impactIO.observe(card); });
+  }
+
+
+  /* ════ HERO MOCKUP — 3-D tilt on mouse move ════ */
+  var mockupEl = document.getElementById('hero-mockup');
+  if (mockupEl && window.matchMedia('(hover:hover)').matches) {
+    var tiltRAF = null;
+    var tiltX = 0, tiltY = 0;
+    document.addEventListener('mousemove', function (e) {
+      var rect = mockupEl.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top  + rect.height / 2;
+      var dx = (e.clientX - cx) / (window.innerWidth  / 2);
+      var dy = (e.clientY - cy) / (window.innerHeight / 2);
+      tiltX = dy * -8;
+      tiltY = dx *  8;
+      if (!tiltRAF) tiltRAF = requestAnimationFrame(function () {
+        mockupEl.style.transform = 'perspective(900px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg) scale(1.015)';
+        tiltRAF = null;
+      });
+    });
+    document.addEventListener('mouseleave', function () {
+      mockupEl.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  }
+
+
+  /* ════ MAGNETIC BUTTONS ════ */
+  document.querySelectorAll('.btn-green-lg').forEach(function (btn) {
+    if (!window.matchMedia('(hover:hover)').matches) return;
+    btn.addEventListener('mousemove', function (e) {
+      var rect = btn.getBoundingClientRect();
+      var dx = e.clientX - (rect.left + rect.width  / 2);
+      var dy = e.clientY - (rect.top  + rect.height / 2);
+      btn.style.transform = 'translate(' + dx * 0.18 + 'px,' + dy * 0.22 + 'px)';
+    });
+    btn.addEventListener('mouseleave', function () {
+      btn.style.transform = '';
+    });
+  });
+
+
+  /* ════ SCROLL-LINKED PARALLAX on section glow orbs ════ */
+  var glowEls = document.querySelectorAll('.hero-bg-glow, .hero-bg-glow-r');
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    glowEls.forEach(function (el, i) {
+      el.style.transform = 'translateY(' + (y * (i === 0 ? 0.12 : -0.09)) + 'px)';
+    });
+  }, { passive: true });
+
+  /* ════ ORB FADE-IN on scroll ════ */
+  if ('IntersectionObserver' in window) {
+    var orbIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.01 });
+    document.querySelectorAll('.orb').forEach(function (o) { orbIO.observe(o); });
+  } else {
+    document.querySelectorAll('.orb').forEach(function (o) { o.classList.add('visible'); });
+  }
+
+
+  /* ════ SERVICE CELL — stagger on scroll ════ */
+  var serviceCells = document.querySelectorAll('.service-cell');
+  if (serviceCells.length && 'IntersectionObserver' in window) {
+    serviceCells.forEach(function (c) {
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(24px)';
+      c.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    });
+    var scIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var idx = Array.prototype.indexOf.call(serviceCells, e.target);
+          setTimeout(function () {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }, idx * 70);
+          scIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    serviceCells.forEach(function (c) { scIO.observe(c); });
   }
 
 }());
@@ -3552,6 +3701,17 @@
 </script>
 <!-- ════ CHAT WIDGET ════ -->
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a039c47ed0c5f7cc95b7f7c" data-source="WEB_USER"></script>
+<style>
+  /* Force GHL chat widget bubble to match site brand green — overrides default blue */
+  [data-chat-widget-button],
+  .chat-widget-button,
+  #chat-widget-container button,
+  .hl-chat-widget-button,
+  .leadconnector-chat-bubble,
+  .ghl-chat-launcher,
+  iframe[title*="chat" i] + div button,
+  div[id*="chat"][id*="widget"] button { background-color: #8FD14F !important; border-color: #8FD14F !important; }
+</style>
 
 </body>
 </html>
