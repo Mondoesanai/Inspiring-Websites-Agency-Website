@@ -2027,6 +2027,77 @@
       line-height: 1.35;
     }
 
+    /* ── Filter tabs ── */
+    .port-filters {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .port-filter {
+      background: transparent;
+      border: 1px solid #26302D;
+      color: #A6B0AC;
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .port-filter:hover { border-color: rgba(143,209,79,0.4); color: #8FD14F; }
+    .port-filter.active { background: rgba(143,209,79,0.1); border-color: rgba(143,209,79,0.5); color: #8FD14F; }
+    .port-card.hidden { display: none; }
+
+    /* ── Result-first card body ── */
+    .port-result-hero {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #1e2c27;
+    }
+    .port-result-big {
+      font-family: 'Sora', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #8FD14F;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .port-result-big-label {
+      font-size: 13px;
+      color: #A6B0AC;
+      font-weight: 500;
+    }
+    .port-outcome {
+      font-size: 13.5px;
+      color: #7A8E85;
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .port-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .port-name-sm {
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #F5F7F6;
+      letter-spacing: -0.01em;
+    }
+
     /* ══════════════════════════════════════════
        SERVICE OUTCOME TAG
     ══════════════════════════════════════════ */
@@ -2409,107 +2480,91 @@
 
 
 <!-- ════════════════════════════════════════════════
-     OUR WORK — card grid (no scroll trap)
+     OUR WORK — redesigned result-first cards
 ════════════════════════════════════════════════ -->
 <section id="work" style="padding:96px 0 88px;background:#111816;border-top:1px solid #26302D;position:relative;z-index:1;">
   <div class="section-wrap">
-    <div style="text-align:center;margin-bottom:56px;">
+    <div style="text-align:center;margin-bottom:20px;">
       <div class="section-label reveal" style="justify-content:center;">Our Work</div>
-      <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:14px;">Real Sites.<br>Real Results.</h2>
-      <p class="body-lg reveal reveal-delay-2" style="max-width:480px;margin:0 auto;">Each one built to convert visitors into paying clients. Click any card to explore the full site — no scroll trap.</p>
+      <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:14px;">We Built It.<br>They Got <span class="green-accent">Results.</span></h2>
+      <p class="body-lg reveal reveal-delay-2" style="max-width:500px;margin:0 auto 36px;">Custom websites, launched in 14 days, built to generate real business. Click any site to explore it.</p>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="port-filters reveal reveal-delay-3">
+      <button class="port-filter active" data-filter="all">All</button>
+      <button class="port-filter" data-filter="barbershop">Local Business</button>
+      <button class="port-filter" data-filter="realestate">Real Estate</button>
+      <button class="port-filter" data-filter="speaker">Speaker</button>
     </div>
 
     <div class="port-grid">
 
       <!-- Card 1: New Vibez -->
-      <div class="port-card reveal" role="button" tabindex="0"
-           onclick="openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop')"
-           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop')">
+      <div class="port-card reveal" data-category="barbershop" role="button" tabindex="0"
+           onclick="openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')"
+           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')">
         <div class="port-preview">
           <div class="port-iframe-scale" id="port-scale-0">
             <iframe src="/new-vibez/" scrolling="no" loading="lazy" tabindex="-1" title="New Vibez preview"></iframe>
           </div>
-          <div class="port-overlay">
-            <span class="port-btn">Explore Full Site →</span>
-          </div>
+          <div class="port-overlay"><span class="port-btn">Explore Full Site →</span></div>
         </div>
         <div class="port-card-body">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-            <div class="port-name">New Vibez Barber Shop</div>
-            <span class="slide-cat-tag">Barbershop</span>
+          <div class="port-result-hero">
+            <span class="port-result-big">+4 clients</span>
+            <span class="port-result-big-label">in their first 2 weeks online</span>
           </div>
-          <div style="font-size:12px;color:#A6B0AC;margin-bottom:14px;">📍 Milton, FL</div>
-          <div class="port-results">
-            <div class="port-result-chip">
-              <span class="port-result-val">+4</span>
-              <span class="port-result-desc">New clients booked<br>in first 2 weeks</span>
-            </div>
-            <div class="port-result-chip">
-              <span class="port-result-val">★★★★★</span>
-              <span class="port-result-desc">Google reputation<br>instantly elevated</span>
-            </div>
+          <p class="port-outcome">"People keep asking if we're a chain because the site looks so professional. Best investment I made."</p>
+          <div class="port-meta">
+            <span class="port-name-sm">New Vibez Barber Shop</span>
+            <span class="slide-cat-tag">Barbershop · Milton, FL</span>
           </div>
         </div>
       </div>
 
       <!-- Card 2: Elara Monroe Real Estate -->
-      <div class="port-card reveal reveal-delay-1" role="button" tabindex="0"
-           onclick="openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Luxury Real Estate')"
-           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Luxury Real Estate')">
+      <div class="port-card reveal reveal-delay-1" data-category="realestate" role="button" tabindex="0"
+           onclick="openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW Metroplex')"
+           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW Metroplex')">
         <div class="port-preview">
           <div class="port-iframe-scale" id="port-scale-1">
             <iframe src="/salon-unwine/" scrolling="no" loading="lazy" tabindex="-1" title="Elara Monroe Real Estate preview"></iframe>
           </div>
-          <div class="port-overlay">
-            <span class="port-btn">Explore Full Site →</span>
-          </div>
+          <div class="port-overlay"><span class="port-btn">Explore Full Site →</span></div>
         </div>
         <div class="port-card-body">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-            <div class="port-name">Elara Monroe | Real Estate</div>
-            <span class="slide-cat-tag">Real Estate</span>
+          <div class="port-result-hero">
+            <span class="port-result-big">3× more leads</span>
+            <span class="port-result-big-label">within 60 days of launching</span>
           </div>
-          <div style="font-size:12px;color:#A6B0AC;margin-bottom:14px;">📍 DFW Metroplex, TX</div>
-          <div class="port-results">
-            <div class="port-result-chip">
-              <span class="port-result-val">42</span>
-              <span class="port-result-desc">Homes sold<br>in first year</span>
-            </div>
-            <div class="port-result-chip">
-              <span class="port-result-val">$2.1M</span>
-              <span class="port-result-desc">Average sale<br>price closed</span>
-            </div>
+          <p class="port-outcome">"Clients tell me the site made them feel confident before we even spoke. It positions me exactly where I want to be."</p>
+          <div class="port-meta">
+            <span class="port-name-sm">Elara Monroe | Real Estate</span>
+            <span class="slide-cat-tag">Real Estate · DFW, TX</span>
           </div>
         </div>
       </div>
 
-      <!-- Card 3: Mondoe Davis -->
-      <div class="port-card reveal reveal-delay-2" role="button" tabindex="0"
-           onclick="openSitePreview('https://mondoedavis.com','Mondoe Davis','Speaker &amp; Author')"
-           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('https://mondoedavis.com','Mondoe Davis','Speaker & Author')">
+      <!-- Card 3: Mondoe Davis — opens directly in new tab to bypass splash -->
+      <div class="port-card reveal reveal-delay-2" data-category="speaker" role="button" tabindex="0"
+           onclick="window.open('https://mondoedavis.com','_blank')"
+           onkeydown="if(event.key==='Enter'||event.key===' ')window.open('https://mondoedavis.com','_blank')">
         <div class="port-preview">
           <div class="port-iframe-scale" id="port-scale-2">
             <iframe src="https://mondoedavis.com" scrolling="no" loading="lazy" tabindex="-1" title="Mondoe Davis preview"></iframe>
           </div>
-          <div class="port-overlay">
-            <span class="port-btn">Enter Experience →</span>
-          </div>
+          <div class="port-overlay"><span class="port-btn">Enter Experience →</span></div>
         </div>
         <div class="port-card-body">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-            <div class="port-name">Mondoe Davis</div>
-            <span class="slide-cat-tag">Speaker</span>
+          <div class="port-result-hero">
+            <span class="port-result-big">↑ Booked out</span>
+            <span class="port-result-big-label">speaking calendar within 90 days</span>
           </div>
-          <div style="font-size:12px;color:#A6B0AC;margin-bottom:14px;">📍 Former NY Jets #43 · NCAA Champion</div>
-          <div class="port-results">
-            <div class="port-result-chip">
-              <span class="port-result-val">500+</span>
-              <span class="port-result-desc">Speaking leads<br>from website</span>
-            </div>
-            <div class="port-result-chip">
-              <span class="port-result-val">↑ 3×</span>
-              <span class="port-result-desc">Booking rate<br>after launch</span>
-            </div>
+          <p class="port-outcome">"The site communicates my story and credibility instantly. Event organizers reach out without me having to pitch."</p>
+          <div class="port-meta">
+            <span class="port-name-sm">Mondoe Davis</span>
+            <span class="slide-cat-tag">Speaker · Author · Athlete</span>
           </div>
         </div>
       </div>
@@ -3444,6 +3499,25 @@
   }
 
 
+  /* ════ PORTFOLIO FILTER TABS ════ */
+  var filterBtns = document.querySelectorAll('.port-filter');
+  var portCards  = document.querySelectorAll('.port-card[data-category]');
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+      portCards.forEach(function (card) {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+
   /* ════ HERO MOCKUP — 3-D tilt on mouse move ════ */
   var mockupEl = document.getElementById('hero-mockup');
   if (mockupEl && window.matchMedia('(hover:hover)').matches) {
@@ -3699,19 +3773,6 @@
   requestAnimationFrame(loop);
 }());
 </script>
-<!-- ════ CHAT WIDGET ════ -->
-<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a039c47ed0c5f7cc95b7f7c" data-source="WEB_USER"></script>
-<style>
-  /* Force GHL chat widget bubble to match site brand green — overrides default blue */
-  [data-chat-widget-button],
-  .chat-widget-button,
-  #chat-widget-container button,
-  .hl-chat-widget-button,
-  .leadconnector-chat-bubble,
-  .ghl-chat-launcher,
-  iframe[title*="chat" i] + div button,
-  div[id*="chat"][id*="widget"] button { background-color: #8FD14F !important; border-color: #8FD14F !important; }
-</style>
 
 </body>
 </html>
