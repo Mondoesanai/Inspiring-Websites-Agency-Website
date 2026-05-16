@@ -254,24 +254,37 @@
       align-items: center;
     }
 
+    /* grain texture for depth */
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: overlay;
+    }
+
     .hero-bg-glow {
       position: absolute;
-      top: -120px; left: -100px;
-      width: 700px; height: 700px;
+      top: -180px; left: -160px;
+      width: 860px; height: 860px;
       background: radial-gradient(ellipse at 30% 30%,
-        rgba(143,209,79,0.13) 0%,
-        rgba(143,209,79,0.04) 40%,
+        rgba(143,209,79,0.17) 0%,
+        rgba(143,209,79,0.06) 40%,
         transparent 70%);
       pointer-events: none; z-index: 0;
     }
 
     .hero-bg-glow-r {
       position: absolute;
-      top: 20%; right: -100px;
-      width: 500px; height: 500px;
-      background: radial-gradient(ellipse at 80% 30%,
-        rgba(143,209,79,0.09) 0%,
-        transparent 60%);
+      top: -120px; right: -280px;
+      width: 1000px; height: 1000px;
+      background: radial-gradient(ellipse at 60% 40%,
+        rgba(143,209,79,0.26) 0%,
+        rgba(143,209,79,0.10) 35%,
+        transparent 65%);
       pointer-events: none; z-index: 0;
     }
 
@@ -292,12 +305,12 @@
     /* ── Hero left ── */
     .hero-h1 {
       font-family: 'Sora', sans-serif;
-      font-size: clamp(40px, 5vw, 72px);
+      font-size: clamp(48px, 6.4vw, 96px);
       font-weight: 800;
-      line-height: 1.06;
-      letter-spacing: -0.035em;
+      line-height: 1.03;
+      letter-spacing: -0.04em;
       color: #F5F7F6;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .hero-cycle-wrap {
@@ -365,21 +378,42 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      perspective: 1400px;
     }
 
     .hero-mockup-glow {
       position: absolute;
-      width: 500px; height: 500px;
+      width: 700px; height: 700px;
       background: radial-gradient(ellipse at center,
-        rgba(143,209,79,0.18) 0%,
+        rgba(143,209,79,0.28) 0%,
+        rgba(143,209,79,0.10) 40%,
         transparent 65%);
       pointer-events: none;
       z-index: 0;
     }
 
+    /* decorative ring behind mockup */
+    .hero-ring {
+      position: absolute;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      border: 1px solid rgba(143,209,79,0.14);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-ring::before {
+      content: '';
+      position: absolute;
+      inset: -36px;
+      border-radius: 50%;
+      border: 1px solid rgba(143,209,79,0.07);
+    }
+
     @keyframes heroFloat {
-      0%,100% { transform: translateY(0) rotate(-0.5deg); }
-      50%      { transform: translateY(-18px) rotate(0.5deg); }
+      0%,100% { transform: rotateY(-6deg) rotateX(2deg) translateY(0); }
+      50%      { transform: rotateY(-6deg) rotateX(2deg) translateY(-18px); }
     }
     @keyframes chipFloat1 {
       0%,100% { transform: translateY(0); }
@@ -400,14 +434,16 @@
       border-radius: 14px;
       overflow: hidden;
       background: #0b1410;
-      border: 1px solid rgba(143,209,79,0.25);
+      border: 1px solid rgba(143,209,79,0.3);
       box-shadow:
-        0 40px 100px rgba(0,0,0,0.6),
-        0 0 0 1px rgba(143,209,79,0.1),
-        0 0 80px rgba(143,209,79,0.08);
+        0 60px 120px rgba(0,0,0,0.75),
+        0 0 0 1px rgba(143,209,79,0.12),
+        0 0 100px rgba(143,209,79,0.14),
+        0 20px 60px rgba(143,209,79,0.08);
       animation: heroFloat 7s ease-in-out infinite;
       width: 100%;
-      max-width: 540px;
+      max-width: 580px;
+      transform: rotateY(-6deg) rotateX(2deg);
       transition: transform 0.12s ease, box-shadow 0.12s ease;
       will-change: transform;
     }
@@ -415,22 +451,13 @@
     .hero-mockup-viewport {
       position: relative;
       width: 100%;
-      padding-top: 70%; /* aspect ratio */
       overflow: hidden;
+      height: 380px;
     }
-    .hero-mockup-iframe-inner {
-      position: absolute;
-      top: 0; left: 0;
-      width: 1280px;
-      transform-origin: top left;
-      pointer-events: none;
-    }
-    .hero-mockup-iframe-inner iframe {
-      width: 100%;
-      height: 800px;
-      border: none;
+    .hero-preview-img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
       display: block;
-      background: #070909;
     }
 
     .hero-chip {
@@ -2365,17 +2392,8 @@
       padding:4px 12px; flex:1; max-width:320px; margin:0 auto;
     }
     .cport-addr span { font-size:12px; color:#5C6B65; font-family:'Inter',sans-serif; }
-    .cport-viewport { position:relative; overflow:hidden; background:#111; }
-    .cport-scaler { position:absolute; top:0; left:0; width:1280px; transform-origin:top left; pointer-events:none; }
-    .cport-scaler iframe { width:1280px; height:900px; border:none; display:block; pointer-events:none; }
-    .cport-badge {
-      position:absolute; bottom:18px; left:18px;
-      background:rgba(7,9,9,0.88); backdrop-filter:blur(16px);
-      border:1px solid rgba(143,209,79,0.22); border-radius:10px;
-      padding:14px 18px; z-index:10;
-    }
-    .cport-badge-num { font-family:'Sora',sans-serif; font-size:26px; font-weight:800; color:#8FD14F; letter-spacing:-0.03em; line-height:1.1; margin-bottom:3px; }
-    .cport-badge-desc { font-size:12.5px; color:#A6B0AC; }
+    .cport-viewport { position:relative; overflow:hidden; background:#111; width:100%; aspect-ratio:16/10; }
+    .cport-preview-img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
     .cport-bottombar {
       flex-shrink:0; display:flex; align-items:center;
       justify-content:space-between; padding:14px 48px;
@@ -2496,29 +2514,28 @@
     <!-- RIGHT: Floating browser mockup -->
     <div class="hero-right">
       <div class="hero-mockup-glow"></div>
+      <div class="hero-ring"></div>
       <div class="hero-mockup" id="hero-mockup">
         <div class="card-browser-chrome">
           <div class="chrome-dots"><span></span><span></span><span></span></div>
           <div class="chrome-url" id="hero-url">newvibezbarber.com</div>
         </div>
         <div class="hero-mockup-viewport">
-          <div class="hero-mockup-iframe-inner" id="hero-iframe-inner">
-            <iframe id="hero-frame" src="/new-vibez/" scrolling="no" loading="lazy" tabindex="-1" title="Site preview"></iframe>
-          </div>
+          <img src="brand_assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="hero-preview-img" id="hero-preview-img">
         </div>
       </div>
       <!-- Floating stat chips -->
       <div class="hero-chip chip-1">
-        <div class="chip-val">3×</div>
-        <div class="chip-lbl">More Leads</div>
-      </div>
-      <div class="hero-chip chip-2">
         <div class="chip-val">14d</div>
         <div class="chip-lbl">Avg. Delivery</div>
       </div>
-      <div class="hero-chip chip-3">
+      <div class="hero-chip chip-2">
         <div class="chip-val">★ 5.0</div>
-        <div class="chip-lbl">Client Rating</div>
+        <div class="chip-lbl">Client Rated</div>
+      </div>
+      <div class="hero-chip chip-3">
+        <div class="chip-val">100%</div>
+        <div class="chip-lbl">You Own It</div>
       </div>
     </div>
   </div>
@@ -2608,14 +2625,8 @@
                   <span>newvibezbarber.com</span>
                 </div>
               </div>
-              <div class="cport-viewport" id="cportVP0">
-                <div class="cport-scaler" id="cportSc0">
-                  <iframe src="/new-vibez/" id="cportIf0" scrolling="no" loading="lazy" tabindex="-1" title="New Vibez Barber Shop"></iframe>
-                </div>
-              </div>
-              <div class="cport-badge">
-                <div class="cport-badge-num">+4 new clients</div>
-                <div class="cport-badge-desc">booked in their first 2 weeks online</div>
+              <div class="cport-viewport">
+                <img src="brand_assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="cport-preview-img">
               </div>
             </div>
           </div>
@@ -2630,14 +2641,8 @@
                   <span>elaramonroerealestate.com</span>
                 </div>
               </div>
-              <div class="cport-viewport" id="cportVP1">
-                <div class="cport-scaler" id="cportSc1">
-                  <iframe src="/salon-unwine/" id="cportIf1" scrolling="no" loading="lazy" tabindex="-1" title="Elara Monroe Real Estate"></iframe>
-                </div>
-              </div>
-              <div class="cport-badge">
-                <div class="cport-badge-num">3× more leads</div>
-                <div class="cport-badge-desc">within 60 days of launching</div>
+              <div class="cport-viewport">
+                <img src="brand_assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" class="cport-preview-img">
               </div>
             </div>
           </div>
@@ -2652,14 +2657,8 @@
                   <span>mondoedavis.com</span>
                 </div>
               </div>
-              <div class="cport-viewport" id="cportVP2">
-                <div class="cport-scaler" id="cportSc2">
-                  <iframe src="https://mondoedavis.com" id="cportIf2" scrolling="no" loading="lazy" tabindex="-1" title="Mondoe Davis"></iframe>
-                </div>
-              </div>
-              <div class="cport-badge">
-                <div class="cport-badge-num">Booked out</div>
-                <div class="cport-badge-desc">speaking calendar within 90 days</div>
+              <div class="cport-viewport">
+                <img src="brand_assets/preview-mondo-davis.jpg" alt="Mondoe Davis" class="cport-preview-img">
               </div>
             </div>
           </div>
@@ -3507,47 +3506,27 @@
   }
 
 
-  /* ════ HERO MOCKUP — fit iframe to viewport ════ */
-  function fitHeroMockup() {
-    var inner = document.getElementById('hero-iframe-inner');
-    if (!inner) return;
-    var mockup = inner.closest('.hero-mockup');
-    if (!mockup) return;
-    var w = mockup.offsetWidth;
-    if (!w) return;
-    var scale = w / 1280;
-    inner.style.transform = 'scale(' + scale + ')';
-    inner.style.transformOrigin = 'top left';
-    inner.style.width = '1280px';
-    var vpEl = mockup.querySelector('.hero-mockup-viewport');
-    if (vpEl) vpEl.style.height = Math.round(800 * scale) + 'px';
-  }
-  fitHeroMockup();
-  window.addEventListener('resize', fitHeroMockup);
-
-  // Cycle hero mockup through sites every 6s
-  var mockupSites = [
-    { src: '/new-vibez/',    url: 'newvibezbarber.com' },
-    { src: '/salon-unwine/', url: 'elaramonroerealestate.com' },
-    { src: 'https://mondoedavis.com', url: 'mondoedavis.com' },
+  /* ════ HERO MOCKUP — cycle preview images every 5s ════ */
+  var heroMockupSites = [
+    { img: 'brand_assets/preview-new-vibez.jpg',     url: 'newvibezbarber.com' },
+    { img: 'brand_assets/preview-elara-monroe.jpg',  url: 'elaramonroerealestate.com' },
+    { img: 'brand_assets/preview-mondo-davis.jpg',   url: 'mondoedavis.com' },
   ];
-  var mockupIdx = 0;
-  var heroFrame = document.getElementById('hero-frame');
-  var heroUrl   = document.getElementById('hero-url');
-  if (heroFrame && heroUrl) {
+  var heroMockupIdx = 0;
+  var heroPreviewImg = document.getElementById('hero-preview-img');
+  var heroUrl        = document.getElementById('hero-url');
+  if (heroPreviewImg && heroUrl) {
     setInterval(function () {
-      mockupIdx = (mockupIdx + 1) % mockupSites.length;
-      var site = mockupSites[mockupIdx];
-      heroFrame.style.opacity = '0';
-      heroFrame.style.transition = 'opacity 0.4s ease';
+      heroMockupIdx = (heroMockupIdx + 1) % heroMockupSites.length;
+      var site = heroMockupSites[heroMockupIdx];
+      heroPreviewImg.style.opacity = '0';
+      heroPreviewImg.style.transition = 'opacity 0.5s ease';
       setTimeout(function () {
-        heroFrame.src = site.src;
+        heroPreviewImg.src = site.img;
         heroUrl.textContent = site.url;
-        heroFrame.onload = function () {
-          heroFrame.style.opacity = '1';
-        };
-      }, 400);
-    }, 6000);
+        heroPreviewImg.style.opacity = '1';
+      }, 500);
+    }, 5000);
   }
 
 
@@ -3774,32 +3753,6 @@
 
   function lerp(a, b, t) { return a + (b - a) * t; }
 
-  var iframes = [
-    document.getElementById('cportIf0'),
-    document.getElementById('cportIf1'),
-    document.getElementById('cportIf2')
-  ];
-
-  function setIfScroll(ifr, y) {
-    if (!ifr) return;
-    try { ifr.contentWindow.scrollTo(0, y); } catch (e) {}
-  }
-
-  function scaleCPortFrames() {
-    for (var i = 0; i < TOTAL; i++) {
-      var vp = document.getElementById('cportVP' + i);
-      var sc = document.getElementById('cportSc' + i);
-      if (!vp || !sc) continue;
-      var w = vp.offsetWidth;
-      if (!w) continue;
-      var s = w / 1280;
-      sc.style.transform = 'scale(' + s + ')';
-      vp.style.height    = Math.round(900 * s) + 'px';
-    }
-  }
-  scaleCPortFrames();
-  window.addEventListener('resize', scaleCPortFrames);
-
   function updateUI(idx) {
     if (idx === currentSlide) return;
     currentSlide = idx;
@@ -3836,10 +3789,6 @@
 
     var slideIdx = Math.min(TOTAL - 1, Math.round(progress * (TOTAL - 1)));
     updateUI(slideIdx);
-
-    /* scroll iframes for same-origin sites */
-    var perSlide = (progress * (TOTAL - 1)) % 1;
-    if (slideIdx < 2) { setIfScroll(iframes[slideIdx], perSlide * 800); }
 
     if (!hintGone && scrolled > 20) {
       hintGone = true;
