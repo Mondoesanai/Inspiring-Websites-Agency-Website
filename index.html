@@ -2318,6 +2318,99 @@
       transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.2s ease, box-shadow 0.2s ease !important;
     }
 
+    /* ════════════════════════════════════════════════
+       CINEMATIC PORTFOLIO — scroll-driven
+    ════════════════════════════════════════════════ */
+    .cport-driver { position:relative; height:420vh; }
+    .cport-mobile { display:none; }
+    @media(max-width:768px){
+      .cport-driver { display:none; }
+      .cport-mobile { display:block; background:#111816; border-top:1px solid #26302D; }
+    }
+    .cport-sticky {
+      position:sticky; top:0; height:100vh;
+      background:#050706; overflow:hidden;
+      display:flex; flex-direction:column;
+    }
+    .cport-topbar {
+      flex-shrink:0; display:flex; align-items:center;
+      justify-content:space-between; padding:18px 48px;
+      border-bottom:1px solid #0e1a16;
+    }
+    .cport-tagline { font-size:12px; color:#3D4D47; letter-spacing:0.04em; }
+    .cport-counter { font-family:'Sora',sans-serif; font-size:14px; font-weight:700; color:#F5F7F6; display:flex; align-items:baseline; gap:2px; }
+    .cport-cur { color:#8FD14F; font-size:18px; line-height:1; }
+    .cport-sep, .cport-tot { color:#26302D; padding:0 3px; font-size:14px; }
+    .cport-stage { flex:1; position:relative; overflow:hidden; }
+    .cport-track { display:flex; width:300%; height:100%; will-change:transform; }
+    .cport-slide { width:33.333%; height:100%; display:flex; align-items:center; justify-content:center; padding:16px 48px; }
+    .cport-browser {
+      position:relative; width:100%; max-width:1060px;
+      border-radius:12px; overflow:hidden;
+      background:#0b0e0d;
+      box-shadow:0 0 0 1px rgba(143,209,79,0.12), 0 24px 80px rgba(0,0,0,0.8), 0 4px 20px rgba(143,209,79,0.06);
+    }
+    .cport-chrome {
+      height:40px; background:#141a16; border-bottom:1px solid #1e2c27;
+      display:flex; align-items:center; padding:0 14px; gap:10px; flex-shrink:0;
+    }
+    .cport-cdots { display:flex; gap:6px; }
+    .cport-cdots span { width:10px; height:10px; border-radius:50%; display:block; }
+    .cport-cdots span:nth-child(1) { background:#FF5F57; }
+    .cport-cdots span:nth-child(2) { background:#FEBC2E; }
+    .cport-cdots span:nth-child(3) { background:#28C840; }
+    .cport-addr {
+      display:flex; align-items:center; gap:6px;
+      background:#0b1410; border:1px solid #1e2c27; border-radius:6px;
+      padding:4px 12px; flex:1; max-width:320px; margin:0 auto;
+    }
+    .cport-addr span { font-size:12px; color:#5C6B65; font-family:'Inter',sans-serif; }
+    .cport-viewport { position:relative; overflow:hidden; background:#111; }
+    .cport-scaler { position:absolute; top:0; left:0; width:1280px; transform-origin:top left; pointer-events:none; }
+    .cport-scaler iframe { width:1280px; height:900px; border:none; display:block; pointer-events:none; }
+    .cport-badge {
+      position:absolute; bottom:18px; left:18px;
+      background:rgba(7,9,9,0.88); backdrop-filter:blur(16px);
+      border:1px solid rgba(143,209,79,0.22); border-radius:10px;
+      padding:14px 18px; z-index:10;
+    }
+    .cport-badge-num { font-family:'Sora',sans-serif; font-size:26px; font-weight:800; color:#8FD14F; letter-spacing:-0.03em; line-height:1.1; margin-bottom:3px; }
+    .cport-badge-desc { font-size:12.5px; color:#A6B0AC; }
+    .cport-bottombar {
+      flex-shrink:0; display:flex; align-items:center;
+      justify-content:space-between; padding:14px 48px;
+      border-top:1px solid #0e1a16; gap:16px;
+    }
+    .cport-sitename { font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:#F5F7F6; letter-spacing:-0.02em; transition:opacity 0.3s ease; }
+    .cport-sitetag { font-size:12px; color:#5C6B65; margin-top:2px; transition:opacity 0.3s ease; }
+    .cport-dots { display:flex; gap:8px; align-items:center; }
+    .cport-dot {
+      width:8px; height:8px; border-radius:50%;
+      background:#26302D; border:none; cursor:pointer;
+      transition:background 0.3s, width 0.3s, border-radius 0.3s; padding:0;
+    }
+    .cport-dot.active { background:#8FD14F; width:24px; border-radius:4px; }
+    .cport-explore-btn {
+      background:#8FD14F; color:#070909;
+      font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+      padding:10px 22px; border-radius:8px; border:none; cursor:pointer;
+      white-space:nowrap;
+      transition:background 0.2s ease, transform 0.2s ease;
+    }
+    .cport-explore-btn:hover { background:#6FAF39; transform:translateY(-1px); }
+    .cport-hint {
+      position:absolute; bottom:76px; left:50%; transform:translateX(-50%);
+      display:flex; align-items:center; gap:8px;
+      font-size:12px; color:#3D4D47; pointer-events:none;
+      transition:opacity 0.6s ease;
+      animation:hintBob 2s ease-in-out infinite;
+    }
+    @keyframes hintBob {
+      0%,100% { transform:translateX(-50%) translateY(0); }
+      50%      { transform:translateX(-50%) translateY(5px); }
+    }
+    .cport-hint.gone { opacity:0; }
+
   </style>
 </head>
 <body>
@@ -2480,101 +2573,152 @@
 
 
 <!-- ════════════════════════════════════════════════
-     OUR WORK — redesigned result-first cards
+     OUR WORK — cinematic scroll-driven portfolio
 ════════════════════════════════════════════════ -->
-<section id="work" style="padding:96px 0 88px;background:#111816;border-top:1px solid #26302D;position:relative;z-index:1;">
-  <div class="section-wrap">
-    <div style="text-align:center;margin-bottom:20px;">
-      <div class="section-label reveal" style="justify-content:center;">Our Work</div>
-      <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:14px;">We Built It.<br>They Got <span class="green-accent">Results.</span></h2>
-      <p class="body-lg reveal reveal-delay-2" style="max-width:500px;margin:0 auto 36px;">Custom websites, launched in 14 days, built to generate real business. Click any site to explore it.</p>
-    </div>
+<section id="work" style="background:#050706;">
 
-    <!-- Filter tabs -->
-    <div class="port-filters reveal reveal-delay-3">
-      <button class="port-filter active" data-filter="all">All</button>
-      <button class="port-filter" data-filter="barbershop">Local Business</button>
-      <button class="port-filter" data-filter="realestate">Real Estate</button>
-      <button class="port-filter" data-filter="speaker">Speaker</button>
-    </div>
+  <!-- ══ DESKTOP: scroll-driven cinematic experience ══ -->
+  <div class="cport-driver" id="cportDriver">
+    <div class="cport-sticky" id="cportSticky">
 
-    <div class="port-grid">
-
-      <!-- Card 1: New Vibez -->
-      <div class="port-card reveal" data-category="barbershop" role="button" tabindex="0"
-           onclick="openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')"
-           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')">
-        <div class="port-preview">
-          <div class="port-iframe-scale" id="port-scale-0">
-            <iframe src="/new-vibez/" scrolling="no" loading="lazy" tabindex="-1" title="New Vibez preview"></iframe>
-          </div>
-          <div class="port-overlay"><span class="port-btn">Explore Full Site →</span></div>
+      <!-- Top bar -->
+      <div class="cport-topbar">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div class="section-label" style="margin:0;justify-content:flex-start;">Our Work</div>
+          <span class="cport-tagline">Scroll to explore each site →</span>
         </div>
-        <div class="port-card-body">
-          <div class="port-result-hero">
-            <span class="port-result-big">+4 clients</span>
-            <span class="port-result-big-label">in their first 2 weeks online</span>
-          </div>
-          <p class="port-outcome">"People keep asking if we're a chain because the site looks so professional. Best investment I made."</p>
-          <div class="port-meta">
-            <span class="port-name-sm">New Vibez Barber Shop</span>
-            <span class="slide-cat-tag">Barbershop · Milton, FL</span>
-          </div>
+        <div class="cport-counter">
+          <span class="cport-cur" id="cportCur">01</span>
+          <span class="cport-sep">/</span>
+          <span class="cport-tot">03</span>
         </div>
       </div>
 
-      <!-- Card 2: Elara Monroe Real Estate -->
-      <div class="port-card reveal reveal-delay-1" data-category="realestate" role="button" tabindex="0"
-           onclick="openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW Metroplex')"
-           onkeydown="if(event.key==='Enter'||event.key===' ')openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW Metroplex')">
-        <div class="port-preview">
-          <div class="port-iframe-scale" id="port-scale-1">
-            <iframe src="/salon-unwine/" scrolling="no" loading="lazy" tabindex="-1" title="Elara Monroe Real Estate preview"></iframe>
+      <!-- Slide stage -->
+      <div class="cport-stage">
+        <div class="cport-track" id="cportTrack">
+
+          <!-- ── Slide 0: New Vibez ── -->
+          <div class="cport-slide">
+            <div class="cport-browser">
+              <div class="cport-chrome">
+                <div class="cport-cdots"><span></span><span></span><span></span></div>
+                <div class="cport-addr">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>newvibezbarber.com</span>
+                </div>
+              </div>
+              <div class="cport-viewport" id="cportVP0">
+                <div class="cport-scaler" id="cportSc0">
+                  <iframe src="/new-vibez/" id="cportIf0" scrolling="no" loading="lazy" tabindex="-1" title="New Vibez Barber Shop"></iframe>
+                </div>
+              </div>
+              <div class="cport-badge">
+                <div class="cport-badge-num">+4 new clients</div>
+                <div class="cport-badge-desc">booked in their first 2 weeks online</div>
+              </div>
+            </div>
           </div>
-          <div class="port-overlay"><span class="port-btn">Explore Full Site →</span></div>
+
+          <!-- ── Slide 1: Elara Monroe ── -->
+          <div class="cport-slide">
+            <div class="cport-browser">
+              <div class="cport-chrome">
+                <div class="cport-cdots"><span></span><span></span><span></span></div>
+                <div class="cport-addr">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>elaramonroerealestate.com</span>
+                </div>
+              </div>
+              <div class="cport-viewport" id="cportVP1">
+                <div class="cport-scaler" id="cportSc1">
+                  <iframe src="/salon-unwine/" id="cportIf1" scrolling="no" loading="lazy" tabindex="-1" title="Elara Monroe Real Estate"></iframe>
+                </div>
+              </div>
+              <div class="cport-badge">
+                <div class="cport-badge-num">3× more leads</div>
+                <div class="cport-badge-desc">within 60 days of launching</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Slide 2: Mondoe Davis ── -->
+          <div class="cport-slide">
+            <div class="cport-browser">
+              <div class="cport-chrome">
+                <div class="cport-cdots"><span></span><span></span><span></span></div>
+                <div class="cport-addr">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>mondoedavis.com</span>
+                </div>
+              </div>
+              <div class="cport-viewport" id="cportVP2">
+                <div class="cport-scaler" id="cportSc2">
+                  <iframe src="https://mondoedavis.com" id="cportIf2" scrolling="no" loading="lazy" tabindex="-1" title="Mondoe Davis"></iframe>
+                </div>
+              </div>
+              <div class="cport-badge">
+                <div class="cport-badge-num">Booked out</div>
+                <div class="cport-badge-desc">speaking calendar within 90 days</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /cport-track -->
+      </div><!-- /cport-stage -->
+
+      <!-- Bottom bar -->
+      <div class="cport-bottombar">
+        <div>
+          <div class="cport-sitename" id="cportSiteName">New Vibez Barber Shop</div>
+          <div class="cport-sitetag" id="cportSiteTag">Barbershop · Milton, FL</div>
         </div>
-        <div class="port-card-body">
-          <div class="port-result-hero">
-            <span class="port-result-big">3× more leads</span>
-            <span class="port-result-big-label">within 60 days of launching</span>
-          </div>
-          <p class="port-outcome">"Clients tell me the site made them feel confident before we even spoke. It positions me exactly where I want to be."</p>
-          <div class="port-meta">
-            <span class="port-name-sm">Elara Monroe | Real Estate</span>
-            <span class="slide-cat-tag">Real Estate · DFW, TX</span>
-          </div>
+        <div class="cport-dots">
+          <button class="cport-dot active" data-slide="0" aria-label="New Vibez"></button>
+          <button class="cport-dot" data-slide="1" aria-label="Elara Monroe"></button>
+          <button class="cport-dot" data-slide="2" aria-label="Mondoe Davis"></button>
         </div>
+        <button class="cport-explore-btn" id="cportExploreBtn">Explore Full Site →</button>
       </div>
 
-      <!-- Card 3: Mondoe Davis — opens directly in new tab to bypass splash -->
-      <div class="port-card reveal reveal-delay-2" data-category="speaker" role="button" tabindex="0"
-           onclick="window.open('https://mondoedavis.com','_blank')"
-           onkeydown="if(event.key==='Enter'||event.key===' ')window.open('https://mondoedavis.com','_blank')">
-        <div class="port-preview">
-          <div class="port-iframe-scale" id="port-scale-2">
-            <iframe src="https://mondoedavis.com" scrolling="no" loading="lazy" tabindex="-1" title="Mondoe Davis preview"></iframe>
-          </div>
-          <div class="port-overlay"><span class="port-btn">Enter Experience →</span></div>
-        </div>
-        <div class="port-card-body">
-          <div class="port-result-hero">
-            <span class="port-result-big">↑ Booked out</span>
-            <span class="port-result-big-label">speaking calendar within 90 days</span>
-          </div>
-          <p class="port-outcome">"The site communicates my story and credibility instantly. Event organizers reach out without me having to pitch."</p>
-          <div class="port-meta">
-            <span class="port-name-sm">Mondoe Davis</span>
-            <span class="slide-cat-tag">Speaker · Author · Athlete</span>
-          </div>
-        </div>
+      <!-- Scroll hint -->
+      <div class="cport-hint" id="cportHint">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        Scroll to explore
       </div>
 
     </div>
+  </div><!-- /cport-driver -->
 
-    <div style="text-align:center;margin-top:52px;" class="reveal">
-      <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green btn-green-lg">Get a Site Like This</a>
+  <!-- ══ MOBILE: simple stacked cards ══ -->
+  <div class="cport-mobile">
+    <div class="section-wrap" style="padding-top:64px;padding-bottom:64px;">
+      <div style="text-align:center;margin-bottom:40px;">
+        <div class="section-label reveal" style="justify-content:center;">Our Work</div>
+        <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:12px;">We Built It.<br>They Got <span class="green-accent">Results.</span></h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div class="port-card reveal" role="button" tabindex="0" onclick="openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')" onkeydown="if(event.key==='Enter')openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')">
+          <div class="port-preview" style="height:180px;"><div class="port-iframe-scale" id="port-scale-0"><iframe src="/new-vibez/" scrolling="no" loading="lazy" tabindex="-1" title="New Vibez"></iframe></div><div class="port-overlay"><span class="port-btn">Explore →</span></div></div>
+          <div class="port-card-body"><div class="port-result-hero"><span class="port-result-big">+4 clients</span><span class="port-result-big-label">in first 2 weeks</span></div><div class="port-meta"><span class="port-name-sm">New Vibez Barber Shop</span><span class="slide-cat-tag">Barbershop</span></div></div>
+        </div>
+        <div class="port-card reveal" role="button" tabindex="0" onclick="openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW')" onkeydown="if(event.key==='Enter')openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW')">
+          <div class="port-preview" style="height:180px;"><div class="port-iframe-scale" id="port-scale-1"><iframe src="/salon-unwine/" scrolling="no" loading="lazy" tabindex="-1" title="Elara Monroe"></iframe></div><div class="port-overlay"><span class="port-btn">Explore →</span></div></div>
+          <div class="port-card-body"><div class="port-result-hero"><span class="port-result-big">3× leads</span><span class="port-result-big-label">in 60 days</span></div><div class="port-meta"><span class="port-name-sm">Elara Monroe | Real Estate</span><span class="slide-cat-tag">Real Estate</span></div></div>
+        </div>
+        <div class="port-card reveal" role="button" tabindex="0" onclick="window.open('https://mondoedavis.com','_blank')" onkeydown="if(event.key==='Enter')window.open('https://mondoedavis.com','_blank')">
+          <div class="port-preview" style="height:180px;"><div class="port-iframe-scale" id="port-scale-2"><iframe src="https://mondoedavis.com" scrolling="no" loading="lazy" tabindex="-1" title="Mondoe Davis"></iframe></div><div class="port-overlay"><span class="port-btn">Enter Experience →</span></div></div>
+          <div class="port-card-body"><div class="port-result-hero"><span class="port-result-big">Booked out</span><span class="port-result-big-label">calendar in 90 days</span></div><div class="port-meta"><span class="port-name-sm">Mondoe Davis</span><span class="slide-cat-tag">Speaker</span></div></div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- CTA -->
+  <div style="text-align:center;padding:0 24px 72px;background:#050706;" class="reveal">
+    <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green btn-green-lg">Get a Site Like This</a>
+  </div>
+
 </section>
 
 <!-- ── Site Preview Modal ── -->
@@ -3603,6 +3747,142 @@
 }());
 </script>
 
+
+<!-- ════════════════════════════════════════════════
+     CINEMATIC PORTFOLIO — scroll animation engine
+════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  var driver  = document.getElementById('cportDriver');
+  var track   = document.getElementById('cportTrack');
+  if (!driver || !track) return;
+
+  var TOTAL = 3;
+  var slides = [
+    { name:'New Vibez Barber Shop',       tag:'Barbershop · Milton, FL',      url:'/new-vibez/',             modal:true  },
+    { name:'Elara Monroe | Real Estate',  tag:'Real Estate · DFW, TX',        url:'/salon-unwine/',          modal:true  },
+    { name:'Mondoe Davis',                tag:'Speaker · Author · Athlete',    url:'https://mondoedavis.com', modal:false }
+  ];
+
+  var currentX    = 0;
+  var targetX     = 0;
+  var currentSlide = -1;
+  var hint        = document.getElementById('cportHint');
+  var hintGone    = false;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  var iframes = [
+    document.getElementById('cportIf0'),
+    document.getElementById('cportIf1'),
+    document.getElementById('cportIf2')
+  ];
+
+  function setIfScroll(ifr, y) {
+    if (!ifr) return;
+    try { ifr.contentWindow.scrollTo(0, y); } catch (e) {}
+  }
+
+  function scaleCPortFrames() {
+    for (var i = 0; i < TOTAL; i++) {
+      var vp = document.getElementById('cportVP' + i);
+      var sc = document.getElementById('cportSc' + i);
+      if (!vp || !sc) continue;
+      var w = vp.offsetWidth;
+      if (!w) continue;
+      var s = w / 1280;
+      sc.style.transform = 'scale(' + s + ')';
+      vp.style.height    = Math.round(900 * s) + 'px';
+    }
+  }
+  scaleCPortFrames();
+  window.addEventListener('resize', scaleCPortFrames);
+
+  function updateUI(idx) {
+    if (idx === currentSlide) return;
+    currentSlide = idx;
+    var sl     = slides[idx];
+    var nameEl = document.getElementById('cportSiteName');
+    var tagEl  = document.getElementById('cportSiteTag');
+    var curEl  = document.getElementById('cportCur');
+    var btn    = document.getElementById('cportExploreBtn');
+
+    if (nameEl) { nameEl.style.opacity = '0'; setTimeout(function () { nameEl.textContent = sl.name; nameEl.style.opacity = '1'; }, 200); }
+    if (tagEl)  { tagEl.style.opacity  = '0'; setTimeout(function () { tagEl.textContent  = sl.tag;  tagEl.style.opacity  = '1'; }, 200); }
+    if (curEl)  { curEl.textContent = String(idx + 1).padStart(2, '0'); }
+
+    document.querySelectorAll('.cport-dot').forEach(function (d, i) {
+      d.classList.toggle('active', i === idx);
+    });
+
+    if (btn) {
+      btn.onclick = function () {
+        if (sl.modal) { window.openSitePreview(sl.url, sl.name, sl.tag); }
+        else          { window.open(sl.url, '_blank'); }
+      };
+    }
+  }
+
+  window.addEventListener('scroll', function () {
+    var rect      = driver.getBoundingClientRect();
+    var scrolled  = -rect.top;
+    var maxScroll = rect.height - window.innerHeight;
+    if (maxScroll <= 0) return;
+
+    var progress = Math.max(0, Math.min(1, scrolled / maxScroll));
+    targetX = progress * 66.666;
+
+    var slideIdx = Math.min(TOTAL - 1, Math.round(progress * (TOTAL - 1)));
+    updateUI(slideIdx);
+
+    /* scroll iframes for same-origin sites */
+    var perSlide = (progress * (TOTAL - 1)) % 1;
+    if (slideIdx < 2) { setIfScroll(iframes[slideIdx], perSlide * 800); }
+
+    if (!hintGone && scrolled > 20) {
+      hintGone = true;
+      if (hint) hint.classList.add('gone');
+    }
+  }, { passive: true });
+
+  /* lerp animation loop */
+  function tick() {
+    var dx = targetX - currentX;
+    if (Math.abs(dx) > 0.001) {
+      currentX = lerp(currentX, targetX, 0.09);
+      track.style.transform = 'translateX(-' + currentX + '%)';
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  /* dot nav — jump to slide by scrolling */
+  document.querySelectorAll('.cport-dot').forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      var idx        = parseInt(dot.getAttribute('data-slide'), 10);
+      var targetProg = idx / (TOTAL - 1);
+      var rect       = driver.getBoundingClientRect();
+      var maxScroll  = driver.offsetHeight - window.innerHeight;
+      var targetY    = window.scrollY + rect.top + targetProg * maxScroll;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+    });
+  });
+
+  /* initial explore btn target */
+  var initBtn = document.getElementById('cportExploreBtn');
+  if (initBtn) {
+    initBtn.onclick = function () {
+      window.openSitePreview('/new-vibez/', 'New Vibez Barber Shop', 'Barbershop · Milton, FL');
+    };
+  }
+
+  /* trigger initial UI state */
+  updateUI(0);
+
+}());
+</script>
 
 <!-- ════════════════════════════════════════════════
      PARTICLE SYSTEM — unified (hero + 4 sections)
