@@ -305,12 +305,12 @@
     /* ── Hero left ── */
     .hero-h1 {
       font-family: 'Sora', sans-serif;
-      font-size: clamp(48px, 6.4vw, 96px);
+      font-size: clamp(34px, 3.8vw, 56px);
       font-weight: 800;
-      line-height: 1.03;
-      letter-spacing: -0.04em;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
       color: #F5F7F6;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .hero-cycle-wrap {
@@ -412,8 +412,8 @@
     }
 
     @keyframes heroFloat {
-      0%,100% { transform: rotateY(-6deg) rotateX(2deg) translateY(0); }
-      50%      { transform: rotateY(-6deg) rotateX(2deg) translateY(-18px); }
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-16px); }
     }
     @keyframes chipFloat1 {
       0%,100% { transform: translateY(0); }
@@ -443,7 +443,6 @@
       animation: heroFloat 7s ease-in-out infinite;
       width: 100%;
       max-width: 580px;
-      transform: rotateY(-6deg) rotateX(2deg);
       transition: transform 0.12s ease, box-shadow 0.12s ease;
       will-change: transform;
     }
@@ -2364,10 +2363,10 @@
       justify-content:space-between; padding:18px 48px;
       border-bottom:1px solid #0e1a16;
     }
-    .cport-tagline { font-size:12px; color:#3D4D47; letter-spacing:0.04em; }
-    .cport-counter { font-family:'Sora',sans-serif; font-size:14px; font-weight:700; color:#F5F7F6; display:flex; align-items:baseline; gap:2px; }
-    .cport-cur { color:#8FD14F; font-size:18px; line-height:1; }
-    .cport-sep, .cport-tot { color:#26302D; padding:0 3px; font-size:14px; }
+    .cport-tagline { font-size:14px; color:#6B7D73; letter-spacing:0.02em; font-weight:500; }
+    .cport-counter { font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:#F5F7F6; display:flex; align-items:baseline; gap:2px; }
+    .cport-cur { color:#8FD14F; font-size:20px; line-height:1; }
+    .cport-sep, .cport-tot { color:#3D4D47; padding:0 3px; font-size:16px; }
     .cport-stage { flex:1; position:relative; overflow:hidden; }
     .cport-track { display:flex; width:300%; height:100%; will-change:transform; }
     .cport-slide { width:33.333%; height:100%; display:flex; align-items:center; justify-content:center; padding:16px 48px; }
@@ -2399,8 +2398,8 @@
       justify-content:space-between; padding:14px 48px;
       border-top:1px solid #0e1a16; gap:16px;
     }
-    .cport-sitename { font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:#F5F7F6; letter-spacing:-0.02em; transition:opacity 0.3s ease; }
-    .cport-sitetag { font-size:12px; color:#5C6B65; margin-top:2px; transition:opacity 0.3s ease; }
+    .cport-sitename { font-family:'Sora',sans-serif; font-size:18px; font-weight:700; color:#F5F7F6; letter-spacing:-0.02em; transition:opacity 0.3s ease; }
+    .cport-sitetag { font-size:13px; color:#6B7D73; margin-top:2px; transition:opacity 0.3s ease; }
     .cport-dots { display:flex; gap:8px; align-items:center; }
     .cport-dot {
       width:8px; height:8px; border-radius:50%;
@@ -2419,9 +2418,10 @@
     .cport-hint {
       position:absolute; bottom:76px; left:50%; transform:translateX(-50%);
       display:flex; align-items:center; gap:8px;
-      font-size:12px; color:#3D4D47; pointer-events:none;
+      font-size:13px; color:#6B7D73; pointer-events:none;
       transition:opacity 0.6s ease;
       animation:hintBob 2s ease-in-out infinite;
+      white-space:nowrap;
     }
     @keyframes hintBob {
       0%,100% { transform:translateX(-50%) translateY(0); }
@@ -2521,7 +2521,7 @@
           <div class="chrome-url" id="hero-url">newvibezbarber.com</div>
         </div>
         <div class="hero-mockup-viewport">
-          <img src="brand_assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="hero-preview-img" id="hero-preview-img">
+          <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="hero-preview-img" id="hero-preview-img">
         </div>
       </div>
       <!-- Floating stat chips -->
@@ -2626,7 +2626,7 @@
                 </div>
               </div>
               <div class="cport-viewport">
-                <img src="brand_assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="cport-preview-img">
+                <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="cport-preview-img">
               </div>
             </div>
           </div>
@@ -2642,7 +2642,7 @@
                 </div>
               </div>
               <div class="cport-viewport">
-                <img src="brand_assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" class="cport-preview-img">
+                <img src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" class="cport-preview-img">
               </div>
             </div>
           </div>
@@ -2658,7 +2658,7 @@
                 </div>
               </div>
               <div class="cport-viewport">
-                <img src="brand_assets/preview-mondo-davis.jpg" alt="Mondoe Davis" class="cport-preview-img">
+                <img src="Brand_Assets/preview-mondo-davis.jpg" alt="Mondoe Davis" class="cport-preview-img">
               </div>
             </div>
           </div>
@@ -3508,9 +3508,9 @@
 
   /* ════ HERO MOCKUP — cycle preview images every 5s ════ */
   var heroMockupSites = [
-    { img: 'brand_assets/preview-new-vibez.jpg',     url: 'newvibezbarber.com' },
-    { img: 'brand_assets/preview-elara-monroe.jpg',  url: 'elaramonroerealestate.com' },
-    { img: 'brand_assets/preview-mondo-davis.jpg',   url: 'mondoedavis.com' },
+    { img: 'Brand_Assets/preview-new-vibez.jpg',     url: 'newvibezbarber.com' },
+    { img: 'Brand_Assets/preview-elara-monroe.jpg',  url: 'elaramonroerealestate.com' },
+    { img: 'Brand_Assets/preview-mondo-davis.jpg',   url: 'mondoedavis.com' },
   ];
   var heroMockupIdx = 0;
   var heroPreviewImg = document.getElementById('hero-preview-img');
@@ -3745,13 +3745,26 @@
     { name:'Mondoe Davis',                tag:'Speaker · Author · Athlete',    url:'https://mondoedavis.com', modal:false }
   ];
 
-  var currentX    = 0;
-  var targetX     = 0;
+  var currentX     = 0;
+  var targetX      = 0;
   var currentSlide = -1;
-  var hint        = document.getElementById('cportHint');
-  var hintGone    = false;
+  var hint         = document.getElementById('cportHint');
+  var hintGone     = false;
+  var driverTop    = 0;
+  var maxScroll    = 0;
 
   function lerp(a, b, t) { return a + (b - a) * t; }
+
+  /* precompute stable document-offset so getBoundingClientRect isn't
+     called every scroll tick (avoids layout-thrash and position jitter) */
+  function computeOffsets() {
+    var el = driver, t = 0;
+    while (el) { t += el.offsetTop; el = el.offsetParent; }
+    driverTop = t;
+    maxScroll = driver.offsetHeight - window.innerHeight;
+  }
+  computeOffsets();
+  window.addEventListener('resize', computeOffsets);
 
   function updateUI(idx) {
     if (idx === currentSlide) return;
@@ -3771,55 +3784,51 @@
     });
 
     if (btn) {
-      btn.onclick = function () {
-        if (sl.modal) { window.openSitePreview(sl.url, sl.name, sl.tag); }
-        else          { window.open(sl.url, '_blank'); }
-      };
+      btn.onclick = (function (s) { return function () {
+        if (s.modal) { window.openSitePreview(s.url, s.name, s.tag); }
+        else         { window.open(s.url, '_blank'); }
+      }; }(sl));
     }
   }
 
   window.addEventListener('scroll', function () {
-    var rect      = driver.getBoundingClientRect();
-    var scrolled  = -rect.top;
-    var maxScroll = rect.height - window.innerHeight;
     if (maxScroll <= 0) return;
+    var scrolled  = window.scrollY - driverTop;
+    var progress  = Math.max(0, Math.min(1, scrolled / maxScroll));
 
-    var progress = Math.max(0, Math.min(1, scrolled / maxScroll));
     targetX = progress * 66.666;
 
-    var slideIdx = Math.min(TOTAL - 1, Math.round(progress * (TOTAL - 1)));
+    /* floor+clamp gives stable slide transitions without flickering */
+    var slideIdx = Math.min(TOTAL - 1, Math.floor(progress * TOTAL));
     updateUI(slideIdx);
 
-    if (!hintGone && scrolled > 20) {
+    if (!hintGone && scrolled > 30) {
       hintGone = true;
       if (hint) hint.classList.add('gone');
     }
   }, { passive: true });
 
-  /* lerp animation loop */
+  /* smooth lerp loop — only writes to DOM when actually moving */
   function tick() {
     var dx = targetX - currentX;
-    if (Math.abs(dx) > 0.001) {
-      currentX = lerp(currentX, targetX, 0.09);
+    if (Math.abs(dx) > 0.002) {
+      currentX = lerp(currentX, targetX, 0.11);
       track.style.transform = 'translateX(-' + currentX + '%)';
     }
     requestAnimationFrame(tick);
   }
   tick();
 
-  /* dot nav — jump to slide by scrolling */
+  /* dot nav */
   document.querySelectorAll('.cport-dot').forEach(function (dot) {
     dot.addEventListener('click', function () {
-      var idx        = parseInt(dot.getAttribute('data-slide'), 10);
-      var targetProg = idx / (TOTAL - 1);
-      var rect       = driver.getBoundingClientRect();
-      var maxScroll  = driver.offsetHeight - window.innerHeight;
-      var targetY    = window.scrollY + rect.top + targetProg * maxScroll;
-      window.scrollTo({ top: targetY, behavior: 'smooth' });
+      var idx       = parseInt(dot.getAttribute('data-slide'), 10);
+      var prog      = TOTAL > 1 ? idx / (TOTAL - 1) : 0;
+      window.scrollTo({ top: driverTop + prog * maxScroll, behavior: 'smooth' });
     });
   });
 
-  /* initial explore btn target */
+  /* initial explore btn */
   var initBtn = document.getElementById('cportExploreBtn');
   if (initBtn) {
     initBtn.onclick = function () {
@@ -3827,7 +3836,6 @@
     };
   }
 
-  /* trigger initial UI state */
   updateUI(0);
 
 }());
