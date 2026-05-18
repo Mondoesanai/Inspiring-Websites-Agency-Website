@@ -2698,16 +2698,31 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:20px;">
         <div class="port-card reveal" role="button" tabindex="0" onclick="openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')" onkeydown="if(event.key==='Enter')openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')">
-          <div class="port-preview" style="height:180px;"><div class="port-iframe-scale" id="port-scale-0"><iframe src="/new-vibez/" scrolling="no" loading="lazy" tabindex="-1" title="New Vibez"></iframe></div><div class="port-overlay"><span class="port-btn">Explore →</span></div></div>
-          <div class="port-card-body"><div class="port-result-hero"><span class="port-result-big">+4 clients</span><span class="port-result-big-label">in first 2 weeks</span></div><div class="port-meta"><span class="port-name-sm">New Vibez Barber Shop</span><span class="slide-cat-tag">Barbershop</span></div></div>
+          <div class="port-preview" style="height:200px;">
+            <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+            <div class="port-overlay"><span class="port-btn">Explore →</span></div>
+          </div>
+          <div class="port-card-body">
+            <div class="port-meta"><span class="port-name-sm">New Vibez Barber Shop</span><span class="slide-cat-tag">Barbershop · Milton, FL</span></div>
+          </div>
         </div>
         <div class="port-card reveal" role="button" tabindex="0" onclick="openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW')" onkeydown="if(event.key==='Enter')openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW')">
-          <div class="port-preview" style="height:180px;"><div class="port-iframe-scale" id="port-scale-1"><iframe src="/salon-unwine/" scrolling="no" loading="lazy" tabindex="-1" title="Elara Monroe"></iframe></div><div class="port-overlay"><span class="port-btn">Explore →</span></div></div>
-          <div class="port-card-body"><div class="port-result-hero"><span class="port-result-big">3× leads</span><span class="port-result-big-label">in 60 days</span></div><div class="port-meta"><span class="port-name-sm">Elara Monroe | Real Estate</span><span class="slide-cat-tag">Real Estate</span></div></div>
+          <div class="port-preview" style="height:200px;">
+            <img src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+            <div class="port-overlay"><span class="port-btn">Explore →</span></div>
+          </div>
+          <div class="port-card-body">
+            <div class="port-meta"><span class="port-name-sm">Elara Monroe | Real Estate</span><span class="slide-cat-tag">Real Estate · DFW, TX</span></div>
+          </div>
         </div>
         <div class="port-card reveal" role="button" tabindex="0" onclick="window.open('https://mondoedavis.com','_blank')" onkeydown="if(event.key==='Enter')window.open('https://mondoedavis.com','_blank')">
-          <div class="port-preview" style="height:180px;"><div class="port-iframe-scale" id="port-scale-2"><iframe src="https://mondoedavis.com" scrolling="no" loading="lazy" tabindex="-1" title="Mondoe Davis"></iframe></div><div class="port-overlay"><span class="port-btn">Enter Experience →</span></div></div>
-          <div class="port-card-body"><div class="port-result-hero"><span class="port-result-big">Booked out</span><span class="port-result-big-label">calendar in 90 days</span></div><div class="port-meta"><span class="port-name-sm">Mondoe Davis</span><span class="slide-cat-tag">Speaker</span></div></div>
+          <div class="port-preview" style="height:200px;">
+            <img src="Brand_Assets/preview-mondo-davis.jpg" alt="Mondoe Davis" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+            <div class="port-overlay"><span class="port-btn">View Site →</span></div>
+          </div>
+          <div class="port-card-body">
+            <div class="port-meta"><span class="port-name-sm">Mondoe Davis</span><span class="slide-cat-tag">Speaker · Author · Athlete</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -3586,25 +3601,6 @@
   }
 
 
-  /* ════ PORTFOLIO CARD IFRAMES — fit to container ════ */
-  function scalePortFrames() {
-    var isMobile = window.innerWidth < 769;
-    var scales = document.querySelectorAll('.port-iframe-scale');
-    scales.forEach(function (wrap) {
-      var preview = wrap.closest('.port-preview');
-      if (!preview) return;
-      var w = preview.offsetWidth;
-      if (!w) return;
-      var scale = w / 1280;
-      wrap.style.transform = 'scale(' + scale + ')';
-      // On mobile let CSS control height; on desktop derive from scale
-      if (!isMobile) {
-        preview.style.height = Math.round(848 * scale) + 'px';
-      }
-    });
-  }
-  scalePortFrames();
-  window.addEventListener('resize', scalePortFrames);
 
 
   /* ════ IMPACT CARDS — pop-in animation on scroll ════ */
