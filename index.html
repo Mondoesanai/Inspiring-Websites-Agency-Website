@@ -2345,6 +2345,182 @@
     }
 
     /* ════════════════════════════════════════════════
+       MOBILE STICKY CTA BAR
+    ════════════════════════════════════════════════ */
+    .mob-sticky {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 9990;
+      padding: 10px 16px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
+      background: linear-gradient(to top, rgba(5,7,6,1) 60%, rgba(5,7,6,0.92) 100%);
+      border-top: 1px solid rgba(143,209,79,0.18);
+      transform: translateY(110%);
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .mob-sticky.is-visible { transform: translateY(0); }
+    .mob-sticky-btn {
+      display: block;
+      background: #8FD14F;
+      color: #070909;
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+      padding: 15px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      box-shadow: 0 0 32px rgba(143,209,79,0.25), 0 4px 16px rgba(0,0,0,0.4);
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .mob-sticky-btn:active { transform: scale(0.97); background: #7AC23A; }
+
+    /* ════════════════════════════════════════════════
+       MOBILE — comprehensive polish (≤768px)
+    ════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+
+      /* Sticky bar visible + body padding so content clears it */
+      .mob-sticky { display: block; }
+      body { padding-bottom: 76px; }
+
+      /* ── Hero ── */
+      .hero-badge { font-size: 11px; padding: 6px 12px; }
+      .hero-h1 { font-size: clamp(36px, 9.5vw, 52px) !important; }
+      .hero-sub { font-size: 15px; line-height: 1.65; color: #A6B0AC; }
+      /* Ghost button: add green tint so it reads as a button on mobile */
+      .hero-ctas .btn-ghost {
+        border-color: rgba(143,209,79,0.35);
+        background: rgba(143,209,79,0.06);
+      }
+      /* Trust row: tighter, centered */
+      .hero-trust {
+        gap: 14px;
+        font-size: 12px !important;
+        padding-bottom: 4px;
+      }
+      /* Full-width buttons at ≤480 already handled; ensure border-radius */
+      .hero-ctas a { border-radius: 10px; font-size: 15px; padding: 14px 20px; }
+
+      /* ── Stats bar ── */
+      .stat-number { font-size: 36px !important; letter-spacing: -0.04em; }
+      .stat-label  { font-size: 11px; }
+
+      /* ── Section headers ── */
+      .h-lg { font-size: clamp(28px, 7.5vw, 40px) !important; line-height: 1.12 !important; }
+      .section-label { font-size: 10px; }
+
+      /* ── Impact / benefits cards — single col, left-aligned ── */
+      .impact-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .impact-card {
+        display: flex !important;
+        align-items: center !important;
+        gap: 16px !important;
+        text-align: left !important;
+        padding: 18px 20px !important;
+        background: #0d1a14 !important;
+        border-radius: 14px !important;
+      }
+      .impact-card::before { display: none; }
+      .impact-icon {
+        flex-shrink: 0;
+        width: 44px; height: 44px;
+        border-radius: 12px;
+        margin: 0 !important;
+      }
+      .impact-num {
+        font-size: 26px !important;
+        margin-bottom: 2px !important;
+        line-height: 1 !important;
+      }
+      .impact-title { font-size: 14px !important; margin-bottom: 4px !important; }
+      .impact-desc  { font-size: 12.5px !important; line-height: 1.5 !important; }
+
+      /* ── Services grid — single col, visible cards ── */
+      .services-grid-v2 {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+      .service-cell {
+        background: #0d1a14 !important;
+        border: 1px solid #1e2c27 !important;
+        border-radius: 14px !important;
+        padding: 22px 20px !important;
+      }
+      .sc-title  { font-size: 16px !important; color: #F5F7F6 !important; opacity: 1 !important; }
+      .sc-desc   { font-size: 13.5px !important; color: #A6B0AC !important; opacity: 1 !important; }
+      .sc-bullets li { opacity: 1 !important; color: #A6B0AC !important; }
+      .sc-outcome { opacity: 1 !important; }
+      .sc-icon { opacity: 1 !important; }
+
+      /* ── Portfolio mobile cards ── */
+      .port-overlay {
+        opacity: 1 !important;
+        background: linear-gradient(to top, rgba(7,9,9,0.9) 0%, rgba(7,9,9,0.15) 60%, transparent 100%) !important;
+      }
+      .port-btn {
+        font-size: 13px; padding: 9px 20px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      }
+      .port-card {
+        border-radius: 14px !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.35) !important;
+      }
+      .port-name-sm {
+        font-family: 'Sora', sans-serif;
+        font-size: 15px !important;
+        font-weight: 700;
+        color: #F5F7F6;
+      }
+      .slide-cat-tag {
+        font-size: 11px !important;
+        letter-spacing: 0.06em;
+      }
+      .port-card-body { padding: 14px 16px 16px !important; }
+
+      /* ── Process steps — tighter ── */
+      .proc-step { padding: 0 8px 32px !important; }
+      .proc-num { width: 52px !important; height: 52px !important; font-size: 18px !important; }
+
+      /* ── After-launch cards ── */
+      .after-card {
+        background: #0d1a14 !important;
+        border: 1px solid #1e2c27 !important;
+      }
+
+      /* ── Testimonials ── */
+      .testi-card-v2 { padding: 24px 20px !important; }
+
+      /* ── FAQ ── */
+      .faq-item { border-radius: 12px !important; margin-bottom: 8px !important; }
+      .faq-summary { font-size: 15px !important; padding: 16px 18px !important; }
+      .faq-answer  { font-size: 14px !important; padding: 0 18px 16px !important; }
+
+      /* ── CTA block ── */
+      .cta-card { border-radius: 18px !important; }
+
+      /* ── Section dividers ── */
+      #work, #services, #results, #faq {
+        border-top: 1px solid #111c18;
+      }
+
+      /* ── "We Built It" heading ── */
+      .cport-mobile h2 { margin-bottom: 6px !important; }
+      .cport-mobile .section-label { margin-bottom: 10px !important; }
+    }
+
+    /* Extra tight small phones */
+    @media (max-width: 390px) {
+      .hero-h1 { font-size: 34px !important; }
+      .mob-sticky-btn { font-size: 14px; padding: 13px 16px; }
+    }
+
+    /* ════════════════════════════════════════════════
        CINEMATIC PORTFOLIO — scroll-driven
     ════════════════════════════════════════════════ */
     .cport-driver { position:relative; height:420vh; }
@@ -3618,6 +3794,19 @@
   }
 
 
+  /* ════ MOBILE STICKY CTA ════ */
+  var mobSticky = document.getElementById('mobSticky');
+  if (mobSticky) {
+    var _stickyShown = false;
+    window.addEventListener('scroll', function () {
+      if (!_stickyShown && window.scrollY > 320) {
+        _stickyShown = true;
+        mobSticky.classList.add('is-visible');
+      }
+    }, { passive: true });
+  }
+
+
   /* ════ PORTFOLIO FILTER TABS ════ */
   var filterBtns = document.querySelectorAll('.port-filter');
   var portCards  = document.querySelectorAll('.port-card[data-category]');
@@ -4006,6 +4195,14 @@
   requestAnimationFrame(loop);
 }());
 </script>
+
+
+<!-- ════ MOBILE STICKY CTA BAR ════ -->
+<div class="mob-sticky" id="mobSticky">
+  <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="mob-sticky-btn">
+    Book a Free Call — It's Free →
+  </a>
+</div>
 
 </body>
 </html>
