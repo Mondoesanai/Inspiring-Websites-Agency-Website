@@ -2520,7 +2520,7 @@
       /* Section becomes a tall scroll driver */
       #process {
         padding: 0 !important;
-        height: 430vh !important;
+        height: 250vh !important;
         position: relative !important;
       }
 
@@ -2655,6 +2655,64 @@
         background: #8FD14F;
         width: 28px;
         border-radius: 3px;
+      }
+
+      /* ── Step entry animations ── */
+      @keyframes procNumIn {
+        0%   { transform: scale(0.5) translateY(28px); opacity: 0; }
+        65%  { transform: scale(1.08) translateY(-5px); opacity: 1; }
+        100% { transform: scale(1) translateY(0); opacity: 1; }
+      }
+      @keyframes procTitleIn {
+        from { transform: translateX(-32px); opacity: 0; }
+        to   { transform: translateX(0);     opacity: 1; }
+      }
+      @keyframes procTagIn {
+        from { transform: translateY(14px) scale(0.88); opacity: 0; }
+        to   { transform: translateY(0)    scale(1);    opacity: 1; }
+      }
+      @keyframes procGlowPulse {
+        0%, 100% { opacity: 0.5; transform: scale(1); }
+        50%      { opacity: 1;   transform: scale(1.12); }
+      }
+
+      .proc-step.step-active .proc-num {
+        animation: procNumIn 0.65s cubic-bezier(0.34,1.56,0.64,1) both;
+      }
+      .proc-step.step-active .proc-title {
+        animation: procTitleIn 0.6s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .proc-step.step-active > div[style*="inline-block"] {
+        animation: procTagIn 0.5s 0.05s ease both;
+      }
+
+      /* Radial glow behind active card content */
+      .proc-step.step-active::before {
+        content: '';
+        position: absolute;
+        left: -10%; top: 15%;
+        width: 70%; height: 70%;
+        background: radial-gradient(ellipse at 30% 40%,
+          rgba(143,209,79,0.1) 0%, transparent 65%);
+        pointer-events: none;
+        animation: procGlowPulse 3s ease-in-out infinite;
+      }
+
+      /* ── Scroll progress bar at the bottom of sticky view ── */
+      .proc-scroll-bar-track {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 3px;
+        background: rgba(143,209,79,0.12);
+        z-index: 4;
+      }
+      .proc-scroll-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(to right, #8FD14F, #6FAF39);
+        box-shadow: 0 0 14px rgba(143,209,79,0.8);
+        transition: width 0.05s linear;
+        z-index: 5;
       }
 
       /* CTA at bottom of sticky view */
@@ -3857,6 +3915,15 @@
     var dotsWrap = document.querySelector('.proc-dots');
     if (dotsWrap) dotsWrap.style.display = 'flex';
 
+    /* Inject scroll progress bar */
+    var wrap = section.querySelector('.section-wrap');
+    var barTrack = document.createElement('div');
+    barTrack.className = 'proc-scroll-bar-track';
+    var barFill  = document.createElement('div');
+    barFill.className = 'proc-scroll-bar-fill';
+    barTrack.appendChild(barFill);
+    wrap.appendChild(barTrack);
+
     /* Precompute section offset for stable scroll math */
     var sectionTop = 0;
     function computeOffset() {
@@ -3873,8 +3940,12 @@
       if (idx === current) return;
       steps.forEach(function (s, i) {
         s.classList.remove('step-active', 'step-done');
-        if (i === idx)      s.classList.add('step-active');
-        else if (i < idx)   s.classList.add('step-done');
+      });
+      /* Reflow between remove and add so CSS animations restart cleanly */
+      void steps[idx].offsetWidth;
+      steps.forEach(function (s, i) {
+        if (i === idx)    s.classList.add('step-active');
+        else if (i < idx) s.classList.add('step-done');
       });
       dots.forEach(function (d, i) {
         d.classList.toggle('dot-active', i === idx);
@@ -3890,6 +3961,11 @@
       var total    = section.offsetHeight - window.innerHeight;
       if (total <= 0) return;
       var progress = Math.max(0, Math.min(1, scrolled / total));
+
+      /* Drive the progress bar with raw scroll % */
+      barFill.style.width = (progress * 100) + '%';
+
+      /* Advance step at 0 / 33% / 66% */
       var idx = Math.min(Math.floor(progress * steps.length), steps.length - 1);
       setActive(idx);
     }, { passive: true });
@@ -3897,9 +3973,9 @@
     /* Dot tap → scroll page to that step's position */
     dots.forEach(function (dot, i) {
       dot.addEventListener('click', function () {
-        var stepFrac = (i / steps.length);
-        var total    = section.offsetHeight - window.innerHeight;
-        window.scrollTo({ top: sectionTop + stepFrac * total, behavior: 'smooth' });
+        var total = section.offsetHeight - window.innerHeight;
+        var frac  = i / steps.length + 0.02; /* slight offset to land in step */
+        window.scrollTo({ top: sectionTop + frac * total, behavior: 'smooth' });
       });
     });
   }());
