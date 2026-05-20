@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect — You Inspire Now</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:#080808;color:#fff;overflow-x:hidden;cursor:none;}
+@media(hover:none){body{cursor:auto;}}
+:root{--teal:#00E8C8;--pink:#FF2D9E;--pu:#8B2FFF;--black:#080808;--card:#111111;--border:rgba(255,255,255,0.07);--muted:rgba(255,255,255,0.38);}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+#cursor{position:fixed;pointer-events:none;z-index:10000;font-size:24px;line-height:1;user-select:none;transform:translate(-6px,-22px) rotate(-20deg);transition:font-size 0.15s ease;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.8));}
+#cursor.hov{font-size:32px;transform:translate(-4px,-24px) rotate(-20deg);}
+@media(hover:none){#cursor{display:none;}}
+.hero-top-shade{position:absolute;top:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,rgba(8,8,8,0.85) 0%,transparent 100%);z-index:1;pointer-events:none;}
+.splat-wrap{position:absolute;pointer-events:none;}
+.blob{position:absolute;border-radius:71% 29% 76% 24% / 42% 68% 32% 58%;filter:blur(80px);pointer-events:none;animation:blob-drift var(--bd,14s) ease-in-out infinite alternate var(--bdel,0s);}
+.blob-teal{background:rgba(0,232,200,0.22);}
+.blob-pink{background:rgba(255,45,158,0.20);}
+.blob-pu{background:rgba(139,47,255,0.18);}
+@keyframes blob-drift{from{transform:translate(0,0) scale(1);border-radius:71% 29% 76% 24% / 42% 68% 32% 58%;}to{transform:translate(var(--btx,30px),var(--bty,-20px)) scale(var(--bs,1.12));border-radius:42% 58% 31% 69% / 70% 35% 65% 30%;}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-36px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-left.in{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(36px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-right.in{opacity:1;transform:translateX(0);}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1rem 2.5rem;background:rgba(8,8,8,0.55);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.4s,box-shadow 0.4s;}
+#nav.scrolled{background:rgba(8,8,8,0.96);backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(255,255,255,0.05);}
+.nav-in{max-width:1340px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo img{height:78px;display:block;filter:invert(1);mix-blend-mode:screen;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-a{font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.42);text-decoration:none;transition:color 0.2s;position:relative;}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--teal);transition:width 0.25s;}
+.nav-a:hover,.nav-a.active{color:#fff;}.nav-a:hover::after,.nav-a.active::after{width:100%;}
+.nav-pill{padding:0.45rem 1.3rem;background:var(--teal);color:#080808;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 0 20px rgba(0,232,200,0.35);}
+.nav-pill:hover{transform:scale(1.07);box-shadow:0 0 32px rgba(0,232,200,0.55);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.nav-burger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;}
+
+/* HERO */
+#hero{min-height:70vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding-bottom:6rem;}
+.hero-bg{position:absolute;inset:0;background:url('images/women-2.jpg') center 35%/cover no-repeat;filter:brightness(0.18) saturate(0.6);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,#080808 0%,rgba(8,8,8,0.6) 40%,rgba(8,8,8,0.1) 100%);}
+.hero-content{position:relative;z-index:2;max-width:1340px;margin:0 auto;padding:0 2.5rem;width:100%;}
+.hero-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:rgba(0,232,200,0.8);display:inline-flex;align-items:center;gap:0.7rem;margin-bottom:2rem;}
+.hero-tag::before{content:'';width:28px;height:1.5px;background:var(--teal);}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,12vw,11rem);line-height:0.88;color:#fff;margin-bottom:1.5rem;}
+.hero-h1 .tl{color:var(--teal);}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.45);line-height:1.9;max-width:520px;}
+
+/* MAIN CONTACT SECTION */
+#contact{padding:8rem 2.5rem;background:#080808;position:relative;overflow:hidden;}
+#contact::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,232,200,0.2),transparent);}
+.con-in{max-width:1340px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+.sec-label{font-size:0.68rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem;}
+.sec-label::before{content:'';width:22px;height:1.5px;background:currentColor;}
+.sec-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,5rem);line-height:0.92;color:#fff;margin-bottom:1rem;}
+
+/* FORM */
+.cf-form{margin-top:0;}
+.cf-field{margin-bottom:1.4rem;}
+.cf-label{display:block;font-size:0.65rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:0.5rem;}
+.cf-input,.cf-textarea{width:100%;padding:1rem 1.3rem;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;color:#fff;font-size:0.95rem;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s,background 0.2s;-webkit-appearance:none;}
+.cf-input:focus,.cf-textarea:focus{border-color:var(--teal);background:rgba(0,232,200,0.04);}
+.cf-input::placeholder,.cf-textarea::placeholder{color:rgba(255,255,255,0.22);}
+.cf-textarea{resize:vertical;min-height:160px;line-height:1.6;}
+.cf-textarea.tall{min-height:280px;}
+.cf-check-group{display:flex;flex-direction:column;gap:0.75rem;margin-bottom:0.4rem;}
+.cf-check-label{display:flex;align-items:center;gap:0.75rem;cursor:pointer;font-size:0.88rem;color:rgba(255,255,255,0.55);transition:color 0.2s;}
+.cf-check-label:hover{color:rgba(255,255,255,0.8);}
+.cf-check-label input[type=checkbox]{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:1.5px solid rgba(255,255,255,0.2);border-radius:5px;background:rgba(255,255,255,0.03);cursor:pointer;flex-shrink:0;transition:border-color 0.2s,background 0.2s;position:relative;}
+.cf-check-label input[type=checkbox]:checked{background:var(--teal);border-color:var(--teal);}
+.cf-check-label input[type=checkbox]:checked::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:11px;color:#080808;font-weight:900;line-height:1;}
+.cf-divider{height:1px;background:rgba(255,255,255,0.05);margin:1.8rem 0;}
+.cf-select-wrap{position:relative;}
+.cf-select-wrap::after{content:'▾';position:absolute;right:1.2rem;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.3);pointer-events:none;font-size:0.8rem;}
+.cf-select{width:100%;padding:1rem 1.3rem;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;color:#fff;font-size:0.95rem;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;-webkit-appearance:none;cursor:pointer;}
+.cf-select:focus{border-color:var(--teal);}
+.cf-select option{background:#111;color:#fff;}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+.cf-btn{width:100%;padding:1.1rem;background:var(--teal);color:#080808;font-weight:700;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;border:none;border-radius:100px;cursor:pointer;box-shadow:0 0 28px rgba(0,232,200,0.4);transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;margin-top:0.5rem;}
+.cf-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 48px rgba(0,232,200,0.6);}
+.cf-success{display:none;text-align:center;padding:2rem;background:rgba(0,232,200,0.06);border:1px solid rgba(0,232,200,0.15);border-radius:12px;margin-top:1.5rem;}
+.cf-success.show{display:block;}
+.cf-success .check{font-size:2.5rem;margin-bottom:0.8rem;display:block;}
+.cf-success p{font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.7;}
+
+/* CONTACT INFO + SOCIALS */
+.ci-block{margin-bottom:3rem;}
+.ci-title{font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:1rem;}
+.ci-val{font-size:1rem;color:rgba(255,255,255,0.7);}
+.ci-val a{color:var(--teal);text-decoration:none;transition:opacity 0.2s;}
+.ci-val a:hover{opacity:0.75;}
+
+/* SOCIAL CARDS */
+.soc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.5rem;}
+.soc-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-decoration:none;display:flex;align-items:center;gap:1rem;transition:border-color 0.3s,transform 0.3s cubic-bezier(.34,1.56,.64,1);}
+.soc-card:hover{transform:translateY(-4px);border-color:var(--sc,rgba(255,255,255,0.2));}
+.soc-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--sci,rgba(255,255,255,0.06));}
+.soc-name{font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:0.15rem;}
+.soc-handle{font-size:0.68rem;color:rgba(255,255,255,0.3);}
+
+/* MUSIC TOGGLE */
+#music-btn{position:fixed;bottom:2rem;right:2rem;z-index:490;width:52px;height:52px;border-radius:50%;background:rgba(8,8,8,0.75);border:1.5px solid rgba(0,232,200,0.45);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;color:var(--teal);transition:all 0.25s ease;box-shadow:0 4px 20px rgba(0,0,0,0.5);}
+#music-btn:hover{background:rgba(0,232,200,0.12);border-color:var(--teal);transform:scale(1.1);box-shadow:0 0 20px rgba(0,232,200,0.4),0 4px 20px rgba(0,0,0,0.5);}
+#music-btn.playing{background:rgba(0,232,200,0.1);border-color:var(--teal);color:var(--teal);box-shadow:0 0 24px rgba(0,232,200,0.5),0 4px 20px rgba(0,0,0,0.5);animation:music-pulse 2s ease-in-out infinite;}
+@keyframes music-pulse{0%,100%{box-shadow:0 0 24px rgba(0,232,200,0.5),0 4px 20px rgba(0,0,0,0.5);}50%{box-shadow:0 0 40px rgba(0,232,200,0.7),0 4px 20px rgba(0,0,0,0.5);}}
+
+/* FOOTER */
+footer{background:#050505;padding:5.5rem 2.5rem 2.5rem;border-top:1px solid rgba(255,255,255,0.04);}
+.ft-in{max-width:1340px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem;}
+.ft-brand img{height:70px;filter:invert(1);mix-blend-mode:screen;opacity:0.8;display:block;margin-bottom:1rem;}
+.ft-brand p{font-size:0.85rem;color:rgba(255,255,255,0.22);line-height:1.9;max-width:240px;}
+.ft-col h4{font-size:0.58rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--teal);opacity:0.6;margin-bottom:1.2rem;}
+.ft-links{display:flex;flex-direction:column;gap:0.65rem;}
+.ft-links a{font-size:0.85rem;color:rgba(255,255,255,0.24);text-decoration:none;transition:color 0.2s;}
+.ft-links a:hover{color:rgba(255,255,255,0.8);}
+.ft-socials{display:flex;gap:0.75rem;margin-top:1.5rem;}
+.ft-soc{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:all 0.2s;}
+.ft-soc:hover{border-color:var(--teal);color:var(--teal);transform:scale(1.12);}
+.ft-bot{border-top:1px solid rgba(255,255,255,0.04);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.ft-copy{font-size:0.7rem;color:rgba(255,255,255,0.14);}
+
+@media(max-width:1024px){.con-in{grid-template-columns:1fr;gap:4rem;}.ft-grid{grid-template-columns:1fr 1fr;gap:3rem;}}
+@media(max-width:600px){
+  #nav{padding:0.8rem 1.2rem;}.nav-logo img{height:60px;}.nav-links{display:none;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(8,8,8,0.98);padding:1.5rem;gap:1.2rem;z-index:499;}
+  .nav-a{font-size:0.9rem;}.nav-burger{display:flex;}
+  #contact{padding:5rem 1.5rem;}
+  .cf-row{grid-template-columns:1fr;}
+  .soc-grid{grid-template-columns:1fr;}
+  .ft-grid{grid-template-columns:1fr;gap:2rem;}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div id="cursor">👟</div>
+<audio id="bg-music" loop><source src="audio/brave.mp3" type="audio/mpeg"></audio>
+<button id="music-btn" aria-label="Toggle music">♪</button>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo"><img src="assets/yin-logo.png" alt="You Inspire Now"></a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-a">Home</a>
+      <a href="about.html" class="nav-a">About</a>
+      <a href="events.html" class="nav-a">Events</a>
+      <a href="merch.html" class="nav-a">Merch</a>
+      <a href="contact.html" class="nav-a active">Connect</a>
+      <a href="donate.html" class="nav-pill">Give →</a>
+    </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-top-shade"></div>
+  <div class="blob blob-teal" style="width:600px;height:600px;top:-200px;right:-100px;--bd:16s;"></div>
+  <div class="blob blob-pu" style="width:400px;height:400px;bottom:-100px;left:5%;--bd:19s;--bdel:-4s;"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Connect With Us</div>
+    <h1 class="hero-h1">We'd Love To<br>Hear From <span class="tl">You.</span></h1>
+    <p class="hero-sub">Whether you have a question, a testimony, a prayer request, or just want to connect — we're here. Reach out below and someone from the YIN team will get back to you.</p>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact">
+  <div class="blob blob-pink" style="position:absolute;width:600px;height:600px;top:-100px;right:-150px;--bd:15s;"></div>
+  <div class="blob blob-pu" style="position:absolute;width:500px;height:500px;bottom:-100px;left:-100px;--bd:18s;--bdel:-6s;"></div>
+  <div class="blob blob-teal" style="position:absolute;width:350px;height:350px;top:40%;left:45%;--bd:22s;--bdel:-10s;opacity:0.8;"></div>
+  <div class="con-in">
+
+    <!-- FORM -->
+    <div class="reveal-left">
+      <div class="sec-label" style="color:var(--teal);">— Send a Message</div>
+      <div class="sec-h">Let's <span style="color:var(--teal);">Connect.</span></div>
+      <p style="font-size:0.95rem;color:rgba(255,255,255,0.35);line-height:1.9;margin-bottom:2.5rem;">Fill in the form below and we'll be in touch soon. All fields marked are required.</p>
+      <form class="cf-form" id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="cf-row">
+          <div class="cf-field">
+            <label class="cf-label" for="fname">First Name</label>
+            <input class="cf-input" id="fname" type="text" placeholder="Your first name" required>
+          </div>
+          <div class="cf-field">
+            <label class="cf-label" for="lname">Last Name</label>
+            <input class="cf-input" id="lname" type="text" placeholder="Your last name" required>
+          </div>
+        </div>
+        <div class="cf-row">
+          <div class="cf-field">
+            <label class="cf-label" for="email">Email Address *</label>
+            <input class="cf-input" id="email" type="email" placeholder="your@email.com" required>
+          </div>
+          <div class="cf-field">
+            <label class="cf-label" for="phone">Phone (optional)</label>
+            <input class="cf-input" id="phone" type="tel" placeholder="(555) 000-0000">
+          </div>
+        </div>
+        <div class="cf-row">
+          <div class="cf-field">
+            <label class="cf-label" for="city">City</label>
+            <input class="cf-input" id="city" type="text" placeholder="Your city">
+          </div>
+          <div class="cf-field">
+            <label class="cf-label" for="state">State / Country</label>
+            <input class="cf-input" id="state" type="text" placeholder="e.g. Florida, USA">
+          </div>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="subject">What's This About? *</label>
+          <div class="cf-select-wrap">
+            <select class="cf-select" id="subject" required>
+              <option value="" disabled selected>Select a topic</option>
+              <option value="events">Event Registration / Info</option>
+              <option value="speaking">Speaking Engagement</option>
+              <option value="merch">Merch / Orders</option>
+              <option value="donation">Donation / GoInspireNow</option>
+              <option value="prayer">Prayer Request</option>
+              <option value="testimony">Share a Testimony</option>
+              <option value="general">General Message</option>
+            </select>
+          </div>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="heard">How Did You Hear About Us?</label>
+          <div class="cf-select-wrap">
+            <select class="cf-select" id="heard">
+              <option value="" disabled selected>Select one</option>
+              <option value="instagram">Instagram</option>
+              <option value="tiktok">TikTok</option>
+              <option value="facebook">Facebook</option>
+              <option value="youtube">YouTube</option>
+              <option value="friend">Friend / Family</option>
+              <option value="event">In-Person Event</option>
+              <option value="search">Google / Search</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="cf-divider"></div>
+        <div class="cf-field">
+          <label class="cf-label" for="message">Your Message *</label>
+          <textarea class="cf-textarea tall" id="message" placeholder="Write your message here — share your heart, ask a question, request prayer, or just say hello..." required></textarea>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" style="margin-bottom:0.8rem;">I'm Interested In</label>
+          <div class="cf-check-group">
+            <label class="cf-check-label"><input type="checkbox" name="interest" value="newsletter"> Joining the YIN email list</label>
+            <label class="cf-check-label"><input type="checkbox" name="interest" value="events"> Getting notified about upcoming events</label>
+            <label class="cf-check-label"><input type="checkbox" name="interest" value="community"> Being part of the YIN community</label>
+            <label class="cf-check-label"><input type="checkbox" name="interest" value="prayer"> Receiving prayer from the YIN team</label>
+          </div>
+        </div>
+        <button class="cf-btn" type="submit">Send Message →</button>
+        <div class="cf-success" id="form-success">
+          <span class="check">✓</span>
+          <p>Your message has been sent. We'll be in touch with you soon — thank you for reaching out!</p>
+        </div>
+      </form>
+    </div>
+
+    <!-- INFO + SOCIALS -->
+    <div class="reveal-right" style="transition-delay:0.12s">
+      <div class="sec-label" style="color:var(--pink);">— Find Us</div>
+      <div class="sec-h" style="margin-bottom:2.5rem;">Follow The<br><span style="color:var(--pink);">Journey.</span></div>
+
+      <div class="ci-block">
+        <div class="ci-title">Email</div>
+        <div class="ci-val"><a href="mailto:hello@youinspirenow.com">hello@youinspirenow.com</a></div>
+      </div>
+
+      <div class="ci-block">
+        <div class="ci-title">Website</div>
+        <div class="ci-val"><a href="https://www.youinspirenow.com" target="_blank">youinspirenow.com</a></div>
+      </div>
+
+      <div class="ci-block">
+        <div class="ci-title">Giving</div>
+        <div class="ci-val"><a href="https://www.goinspirenow.org" target="_blank">goinspirenow.org</a></div>
+      </div>
+
+      <div class="ci-title" style="margin-bottom:1rem;">Follow Along</div>
+      <div class="soc-grid">
+        <a href="https://instagram.com/youinspirenow" target="_blank" rel="noopener" class="soc-card" style="--sc:rgba(225,48,108,0.4);">
+          <div class="soc-icon" style="--sci:rgba(225,48,108,0.12);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="#E1306C" stroke="none"/></svg>
+          </div>
+          <div><div class="soc-name">Instagram</div><div class="soc-handle">@youinspirenow</div></div>
+        </a>
+        <a href="https://facebook.com/youinspirenow" target="_blank" rel="noopener" class="soc-card" style="--sc:rgba(24,119,242,0.4);">
+          <div class="soc-icon" style="--sci:rgba(24,119,242,0.12);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2" stroke="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </div>
+          <div><div class="soc-name">Facebook</div><div class="soc-handle">You Inspire Now</div></div>
+        </a>
+        <a href="https://tiktok.com/@youinspirenow" target="_blank" rel="noopener" class="soc-card" style="--sc:rgba(255,255,255,0.2);">
+          <div class="soc-icon" style="--sci:rgba(255,255,255,0.06);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.17 8.17 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg>
+          </div>
+          <div><div class="soc-name">TikTok</div><div class="soc-handle">@youinspirenow</div></div>
+        </a>
+        <a href="https://youtube.com/@youinspirenow" target="_blank" rel="noopener" class="soc-card" style="--sc:rgba(255,0,0,0.3);">
+          <div class="soc-icon" style="--sci:rgba(255,0,0,0.1);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF0000"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg>
+          </div>
+          <div><div class="soc-name">YouTube</div><div class="soc-handle">@youinspirenow</div></div>
+        </a>
+      </div>
+
+      <div style="margin-top:3rem;padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:14px;border-left:3px solid var(--teal);">
+        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:0.6rem;">Speaking / Ministry Requests</div>
+        <p style="font-size:0.88rem;color:rgba(255,255,255,0.35);line-height:1.8;">For speaking engagements, partnerships, or ministry collaborations — use the contact form and select "Speaking Engagement" in the topic dropdown. We'll respond within 48–72 hours.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="ft-in">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <img src="assets/yin-logo.png" alt="You Inspire Now">
+        <p>Faith-rooted encouragement for women becoming who they were created to be.</p>
+        <div class="ft-socials">
+          <a href="https://instagram.com/youinspirenow" target="_blank" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://facebook.com/youinspirenow" target="_blank" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://tiktok.com/@youinspirenow" target="_blank" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.17 8.17 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg></a>
+          <a href="https://youtube.com/@youinspirenow" target="_blank" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#080808"/></svg></a>
+        </div>
+      </div>
+      <div class="ft-col"><h4>Navigate</h4><div class="ft-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="events.html">Events</a><a href="merch.html">Merch</a><a href="contact.html">Connect</a></div></div>
+      <div class="ft-col"><h4>Socials</h4><div class="ft-links"><a href="https://instagram.com/youinspirenow" target="_blank">Instagram</a><a href="https://facebook.com/youinspirenow" target="_blank">Facebook</a><a href="https://tiktok.com/@youinspirenow" target="_blank">TikTok</a><a href="https://youtube.com/@youinspirenow" target="_blank">YouTube</a></div></div>
+      <div class="ft-col"><h4>Mission</h4><div class="ft-links"><a href="donate.html" style="color:var(--teal);opacity:0.9;">Go Inspire Now →</a><a href="donate.html">Donate</a><a href="contact.html">Contact Us</a></div></div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 You Inspire Now. All Rights Reserved.</p>
+      <p class="ft-copy">Gifted · Purposed · Be-YOU-tiful</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function handleSubmit(e){
+  e.preventDefault();
+  document.getElementById('contact-form').style.opacity='0.4';
+  document.getElementById('contact-form').style.pointerEvents='none';
+  setTimeout(()=>{
+    document.getElementById('form-success').classList.add('show');
+    document.getElementById('contact-form').reset();
+    document.getElementById('contact-form').style.opacity='1';
+    document.getElementById('contact-form').style.pointerEvents='auto';
+  },800);
+}
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+document.getElementById('nav-burger').addEventListener('click',()=>document.getElementById('nav-links').classList.toggle('open'));
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>io.observe(el));
+const c=document.getElementById('cursor');
+if(c){document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});document.querySelectorAll('a,button,input,select,textarea').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hov'));el.addEventListener('mouseleave',()=>c.classList.remove('hov'));});}
+(function(){const btn=document.getElementById('music-btn'),aud=document.getElementById('bg-music');if(!btn||!aud)return;let on=false;function play(){aud.volume=0.38;aud.play().then(()=>{on=true;btn.classList.add('playing');btn.innerHTML='♫';}).catch(()=>{});}function pause(){aud.pause();on=false;btn.classList.remove('playing');btn.innerHTML='♪';}btn.addEventListener('click',()=>{on?pause():play();});window.addEventListener('beforeunload',()=>{localStorage.setItem('yin-playing',on?'1':'0');localStorage.setItem('yin-time',aud.currentTime.toString());});const wasOn=localStorage.getItem('yin-playing')==='1';const t=parseFloat(localStorage.getItem('yin-time')||'0');if(wasOn){aud.currentTime=t;play();}else{document.addEventListener('click',function first(){if(!on)play();document.removeEventListener('click',first);},{once:true});}})();
+</script>
+</body>
+</html>

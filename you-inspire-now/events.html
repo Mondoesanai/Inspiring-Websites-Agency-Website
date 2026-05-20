@@ -5,695 +5,330 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Events — You Inspire Now</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Lato',sans-serif;background:#FFF9FE;color:#2D0A5E;overflow-x:hidden;}
-:root{
-  --dp:#2D0A5E;--vi:#7C3AED;--vi2:#A855F7;
-  --cy:#06B6D4;--pk:#EC4899;--pk2:#F472B6;
-  --go:#FBBF24;--cr:#FFF9FE;--lv:#FAF5FF;
-}
-.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.025;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");}
-
-/* ══ NAV ══ */
-#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.1rem 2.5rem;
-  background:transparent;transition:background 0.3s,box-shadow 0.3s;}
-#nav.scrolled{background:rgba(28,4,60,0.96);backdrop-filter:blur(20px);
-  box-shadow:0 4px 32px rgba(0,0,0,0.25);}
-.nav-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
-.nav-logo img{height:52px;display:block;}
-.nav-links{display:flex;align-items:center;gap:2rem;}
-.nav-a{font-size:0.67rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;
-  color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;position:relative;}
-.nav-a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;
-  background:var(--cy);transition:width 0.2s;}
-.nav-a:hover{color:#fff;}.nav-a:hover::after,.nav-a.active::after{width:100%;}
-.nav-a.active{color:var(--cy);}
-.nav-pill{display:inline-block;padding:0.48rem 1.3rem;
-  background:linear-gradient(135deg,var(--pk),var(--vi));color:#fff;
-  font-size:0.67rem;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;
-  border-radius:100px;text-decoration:none;
-  box-shadow:0 4px 16px rgba(236,72,153,0.45);
-  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
-.nav-pill:hover{transform:scale(1.06);box-shadow:0 8px 28px rgba(236,72,153,0.6);}
-.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
-.nav-burger span{display:block;width:22px;height:2px;background:#fff;}
-
-/* ══ PAGE HERO ══ */
-#ph{padding:8rem 2.5rem 5.5rem;position:relative;overflow:hidden;
-  background:linear-gradient(148deg,#180330 0%,#2D0A5E 40%,#4C1D95 70%,#063A50 100%);
-  text-align:center;}
-.ph-orb{position:absolute;border-radius:50%;pointer-events:none;}
-.ph-orb1{width:600px;height:600px;top:-200px;left:-150px;
-  background:radial-gradient(circle,rgba(236,72,153,0.15) 0%,transparent 70%);
-  animation:fl 11s ease-in-out infinite;}
-.ph-orb2{width:500px;height:500px;bottom:-150px;right:-100px;
-  background:radial-gradient(circle,rgba(6,182,212,0.15) 0%,transparent 70%);
-  animation:fl 15s ease-in-out infinite reverse;}
-.ph-orb3{width:250px;height:250px;top:45%;left:50%;transform:translateX(-50%);
-  background:radial-gradient(circle,rgba(251,191,36,0.1) 0%,transparent 70%);
-  animation:fl 7s ease-in-out infinite;}
-@keyframes fl{0%,100%{transform:translateY(0);}50%{transform:translateY(-28px);}}
-.ph-noise{position:absolute;inset:0;opacity:0.04;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size:200px;}
-.ph-in{max-width:750px;margin:0 auto;position:relative;z-index:2;}
-.ph-tag{display:inline-flex;align-items:center;gap:0.55rem;font-size:0.58rem;font-weight:900;
-  letter-spacing:0.25em;text-transform:uppercase;color:rgba(251,191,36,0.9);
-  border:1px solid rgba(251,191,36,0.3);padding:0.38rem 1.1rem;border-radius:100px;
-  margin-bottom:1.6rem;background:rgba(251,191,36,0.06);}
-.ph-dot{width:6px;height:6px;border-radius:50%;background:var(--go);
-  animation:pu 2s infinite;}
-@keyframes pu{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.25;transform:scale(0.5);}}
-.ph-h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4rem);
-  font-weight:700;line-height:1.06;letter-spacing:-0.025em;color:#fff;margin-bottom:1.2rem;}
-.ph-h1 em{color:#A8E6E3;font-style:italic;display:block;}
-.ph-sub{font-size:1rem;font-weight:300;color:rgba(255,255,255,0.65);
-  line-height:1.95;max-width:560px;margin:0 auto 2.5rem;}
-.ph-anchors{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;}
-.anch-pk{display:inline-block;padding:0.75rem 2rem;
-  background:linear-gradient(135deg,var(--pk),var(--pk2));color:#fff;
-  font-weight:900;font-size:0.67rem;letter-spacing:0.12em;text-transform:uppercase;
-  border-radius:100px;text-decoration:none;
-  box-shadow:0 6px 24px rgba(236,72,153,0.45);
-  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
-.anch-pk:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 14px 40px rgba(236,72,153,0.6);}
-.anch-cy{display:inline-block;padding:0.75rem 2rem;
-  background:rgba(255,255,255,0.1);color:#fff;
-  font-weight:700;font-size:0.67rem;letter-spacing:0.12em;text-transform:uppercase;
-  border-radius:100px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.3);
-  backdrop-filter:blur(4px);transition:background 0.2s,transform 0.2s;}
-.anch-cy:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px);}
-
-/* ══ SHARED ══ */
-.sec{padding:6.5rem 2.5rem;}
-.sec-in{max-width:1200px;margin:0 auto;}
-.ey{font-size:0.6rem;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;
-  color:var(--vi);display:block;margin-bottom:0.65rem;}
-.sh2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;
-  letter-spacing:-0.025em;line-height:1.12;color:var(--dp);margin-bottom:1rem;}
-.sh2 em{font-style:italic;color:var(--cy);}
-.sh2-wh{color:#fff;}
-.bp{font-size:0.97rem;color:rgba(45,10,94,0.55);line-height:1.9;}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+body{font-family:'Inter',sans-serif;background:#080808;color:#fff;overflow-x:hidden;cursor:none;}
+@media(hover:none){body{cursor:auto;}}
+:root{--teal:#00E8C8;--pink:#FF2D9E;--pu:#8B2FFF;--black:#080808;--card:#111111;--border:rgba(255,255,255,0.07);--muted:rgba(255,255,255,0.38);}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+#cursor{position:fixed;pointer-events:none;z-index:10000;font-size:24px;line-height:1;user-select:none;transform:translate(-6px,-22px) rotate(-20deg);transition:font-size 0.15s ease;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.8));}
+#cursor.hov{font-size:32px;transform:translate(-4px,-24px) rotate(-20deg);}
+@media(hover:none){#cursor{display:none;}}
+.hero-top-shade{position:absolute;top:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,rgba(8,8,8,0.85) 0%,transparent 100%);z-index:1;pointer-events:none;}
+.splat-wrap{position:absolute;pointer-events:none;}
+.blob{position:absolute;border-radius:71% 29% 76% 24% / 42% 68% 32% 58%;filter:blur(80px);pointer-events:none;animation:blob-drift var(--bd,14s) ease-in-out infinite alternate var(--bdel,0s);}
+.blob-teal{background:rgba(0,232,200,0.22);}
+.blob-pink{background:rgba(255,45,158,0.20);}
+.blob-pu{background:rgba(139,47,255,0.18);}
+@keyframes blob-drift{from{transform:translate(0,0) scale(1);border-radius:71% 29% 76% 24% / 42% 68% 32% 58%;}to{transform:translate(var(--btx,30px),var(--bty,-20px)) scale(var(--bs,1.12));border-radius:42% 58% 31% 69% / 70% 35% 65% 30%;}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.in{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-36px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-left.in{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(36px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-right.in{opacity:1;transform:translateX(0);}
 
-/* ══ EVENT: MARRIAGE ══ */
-#marriage{background:#FFF9FE;padding:7rem 2.5rem;}
-.ev-full{max-width:1200px;margin:0 auto;}
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1rem 2.5rem;background:rgba(8,8,8,0.55);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.4s,box-shadow 0.4s;}
+#nav.scrolled{background:rgba(8,8,8,0.96);backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(255,255,255,0.05);}
+.nav-in{max-width:1340px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo img{height:78px;display:block;filter:invert(1);mix-blend-mode:screen;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-a{font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.42);text-decoration:none;transition:color 0.2s;position:relative;}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--teal);transition:width 0.25s;}
+.nav-a:hover,.nav-a.active{color:#fff;}.nav-a:hover::after,.nav-a.active::after{width:100%;}
+.nav-pill{padding:0.45rem 1.3rem;background:var(--teal);color:#080808;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 0 20px rgba(0,232,200,0.35);}
+.nav-pill:hover{transform:scale(1.07);box-shadow:0 0 32px rgba(0,232,200,0.55);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.nav-burger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;}
 
-/* Visual Band above each event */
-.ev-band-pk{height:5px;border-radius:4px 4px 0 0;
-  background:linear-gradient(90deg,var(--pk),var(--vi),var(--cy));}
-.ev-band-cy{height:5px;border-radius:4px 4px 0 0;
-  background:linear-gradient(90deg,var(--cy),var(--vi),var(--pk));}
+/* HERO */
+#hero{min-height:88vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding-bottom:6rem;}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;filter:brightness(0.22) saturate(0.65);transform:scale(1.04);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,#080808 0%,rgba(8,8,8,0.65) 40%,rgba(8,8,8,0.15) 100%);}
+.hero-content{position:relative;z-index:2;max-width:1340px;margin:0 auto;padding:0 2.5rem;width:100%;}
+.hero-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,45,158,0.9);display:inline-flex;align-items:center;gap:0.7rem;margin-bottom:2rem;}
+.hero-tag::before{content:'';width:28px;height:1.5px;background:var(--pink);}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,12vw,11rem);line-height:0.88;color:#fff;margin-bottom:1.5rem;}
+.hero-h1 .pk{color:var(--pink);}
+.hero-h1 .tl{color:var(--teal);}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.45);line-height:1.9;max-width:520px;}
 
-/* Event card wrapper */
-.ev-card{border-radius:0 0 24px 24px;overflow:hidden;
-  box-shadow:0 32px 80px rgba(45,10,94,0.1),0 8px 24px rgba(45,10,94,0.07);}
+/* ADVENTURE ODYSSEY — FEATURED */
+#odyssey{padding:0;position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:stretch;}
+.od-photo{position:absolute;inset:0;background:url('images/women-1.jpg') center 20%/cover no-repeat;filter:brightness(0.32) saturate(0.8);}
+.od-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(8,8,8,0.97) 42%,rgba(8,8,8,0.2) 100%);}
+.od-side-accent{position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--pink),var(--pu));}
+.od-in{position:relative;z-index:2;max-width:1340px;margin:0 auto;padding:8rem 2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;width:100%;}
+.od-intensity{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.6rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--pink);margin-bottom:1.5rem;}
+.od-intensity::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 12px var(--pink);animation:pulse-dot 1.4s ease-in-out infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.6);}}
+.od-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,7rem);line-height:0.88;color:#fff;margin-bottom:1.2rem;}
+.od-title .pk{color:var(--pink);}
+.od-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;color:rgba(0,232,200,0.7);line-height:1.7;margin-bottom:1.8rem;padding-left:1.2rem;border-left:2px solid rgba(0,232,200,0.3);}
+.od-desc{font-size:0.95rem;color:rgba(255,255,255,0.42);line-height:1.9;margin-bottom:2.5rem;}
+.od-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2.8rem;}
+.od-stat{border-top:1px solid rgba(255,255,255,0.07);padding-top:1rem;}
+.od-stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#fff;line-height:1;}
+.od-stat-lbl{font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-top:0.25rem;}
+.od-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-pink{display:inline-block;padding:0.95rem 2.4rem;background:var(--pink);color:#fff;font-weight:700;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;text-decoration:none;box-shadow:0 0 28px rgba(255,45,158,0.4);transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.btn-pink:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 48px rgba(255,45,158,0.6);}
+.btn-teal{display:inline-block;padding:0.95rem 2.4rem;background:var(--teal);color:#080808;font-weight:700;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;text-decoration:none;box-shadow:0 0 28px rgba(0,232,200,0.4);transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.btn-teal:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 48px rgba(0,232,200,0.6);}
+.btn-ghost{display:inline-block;padding:0.95rem 2.4rem;background:transparent;color:rgba(255,255,255,0.7);font-weight:600;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.18);transition:all 0.2s;}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff;}
+.od-image-frame{position:relative;}
+.od-frame-img{width:100%;border-radius:8px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,0.6),0 0 0 1px rgba(255,45,158,0.15);}
+.od-frame-img img{width:100%;display:block;filter:brightness(0.9) saturate(1.15);}
+.od-badge{position:absolute;bottom:-20px;left:-20px;background:var(--pink);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.08em;padding:0.7rem 1.4rem;border-radius:8px;box-shadow:0 8px 32px rgba(255,45,158,0.5);}
 
-/* Two-column layout */
-.ev-cols{display:grid;grid-template-columns:1fr 1fr;min-height:580px;}
+/* ALL EVENTS */
+#all-events{padding:8rem 2.5rem;background:#080808;position:relative;overflow:hidden;}
+#all-events::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,47,255,0.2),transparent);}
+.ae-in{max-width:1340px;margin:0 auto;}
+.sec-label{font-size:0.68rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem;}
+.sec-label::before{content:'';width:22px;height:1.5px;background:currentColor;}
+.sec-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6vw,5.5rem);line-height:0.92;color:#fff;margin-bottom:1rem;}
+.events-list{margin-top:4rem;display:flex;flex-direction:column;gap:2px;}
+.ev-row{display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:2rem;padding:2.2rem 2.5rem;background:var(--card);border:1px solid var(--border);border-radius:12px;text-decoration:none;position:relative;overflow:hidden;transition:border-color 0.3s,transform 0.4s cubic-bezier(.34,1.56,.64,1);}
+.ev-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ev-clr,var(--teal));transform:scaleY(0);transform-origin:bottom;transition:transform 0.35s ease;}
+.ev-row:hover{border-color:rgba(255,255,255,0.12);transform:translateX(6px);}
+.ev-row:hover::before{transform:scaleY(1);}
+.ev-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:rgba(255,255,255,0.07);letter-spacing:0.05em;line-height:1;}
+.ev-name{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#fff;letter-spacing:0.03em;line-height:1;margin-bottom:0.3rem;}
+.ev-sub{font-size:0.82rem;color:rgba(255,255,255,0.3);line-height:1.6;}
+.ev-meta{text-align:right;}
+.ev-tag{display:inline-block;font-size:0.58rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:0.3rem 0.8rem;border-radius:100px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);margin-bottom:0.5rem;}
+.ev-arrow{font-size:1.2rem;color:rgba(255,255,255,0.15);transition:color 0.2s,transform 0.2s;display:block;}
+.ev-row:hover .ev-arrow{color:var(--ev-clr,var(--teal));transform:translateX(4px);}
 
-/* Left: dark content panel */
-.ev-left-pk{background:linear-gradient(155deg,#2D0A5E 0%,#4C1D95 60%,#6B1260 100%);
-  padding:4rem;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;}
-.ev-left-cy{background:linear-gradient(155deg,#0A1E3E 0%,#0C3B5E 55%,#0F2D4A 100%);
-  padding:4rem;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;}
-.ev-left-pk::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;
-  border-radius:50%;background:radial-gradient(circle,rgba(236,72,153,0.25),transparent 70%);}
-.ev-left-pk::after{content:'';position:absolute;bottom:-60px;left:-60px;width:220px;height:220px;
-  border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.2),transparent 70%);}
-.ev-left-cy::before{content:'';position:absolute;top:-80px;left:-80px;width:300px;height:300px;
-  border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,0.2),transparent 70%);}
-.ev-left-cy::after{content:'';position:absolute;bottom:-60px;right:-60px;width:220px;height:220px;
-  border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.2),transparent 70%);}
+/* REGISTER CTA */
+#reg-cta{padding:8rem 2.5rem;background:#0A0A0A;position:relative;overflow:hidden;text-align:center;}
+.reg-in{max-width:700px;margin:0 auto;position:relative;z-index:1;}
 
-.ev-type{display:inline-flex;align-items:center;gap:0.45rem;font-size:0.56rem;font-weight:900;
-  letter-spacing:0.24em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:100px;
-  margin-bottom:1.6rem;position:relative;z-index:1;}
-.ev-type-pk{background:rgba(236,72,153,0.22);color:#FBCFE8;border:1px solid rgba(236,72,153,0.35);}
-.ev-type-cy{background:rgba(6,182,212,0.22);color:#A5F3FC;border:1px solid rgba(6,182,212,0.35);}
+/* MUSIC TOGGLE */
+#music-btn{position:fixed;bottom:2rem;right:2rem;z-index:490;width:52px;height:52px;border-radius:50%;background:rgba(8,8,8,0.75);border:1.5px solid rgba(0,232,200,0.45);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;color:var(--teal);transition:all 0.25s ease;box-shadow:0 4px 20px rgba(0,0,0,0.5);}
+#music-btn:hover{background:rgba(0,232,200,0.12);border-color:var(--teal);transform:scale(1.1);box-shadow:0 0 20px rgba(0,232,200,0.4),0 4px 20px rgba(0,0,0,0.5);}
+#music-btn.playing{background:rgba(0,232,200,0.1);border-color:var(--teal);color:var(--teal);box-shadow:0 0 24px rgba(0,232,200,0.5),0 4px 20px rgba(0,0,0,0.5);animation:music-pulse 2s ease-in-out infinite;}
+@keyframes music-pulse{0%,100%{box-shadow:0 0 24px rgba(0,232,200,0.5),0 4px 20px rgba(0,0,0,0.5);}50%{box-shadow:0 0 40px rgba(0,232,200,0.7),0 4px 20px rgba(0,0,0,0.5);}}
 
-.ev-name{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,2.65rem);
-  font-weight:700;line-height:1.08;letter-spacing:-0.025em;color:#fff;
-  margin-bottom:1.3rem;position:relative;z-index:1;}
-.ev-name em{display:block;font-style:italic;}
-.ev-name-pk em{color:#F9A8D4;}
-.ev-name-cy em{color:#A5F3FC;}
-
-.ev-copy{font-size:0.96rem;font-weight:300;color:rgba(255,255,255,0.72);
-  line-height:1.95;margin-bottom:2rem;position:relative;z-index:1;max-width:420px;}
-
-.ev-details{display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:2.2rem;
-  position:relative;z-index:1;}
-.ev-det{display:flex;align-items:center;gap:0.4rem;font-size:0.62rem;font-weight:700;
-  letter-spacing:0.06em;color:rgba(255,255,255,0.58);text-transform:uppercase;}
-.ev-det span:first-child{font-size:0.9rem;}
-
-.ev-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2.5rem;position:relative;z-index:1;}
-.ev-t{font-size:0.55rem;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;
-  padding:0.24rem 0.72rem;border-radius:100px;}
-.ev-t-pk{background:rgba(236,72,153,0.18);color:#FBCFE8;}
-.ev-t-vi{background:rgba(168,85,247,0.22);color:#DDD6FE;}
-.ev-t-go{background:rgba(251,191,36,0.18);color:#FDE68A;}
-.ev-t-cy{background:rgba(6,182,212,0.18);color:#A5F3FC;}
-
-.btn-reg-pk{display:inline-block;padding:1rem 2.4rem;
-  background:linear-gradient(135deg,var(--pk),var(--pk2));color:#fff;
-  font-weight:900;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
-  border-radius:100px;text-decoration:none;
-  box-shadow:0 8px 32px rgba(236,72,153,0.5);
-  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;
-  position:relative;z-index:1;}
-.btn-reg-pk:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 16px 48px rgba(236,72,153,0.65);}
-
-.btn-reg-cy{display:inline-block;padding:1rem 2.4rem;
-  background:linear-gradient(135deg,var(--cy),#0891B2);color:#fff;
-  font-weight:900;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
-  border-radius:100px;text-decoration:none;
-  box-shadow:0 8px 32px rgba(6,182,212,0.5);
-  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;
-  position:relative;z-index:1;}
-.btn-reg-cy:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 16px 48px rgba(6,182,212,0.65);}
-
-/* Right: visual panel */
-.ev-right{display:flex;flex-direction:column;background:#FAF5FF;}
-.ev-visual-pk{background:linear-gradient(155deg,#4C1D95 0%,#7C3AED 50%,#BE185D 100%);
-  flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;padding:3.5rem 3rem;gap:1.5rem;}
-.ev-visual-cy{background:linear-gradient(155deg,#0C4A6E 0%,#0891B2 50%,#7C3AED 100%);
-  flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;padding:3.5rem 3rem;gap:1.5rem;}
-.ev-vis-icon{font-size:5rem;display:block;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.35));}
-.ev-vis-quote{font-family:'Playfair Display',serif;font-size:1.12rem;font-style:italic;
-  color:rgba(255,255,255,0.88);text-align:center;line-height:1.7;max-width:300px;}
-.ev-vis-pills{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;}
-.ev-vis-pill{font-size:0.55rem;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;
-  padding:0.26rem 0.8rem;border-radius:100px;background:rgba(255,255,255,0.14);
-  color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.2);}
-
-/* Stats row */
-.ev-stats{display:grid;grid-template-columns:repeat(3,1fr);
-  background:#fff;border-top:1px solid rgba(45,10,94,0.08);}
-.ev-stat{padding:1.6rem;text-align:center;border-right:1px solid rgba(45,10,94,0.08);}
-.ev-stat:last-child{border-right:none;}
-.ev-stat-n{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:700;
-  letter-spacing:-0.02em;line-height:1;}
-.ev-stat-n-pk{color:var(--pk);}
-.ev-stat-n-cy{color:var(--cy);}
-.ev-stat-l{font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(45,10,94,0.42);margin-top:0.35rem;}
-
-/* ══ WHAT TO EXPECT ══ */
-.expect-sec{padding:6.5rem 2.5rem;background:var(--lv);}
-.expect-in{max-width:1200px;margin:0 auto;}
-.expect-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;margin-top:4rem;}
-.expect-block{background:#fff;border-radius:20px;overflow:hidden;
-  box-shadow:0 8px 40px rgba(45,10,94,0.07),0 2px 8px rgba(45,10,94,0.05);}
-.eb-top-pk{background:linear-gradient(135deg,#4C1D95,#BE185D);padding:2.5rem;position:relative;overflow:hidden;}
-.eb-top-cy{background:linear-gradient(135deg,#0C4A6E,#7C3AED);padding:2.5rem;position:relative;overflow:hidden;}
-.eb-top-pk::before,.eb-top-cy::before{content:'';position:absolute;top:-40px;right:-40px;
-  width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.08);}
-.eb-ev-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;
-  color:#fff;margin-bottom:0.3rem;position:relative;z-index:1;}
-.eb-ev-sub{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(255,255,255,0.55);position:relative;z-index:1;}
-.eb-body{padding:2.5rem;}
-.eb-item{display:flex;gap:1rem;margin-bottom:1.6rem;}
-.eb-item:last-child{margin-bottom:0;}
-.eb-ico{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;
-  justify-content:center;font-size:1.1rem;flex-shrink:0;}
-.eb-ico-pk{background:linear-gradient(135deg,rgba(236,72,153,0.18),rgba(168,85,247,0.18));}
-.eb-ico-cy{background:linear-gradient(135deg,rgba(6,182,212,0.18),rgba(124,58,237,0.18));}
-.eb-txt h4{font-size:0.82rem;font-weight:900;color:var(--dp);letter-spacing:0.02em;margin-bottom:0.3rem;}
-.eb-txt p{font-size:0.86rem;color:rgba(45,10,94,0.52);line-height:1.75;}
-
-/* ══ WHO IS THIS FOR ══ */
-.who-sec{padding:6.5rem 2.5rem;background:#fff;}
-.who-in{max-width:1200px;margin:0 auto;}
-.who-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem;}
-.who-card{border-radius:18px;padding:2rem;text-align:center;border:1.5px solid transparent;
-  transition:transform 0.25s cubic-bezier(.34,1.56,.64,1),box-shadow 0.25s;}
-.who-card:hover{transform:translateY(-6px);box-shadow:0 20px 56px rgba(45,10,94,0.12);}
-.who-card-1{background:linear-gradient(145deg,#FAF5FF,#F3E8FF);border-color:rgba(168,85,247,0.18);}
-.who-card-2{background:linear-gradient(145deg,#FFF0F6,#FCE7F3);border-color:rgba(236,72,153,0.18);}
-.who-card-3{background:linear-gradient(145deg,#F0FDFF,#ECFEFF);border-color:rgba(6,182,212,0.18);}
-.who-card-4{background:linear-gradient(145deg,#FFFBEB,#FEF9C3);border-color:rgba(251,191,36,0.22);}
-.who-ico{font-size:2.4rem;margin-bottom:1rem;display:block;}
-.who-h{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;
-  color:var(--dp);margin-bottom:0.5rem;line-height:1.3;}
-.who-p{font-size:0.82rem;color:rgba(45,10,94,0.52);line-height:1.75;}
-
-/* ══ TESTIMONY BAND ══ */
-.test-band{background:linear-gradient(135deg,#2D0A5E,#7C3AED 50%,#0882A0);
-  padding:5.5rem 2.5rem;position:relative;overflow:hidden;}
-.test-band::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 60% 80% at 20% 50%,rgba(255,255,255,0.07),transparent);}
-.test-in{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
-.test-tag{display:inline-block;font-size:0.58rem;font-weight:900;letter-spacing:0.28em;
-  text-transform:uppercase;color:rgba(251,191,36,0.85);margin-bottom:1.5rem;}
-.test-h{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);
-  font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.02em;margin-bottom:3.5rem;
-  max-width:640px;}
-.test-h em{font-style:italic;color:#A8E6E3;}
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;}
-.test-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
-  border-radius:18px;padding:2rem 2rem 1.6rem;backdrop-filter:blur(10px);}
-.test-q{font-size:0.93rem;color:rgba(255,255,255,0.78);line-height:1.8;
-  font-style:italic;margin-bottom:1.4rem;}
-.test-who{font-size:0.62rem;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(255,255,255,0.42);}
-
-/* ══ CTA BAND ══ */
-.cta-band{background:linear-gradient(135deg,var(--pk) 0%,var(--vi) 50%,var(--cy) 100%);
-  padding:6rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
-.cta-band::before{content:'';position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity:0.04;background-size:200px;}
-.cta-in{max-width:640px;margin:0 auto;position:relative;z-index:1;}
-.cta-ey{font-size:0.6rem;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;
-  color:rgba(255,255,255,0.72);display:block;margin-bottom:1rem;}
-.cta-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);
-  font-weight:700;color:#fff;letter-spacing:-0.025em;line-height:1.12;margin-bottom:1.2rem;}
-.cta-p{font-size:0.97rem;color:rgba(255,255,255,0.72);line-height:1.85;margin-bottom:2.2rem;}
-.btn-wh{display:inline-block;padding:1rem 2.6rem;background:#fff;
-  color:var(--dp);font-weight:900;font-size:0.72rem;letter-spacing:0.12em;
-  text-transform:uppercase;border-radius:100px;text-decoration:none;
-  box-shadow:0 8px 32px rgba(0,0,0,0.2);
-  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
-.btn-wh:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 16px 48px rgba(0,0,0,0.25);}
-
-/* ══ FOOTER ══ */
-footer{background:var(--dp);padding:4rem 2.5rem 2.5rem;}
-.ft-in{max-width:1200px;margin:0 auto;}
-.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;
-  padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08);}
-.ft-brand p{font-size:0.86rem;color:rgba(255,255,255,0.45);line-height:1.9;margin-top:1rem;}
-.ft-brand img{height:48px;filter:brightness(0) invert(1);opacity:0.8;}
-.ft-col h4{font-size:0.58rem;font-weight:900;letter-spacing:0.22em;text-transform:uppercase;
-  color:rgba(255,255,255,0.35);margin-bottom:1.1rem;}
+/* FOOTER */
+footer{background:#050505;padding:5.5rem 2.5rem 2.5rem;border-top:1px solid rgba(255,255,255,0.04);}
+.ft-in{max-width:1340px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem;}
+.ft-brand img{height:70px;filter:invert(1);mix-blend-mode:screen;opacity:0.8;display:block;margin-bottom:1rem;}
+.ft-brand p{font-size:0.85rem;color:rgba(255,255,255,0.22);line-height:1.9;max-width:240px;}
+.ft-col h4{font-size:0.58rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--teal);opacity:0.6;margin-bottom:1.2rem;}
 .ft-links{display:flex;flex-direction:column;gap:0.65rem;}
-.ft-links a{font-size:0.84rem;color:rgba(255,255,255,0.52);text-decoration:none;
-  transition:color 0.2s;}
-.ft-links a:hover{color:#fff;}
-.ft-bot{padding-top:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;}
-.ft-copy{font-size:0.75rem;color:rgba(255,255,255,0.25);}
+.ft-links a{font-size:0.85rem;color:rgba(255,255,255,0.24);text-decoration:none;transition:color 0.2s;}
+.ft-links a:hover{color:rgba(255,255,255,0.8);}
+.ft-socials{display:flex;gap:0.75rem;margin-top:1.5rem;}
+.ft-soc{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:all 0.2s;}
+.ft-soc:hover{border-color:var(--teal);color:var(--teal);transform:scale(1.12);}
+.ft-bot{border-top:1px solid rgba(255,255,255,0.04);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.ft-copy{font-size:0.7rem;color:rgba(255,255,255,0.14);}
 
-/* ══ RESPONSIVE ══ */
-@media(max-width:1024px){
-  .ev-cols{grid-template-columns:1fr;}
-  .ev-right{display:none;}
-  .expect-grid{grid-template-columns:1fr;}
-  .who-grid{grid-template-columns:repeat(2,1fr);}
-  .test-grid{grid-template-columns:1fr 1fr;}
-  .ft-grid{grid-template-columns:1fr 1fr;gap:2rem;}
-}
-@media(max-width:860px){
-  .test-grid{grid-template-columns:1fr;}
-  .who-grid{grid-template-columns:repeat(2,1fr);}
-}
+@media(max-width:1024px){.od-in{grid-template-columns:1fr;}.od-image-frame{display:none;}.ft-grid{grid-template-columns:1fr 1fr;gap:3rem;}}
+@media(max-width:860px){.ev-row{grid-template-columns:1fr auto;}.ev-num{display:none;}.ft-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:600px){
-  #ph{padding:7rem 1.5rem 4rem;}
-  .sec,.expect-sec,.who-sec{padding:4.5rem 1.5rem;}
-  #marriage,#adventure{padding:5rem 1.5rem;}
-  .ev-left-pk,.ev-left-cy{padding:2.5rem 1.5rem;}
-  .who-grid{grid-template-columns:1fr;}
-  .ft-grid{grid-template-columns:1fr;}
-  .nav-links{display:none;}
-  .nav-links.open{display:flex;flex-direction:column;position:fixed;
-    top:0;left:0;right:0;bottom:0;background:rgba(28,4,60,0.97);
-    align-items:center;justify-content:center;gap:1.6rem;z-index:400;}
-  .nav-a{font-size:1.1rem;}
-  .nav-burger{display:flex;}
-  .ft-grid{gap:1.5rem;}
-  .test-band{padding:4rem 1.5rem;}
-  .cta-band{padding:4rem 1.5rem;}
+  #nav{padding:0.8rem 1.2rem;}.nav-logo img{height:60px;}.nav-links{display:none;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(8,8,8,0.98);padding:1.5rem;gap:1.2rem;z-index:499;}
+  .nav-a{font-size:0.9rem;}.nav-burger{display:flex;}
+  #all-events,#reg-cta{padding:5rem 1.5rem;}
+  .ev-row{grid-template-columns:1fr;gap:0.8rem;padding:1.8rem 1.5rem;}
+  .ev-meta{text-align:left;}.ft-grid{grid-template-columns:1fr;gap:2rem;}
+  .od-in{padding:6rem 1.5rem;}
 }
 </style>
 </head>
 <body>
 <div class="grain"></div>
+<div id="cursor">👟</div>
+<audio id="bg-music" loop><source src="audio/brave.mp3" type="audio/mpeg"></audio>
+<button id="music-btn" aria-label="Toggle music">♪</button>
 
-<!-- NAV -->
 <nav id="nav">
   <div class="nav-in">
-    <a class="nav-logo" href="index.html"><img src="assets/yin-logo.png" alt="You Inspire Now"></a>
+    <a href="index.html" class="nav-logo"><img src="assets/yin-logo.png" alt="You Inspire Now"></a>
     <div class="nav-links" id="nav-links">
       <a href="index.html" class="nav-a">Home</a>
       <a href="about.html" class="nav-a">About</a>
       <a href="events.html" class="nav-a active">Events</a>
-      <a href="https://goinspirenow.org" target="_blank" class="nav-pill">Go Inspire Now ♥</a>
+      <a href="merch.html" class="nav-a">Merch</a>
+      <a href="contact.html" class="nav-a">Connect</a>
+      <a href="donate.html" class="nav-pill">Give →</a>
     </div>
     <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- PAGE HERO -->
-<section id="ph">
-  <div class="ph-orb ph-orb1"></div>
-  <div class="ph-orb ph-orb2"></div>
-  <div class="ph-orb ph-orb3"></div>
-  <div class="ph-noise"></div>
-  <div class="ph-in">
-    <div class="ph-tag"><span class="ph-dot"></span> Transformative Experiences</div>
-    <h1 class="ph-h1">Events That <em>Change Everything</em></h1>
-    <p class="ph-sub">You were not made to stay where you are. These experiences are curated spaces where healing begins, identities are reclaimed, and purpose is ignited.</p>
-    <div class="ph-anchors">
-      <a href="#marriage" class="anch-pk">Extreme Marriage Challenge</a>
-      <a href="#adventure" class="anch-cy">Adventure Odyssey</a>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg" style="background-image:url('images/hero.jpg');"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-top-shade"></div>
+  <div class="blob blob-pink" style="width:600px;height:600px;top:-200px;right:-100px;--bd:14s;"></div>
+  <div class="blob blob-pu" style="width:400px;height:400px;bottom:-100px;left:5%;--bd:18s;--bdel:-5s;"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Live Events</div>
+    <h1 class="hero-h1">Answer The<br><span class="pk">Call.</span></h1>
+    <p class="hero-sub">Real experiences. Real transformation. Every event is designed to push you beyond where you thought you could go — and show you who you were always meant to be.</p>
+  </div>
+</section>
+
+<!-- ADVENTURE ODYSSEY FEATURED -->
+<section id="odyssey">
+  <div class="od-photo"></div>
+  <div class="od-overlay"></div>
+  <div class="od-side-accent"></div>
+  <div class="blob blob-pink" style="width:500px;height:500px;top:20%;left:-100px;--bd:16s;opacity:0.35;"></div>
+  <div class="od-in">
+    <div class="od-content reveal-left">
+      <div class="od-intensity">⚡ Signature Event — Register Now</div>
+      <h2 class="od-title">Adventure<br><span class="pk">Odyssey</span></h2>
+      <div class="od-quote">"I can do all things through Christ who strengthens me." — Philippians 4:13</div>
+      <p class="od-desc">This isn't a spa day. Adventure Odyssey is a raw, physical, full-throttle experience built to break you open — and show you what's on the other side of your limit. Sweat. Dirt. Faith. Sisterhood. You'll leave different.</p>
+      <div class="od-stats">
+        <div class="od-stat"><div class="od-stat-num">1</div><div class="od-stat-lbl">Full Day</div></div>
+        <div class="od-stat"><div class="od-stat-num">∞</div><div class="od-stat-lbl">Breakthrough</div></div>
+        <div class="od-stat"><div class="od-stat-num">100%</div><div class="od-stat-lbl">Worth It</div></div>
+      </div>
+      <div class="od-btns">
+        <a href="#" class="btn-pink" data-magnetic>Register Now</a>
+        <a href="#all-events" class="btn-ghost">All Events</a>
+      </div>
+    </div>
+    <div class="od-image-frame reveal-right" style="transition-delay:0.15s">
+      <div class="od-frame-img">
+        <img src="images/women-2.jpg" alt="Adventure Odyssey — Woman pushing her limits">
+      </div>
+      <div class="od-badge">ADVENTURE ODYSSEY</div>
     </div>
   </div>
 </section>
 
-<!-- ══ EVENT 1: EXTREME MARRIAGE CHALLENGE ══ -->
-<section id="marriage" style="padding:7rem 2.5rem;background:#FFF9FE;">
-  <div class="ev-full">
-    <div class="reveal" style="margin-bottom:2.5rem;">
-      <span class="ey">Event 01</span>
-    </div>
-    <div class="ev-band-pk"></div>
-    <div class="ev-card reveal" style="transition-delay:0.1s;">
-      <div class="ev-cols">
-        <!-- Left: Content -->
-        <div class="ev-left-pk">
-          <div class="ev-type ev-type-pk">💍 Marriage &amp; Couples</div>
-          <h2 class="ev-name ev-name-pk">Extreme<br><em>Marriage Challenge</em></h2>
-          <p class="ev-copy">Marriage was never meant to be a survival story — it was meant to be a love story. The Extreme Marriage Challenge is a powerful, faith-centered weekend experience designed to break through the walls that time, pain, and silence can build. You will come out the other side closer, stronger, and more committed than the day you said "I do."</p>
-          <div class="ev-details">
-            <div class="ev-det"><span>🏕️</span><span>Weekend Retreat</span></div>
-            <div class="ev-det"><span>👫</span><span>Couples Experience</span></div>
-            <div class="ev-det"><span>✝️</span><span>Faith-Centered</span></div>
-          </div>
-          <div class="ev-tags">
-            <span class="ev-t ev-t-pk">Reconnection</span>
-            <span class="ev-t ev-t-vi">Communication</span>
-            <span class="ev-t ev-t-go">Faith &amp; Purpose</span>
-            <span class="ev-t ev-t-pk">Healing</span>
-            <span class="ev-t ev-t-vi">Covenant</span>
-          </div>
-          <a href="#" class="btn-reg-pk">Register Your Spot</a>
-        </div>
-        <!-- Right: Visual -->
-        <div class="ev-right">
-          <div class="ev-visual-pk">
-            <span class="ev-vis-icon">💍</span>
-            <p class="ev-vis-quote">"Two people rediscovering each other — that is the miracle this weekend is designed to create."</p>
-            <div class="ev-vis-pills">
-              <span class="ev-vis-pill">Intimacy</span>
-              <span class="ev-vis-pill">Trust</span>
-              <span class="ev-vis-pill">Legacy</span>
-              <span class="ev-vis-pill">Renewal</span>
-            </div>
-          </div>
-          <div class="ev-stats">
-            <div class="ev-stat">
-              <div class="ev-stat-n ev-stat-n-pk">Weekend</div>
-              <div class="ev-stat-l">Duration</div>
-            </div>
-            <div class="ev-stat">
-              <div class="ev-stat-n ev-stat-n-pk">Couples</div>
-              <div class="ev-stat-l">Who Attend</div>
-            </div>
-            <div class="ev-stat">
-              <div class="ev-stat-n ev-stat-n-pk">Life-Changing</div>
-              <div class="ev-stat-l">Results</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ EVENT 2: ADVENTURE ODYSSEY ══ -->
-<section id="adventure" style="padding:0 2.5rem 7rem;background:#FFF9FE;">
-  <div class="ev-full">
-    <div class="reveal" style="margin-bottom:2.5rem;">
-      <span class="ey">Event 02</span>
-    </div>
-    <div class="ev-band-cy"></div>
-    <div class="ev-card reveal" style="transition-delay:0.1s;">
-      <div class="ev-cols">
-        <!-- Left: Content -->
-        <div class="ev-left-cy">
-          <div class="ev-type ev-type-cy">🌄 Women's Experience</div>
-          <h2 class="ev-name ev-name-cy">Adventure<br><em>Odyssey</em></h2>
-          <p class="ev-copy">This is not a vacation. This is a reckoning. Adventure Odyssey takes women into the wild — literally — and in doing so, strips away the noise, the expectations, and the masks. You will challenge your body, quiet your mind, and hear your own voice, perhaps for the first time in a long time. Adventure is the setting. Transformation is the destination.</p>
-          <div class="ev-details">
-            <div class="ev-det"><span>🏔️</span><span>Outdoor Experience</span></div>
-            <div class="ev-det"><span>👩</span><span>Women Only</span></div>
-            <div class="ev-det"><span>💪</span><span>Mind &amp; Body</span></div>
-          </div>
-          <div class="ev-tags">
-            <span class="ev-t ev-t-cy">Confidence</span>
-            <span class="ev-t ev-t-vi">Identity</span>
-            <span class="ev-t ev-t-cy">Sisterhood</span>
-            <span class="ev-t ev-t-vi">Resilience</span>
-            <span class="ev-t ev-t-cy">Breakthrough</span>
-          </div>
-          <a href="#" class="btn-reg-cy">Register Your Spot</a>
-        </div>
-        <!-- Right: Visual -->
-        <div class="ev-right">
-          <div class="ev-visual-cy">
-            <span class="ev-vis-icon">🌄</span>
-            <p class="ev-vis-quote">"She didn't find herself on this trip. She remembered herself. That is the difference."</p>
-            <div class="ev-vis-pills">
-              <span class="ev-vis-pill">Courage</span>
-              <span class="ev-vis-pill">Freedom</span>
-              <span class="ev-vis-pill">Strength</span>
-              <span class="ev-vis-pill">Becoming</span>
-            </div>
-          </div>
-          <div class="ev-stats">
-            <div class="ev-stat">
-              <div class="ev-stat-n ev-stat-n-cy">Outdoors</div>
-              <div class="ev-stat-l">Setting</div>
-            </div>
-            <div class="ev-stat">
-              <div class="ev-stat-n ev-stat-n-cy">Women</div>
-              <div class="ev-stat-l">Who Attend</div>
-            </div>
-            <div class="ev-stat">
-              <div class="ev-stat-n ev-stat-n-cy">Unbreakable</div>
-              <div class="ev-stat-l">You Leave</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT TO EXPECT -->
-<section class="expect-sec">
-  <div class="expect-in">
-    <div class="reveal" style="text-align:center;max-width:540px;margin:0 auto 1rem;">
-      <span class="ey">Inside the Experience</span>
-      <h2 class="sh2">What You Can <em>Expect</em></h2>
-      <p class="bp" style="margin-top:0.75rem;">Both events are intentionally designed to go deep. Here is what each experience holds for you.</p>
-    </div>
-    <div class="expect-grid">
-      <!-- Marriage -->
-      <div class="expect-block reveal">
-        <div class="eb-top-pk">
-          <div class="eb-ev-name">Extreme Marriage Challenge</div>
-          <div class="eb-ev-sub">What the Weekend Holds</div>
-        </div>
-        <div class="eb-body">
-          <div class="eb-item">
-            <div class="eb-ico eb-ico-pk">🔥</div>
-            <div class="eb-txt">
-              <h4>Breakthrough Sessions</h4>
-              <p>Guided sessions that bring hidden tensions to the surface in a safe, healing environment — and show you the path forward.</p>
-            </div>
-          </div>
-          <div class="eb-item">
-            <div class="eb-ico eb-ico-pk">💬</div>
-            <div class="eb-txt">
-              <h4>Communication Rebuilding</h4>
-              <p>Tools and exercises to help couples hear each other again — not just words, but the hearts behind them.</p>
-            </div>
-          </div>
-          <div class="eb-item">
-            <div class="eb-ico eb-ico-pk">✝️</div>
-            <div class="eb-txt">
-              <h4>Faith-Rooted Foundation</h4>
-              <p>Every session is grounded in Scripture and the covenant of marriage — reminding you why you chose each other.</p>
-            </div>
-          </div>
-          <div class="eb-item">
-            <div class="eb-ico eb-ico-pk">🌅</div>
-            <div class="eb-txt">
-              <h4>Renewal Ceremony</h4>
-              <p>A closing moment of recommitment and hope — a new chapter officially beginning.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Adventure -->
-      <div class="expect-block reveal" style="transition-delay:0.15s;">
-        <div class="eb-top-cy">
-          <div class="eb-ev-name">Adventure Odyssey</div>
-          <div class="eb-ev-sub">What the Journey Holds</div>
-        </div>
-        <div class="eb-body">
-          <div class="eb-item">
-            <div class="eb-ico eb-ico-cy">🏔️</div>
-            <div class="eb-txt">
-              <h4>Physical Challenges</h4>
-              <p>Outdoor activities chosen to stretch you physically — hiking, challenges, and adventures that prove your strength to yourself.</p>
-            </div>
-          </div>
-          <div class="eb-item">
-            <div class="eb-ico eb-ico-cy">🧭</div>
-            <div class="eb-txt">
-              <h4>Identity Workshops</h4>
-              <p>Inner work sessions woven into the experience — unpacking who you are, what you carry, and what you are ready to release.</p>
-            </div>
-          </div>
-          <div class="eb-item">
-            <div class="eb-ico eb-ico-cy">🌸</div>
-            <div class="eb-txt">
-              <h4>Sisterhood Bonds</h4>
-              <p>You will leave with women who have seen you cry, cheer, and push through. These are not just event friendships — they are life ones.</p>
-            </div>
-          </div>
-          <div class="eb-item">
-            <div class="eb-ico eb-ico-cy">✨</div>
-            <div class="eb-txt">
-              <h4>The Becoming Ritual</h4>
-              <p>A closing ceremony honoring the version of yourself that showed up and the one you are choosing to become.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHO IS THIS FOR -->
-<section class="who-sec">
-  <div class="who-in">
-    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto;">
-      <span class="ey">For You, If…</span>
-      <h2 class="sh2">These Events Were <em>Made For You</em></h2>
-      <p class="bp" style="margin-top:0.75rem;">You do not have to have it figured out. You just have to say yes.</p>
-    </div>
-    <div class="who-grid">
-      <div class="who-card who-card-1 reveal">
-        <span class="who-ico">💔</span>
-        <h3 class="who-h">Your Marriage Is Struggling</h3>
-        <p class="who-p">If you feel like you are roommates rather than partners, if communication has broken down, if hope feels distant — the Extreme Marriage Challenge was created for exactly where you are.</p>
-      </div>
-      <div class="who-card who-card-2 reveal" style="transition-delay:0.1s;">
-        <span class="who-ico">🌊</span>
-        <h3 class="who-h">You've Lost Yourself</h3>
-        <p class="who-p">You have spent so long being everything for everyone else that you are not sure who you are anymore. Adventure Odyssey is the space to come back to yourself.</p>
-      </div>
-      <div class="who-card who-card-3 reveal" style="transition-delay:0.2s;">
-        <span class="who-ico">🌱</span>
-        <h3 class="who-h">You're Ready for More</h3>
-        <p class="who-p">Things are okay — but you know there is more. You are hungry for growth, for depth, for the next chapter. These events meet you at that threshold.</p>
-      </div>
-      <div class="who-card who-card-4 reveal" style="transition-delay:0.3s;">
-        <span class="who-ico">🙏</span>
-        <h3 class="who-h">You Want Faith-Centered Community</h3>
-        <p class="who-p">You want to grow alongside people who share your values — where faith is not an afterthought but the very foundation of everything.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONY BAND -->
-<div class="test-band">
-  <div class="test-in">
+<!-- ALL EVENTS -->
+<section id="all-events">
+  <div class="blob blob-pu" style="position:absolute;width:700px;height:700px;top:-150px;right:-200px;--bd:18s;"></div>
+  <div class="blob blob-pink" style="position:absolute;width:500px;height:500px;bottom:-100px;left:-120px;--bd:14s;--bdel:-6s;"></div>
+  <div class="ae-in">
     <div class="reveal">
-      <div class="test-tag">What People Say</div>
-      <h2 class="test-h">Words From Women <em>Who Showed Up</em></h2>
+      <div class="sec-label" style="color:var(--pu);">— All Events</div>
+      <div class="sec-h">Every<br><span style="color:var(--teal);">Experience.</span></div>
+      <p style="font-size:1rem;color:rgba(255,255,255,0.35);line-height:1.9;max-width:540px;margin-top:1rem;">From physical challenges to intimate retreats — each event is a different doorway into the same truth: there is more within you.</p>
     </div>
-    <div class="test-grid">
-      <div class="test-card reveal">
-        <p class="test-q">"I came in holding so much. By Sunday I didn't recognize who I was in the best possible way. This was not a retreat — it was a resurrection."</p>
-        <div class="test-who">— EMC Attendee</div>
-      </div>
-      <div class="test-card reveal" style="transition-delay:0.12s;">
-        <p class="test-q">"We had not looked each other in the eyes — really looked — in years. That weekend gave us back something I thought was gone forever."</p>
-        <div class="test-who">— EMC Couple</div>
-      </div>
-      <div class="test-card reveal" style="transition-delay:0.24s;">
-        <p class="test-q">"I came terrified of heights and scared of being vulnerable. I left having done both — and knowing I can do anything. Adventure Odyssey changed me."</p>
-        <div class="test-who">— Adventure Odyssey Attendee</div>
-      </div>
+    <div class="events-list">
+      <a href="#" class="ev-row reveal" style="--ev-clr:var(--pink);">
+        <div class="ev-num">01</div>
+        <div class="ev-info">
+          <div class="ev-name">Adventure Odyssey</div>
+          <div class="ev-sub">A full-day physical and spiritual challenge. Sweat. Push. Discover. You will leave changed.</div>
+        </div>
+        <div class="ev-meta">
+          <div class="ev-tag" style="color:var(--pink);border-color:rgba(255,45,158,0.2);background:rgba(255,45,158,0.06);">Signature</div>
+          <div class="ev-arrow">→</div>
+        </div>
+      </a>
+      <a href="#" class="ev-row reveal" style="--ev-clr:var(--teal);transition-delay:0.07s">
+        <div class="ev-num">02</div>
+        <div class="ev-info">
+          <div class="ev-name">Extreme Marriage Challenge</div>
+          <div class="ev-sub">An intensive experience for couples ready to go deeper — in faith, love, and commitment.</div>
+        </div>
+        <div class="ev-meta">
+          <div class="ev-tag" style="color:var(--teal);border-color:rgba(0,232,200,0.2);background:rgba(0,232,200,0.06);">Couples</div>
+          <div class="ev-arrow">→</div>
+        </div>
+      </a>
+      <a href="#" class="ev-row reveal" style="--ev-clr:#D4702A;transition-delay:0.14s">
+        <div class="ev-num">03</div>
+        <div class="ev-info">
+          <div class="ev-name">Get Snatched Challenge</div>
+          <div class="ev-sub">Body, mind, and spirit. A fitness and faith challenge that proves health is a whole-person journey.</div>
+        </div>
+        <div class="ev-meta">
+          <div class="ev-tag" style="color:#D4702A;border-color:rgba(212,112,42,0.2);background:rgba(212,112,42,0.06);">Wellness</div>
+          <div class="ev-arrow">→</div>
+        </div>
+      </a>
+      <a href="#" class="ev-row reveal" style="--ev-clr:var(--pu);transition-delay:0.21s">
+        <div class="ev-num">04</div>
+        <div class="ev-info">
+          <div class="ev-name">The Walking Movement</div>
+          <div class="ev-sub">Move together in community. Walk with purpose, intention, and the women beside you.</div>
+        </div>
+        <div class="ev-meta">
+          <div class="ev-tag" style="color:var(--pu);border-color:rgba(139,47,255,0.2);background:rgba(139,47,255,0.06);">Community</div>
+          <div class="ev-arrow">→</div>
+        </div>
+      </a>
+      <a href="#" class="ev-row reveal" style="--ev-clr:var(--pink);transition-delay:0.28s">
+        <div class="ev-num">05</div>
+        <div class="ev-info">
+          <div class="ev-name">Weekend Y.I.N. Retreat</div>
+          <div class="ev-sub">An immersive weekend experience. Rest, reconnect, and rediscover who you are in God.</div>
+        </div>
+        <div class="ev-meta">
+          <div class="ev-tag" style="color:var(--pink);border-color:rgba(255,45,158,0.2);background:rgba(255,45,158,0.06);">Retreat</div>
+          <div class="ev-arrow">→</div>
+        </div>
+      </a>
     </div>
   </div>
-</div>
+</section>
 
-<!-- CTA -->
-<div class="cta-band">
-  <div class="cta-in reveal">
-    <span class="cta-ey">Your Seat Is Waiting</span>
-    <h2 class="cta-h">Say Yes to <em>Your</em> Next Chapter ✨</h2>
-    <p class="cta-p">You do not need to be ready. You just need to say yes. The experience will meet you exactly where you are and carry you further than you imagined.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
-      <a href="#marriage" class="btn-wh" style="color:#7C3AED;">Marriage Challenge</a>
-      <a href="#adventure" class="btn-wh" style="color:#0891B2;">Adventure Odyssey</a>
+<!-- REGISTER CTA -->
+<section id="reg-cta">
+  <div class="blob blob-teal" style="width:700px;height:700px;top:-200px;left:50%;transform:translateX(-50%);--bd:17s;opacity:0.55;"></div>
+  <div class="reg-in reveal">
+    <div class="sec-label" style="justify-content:center;color:var(--teal);">— Don't Miss Out</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);line-height:0.92;color:#fff;margin-bottom:1.2rem;">You Were Made<br><span style="color:var(--teal);">For This.</span></h2>
+    <p style="font-size:1rem;color:rgba(255,255,255,0.38);line-height:1.9;margin-bottom:2.8rem;">Every event has limited capacity. When the call comes — answer it. Register early and secure your seat at the table.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="#" class="btn-teal" data-magnetic>Register for Next Event</a>
+      <a href="contact.html" class="btn-ghost">Have Questions?</a>
     </div>
   </div>
-</div>
+</section>
 
-<!-- FOOTER -->
 <footer>
   <div class="ft-in">
     <div class="ft-grid">
       <div class="ft-brand">
         <img src="assets/yin-logo.png" alt="You Inspire Now">
-        <p>Faith-rooted encouragement for women becoming who they were created to be. 🌸</p>
-      </div>
-      <div class="ft-col">
-        <h4>Navigate</h4>
-        <div class="ft-links">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="events.html">Events</a>
+        <p>Faith-rooted encouragement for women becoming who they were created to be.</p>
+        <div class="ft-socials">
+          <a href="https://instagram.com/youinspirenow" target="_blank" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://facebook.com/youinspirenow" target="_blank" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://tiktok.com/@youinspirenow" target="_blank" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.17 8.17 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg></a>
+          <a href="https://youtube.com/@youinspirenow" target="_blank" class="ft-soc"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#080808"/></svg></a>
         </div>
       </div>
-      <div class="ft-col">
-        <h4>Events</h4>
-        <div class="ft-links">
-          <a href="#marriage">Extreme Marriage Challenge</a>
-          <a href="#adventure">Adventure Odyssey</a>
-        </div>
-      </div>
-      <div class="ft-col">
-        <h4>Give</h4>
-        <div class="ft-links">
-          <a href="go-inspire-now.html" style="color:#F9A8D4;">Go Inspire Now ♥</a>
-          <a href="go-inspire-now.html">Donate</a>
-        </div>
-      </div>
+      <div class="ft-col"><h4>Navigate</h4><div class="ft-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="events.html">Events</a><a href="merch.html">Merch</a><a href="contact.html">Connect</a></div></div>
+      <div class="ft-col"><h4>Events</h4><div class="ft-links"><a href="#">Adventure Odyssey</a><a href="#">Extreme Marriage</a><a href="#">Get Snatched</a><a href="#">Walking Movement</a><a href="#">YIN Retreat</a></div></div>
+      <div class="ft-col"><h4>Mission</h4><div class="ft-links"><a href="donate.html" style="color:var(--teal);opacity:0.9;">Go Inspire Now →</a><a href="donate.html">Donate</a><a href="contact.html">Contact Us</a></div></div>
     </div>
     <div class="ft-bot">
-      <p class="ft-copy">© 2026 You Inspire Now. All rights reserved.</p>
-      <p class="ft-copy">Faith · Identity · Purpose · Resilience · Community · Wholeness ✨</p>
+      <p class="ft-copy">© 2026 You Inspire Now. All Rights Reserved.</p>
+      <p class="ft-copy">Gifted · Purposed · Be-YOU-tiful</p>
     </div>
   </div>
 </footer>
 
 <script>
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
-document.getElementById('nav-burger').addEventListener('click', () =>
-  document.getElementById('nav-links').classList.toggle('open'));
-
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+document.getElementById('nav-burger').addEventListener('click',()=>document.getElementById('nav-links').classList.toggle('open'));
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>io.observe(el));
+const c=document.getElementById('cursor');
+if(c){document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});document.querySelectorAll('a,button,input').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hov'));el.addEventListener('mouseleave',()=>c.classList.remove('hov'));});}
+document.querySelectorAll('[data-magnetic]').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.28}px,${(e.clientY-r.top-r.height/2)*0.28}px)`;b.style.transition='transform 0.12s linear';});b.addEventListener('mouseleave',()=>{b.style.transition='transform 0.5s cubic-bezier(.34,1.56,.64,1)';b.style.transform='';});});
+(function(){const btn=document.getElementById('music-btn'),aud=document.getElementById('bg-music');if(!btn||!aud)return;let on=false;function play(){aud.volume=0.38;aud.play().then(()=>{on=true;btn.classList.add('playing');btn.innerHTML='♫';}).catch(()=>{});}function pause(){aud.pause();on=false;btn.classList.remove('playing');btn.innerHTML='♪';}btn.addEventListener('click',()=>{on?pause():play();});window.addEventListener('beforeunload',()=>{localStorage.setItem('yin-playing',on?'1':'0');localStorage.setItem('yin-time',aud.currentTime.toString());});const wasOn=localStorage.getItem('yin-playing')==='1';const t=parseFloat(localStorage.getItem('yin-time')||'0');if(wasOn){aud.currentTime=t;play();}else{document.addEventListener('click',function first(){if(!on)play();document.removeEventListener('click',first);},{once:true});}})();
+document.body.addEventListener('click',()=>{if(!playing&&mus.paused){mus.play().then(()=>{playing=true;mb.classList.add('playing');mb.textContent='♫';}).catch(()=>{});}},{once:true});
 </script>
 </body>
 </html>

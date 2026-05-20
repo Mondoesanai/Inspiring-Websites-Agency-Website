@@ -3,653 +3,895 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>You Inspire Now — Women's Faith Ministry</title>
+<title>You Inspire Now — There Is More Within</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Lato',sans-serif;background:#0D0120;color:#fff;overflow-x:hidden;}
+body{font-family:'Inter',sans-serif;background:#080808;color:#fff;overflow-x:hidden;cursor:none;}
+@media(hover:none){body{cursor:auto;}}
 :root{
-  --dp:#0D0120;--pu:#2D0A5E;--vi:#7C3AED;--vi2:#A855F7;
-  --cy:#06B6D4;--pk:#EC4899;--pk2:#F472B6;
-  --go:#FBBF24;--cr:#FFF9FE;--lv:#FAF5FF;
+  --teal:#00E8C8;--teal-d:#00BFA8;
+  --pink:#FF2D9E;--pink-d:#CC2480;
+  --pu:#8B2FFF;--pu-d:#6E26CC;
+  --black:#080808;--card:#111111;--card2:#161616;
+  --border:rgba(255,255,255,0.07);
+  --muted:rgba(255,255,255,0.38);
 }
 
 /* ── GRAIN ── */
-.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.03;
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.028;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
+/* ── SNEAKER CURSOR ── */
+#cursor{position:fixed;pointer-events:none;z-index:10000;font-size:26px;line-height:1;
+  user-select:none;transform:translate(-4px,-20px) rotate(-15deg);
+  transition:font-size 0.15s ease,transform 0.15s ease;
+  filter:drop-shadow(0 2px 8px rgba(0,232,200,0.5));}
+#cursor.hov{font-size:32px;transform:translate(-4px,-24px) rotate(-20deg);}
+@media(hover:none){#cursor{display:none;}}
+
+/* ── INTRO SPLASH ── */
+#intro{position:fixed;inset:0;z-index:99999;background:#040404;
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),visibility 0.9s;
+  overflow:hidden;}
+#intro::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 55% at 15% 15%, rgba(255,45,158,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 85% 85%, rgba(0,232,200,0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(139,47,255,0.05) 0%, transparent 70%);}
+#intro.out{opacity:0;visibility:hidden;pointer-events:none;}
+.intro-splats{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.intro-content{position:relative;z-index:2;text-align:center;padding:2rem;max-width:680px;}
+.intro-logo{height:82px;filter:invert(1) drop-shadow(0 0 20px rgba(0,232,200,0.4));mix-blend-mode:screen;opacity:0;
+  animation:intro-fadein 0.8s 0.3s ease forwards;}
+.intro-rule{width:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--teal),transparent);margin:1.2rem auto;
+  animation:intro-line 0.7s 1.0s ease forwards;}
+.intro-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.6rem,5.5vw,4.4rem);
+  color:#fff;line-height:0.94;letter-spacing:0.05em;
+  opacity:0;animation:intro-fadein 0.7s 1.3s ease forwards;
+  text-shadow:0 0 60px rgba(0,0,0,0.8);}
+.intro-h .tl{color:var(--teal);text-shadow:0 0 40px rgba(0,232,200,0.5);}
+.intro-h .pk{color:var(--pink);text-shadow:0 0 40px rgba(255,45,158,0.4);}
+.intro-scripture{font-family:'Playfair Display',serif;font-style:italic;
+  font-size:0.88rem;color:rgba(255,255,255,0.32);margin-top:0.7rem;letter-spacing:0.02em;
+  opacity:0;animation:intro-fadein 0.7s 1.8s ease forwards;}
+.intro-btn{margin-top:1.8rem;padding:1rem 3rem;background:transparent;
+  border:1.5px solid var(--teal);color:var(--teal);
+  font-family:'Inter',sans-serif;font-size:0.68rem;font-weight:700;
+  letter-spacing:0.22em;text-transform:uppercase;border-radius:100px;
+  cursor:pointer;opacity:0;animation:intro-fadein 0.7s 2.4s ease forwards;
+  box-shadow:0 0 0 rgba(0,232,200,0);
+  transition:background 0.3s,box-shadow 0.3s,transform 0.2s cubic-bezier(.34,1.56,.64,1);}
+.intro-btn:hover{background:rgba(0,232,200,0.1);
+  box-shadow:0 0 40px rgba(0,232,200,0.45),inset 0 0 20px rgba(0,232,200,0.05);
+  transform:scale(1.06);}
+.intro-skip{position:absolute;bottom:2rem;right:2rem;font-size:0.58rem;
+  font-weight:600;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(255,255,255,0.18);background:none;border:none;cursor:pointer;
+  transition:color 0.2s;opacity:0;animation:intro-fadein 0.5s 3s ease forwards;}
+.intro-skip:hover{color:rgba(255,255,255,0.48);}
+@keyframes intro-fadein{to{opacity:1;}}
+@keyframes intro-line{to{width:80px;}}
+
+/* ── PAINT SPLATTERS ── */
+.splat-wrap{position:absolute;pointer-events:none;}
+.splat-wrap svg{width:100%;height:100%;overflow:visible;}
+
+/* ── HERO TOP SHADE ── */
+.hero-top-shade{position:absolute;top:0;left:0;right:0;height:220px;
+  background:linear-gradient(to bottom,rgba(8,8,8,0.85) 0%,transparent 100%);
+  z-index:1;pointer-events:none;}
+
+/* ── HERO SCRIPTURE ── */
+.hero-scripture{font-family:'Playfair Display',serif;font-style:italic;
+  font-size:0.95rem;color:rgba(255,255,255,0.32);margin-top:-1rem;
+  margin-bottom:2.5rem;letter-spacing:0.02em;}
+
+/* ── MUSIC BUTTON ── */
+#music-btn{position:fixed;bottom:2rem;right:2rem;z-index:998;
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(8,8,8,0.75);border:1.5px solid rgba(0,232,200,0.45);
+  backdrop-filter:blur(20px);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;color:var(--teal);
+  transition:all 0.25s ease;
+  box-shadow:0 0 0 0 rgba(0,232,200,0.3),0 4px 20px rgba(0,0,0,0.5);}
+#music-btn:hover{background:rgba(0,232,200,0.12);border-color:var(--teal);transform:scale(1.1);
+  box-shadow:0 0 20px rgba(0,232,200,0.4),0 4px 20px rgba(0,0,0,0.5);}
+#music-btn.playing{background:rgba(0,232,200,0.1);border-color:var(--teal);color:var(--teal);
+  box-shadow:0 0 24px rgba(0,232,200,0.5),0 0 48px rgba(0,232,200,0.2),0 4px 20px rgba(0,0,0,0.5);
+  animation:music-pulse 2s ease-in-out infinite;}
+@keyframes music-pulse{0%,100%{box-shadow:0 0 24px rgba(0,232,200,0.5),0 4px 20px rgba(0,0,0,0.5);}50%{box-shadow:0 0 40px rgba(0,232,200,0.7),0 0 70px rgba(0,232,200,0.25),0 4px 20px rgba(0,0,0,0.5);}}
+
+/* ── PAINT SPLASH BLOBS ── */
+.blob{position:absolute;border-radius:71% 29% 76% 24% / 42% 68% 32% 58%;
+  filter:blur(72px);pointer-events:none;
+  animation:blob-drift var(--bd,14s) ease-in-out infinite alternate var(--bdel,0s);}
+.blob-teal{background:rgba(0,232,200,0.22);}
+.blob-pink{background:rgba(255,45,158,0.20);}
+.blob-pu{background:rgba(139,47,255,0.18);}
+@keyframes blob-drift{
+  from{transform:translate(0,0) scale(1);border-radius:71% 29% 76% 24% / 42% 68% 32% 58%;}
+  to{transform:translate(var(--btx,30px),var(--bty,-20px)) scale(var(--bs,1.12));
+     border-radius:42% 58% 31% 69% / 70% 35% 65% 30%;}}
+
+/* ── PARTICLES ── */
+.ptcl{position:absolute;border-radius:50%;pointer-events:none;z-index:1;
+  animation:ptcl-float var(--d,8s) ease-in-out infinite var(--del,0s);}
+@keyframes ptcl-float{
+  0%,100%{transform:translate(0,0);opacity:var(--op,0.4);}
+  25%{transform:translate(var(--x1,20px),var(--y1,-30px));opacity:calc(var(--op)*1.5);}
+  50%{transform:translate(var(--x2,-15px),var(--y2,-60px));opacity:var(--op,0.4);}
+  75%{transform:translate(var(--x3,10px),var(--y3,-20px));opacity:calc(var(--op)*0.5);}
+}
+
+/* ── WORD STAGGER ── */
+.w-reveal{display:inline-block;opacity:0;transform:translateY(60px);
+  transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1);}
+.w-reveal.wi{opacity:1;transform:translateY(0);}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal-left.in{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal-right.in{opacity:1;transform:translateX(0);}
+
+/* ── MARQUEE ── */
+.marquee-wrap{overflow:hidden;padding:1.1rem 0;
+  background:rgba(255,255,255,0.02);
+  border-top:1px solid rgba(255,255,255,0.05);
+  border-bottom:1px solid rgba(255,255,255,0.05);}
+.marquee-inner{display:flex;width:max-content;animation:marquee 22s linear infinite;}
+.marquee-inner:hover{animation-play-state:paused;}
+@keyframes marquee{to{transform:translateX(-50%);}}
+.marquee-item{white-space:nowrap;padding:0 2rem;
+  font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.18em;
+  color:rgba(255,255,255,0.22);display:flex;align-items:center;gap:2rem;}
+.m-dot{width:6px;height:6px;border-radius:50%;background:var(--mc,var(--teal));flex-shrink:0;}
+
 /* ── NAV ── */
-#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.2rem 2.5rem;
-  background:transparent;transition:background 0.4s,box-shadow 0.4s;}
-#nav.scrolled{background:rgba(13,1,32,0.94);backdrop-filter:blur(24px);
-  box-shadow:0 1px 0 rgba(255,255,255,0.06);}
-.nav-in{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
-.nav-logo img{height:48px;display:block;filter:invert(1);mix-blend-mode:screen;}
-.nav-links{display:flex;align-items:center;gap:2.2rem;}
-.nav-a{font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
-  color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s;position:relative;}
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1rem 2.5rem;
+  background:rgba(8,8,8,0.55);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  transition:background 0.4s,box-shadow 0.4s,border-color 0.4s;}
+#nav.scrolled{background:rgba(8,8,8,0.97);backdrop-filter:blur(24px);
+  box-shadow:0 1px 0 rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.06);}
+.nav-in{max-width:1340px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo img{height:78px;display:block;filter:invert(1);mix-blend-mode:screen;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-a{font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;
+  text-transform:uppercase;color:rgba(255,255,255,0.42);text-decoration:none;
+  transition:color 0.2s;position:relative;}
 .nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;
-  background:var(--cy);transition:width 0.25s;}
-.nav-a:hover{color:#fff;}.nav-a:hover::after,.nav-a.active::after{width:100%;}
-.nav-a.active{color:#fff;}
-.nav-pill{display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1.35rem;
-  background:linear-gradient(135deg,var(--pk),var(--vi));color:#fff;
-  font-size:0.63rem;font-weight:900;letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--teal);transition:width 0.25s;}
+.nav-a:hover,.nav-a.active{color:#fff;}
+.nav-a:hover::after,.nav-a.active::after{width:100%;}
+.nav-pill{padding:0.45rem 1.3rem;background:var(--teal);color:#080808;
+  font-family:'Inter',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
   border-radius:100px;text-decoration:none;
-  box-shadow:0 4px 20px rgba(236,72,153,0.4);
-  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
-.nav-pill:hover{transform:scale(1.06);box-shadow:0 8px 32px rgba(236,72,153,0.6);}
+  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;
+  box-shadow:0 0 20px rgba(0,232,200,0.35);}
+.nav-pill:hover{transform:scale(1.07);box-shadow:0 0 32px rgba(0,232,200,0.55);}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
 .nav-burger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;}
 
 /* ── HERO ── */
-#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+#hero{min-height:100vh;position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;padding-bottom:7rem;}
+.hero-bg{position:absolute;inset:0;
+  background:url('images/hero.jpg') center 18% / cover no-repeat;
+  filter:brightness(0.28) saturate(0.7);
+  transform:scale(1.04);transition:transform 12s ease;}
+#hero:hover .hero-bg{transform:scale(1);}
+.hero-overlay{position:absolute;inset:0;
+  background:linear-gradient(to top,#080808 0%,rgba(8,8,8,0.75) 35%,rgba(8,8,8,0.2) 70%,rgba(8,8,8,0.35) 100%);}
+/* blobs */
+.hero .blob:nth-child(3){width:700px;height:700px;top:-200px;right:-150px;--bd:16s;--btx:40px;--bty:30px;}
+.hero .blob:nth-child(4){width:500px;height:500px;bottom:-100px;left:10%;--bd:18s;--bdel:-5s;--btx:-30px;--bty:-40px;--bs:1.2;}
+.hero .blob:nth-child(5){width:400px;height:400px;top:20%;left:40%;--bd:12s;--bdel:-8s;--btx:25px;--bty:20px;}
 
-/* Left */
-.hero-left{
-  background:linear-gradient(160deg,#0D0120 0%,#1E0545 40%,#2D0A5E 75%,#3B1080 100%);
-  display:flex;flex-direction:column;justify-content:center;
-  padding:9rem 4rem 6rem 5rem;position:relative;z-index:2;}
-.hero-left::after{content:'';position:absolute;right:-1px;top:0;bottom:0;width:2px;
-  background:linear-gradient(180deg,transparent,rgba(168,85,247,0.4) 40%,rgba(6,182,212,0.3) 70%,transparent);}
+.hero-content{position:relative;z-index:2;max-width:1340px;margin:0 auto;padding:0 2.5rem;width:100%;}
+.hero-tag{font-family:'Inter',sans-serif;font-size:0.65rem;font-weight:700;
+  letter-spacing:0.3em;text-transform:uppercase;color:rgba(0,232,200,0.8);
+  display:inline-flex;align-items:center;gap:0.7rem;margin-bottom:2.2rem;}
+.hero-tag::before{content:'';width:28px;height:1.5px;background:var(--teal);}
 
-/* Decorative arc */
-.hero-arc{position:absolute;right:-140px;top:50%;transform:translateY(-50%);
-  width:320px;height:320px;border-radius:50%;
-  border:1px solid rgba(168,85,247,0.2);pointer-events:none;z-index:3;}
-.hero-arc::before{content:'';position:absolute;inset:22px;border-radius:50%;
-  border:1px solid rgba(6,182,212,0.15);}
-.hero-arc::after{content:'';position:absolute;inset:44px;border-radius:50%;
-  border:1px solid rgba(236,72,153,0.1);}
+.hero-h1{font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5.5rem,14vw,13rem);
+  line-height:0.96;letter-spacing:0.02em;color:#fff;
+  margin-bottom:2.2rem;}
+.hero-h1 .accent{color:var(--teal);display:block;}
 
-.hero-ministry-tag{display:inline-flex;align-items:center;gap:0.7rem;
-  font-size:0.58rem;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;
-  color:rgba(251,191,36,0.8);margin-bottom:2rem;}
-.hero-ministry-tag::before{content:'';width:32px;height:1.5px;background:rgba(251,191,36,0.5);}
-.hero-ministry-tag::after{content:'';width:32px;height:1.5px;background:rgba(251,191,36,0.5);}
+.hero-sub{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,0.5);
+  line-height:1.9;max-width:480px;margin-bottom:3rem;}
+.hero-sub strong{color:rgba(255,255,255,0.88);font-weight:600;}
 
-.hero-h1{font-family:'Playfair Display',serif;
-  font-size:clamp(3.4rem,6vw,5.8rem);font-weight:700;
-  line-height:0.98;letter-spacing:-0.04em;color:#fff;margin-bottom:1.6rem;}
-.hero-h1 .line2{font-style:italic;color:#C4B5FD;display:block;padding-left:0.5rem;}
-.hero-h1 .line3{display:block;}
-
-.hero-sub{font-size:1rem;font-weight:300;color:rgba(255,255,255,0.55);
-  line-height:2;max-width:400px;margin-bottom:2.8rem;}
-.hero-sub strong{color:rgba(255,255,255,0.85);font-weight:700;}
-
-.hero-btns{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3.5rem;}
-.btn-hero-pk{display:inline-block;padding:1rem 2.4rem;
-  background:linear-gradient(135deg,var(--pk),var(--pk2));color:#fff;
-  font-weight:900;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
+.hero-btns{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:4rem;}
+.btn-teal{display:inline-block;padding:0.95rem 2.4rem;
+  background:var(--teal);color:#080808;
+  font-weight:700;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
   border-radius:100px;text-decoration:none;
-  box-shadow:0 8px 32px rgba(236,72,153,0.45);
+  box-shadow:0 0 28px rgba(0,232,200,0.4);
   transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
-.btn-hero-pk:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 48px rgba(236,72,153,0.65);}
-.btn-hero-gh{display:inline-block;padding:1rem 2.4rem;
-  background:transparent;color:rgba(255,255,255,0.8);
-  font-weight:700;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
+.btn-teal:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 48px rgba(0,232,200,0.6);}
+.btn-ghost{display:inline-block;padding:0.95rem 2.4rem;
+  background:transparent;color:rgba(255,255,255,0.72);
+  font-weight:600;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
   border-radius:100px;text-decoration:none;
-  border:1.5px solid rgba(255,255,255,0.25);
+  border:1.5px solid rgba(255,255,255,0.18);
   transition:border-color 0.2s,color 0.2s,transform 0.2s;}
-.btn-hero-gh:hover{border-color:rgba(255,255,255,0.6);color:#fff;transform:translateY(-2px);}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff;transform:translateY(-2px);}
 
-.hero-proof{display:flex;align-items:center;gap:1.5rem;}
-.hero-proof-item{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;
-  text-transform:uppercase;color:rgba(255,255,255,0.3);}
-.hero-proof-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.15);}
+.hero-stats{display:flex;gap:3rem;}
+.hero-stat-n{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--teal);line-height:1;}
+.hero-stat-l{font-size:0.6rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);margin-top:0.2rem;}
 
-/* Right — photo */
-.hero-right{position:relative;overflow:hidden;}
-.hero-right::before{content:'';position:absolute;inset:0;z-index:1;
-  background:linear-gradient(90deg,rgba(13,1,32,0.6) 0%,transparent 30%,transparent 60%,rgba(13,1,32,0.3) 100%),
-             linear-gradient(180deg,rgba(13,1,32,0.3) 0%,transparent 20%,transparent 75%,rgba(13,1,32,0.7) 100%);}
-.hero-right img{width:100%;height:100%;object-fit:cover;object-position:52% 18%;display:block;
-  transform:scale(1.04);transition:transform 8s ease;}
-#hero:hover .hero-right img{transform:scale(1);}
+/* ── DEFINE SECTION ── */
+#define{background:#080808;padding:7rem 2.5rem;position:relative;overflow:hidden;isolation:isolate;}
+#define::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,232,200,0.25),transparent);}
+.def-in{max-width:1340px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.def-left{}
+.def-word{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,9vw,8rem);
+  color:#fff;line-height:0.9;margin-bottom:0.4rem;}
+.def-phonetic{font-family:'Playfair Display',serif;font-style:italic;
+  font-size:1.2rem;color:var(--teal);margin-bottom:1.5rem;}
+.def-text{font-size:1.02rem;color:rgba(255,255,255,0.42);line-height:1.9;}
+.def-text em{color:#fff;font-style:normal;font-weight:600;}
+.def-right{}
+.def-statement{font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.2rem,5vw,4rem);line-height:1.05;color:#fff;margin-bottom:1.8rem;}
+.def-statement .tl{color:var(--teal);}
+.def-statement .pk{color:var(--pink);}
+.def-sub{font-size:0.98rem;color:rgba(255,255,255,0.4);line-height:1.95;}
 
-/* Floating card */
-.hero-float{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-60%);
-  z-index:2;background:rgba(255,255,255,0.07);
-  border:1px solid rgba(255,255,255,0.14);border-radius:16px;
-  padding:1.2rem 1.6rem;backdrop-filter:blur(20px);min-width:220px;}
-.hero-float-q{font-family:'Playfair Display',serif;font-size:0.88rem;font-style:italic;
-  color:#fff;line-height:1.5;margin-bottom:0.5rem;}
-.hero-float-tags{display:flex;gap:0.4rem;flex-wrap:wrap;}
-.hft{font-size:0.52rem;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;
-  padding:0.2rem 0.6rem;border-radius:100px;background:rgba(255,255,255,0.1);
-  color:rgba(255,255,255,0.65);}
+/* ── STATEMENT BAND ── */
+#statement-band{padding:5rem 2.5rem;
+  background:linear-gradient(135deg,rgba(0,232,200,0.08) 0%,rgba(139,47,255,0.06) 100%);
+  border-top:1px solid rgba(0,232,200,0.1);
+  border-bottom:1px solid rgba(139,47,255,0.1);
+  text-align:center;position:relative;overflow:hidden;}
+.sb-in{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.sb-label{font-size:0.65rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--pink);display:flex;align-items:center;justify-content:center;gap:0.7rem;margin-bottom:1.5rem;}
+.sb-label::before,.sb-label::after{content:'';width:24px;height:1.5px;background:var(--pink);}
+.sb-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,7vw,6rem);
+  line-height:1;color:#fff;letter-spacing:0.04em;}
+.sb-h .accent{color:var(--teal);}
 
-/* ── PILLARS STRIP ── */
-.pillars-strip{
-  background:linear-gradient(90deg,#1E0545,#2D0A5E 50%,#1A3040);
-  border-top:1px solid rgba(255,255,255,0.06);
-  border-bottom:1px solid rgba(255,255,255,0.06);}
-.ps-in{max-width:1280px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(4,1fr);}
-.ps-item{padding:2rem 2.5rem;border-right:1px solid rgba(255,255,255,0.06);
-  position:relative;overflow:hidden;
-  transition:background 0.3s;}
-.ps-item:last-child{border-right:none;}
-.ps-item:hover{background:rgba(255,255,255,0.04);}
-.ps-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:var(--ps-clr);transform:scaleX(0);transform-origin:left;
-  transition:transform 0.35s ease;}
-.ps-item:hover::before{transform:scaleX(1);}
-.ps-num{font-family:'Playfair Display',serif;font-size:0.7rem;font-weight:700;
-  color:rgba(255,255,255,0.18);letter-spacing:0.06em;margin-bottom:0.5rem;}
-.ps-label{font-size:0.82rem;font-weight:900;letter-spacing:0.06em;text-transform:uppercase;
-  color:rgba(255,255,255,0.75);}
-.ps-desc{font-size:0.75rem;color:rgba(255,255,255,0.32);margin-top:0.3rem;line-height:1.5;}
+/* ── EVENTS PREVIEW ── */
+#events-preview{background:#080808;padding:8rem 2.5rem;position:relative;overflow:hidden;}
+.ep-in{max-width:1340px;margin:0 auto;}
+.section-label{font-size:0.68rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--teal);display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem;}
+.section-label::before{content:'';width:22px;height:1.5px;background:currentColor;}
+.section-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);
+  color:#fff;line-height:0.92;margin-bottom:0.5rem;}
+.section-h .tl{color:var(--teal);}
+.section-h .pk{color:var(--pink);}
+.section-h .pu{color:var(--pu);}
+.section-sub{font-size:1rem;color:var(--muted);line-height:1.9;max-width:480px;margin-bottom:3.5rem;}
 
-/* ── SHARED ── */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal.in{opacity:1;transform:translateY(0);}
-.reveal-left{opacity:0;transform:translateX(-28px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal-left.in{opacity:1;transform:translateX(0);}
-.reveal-right{opacity:0;transform:translateX(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal-right.in{opacity:1;transform:translateX(0);}
-
-/* ── FOR WOMEN LIKE YOU ── */
-#for-you{background:var(--cr);padding:8rem 2.5rem;position:relative;overflow:hidden;}
-#for-you::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;
-  border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.06),transparent 70%);}
-.fy-in{max-width:1280px;margin:0 auto;}
-.section-ey{font-size:0.58rem;font-weight:900;letter-spacing:0.3em;text-transform:uppercase;
-  color:var(--vi);display:flex;align-items:center;gap:0.8rem;margin-bottom:0.9rem;}
-.section-ey::before{content:'';width:24px;height:1.5px;background:var(--vi);}
-.section-sh2{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.5vw,3.6rem);
-  font-weight:700;letter-spacing:-0.03em;line-height:1.05;color:var(--pu);margin-bottom:1.2rem;}
-.section-sh2 em{font-style:italic;color:var(--vi);}
-.section-bp{font-size:0.97rem;color:rgba(45,10,94,0.45);line-height:2;max-width:480px;}
-
-.fy-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:4rem;}
-.fy-card{padding:3rem 2.5rem;position:relative;overflow:hidden;
-  transition:transform 0.3s cubic-bezier(.34,1.56,.64,1);}
-.fy-card:hover{transform:translateY(-4px);}
-.fy-card-1{background:linear-gradient(145deg,#FAF5FF,#F3E8FF);}
-.fy-card-2{background:linear-gradient(145deg,#FFF0F7,#FCE7F3);}
-.fy-card-3{background:linear-gradient(145deg,#F0FDFF,#E0F9FF);}
-.fy-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:var(--fy-clr);opacity:0;transition:opacity 0.3s;}
-.fy-card:hover::after{opacity:1;}
-.fy-card-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:700;
-  line-height:1;letter-spacing:-0.05em;margin-bottom:1.2rem;}
-.fy-card-h{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;
-  color:var(--pu);margin-bottom:0.7rem;line-height:1.2;}
-.fy-card-p{font-size:0.86rem;color:rgba(45,10,94,0.5);line-height:1.8;}
-
-/* ── EVENTS ── */
-#events{background:linear-gradient(170deg,#0D0120,#1E0545 50%,#0A2030 100%);
-  padding:8rem 2.5rem;position:relative;overflow:hidden;}
-#events::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(168,85,247,0.3),transparent);}
-.ev-in{max-width:1280px;margin:0 auto;}
-.ev-header{display:flex;justify-content:space-between;align-items:flex-end;
-  flex-wrap:wrap;gap:2rem;margin-bottom:3.5rem;}
-.ev-link-all{font-size:0.63rem;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;
-  color:rgba(255,255,255,0.4);text-decoration:none;padding:0.6rem 1.4rem;
-  border:1px solid rgba(255,255,255,0.15);border-radius:100px;
-  transition:color 0.2s,border-color 0.2s;}
-.ev-link-all:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
-
-.ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-.ev-card{border-radius:24px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;
-  position:relative;
+.ep-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.ep-card{border-radius:20px;overflow:hidden;text-decoration:none;
+  position:relative;display:flex;flex-direction:column;
   transition:transform 0.4s cubic-bezier(.34,1.56,.64,1),box-shadow 0.4s;}
-.ev-card:hover{transform:translateY(-12px);}
-.ev-body{padding:3.5rem 3rem 3rem;flex:1;position:relative;overflow:hidden;}
-.ev-body::after{content:'';position:absolute;bottom:-80px;right:-80px;
-  width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,0.05);}
-.ev-tag{display:inline-block;font-size:0.52rem;font-weight:900;letter-spacing:0.22em;
-  text-transform:uppercase;padding:0.28rem 0.85rem;border-radius:100px;
-  background:rgba(255,255,255,0.14);color:rgba(255,255,255,0.85);margin-bottom:1.4rem;}
-.ev-title{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:700;
-  color:#fff;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1rem;
-  position:relative;z-index:1;}
-.ev-desc{font-size:0.88rem;color:rgba(255,255,255,0.6);line-height:1.85;
-  position:relative;z-index:1;max-width:320px;}
-.ev-foot{padding:1.3rem 3rem;border-top:1px solid rgba(255,255,255,0.1);
+.ep-card:hover{transform:translateY(-10px);}
+.ep-body{padding:3.5rem 3rem 3rem;flex:1;position:relative;overflow:hidden;}
+.ep-tag{display:inline-block;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;
+  text-transform:uppercase;padding:0.25rem 0.8rem;border-radius:100px;
+  background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);margin-bottom:1.4rem;}
+.ep-title{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:#fff;
+  line-height:0.95;letter-spacing:0.02em;margin-bottom:1rem;}
+.ep-desc{font-size:0.92rem;color:rgba(255,255,255,0.52);line-height:1.9;max-width:300px;}
+.ep-foot{padding:1.2rem 3rem;border-top:1px solid rgba(255,255,255,0.08);
   display:flex;justify-content:space-between;align-items:center;
-  font-size:0.62rem;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;
-  color:rgba(255,255,255,0.7);}
-.ev-foot-arrow{width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.3);
-  display:flex;align-items:center;justify-content:center;font-size:0.8rem;
-  transition:background 0.2s,border-color 0.2s;}
-.ev-card:hover .ev-foot-arrow{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.6);}
-.ev-marriage .ev-body{background:linear-gradient(148deg,#2D0A5E 0%,#5B21B6 60%,#7E22CE 100%);}
-.ev-marriage .ev-foot{background:rgba(0,0,0,0.25);}
-.ev-marriage:hover{box-shadow:0 40px 100px rgba(124,58,237,0.35);}
-.ev-adventure .ev-body{background:linear-gradient(148deg,#063A50 0%,#0369A1 55%,#0891B2 100%);}
-.ev-adventure .ev-foot{background:rgba(0,0,0,0.25);}
-.ev-adventure:hover{box-shadow:0 40px 100px rgba(6,182,212,0.3);}
+  font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.6);}
+.ep-arrow{width:30px;height:30px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.22);
+  display:flex;align-items:center;justify-content:center;font-size:0.75rem;
+  transition:all 0.2s;}
+.ep-card:hover .ep-arrow{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.5);}
+.ep-orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;top:-80px;right:-80px;}
+.ep-ring{position:absolute;border-radius:50%;top:-80px;right:-80px;pointer-events:none;
+  transition:transform 0.8s ease;}
+.ep-card:hover .ep-ring{transform:scale(1.15) rotate(12deg);}
 
-/* ── PILLARS (INTERACTIVE) ── */
-#pillars{background:var(--cr);padding:8rem 2.5rem;position:relative;overflow:hidden;}
-#pillars::before{content:'';position:absolute;bottom:-200px;left:-200px;width:600px;height:600px;
-  border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.05),transparent 70%);}
-.pl-in{max-width:1280px;margin:0 auto;position:relative;z-index:1;}
-.pl-top{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4.5rem;}
-.pl-top-right{font-size:0.97rem;color:rgba(45,10,94,0.45);line-height:2;}
+/* Card themes */
+.ep-marriage .ep-body{background:linear-gradient(148deg,#0D0020 0%,#3B0D6B 55%,#6D22B5 100%);}
+.ep-marriage .ep-foot{background:rgba(0,0,0,0.45);}
+.ep-marriage .ep-orb{width:300px;height:300px;background:radial-gradient(circle,rgba(168,85,247,0.45),transparent 70%);}
+.ep-marriage .ep-ring{width:260px;height:260px;border:1px solid rgba(168,85,247,0.1);}
+.ep-marriage:hover{box-shadow:0 50px 100px rgba(107,34,181,0.45);}
 
-.pl-layout{display:grid;grid-template-columns:260px 1fr;
-  border-radius:24px;overflow:hidden;
-  box-shadow:0 40px 100px rgba(45,10,94,0.1),0 8px 24px rgba(45,10,94,0.06);}
-.pl-tabs{background:var(--pu);display:flex;flex-direction:column;}
-.pl-tab{padding:2rem 2rem;cursor:pointer;border-left:3px solid transparent;
-  display:flex;align-items:center;gap:1rem;
-  transition:background 0.2s,border-color 0.2s;}
-.pl-tab:not(:last-child){border-bottom:1px solid rgba(255,255,255,0.06);}
-.pl-tab:hover{background:rgba(255,255,255,0.07);}
-.pl-tab.pt-active{background:rgba(255,255,255,0.12);border-left-color:var(--pl-c,var(--cy));}
-.pl-tab-n{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;
-  color:rgba(255,255,255,0.18);line-height:1;min-width:26px;}
-.pl-tab-l{font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
-  color:rgba(255,255,255,0.45);transition:color 0.2s;}
-.pl-tab.pt-active .pl-tab-l{color:#fff;}
-.pl-tab-dot{width:7px;height:7px;border-radius:50%;background:var(--pl-c,var(--cy));
-  margin-left:auto;opacity:0;transform:scale(0);transition:opacity 0.2s,transform 0.2s;}
-.pl-tab.pt-active .pl-tab-dot{opacity:1;transform:scale(1);}
+.ep-adventure .ep-body{background:linear-gradient(148deg,#050F08 0%,#0A3020 55%,#0D5C30 100%);}
+.ep-adventure .ep-foot{background:rgba(0,0,0,0.45);}
+.ep-adventure .ep-orb{width:300px;height:300px;background:radial-gradient(circle,rgba(0,232,200,0.4),transparent 70%);}
+.ep-adventure .ep-ring{width:260px;height:260px;border:1px solid rgba(0,232,200,0.1);}
+.ep-adventure:hover{box-shadow:0 50px 100px rgba(0,180,140,0.35);}
+/* shine sweep */
+.ep-card::before{content:'';position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,0.07) 50%,transparent 70%);
+  transform:translateX(-120%);transition:transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+.ep-card:hover::before{transform:translateX(160%);}
 
-.pl-panels{background:#fff;position:relative;min-height:340px;}
-.pl-pane{position:absolute;inset:0;padding:3.5rem 4rem;
-  display:flex;flex-direction:column;justify-content:center;
-  opacity:0;transform:translateY(12px);pointer-events:none;
-  transition:opacity 0.4s ease,transform 0.4s ease;}
-.pl-pane.pp-active{opacity:1;transform:translateY(0);pointer-events:auto;}
-.pl-bg-num{font-family:'Playfair Display',serif;font-size:9rem;font-weight:700;
-  color:rgba(45,10,94,0.04);line-height:1;position:absolute;
-  right:2.5rem;bottom:-1.5rem;letter-spacing:-0.06em;pointer-events:none;}
-.pl-pane-title{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;
-  color:var(--pu);letter-spacing:-0.025em;margin-bottom:1rem;position:relative;}
-.pl-pane-title::after{content:'';display:block;width:40px;height:3px;border-radius:2px;
-  background:var(--pl-c,var(--cy));margin-top:0.85rem;}
-.pl-pane-text{font-size:1rem;color:rgba(45,10,94,0.55);line-height:1.9;
-  max-width:400px;margin-bottom:2rem;}
-.pl-pane-truth{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;
-  color:rgba(45,10,94,0.35);line-height:1.65;max-width:380px;
-  padding-left:1.2rem;border-left:2px solid rgba(45,10,94,0.12);}
+/* ── MERCH PREVIEW ── */
+#merch-preview{background:#0A0A0A;padding:8rem 2.5rem;position:relative;overflow:hidden;}
+#merch-preview::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,45,158,0.25),transparent);}
+.mp-in{max-width:1340px;margin:0 auto;}
+.mp-header{display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:2rem;margin-bottom:4rem;}
+.mp-link{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);text-decoration:none;padding:0.6rem 1.4rem;
+  border:1px solid rgba(255,255,255,0.12);border-radius:100px;
+  transition:color 0.2s,border-color 0.2s;}
+.mp-link:hover{color:#fff;border-color:rgba(255,255,255,0.45);}
 
-/* ── PHOTO EDITORIAL ── */
-#photos{background:var(--dp);padding:0;overflow:hidden;}
-.photo-editorial{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:260px 260px;gap:3px;}
-.pe-cell{overflow:hidden;position:relative;}
-.pe-cell.tall{grid-row:span 2;}
-.pe-cell img{width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform 0.7s ease;}
-.pe-cell:hover img{transform:scale(1.06);}
-.pe-cell::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 50%,rgba(13,1,32,0.5) 100%);}
+.mp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.mp-card{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer;display:block;text-decoration:none;}
+.mp-card img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 0.9s cubic-bezier(0.16,1,0.3,1),filter 0.5s ease;}
+.mp-card:hover img{transform:scale(1.1);filter:brightness(0.7);}
+.mp-card::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 35%,rgba(8,8,8,0.85) 100%);
+  transition:opacity 0.4s;}
+.mp-card:hover::after{opacity:0.9;}
+.mp-card-info{position:absolute;bottom:0;left:0;right:0;padding:2rem;z-index:2;}
+.mp-card-tag{font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--mc-clr,var(--teal));margin-bottom:0.4rem;}
+.mp-card-name{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#fff;
+  line-height:0.95;letter-spacing:0.03em;}
+.mp-card-ref{font-family:'Playfair Display',serif;font-size:0.75rem;font-style:italic;
+  color:rgba(255,255,255,0.4);margin-top:0.3rem;}
+.mp-card-reveal{position:absolute;top:1.2rem;right:1.2rem;width:36px;height:36px;
+  background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:0.8rem;opacity:0;transform:scale(0.8);
+  transition:opacity 0.3s,transform 0.3s;z-index:2;}
+.mp-card:hover .mp-card-reveal{opacity:1;transform:scale(1);}
+.mp-card-accent{position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:var(--mc-clr,var(--teal));transform:scaleY(0);transform-origin:bottom;
+  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);z-index:2;}
+.mp-card:hover .mp-card-accent{transform:scaleY(1);}
 
-/* ── MISSION QUOTE ── */
-#mission{background:linear-gradient(135deg,#2D0A5E 0%,#5B21B6 45%,#0882A0 100%);
-  padding:8rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
-#mission::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);
-  width:800px;height:400px;border-radius:50%;
-  background:radial-gradient(ellipse,rgba(255,255,255,0.07),transparent 70%);}
-.mq-in{max-width:900px;margin:0 auto;position:relative;z-index:1;}
-.mq-mark{font-family:'Playfair Display',serif;font-size:6rem;line-height:0.5;
-  color:rgba(255,255,255,0.1);display:block;margin-bottom:1rem;}
-.mq-text{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.2vw,2.4rem);
-  color:#fff;font-style:italic;line-height:1.65;margin-bottom:2rem;}
-.mq-text strong{color:var(--go);font-style:normal;}
-.mq-line{width:60px;height:1.5px;background:rgba(255,255,255,0.25);margin:0 auto;}
+/* ── PILLARS ── */
+#pillars{background:#080808;padding:8rem 2.5rem;position:relative;overflow:hidden;}
+.pl-in{max-width:1340px;margin:0 auto;}
+.pl-header{text-align:center;margin-bottom:5rem;}
+.pl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:4rem;}
+.pl-card{background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:3rem 2.5rem;position:relative;overflow:hidden;
+  transition:transform 0.4s cubic-bezier(.34,1.56,.64,1),box-shadow 0.4s,border-color 0.3s;}
+.pl-card:hover{transform:translateY(-10px);border-color:var(--pc,var(--teal));}
+.pl-card::before{content:'';position:absolute;inset:0;border-radius:16px;
+  background:radial-gradient(circle at 0% 100%,var(--pc,var(--teal)),transparent 60%);
+  opacity:0;transition:opacity 0.4s;}
+.pl-card:hover::before{opacity:0.06;}
+.pl-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--pc,var(--teal));transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s ease;}
+.pl-card:hover::after{transform:scaleX(1);}
+.pl-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;
+  position:absolute;right:1.2rem;top:0.8rem;
+  color:rgba(255,255,255,0.03);line-height:1;pointer-events:none;}
+.pl-icon{font-size:2.2rem;margin-bottom:1.5rem;display:block;}
+.pl-name{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#fff;
+  line-height:0.95;margin-bottom:1rem;letter-spacing:0.03em;}
+.pl-desc{font-size:0.92rem;color:rgba(255,255,255,0.42);line-height:1.85;margin-bottom:1.8rem;}
+.pl-quote{font-family:'Playfair Display',serif;font-size:0.8rem;font-style:italic;
+  color:rgba(255,255,255,0.28);line-height:1.7;
+  padding-left:1rem;border-left:2px solid var(--pc,var(--teal));}
 
-/* ── CTA ── */
-#cta{background:var(--cr);padding:9rem 2.5rem;position:relative;overflow:hidden;}
-.cta-in{max-width:1280px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
-.cta-left{}
-.cta-left .section-sh2{margin-bottom:1.2rem;}
-.cta-left p{font-size:1rem;color:rgba(45,10,94,0.45);line-height:2;margin-bottom:2.5rem;}
-.cta-btns{display:flex;flex-wrap:wrap;gap:1rem;}
-.btn-cta-main{display:inline-block;padding:1.1rem 2.8rem;
-  background:linear-gradient(135deg,var(--pk),var(--vi));color:#fff;
-  font-weight:900;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
-  border-radius:100px;text-decoration:none;
-  box-shadow:0 8px 32px rgba(236,72,153,0.4);
-  transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
-.btn-cta-main:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 48px rgba(236,72,153,0.6);}
-.btn-cta-sec{display:inline-block;padding:1.1rem 2.8rem;
-  background:transparent;color:var(--vi);
-  font-weight:700;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
-  border-radius:100px;text-decoration:none;
-  border:1.5px solid rgba(124,58,237,0.3);
-  transition:background 0.2s,color 0.2s,border-color 0.2s;}
-.btn-cta-sec:hover{background:var(--vi);color:#fff;border-color:var(--vi);}
-
-.cta-right{position:relative;}
-.cta-photo-main{border-radius:24px;overflow:hidden;position:relative;
-  box-shadow:0 40px 100px rgba(45,10,94,0.15);}
-.cta-photo-main img{width:100%;height:440px;object-fit:cover;object-position:52% 22%;display:block;}
-.cta-photo-main::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 55%,rgba(45,10,94,0.5) 100%);}
-.cta-badge{position:absolute;bottom:-1.5rem;left:-1.5rem;z-index:2;
-  background:linear-gradient(135deg,var(--pk),var(--vi));
-  border-radius:16px;padding:1.4rem 1.8rem;
-  box-shadow:0 16px 48px rgba(236,72,153,0.4);}
-.cta-badge-n{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;
-  color:#fff;line-height:1;}
-.cta-badge-l{font-size:0.58rem;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;
-  color:rgba(255,255,255,0.7);margin-top:0.25rem;}
+/* ── MISSION CTA ── */
+#mission-cta{padding:9rem 2.5rem;position:relative;overflow:hidden;text-align:center;
+  background:#080808;}
+#mission-cta::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+  width:900px;height:600px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(0,232,200,0.06),transparent 65%);}
+.mc-in{max-width:900px;margin:0 auto;position:relative;z-index:1;}
+.mc-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--pink);display:flex;align-items:center;justify-content:center;gap:0.7rem;margin-bottom:2rem;}
+.mc-tag::before,.mc-tag::after{content:'';width:28px;height:1.5px;background:var(--pink);}
+.mc-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,11vw,9rem);
+  color:#fff;line-height:0.9;margin-bottom:1.5rem;}
+.mc-h .tl{color:var(--teal);}
+.mc-sub{font-size:1.05rem;color:rgba(255,255,255,0.42);line-height:1.9;
+  max-width:560px;margin:0 auto 3.5rem;}
+.mc-btns{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;}
 
 /* ── FOOTER ── */
-footer{background:linear-gradient(160deg,#080115,#0D0120 50%,#091828);
-  padding:5.5rem 2.5rem 2.5rem;
-  border-top:1px solid rgba(255,255,255,0.05);}
-.ft-in{max-width:1280px;margin:0 auto;}
+footer{background:#050505;padding:5.5rem 2.5rem 2.5rem;
+  border-top:1px solid rgba(255,255,255,0.04);}
+.ft-in{max-width:1340px;margin:0 auto;}
 .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem;}
-.ft-brand img{height:46px;display:block;filter:invert(1);mix-blend-mode:screen;margin-bottom:1.2rem;opacity:0.85;}
-.ft-brand p{font-size:0.82rem;color:rgba(255,255,255,0.25);line-height:1.9;max-width:240px;}
-.ft-col h4{font-size:0.56rem;font-weight:900;letter-spacing:0.24em;text-transform:uppercase;
-  color:rgba(251,191,36,0.5);margin-bottom:1.2rem;}
-.ft-links{display:flex;flex-direction:column;gap:0.7rem;}
-.ft-links a{font-size:0.82rem;color:rgba(255,255,255,0.28);text-decoration:none;transition:color 0.2s;}
-.ft-links a:hover{color:rgba(255,255,255,0.85);}
-.ft-bot{border-top:1px solid rgba(255,255,255,0.06);padding-top:2rem;
+.ft-brand img{height:70px;filter:invert(1);mix-blend-mode:screen;opacity:0.8;display:block;margin-bottom:1rem;}
+.ft-brand p{font-size:0.85rem;color:rgba(255,255,255,0.22);line-height:1.9;max-width:240px;}
+.ft-col h4{font-size:0.58rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--teal);opacity:0.6;margin-bottom:1.2rem;}
+.ft-links{display:flex;flex-direction:column;gap:0.65rem;}
+.ft-links a{font-size:0.85rem;color:rgba(255,255,255,0.24);text-decoration:none;transition:color 0.2s;}
+.ft-links a:hover{color:rgba(255,255,255,0.8);}
+.ft-socials{display:flex;gap:0.75rem;margin-top:1.5rem;}
+.ft-soc{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;font-size:0.85rem;
+  color:rgba(255,255,255,0.35);text-decoration:none;transition:all 0.2s;}
+.ft-soc:hover{border-color:var(--teal);color:var(--teal);transform:scale(1.12);}
+.ft-bot{border-top:1px solid rgba(255,255,255,0.04);padding-top:2rem;
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.ft-copy{font-size:0.68rem;color:rgba(255,255,255,0.18);}
+.ft-copy{font-size:0.7rem;color:rgba(255,255,255,0.14);}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
-  #hero{grid-template-columns:1fr;}
-  .hero-right{display:none;}
-  .hero-left{padding:9rem 3rem 6rem;}
-  .pl-top{grid-template-columns:1fr;}
-  .cta-in{grid-template-columns:1fr;gap:3rem;}
-  .cta-right{display:none;}
-  .ft-grid{grid-template-columns:1fr 1fr;gap:2.5rem;}
-  .photo-editorial{grid-template-columns:1fr 1fr;grid-template-rows:220px 220px;}
-  .pe-cell.tall{grid-row:span 2;}
+  .def-in,.cta-in,.ft-grid{grid-template-columns:1fr 1fr;gap:3rem;}
+  .ep-grid{grid-template-columns:1fr 1fr;}
+  .pl-grid{grid-template-columns:1fr 1fr;}
+  .mp-grid{grid-template-columns:1fr 1fr 1fr;}
 }
 @media(max-width:860px){
-  .ps-in{grid-template-columns:1fr 1fr;}
-  .fy-grid{grid-template-columns:1fr;}
-  .ev-grid{grid-template-columns:1fr;}
-  .pl-layout{grid-template-columns:1fr;}
-  .pl-tabs{flex-direction:row;flex-wrap:wrap;}
-  .pl-tab{flex:1;min-width:120px;border-left:none;border-bottom:3px solid transparent;
-    justify-content:center;padding:1rem;}
-  .pl-tab.pt-active{border-left:none;border-bottom-color:var(--pl-c,var(--cy));}
-  .pl-pane{position:relative;inset:auto;opacity:0;height:0;overflow:hidden;
-    pointer-events:none;padding:2rem 2rem;}
-  .pl-pane.pp-active{opacity:1;height:auto;pointer-events:auto;transform:none;}
+  .ep-grid,.mp-grid{grid-template-columns:1fr;}
+  .pl-grid{grid-template-columns:1fr 1fr;}
+  .def-in{grid-template-columns:1fr;}
 }
 @media(max-width:600px){
-  #nav{padding:0.9rem 1.25rem;}
+  #nav{padding:0.8rem 1.2rem;}
+  .nav-logo img{height:60px;}
   .nav-links{display:none;}
-  .nav-links.open{display:flex;flex-direction:column;position:fixed;
-    top:70px;left:0;right:0;background:rgba(13,1,32,0.98);
-    padding:1.5rem;gap:1.2rem;z-index:499;
-    box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;
+    background:rgba(8,8,8,0.98);padding:1.5rem;gap:1.2rem;z-index:499;
+    box-shadow:0 12px 40px rgba(0,0,0,0.6);}
   .nav-a{font-size:0.9rem;}
   .nav-burger{display:flex;}
-  .hero-left{padding:8rem 1.5rem 5rem;}
-  #for-you,#events,#pillars,#cta,#mission{padding:5.5rem 1.5rem;}
-  .pl-top{grid-template-columns:1fr;}
+  .hero-h1{font-size:clamp(4rem,18vw,7rem);}
+  .hero-content{padding:0 1.5rem;}
+  #define,#events-preview,#merch-preview,#pillars,#mission-cta,#statement-band{padding:5rem 1.5rem;}
+  .pl-grid{grid-template-columns:1fr;}
+  .mp-grid{grid-template-columns:1fr 1fr;}
   .ft-grid{grid-template-columns:1fr;gap:2rem;}
-  .ps-in{grid-template-columns:1fr 1fr;}
-  .photo-editorial{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px;}
-  .pe-cell.tall{grid-row:span 2;}
+  #music-btn{bottom:1.5rem;right:1.5rem;width:44px;height:44px;}
 }
 </style>
 </head>
 <body>
+
+<!-- INTRO SPLASH -->
+<div id="intro">
+  <div class="intro-splats">
+    <!-- TOP LEFT — big pink flick sweeping toward lower-right -->
+    <div class="splat-wrap" style="position:absolute;width:680px;height:580px;top:-80px;left:-120px;">
+      <svg viewBox="0 0 500 420" fill="none" overflow="visible">
+        <circle cx="45" cy="40" r="16" fill="rgba(255,45,158,.92)"/>
+        <circle cx="28" cy="58" r="6" fill="rgba(255,45,158,.82)"/>
+        <circle cx="62" cy="22" r="5" fill="rgba(255,45,158,.78)"/>
+        <circle cx="18" cy="25" r="3" fill="rgba(255,45,158,.70)"/>
+        <circle cx="70" cy="52" r="3" fill="rgba(255,45,158,.74)"/>
+        <circle cx="92" cy="88" r="11" fill="rgba(255,45,158,.85)"/>
+        <ellipse cx="140" cy="135" rx="9" ry="6" transform="rotate(44,140,135)" fill="rgba(255,45,158,.77)"/>
+        <circle cx="185" cy="180" r="7.5" fill="rgba(255,45,158,.70)"/>
+        <ellipse cx="228" cy="222" rx="6" ry="4" transform="rotate(44,228,222)" fill="rgba(255,45,158,.62)"/>
+        <circle cx="268" cy="260" r="5" fill="rgba(255,45,158,.55)"/>
+        <circle cx="304" cy="294" r="4" fill="rgba(255,45,158,.48)"/>
+        <circle cx="338" cy="326" r="3" fill="rgba(255,45,158,.40)"/>
+        <circle cx="368" cy="354" r="2.5" fill="rgba(255,45,158,.33)"/>
+        <circle cx="394" cy="378" r="2" fill="rgba(255,45,158,.26)"/>
+        <circle cx="416" cy="399" r="1.5" fill="rgba(255,45,158,.19)"/>
+        <!-- scatter above diagonal -->
+        <circle cx="108" cy="62" r="4" fill="rgba(255,45,158,.72)"/>
+        <circle cx="158" cy="108" r="3" fill="rgba(255,45,158,.64)"/>
+        <circle cx="202" cy="152" r="2.5" fill="rgba(255,45,158,.56)"/>
+        <circle cx="244" cy="193" r="2" fill="rgba(255,45,158,.48)"/>
+        <circle cx="282" cy="231" r="1.5" fill="rgba(255,45,158,.40)"/>
+        <!-- scatter below diagonal -->
+        <circle cx="68" cy="118" r="5" fill="rgba(255,45,158,.68)"/>
+        <circle cx="115" cy="162" r="3.5" fill="rgba(255,45,158,.60)"/>
+        <circle cx="160" cy="204" r="2.5" fill="rgba(255,45,158,.52)"/>
+        <circle cx="202" cy="244" r="2" fill="rgba(255,45,158,.44)"/>
+        <!-- micro scatter -->
+        <circle cx="52" cy="82" r="2" fill="rgba(255,45,158,.75)"/>
+        <circle cx="35" cy="94" r="1.5" fill="rgba(255,45,158,.68)"/>
+        <circle cx="78" cy="35" r="1.5" fill="rgba(255,45,158,.65)"/>
+        <circle cx="100" cy="48" r="1" fill="rgba(255,45,158,.60)"/>
+        <circle cx="126" cy="98" r="1" fill="rgba(255,45,158,.55)"/>
+      </svg>
+    </div>
+    <!-- BOTTOM RIGHT — big teal flick sweeping toward upper-left -->
+    <div class="splat-wrap" style="position:absolute;width:640px;height:560px;bottom:-80px;right:-100px;">
+      <svg viewBox="0 0 500 420" fill="none" overflow="visible">
+        <circle cx="455" cy="380" r="16" fill="rgba(0,232,200,.92)"/>
+        <circle cx="472" cy="362" r="6" fill="rgba(0,232,200,.82)"/>
+        <circle cx="438" cy="398" r="5" fill="rgba(0,232,200,.78)"/>
+        <circle cx="482" cy="395" r="3" fill="rgba(0,232,200,.70)"/>
+        <circle cx="430" cy="368" r="3" fill="rgba(0,232,200,.74)"/>
+        <circle cx="408" cy="332" r="11" fill="rgba(0,232,200,.85)"/>
+        <ellipse cx="360" cy="285" rx="9" ry="6" transform="rotate(44,360,285)" fill="rgba(0,232,200,.77)"/>
+        <circle cx="315" cy="240" r="7.5" fill="rgba(0,232,200,.70)"/>
+        <ellipse cx="272" cy="198" rx="6" ry="4" transform="rotate(44,272,198)" fill="rgba(0,232,200,.62)"/>
+        <circle cx="232" cy="160" r="5" fill="rgba(0,232,200,.55)"/>
+        <circle cx="196" cy="126" r="4" fill="rgba(0,232,200,.48)"/>
+        <circle cx="162" cy="94" r="3" fill="rgba(0,232,200,.40)"/>
+        <circle cx="132" cy="66" r="2.5" fill="rgba(0,232,200,.33)"/>
+        <circle cx="106" cy="42" r="2" fill="rgba(0,232,200,.26)"/>
+        <circle cx="84" cy="21" r="1.5" fill="rgba(0,232,200,.19)"/>
+        <!-- scatter -->
+        <circle cx="392" cy="308" r="4" fill="rgba(0,232,200,.72)"/>
+        <circle cx="342" cy="262" r="3" fill="rgba(0,232,200,.64)"/>
+        <circle cx="298" cy="220" r="2.5" fill="rgba(0,232,200,.56)"/>
+        <circle cx="256" cy="180" r="2" fill="rgba(0,232,200,.48)"/>
+        <circle cx="432" cy="358" r="2" fill="rgba(0,232,200,.75)"/>
+        <circle cx="418" cy="344" r="1.5" fill="rgba(0,232,200,.68)"/>
+        <circle cx="378" cy="310" r="1" fill="rgba(0,232,200,.60)"/>
+        <circle cx="448" cy="376" r="1.5" fill="rgba(0,232,200,.65)"/>
+      </svg>
+    </div>
+    <!-- TOP RIGHT — purple scatter accent -->
+    <div class="splat-wrap" style="position:absolute;width:400px;height:360px;top:-40px;right:-60px;">
+      <svg viewBox="0 0 320 280" fill="none" overflow="visible">
+        <circle cx="280" cy="40" r="10" fill="rgba(139,47,255,.82)"/>
+        <circle cx="295" cy="25" r="4" fill="rgba(139,47,255,.72)"/>
+        <circle cx="265" cy="55" r="3.5" fill="rgba(139,47,255,.68)"/>
+        <circle cx="248" cy="72" r="7" fill="rgba(139,47,255,.75)"/>
+        <circle cx="218" cy="98" r="5" fill="rgba(139,47,255,.68)"/>
+        <circle cx="192" cy="120" r="4" fill="rgba(139,47,255,.60)"/>
+        <circle cx="168" cy="140" r="3" fill="rgba(139,47,255,.53)"/>
+        <circle cx="146" cy="158" r="2.5" fill="rgba(139,47,255,.46)"/>
+        <circle cx="126" cy="174" r="2" fill="rgba(139,47,255,.38)"/>
+        <circle cx="108" cy="188" r="1.5" fill="rgba(139,47,255,.31)"/>
+        <!-- scatter -->
+        <circle cx="260" cy="28" r="2.5" fill="rgba(139,47,255,.65)"/>
+        <circle cx="300" cy="48" r="2" fill="rgba(139,47,255,.60)"/>
+        <circle cx="230" cy="85" r="2" fill="rgba(139,47,255,.58)"/>
+        <circle cx="200" cy="108" r="1.5" fill="rgba(139,47,255,.50)"/>
+        <circle cx="270" cy="62" r="1.5" fill="rgba(139,47,255,.55)"/>
+        <circle cx="308" cy="30" r="1" fill="rgba(139,47,255,.50)"/>
+      </svg>
+    </div>
+    <!-- BOTTOM LEFT — teal upward accent -->
+    <div class="splat-wrap" style="position:absolute;width:360px;height:400px;bottom:-60px;left:-50px;">
+      <svg viewBox="0 0 280 320" fill="none" overflow="visible">
+        <circle cx="60" cy="295" r="10" fill="rgba(0,232,200,.80)"/>
+        <circle cx="46" cy="278" r="4" fill="rgba(0,232,200,.70)"/>
+        <circle cx="74" cy="275" r="3.5" fill="rgba(0,232,200,.66)"/>
+        <circle cx="58" cy="260" r="6.5" fill="rgba(0,232,200,.73)"/>
+        <circle cx="56" cy="232" r="5" fill="rgba(0,232,200,.65)"/>
+        <circle cx="54" cy="206" r="4" fill="rgba(0,232,200,.57)"/>
+        <circle cx="52" cy="182" r="3" fill="rgba(0,232,200,.50)"/>
+        <circle cx="51" cy="160" r="2.5" fill="rgba(0,232,200,.42)"/>
+        <circle cx="50" cy="140" r="2" fill="rgba(0,232,200,.35)"/>
+        <circle cx="50" cy="122" r="1.5" fill="rgba(0,232,200,.28)"/>
+        <!-- scatter -->
+        <circle cx="42" cy="248" r="2.5" fill="rgba(0,232,200,.62)"/>
+        <circle cx="72" cy="246" r="2" fill="rgba(0,232,200,.58)"/>
+        <circle cx="40" cy="220" r="1.5" fill="rgba(0,232,200,.52)"/>
+        <circle cx="68" cy="218" r="1.5" fill="rgba(0,232,200,.50)"/>
+        <circle cx="38" cy="196" r="1" fill="rgba(0,232,200,.44)"/>
+        <circle cx="66" cy="193" r="1" fill="rgba(0,232,200,.42)"/>
+      </svg>
+    </div>
+  </div>
+  <div class="intro-content">
+    <img src="assets/yin-logo.png" class="intro-logo" alt="You Inspire Now">
+    <div class="intro-rule"></div>
+    <div class="intro-h">ARE YOU READY TO<br>STEP INTO YOUR<br><span class="tl">CALLING?</span></div>
+    <div class="intro-scripture">"For I know the plans I have for you." — Jeremiah 29:11</div>
+    <button class="intro-btn" id="intro-enter">Enter The Journey →</button>
+  </div>
+  <button class="intro-skip" id="intro-skip">Skip intro</button>
+</div>
+
 <div class="grain"></div>
+<div id="cursor">👟</div>
+<audio id="bg-music" loop preload="none"><source src="audio/brave.mp3" type="audio/mpeg"></audio>
+<button id="music-btn" title="Play music" aria-label="Toggle music">♪</button>
 
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-in">
-    <a href="index.html">
-      <img src="assets/yin-logo.png" alt="You Inspire Now" style="height:48px;display:block;filter:invert(1);mix-blend-mode:screen;">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/yin-logo.png" alt="You Inspire Now">
     </a>
     <div class="nav-links" id="nav-links">
       <a href="index.html" class="nav-a active">Home</a>
       <a href="about.html" class="nav-a">About</a>
       <a href="events.html" class="nav-a">Events</a>
-      <a href="https://goinspirenow.org" target="_blank" class="nav-pill">Go Inspire Now</a>
+      <a href="merch.html" class="nav-a">Merch</a>
+      <a href="contact.html" class="nav-a">Connect</a>
+      <a href="donate.html" class="nav-pill">Give →</a>
     </div>
     <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <!-- HERO -->
-<section id="hero">
-  <!-- Left -->
-  <div class="hero-left">
-    <div class="hero-arc"></div>
-    <div class="hero-ministry-tag">Women's Faith Ministry</div>
+<section id="hero" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-top-shade"></div>
+  <div class="blob blob-teal" style="width:700px;height:700px;top:-200px;right:-150px;--bd:16s;--btx:40px;--bty:30px;--bs:1.1;"></div>
+  <div class="blob blob-pink" style="width:500px;height:500px;bottom:-100px;left:8%;--bd:19s;--bdel:-5s;--btx:-30px;--bty:-40px;--bs:1.2;"></div>
+  <div class="blob blob-pu" style="width:350px;height:350px;top:25%;left:42%;--bd:12s;--bdel:-8s;--btx:25px;--bty:20px;"></div>
+  <!-- HERO PAINT SPLATTERS -->
+  <div class="splat-wrap" style="width:280px;height:280px;top:12%;right:8%;z-index:1;">
+    <svg viewBox="0 0 300 200" fill="none"><circle cx="272" cy="145" r="8" fill="rgba(255,45,158,.90)"/><circle cx="282" cy="134" r="3" fill="rgba(255,45,158,.78)"/><circle cx="262" cy="155" r="2" fill="rgba(255,45,158,.72)"/><circle cx="286" cy="156" r="1.2" fill="rgba(255,45,158,.62)"/><circle cx="243" cy="130" r="5.5" fill="rgba(255,45,158,.82)"/><ellipse cx="213" cy="116" rx="4.5" ry="3.2" transform="rotate(26,213,116)" fill="rgba(255,45,158,.74)"/><circle cx="185" cy="104" r="3.5" fill="rgba(255,45,158,.67)"/><ellipse cx="159" cy="93" rx="3" ry="2.2" transform="rotate(26,159,93)" fill="rgba(255,45,158,.60)"/><circle cx="135" cy="83" r="2.5" fill="rgba(255,45,158,.53)"/><circle cx="113" cy="75" r="2" fill="rgba(255,45,158,.46)"/><circle cx="93" cy="68" r="1.5" fill="rgba(255,45,158,.38)"/><circle cx="75" cy="63" r="1.2" fill="rgba(255,45,158,.30)"/><circle cx="59" cy="59" r="1" fill="rgba(255,45,158,.22)"/><circle cx="234" cy="113" r="2.5" fill="rgba(255,45,158,.68)"/><circle cx="206" cy="100" r="2" fill="rgba(255,45,158,.60)"/><circle cx="180" cy="89" r="1.5" fill="rgba(255,45,158,.52)"/><circle cx="236" cy="148" r="3" fill="rgba(255,45,158,.65)"/><circle cx="208" cy="156" r="2" fill="rgba(255,45,158,.57)"/><circle cx="182" cy="153" r="1.5" fill="rgba(255,45,158,.49)"/></svg>
+  </div>
+  <div class="splat-wrap" style="width:220px;height:220px;top:55%;left:3%;z-index:1;">
+    <svg viewBox="0 0 160 280" fill="none"><circle cx="80" cy="22" r="8" fill="rgba(0,232,200,.90)"/><circle cx="68" cy="14" r="2.5" fill="rgba(0,232,200,.78)"/><circle cx="90" cy="12" r="2" fill="rgba(0,232,200,.72)"/><circle cx="77" cy="52" r="5.5" fill="rgba(0,232,200,.82)"/><ellipse cx="75" cy="80" rx="3.2" ry="4.5" transform="rotate(4,75,80)" fill="rgba(0,232,200,.74)"/><circle cx="73" cy="107" r="3.5" fill="rgba(0,232,200,.67)"/><ellipse cx="72" cy="132" rx="2.2" ry="3.2" transform="rotate(3,72,132)" fill="rgba(0,232,200,.60)"/><circle cx="71" cy="155" r="2.5" fill="rgba(0,232,200,.53)"/><circle cx="70" cy="176" r="2" fill="rgba(0,232,200,.46)"/><circle cx="70" cy="195" r="1.5" fill="rgba(0,232,200,.38)"/><circle cx="69" cy="212" r="1.2" fill="rgba(0,232,200,.30)"/><circle cx="61" cy="59" r="2.5" fill="rgba(0,232,200,.70)"/><circle cx="58" cy="86" r="2" fill="rgba(0,232,200,.62)"/><circle cx="56" cy="111" r="1.5" fill="rgba(0,232,200,.54)"/><circle cx="92" cy="57" r="3" fill="rgba(0,232,200,.68)"/><circle cx="95" cy="84" r="2" fill="rgba(0,232,200,.60)"/><circle cx="96" cy="109" r="1.5" fill="rgba(0,232,200,.52)"/></svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Women's Faith Ministry</div>
     <h1 class="hero-h1">
-      You Were<span class="line2">Made for</span><span class="line3">More.</span>
+      There Is<br>More<br><span class="accent">Within.</span>
     </h1>
-    <p class="hero-sub">A <strong>faith-rooted ministry</strong> empowering women to heal, step into identity, and rise into the life they were created for.</p>
+    <div class="hero-scripture">Jeremiah 29:11 · "For I know the plans I have for you"</div>
+    <p class="hero-sub"><strong>Calling out the greatness within,</strong> while inspiring those around you. You were made for more than this moment.</p>
     <div class="hero-btns">
-      <a href="events.html" class="btn-hero-pk">Explore Events</a>
-      <a href="about.html" class="btn-hero-gh">Our Story</a>
+      <a href="events.html" class="btn-teal" data-magnetic>Explore Events</a>
+      <a href="about.html" class="btn-ghost">Our Story</a>
     </div>
-    <div class="hero-proof">
-      <span class="hero-proof-item">Faith-Centered</span>
-      <span class="hero-proof-dot"></span>
-      <span class="hero-proof-item">Identity</span>
-      <span class="hero-proof-dot"></span>
-      <span class="hero-proof-item">Community</span>
-      <span class="hero-proof-dot"></span>
-      <span class="hero-proof-item">Purpose</span>
-    </div>
-  </div>
-  <!-- Right: photo -->
-  <div class="hero-right">
-    <img src="images/hero.jpg" alt="You Inspire Now — Founder">
-    <div class="hero-float">
-      <p class="hero-float-q">"Your story is not finished — your best chapter may still be ahead."</p>
-      <div class="hero-float-tags">
-        <span class="hft">Healing</span>
-        <span class="hft">Rising</span>
-        <span class="hft">Becoming</span>
-      </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-n">2</div><div class="hero-stat-l">Transformative Events</div></div>
+      <div><div class="hero-stat-n">4</div><div class="hero-stat-l">Core Pillars</div></div>
+      <div><div class="hero-stat-n">∞</div><div class="hero-stat-l">Women Inspired</div></div>
     </div>
   </div>
 </section>
 
-<!-- PILLARS STRIP -->
-<div class="pillars-strip">
-  <div class="ps-in">
-    <div class="ps-item" style="--ps-clr:linear-gradient(90deg,#A855F7,#7C3AED);">
-      <div class="ps-num">01</div>
-      <div class="ps-label">Identity</div>
-      <div class="ps-desc">Who you truly are</div>
-    </div>
-    <div class="ps-item" style="--ps-clr:linear-gradient(90deg,#06B6D4,#0891B2);">
-      <div class="ps-num">02</div>
-      <div class="ps-label">Purpose</div>
-      <div class="ps-desc">Why you are here</div>
-    </div>
-    <div class="ps-item" style="--ps-clr:linear-gradient(90deg,#EC4899,#BE185D);">
-      <div class="ps-num">03</div>
-      <div class="ps-label">Resilience</div>
-      <div class="ps-desc">Strength through healing</div>
-    </div>
-    <div class="ps-item" style="--ps-clr:linear-gradient(90deg,#FBBF24,#D97706);">
-      <div class="ps-num">04</div>
-      <div class="ps-label">Community</div>
-      <div class="ps-desc">You are not alone</div>
-    </div>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">GIFTED.<span class="m-dot" style="--mc:var(--teal);"></span>PURPOSED.<span class="m-dot" style="--mc:var(--pink);"></span>BE-YOU-TIFUL<span class="m-dot" style="--mc:var(--pu);"></span>YOU ARE CHANGING THE WORLD<span class="m-dot" style="--mc:var(--teal);"></span>THERE IS MORE WITHIN<span class="m-dot" style="--mc:var(--pink);"></span>HEAR THE CALL<span class="m-dot" style="--mc:var(--pu);"></span>LADY, YOU INSPIRE NOW<span class="m-dot" style="--mc:var(--teal);"></span></span>
+    <span class="marquee-item">GIFTED.<span class="m-dot" style="--mc:var(--teal);"></span>PURPOSED.<span class="m-dot" style="--mc:var(--pink);"></span>BE-YOU-TIFUL<span class="m-dot" style="--mc:var(--pu);"></span>YOU ARE CHANGING THE WORLD<span class="m-dot" style="--mc:var(--teal);"></span>THERE IS MORE WITHIN<span class="m-dot" style="--mc:var(--pink);"></span>HEAR THE CALL<span class="m-dot" style="--mc:var(--pu);"></span>LADY, YOU INSPIRE NOW<span class="m-dot" style="--mc:var(--teal);"></span></span>
   </div>
 </div>
 
-<!-- FOR WOMEN LIKE YOU -->
-<section id="for-you">
-  <div class="fy-in">
+<!-- DEFINITION -->
+<section id="define">
+  <div class="blob blob-pu" style="position:absolute;width:650px;height:650px;top:-200px;right:-180px;--bd:16s;--bdel:-3s;"></div>
+  <div class="blob blob-teal" style="position:absolute;width:450px;height:450px;bottom:-150px;left:-100px;--bd:20s;--bdel:-8s;"></div>
+  <div class="splat-wrap" style="width:260px;height:260px;bottom:-40px;right:5%;z-index:0;">
+    <svg viewBox="0 0 300 200" fill="none"><circle cx="272" cy="145" r="8" fill="rgba(0,232,200,.90)"/><circle cx="282" cy="134" r="3" fill="rgba(0,232,200,.78)"/><circle cx="262" cy="155" r="2" fill="rgba(0,232,200,.72)"/><circle cx="243" cy="130" r="5.5" fill="rgba(0,232,200,.82)"/><ellipse cx="213" cy="116" rx="4.5" ry="3.2" transform="rotate(26,213,116)" fill="rgba(0,232,200,.74)"/><circle cx="185" cy="104" r="3.5" fill="rgba(0,232,200,.67)"/><ellipse cx="159" cy="93" rx="3" ry="2.2" transform="rotate(26,159,93)" fill="rgba(0,232,200,.60)"/><circle cx="135" cy="83" r="2.5" fill="rgba(0,232,200,.53)"/><circle cx="113" cy="75" r="2" fill="rgba(0,232,200,.46)"/><circle cx="93" cy="68" r="1.5" fill="rgba(0,232,200,.38)"/><circle cx="75" cy="63" r="1.2" fill="rgba(0,232,200,.30)"/><circle cx="234" cy="113" r="2.5" fill="rgba(0,232,200,.68)"/><circle cx="206" cy="100" r="2" fill="rgba(0,232,200,.60)"/><circle cx="180" cy="89" r="1.5" fill="rgba(0,232,200,.52)"/><circle cx="236" cy="148" r="3" fill="rgba(0,232,200,.65)"/><circle cx="208" cy="156" r="2" fill="rgba(0,232,200,.57)"/></svg>
+  </div>
+  <div class="splat-wrap" style="width:200px;height:200px;top:10%;left:2%;z-index:0;">
+    <svg viewBox="0 0 260 220" fill="none"><circle cx="130" cy="110" r="6" fill="rgba(139,47,255,.88)"/><circle cx="104" cy="93" r="4" fill="rgba(139,47,255,.80)"/><circle cx="158" cy="96" r="3.5" fill="rgba(139,47,255,.74)"/><circle cx="85" cy="116" r="3" fill="rgba(139,47,255,.68)"/><circle cx="174" cy="118" r="3" fill="rgba(139,47,255,.68)"/><circle cx="112" cy="134" r="2.5" fill="rgba(139,47,255,.62)"/><circle cx="150" cy="130" r="2.5" fill="rgba(139,47,255,.62)"/><circle cx="67" cy="104" r="2" fill="rgba(139,47,255,.55)"/><circle cx="190" cy="106" r="2" fill="rgba(139,47,255,.55)"/><circle cx="94" cy="72" r="2" fill="rgba(139,47,255,.52)"/><circle cx="165" cy="74" r="1.5" fill="rgba(139,47,255,.48)"/><circle cx="56" cy="130" r="1.5" fill="rgba(139,47,255,.46)"/><circle cx="120" cy="60" r="1.5" fill="rgba(139,47,255,.45)"/><circle cx="136" cy="155" r="1.2" fill="rgba(139,47,255,.42)"/><circle cx="78" cy="152" r="1" fill="rgba(139,47,255,.40)"/></svg>
+  </div>
+  <div class="def-in">
+    <div class="def-left reveal-left">
+      <div class="def-word">in·spire</div>
+      <div class="def-phonetic">/inˈspī(ə)r/</div>
+      <p class="def-text">To fill someone with the urge or ability to do or feel something — especially to do something <em>creative, courageous, and purposeful.</em> To breathe life into what was dormant. To awaken greatness.</p>
+    </div>
+    <div class="def-right reveal-right" style="transition-delay:0.15s">
+      <div class="def-statement">LADY,<br>YOU ARE<br><span class="tl">CHANGING</span><br><span class="pk">THE WORLD.</span></div>
+      <p class="def-sub">Every woman who walks through our doors carries a gift that the world desperately needs. You Inspire Now exists to call that out — boldly, faithfully, intentionally.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT BAND -->
+<div id="statement-band">
+  <div class="blob blob-pink" style="position:absolute;width:600px;height:400px;top:-100px;right:-100px;--bd:11s;opacity:0.5;"></div>
+  <div class="blob blob-teal" style="position:absolute;width:500px;height:400px;bottom:-100px;left:-100px;--bd:14s;--bdel:-3s;opacity:0.5;"></div>
+  <div class="sb-in reveal">
+    <div class="sb-label">The Calling</div>
+    <div class="sb-h">HEAR THE <span class="accent">CALL.</span><br>IT'S CALLING OUT<br>THE GREATNESS <span class="accent">WITHIN.</span></div>
+  </div>
+</div>
+
+<!-- EVENTS PREVIEW -->
+<section id="events-preview">
+  <div class="blob blob-pink" style="position:absolute;width:700px;height:500px;top:-100px;left:-200px;--bd:14s;--bdel:-2s;"></div>
+  <div class="blob blob-pu" style="position:absolute;width:500px;height:500px;bottom:-100px;right:-150px;--bd:17s;--bdel:-9s;"></div>
+  <div class="ep-in">
     <div class="reveal">
-      <div class="section-ey">This is for you</div>
-      <h2 class="section-sh2">A Space Built for<br><em>Women Like You</em></h2>
+      <div class="section-label">Upcoming Experiences</div>
+      <div class="section-h">Two Events.<br><span class="pk">Real</span> <span class="tl">Transformation.</span></div>
+      <p class="section-sub">Faith-centered experiences designed to stretch you, connect you, and move you into the next version of yourself.</p>
     </div>
-    <div class="fy-grid">
-      <div class="fy-card fy-card-1 reveal" style="--fy-clr:#A855F7;">
-        <div class="fy-card-num" style="color:rgba(168,85,247,0.18);">01</div>
-        <h3 class="fy-card-h">You feel like you've lost yourself</h3>
-        <p class="fy-card-p">You have spent so long being everything for everyone else that you are not sure who you are anymore. This ministry was built to bring you back to yourself.</p>
-      </div>
-      <div class="fy-card fy-card-2 reveal" style="--fy-clr:#EC4899;transition-delay:0.1s">
-        <div class="fy-card-num" style="color:rgba(236,72,153,0.15);">02</div>
-        <h3 class="fy-card-h">You are ready for something more</h3>
-        <p class="fy-card-p">Things are okay — but you know there is more. You are hungry for growth, for depth, for the next chapter. You are in the right place.</p>
-      </div>
-      <div class="fy-card fy-card-3 reveal" style="--fy-clr:#06B6D4;transition-delay:0.2s">
-        <div class="fy-card-num" style="color:rgba(6,182,212,0.15);">03</div>
-        <h3 class="fy-card-h">You want faith-rooted community</h3>
-        <p class="fy-card-p">You want to grow alongside women who share your values — where faith is not an afterthought but the very foundation of everything.</p>
-      </div>
+    <div class="ep-grid">
+      <a href="events.html#marriage" class="ep-card ep-marriage reveal" data-tilt>
+        <div class="ep-body">
+          <div class="ep-orb"></div>
+          <div class="ep-ring"></div>
+          <span class="ep-tag">Couples Experience</span>
+          <div class="ep-title">Extreme<br>Marriage<br>Challenge</div>
+          <p class="ep-desc">A faith-centered weekend that breaks through the walls time and silence can build — and brings couples out the other side closer than ever.</p>
+        </div>
+        <div class="ep-foot">Register Now <div class="ep-arrow">→</div></div>
+      </a>
+      <a href="events.html#adventure" class="ep-card ep-adventure reveal" data-tilt style="transition-delay:0.1s">
+        <div class="ep-body">
+          <div class="ep-orb"></div>
+          <div class="ep-ring"></div>
+          <span class="ep-tag">Women's Experience</span>
+          <div class="ep-title">Adventure<br>Odyssey</div>
+          <p class="ep-desc">An outdoor journey for women ready to face fears, discover strength, and step fully into who they were made to be. Push past your limits.</p>
+        </div>
+        <div class="ep-foot">Register Now <div class="ep-arrow">→</div></div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- EVENTS -->
-<section id="events">
-  <div class="ev-in">
-    <div class="ev-header reveal">
+<!-- MERCH PREVIEW -->
+<section id="merch-preview">
+  <div class="blob blob-teal" style="position:absolute;width:600px;height:600px;top:-100px;right:-150px;--bd:15s;--bdel:-4s;"></div>
+  <div class="blob blob-pink" style="position:absolute;width:400px;height:400px;bottom:-80px;left:30%;--bd:18s;--bdel:-7s;"></div>
+  <div class="mp-in">
+    <div class="mp-header reveal">
       <div>
-        <div class="section-ey" style="color:rgba(168,85,247,0.7);">— Experiences</div>
-        <h2 class="section-sh2" style="color:#fff;">Two events.<br><em style="color:#C4B5FD;">Real transformation.</em></h2>
+        <div class="section-label" style="color:var(--pink);">— Wear Your Inspiration</div>
+        <div class="section-h">The <span class="pk">Collection.</span></div>
       </div>
-      <a href="events.html" class="ev-link-all">View All Events →</a>
+      <a href="merch.html" class="mp-link">Shop All Merch →</a>
     </div>
-    <div class="ev-grid">
-      <a href="events.html#marriage" class="ev-card ev-marriage reveal">
-        <div class="ev-body">
-          <span class="ev-tag">Couples Experience</span>
-          <div class="ev-title">Extreme Marriage<br>Challenge</div>
-          <p class="ev-desc">A faith-centered weekend that breaks through the walls time and silence can build — and brings couples out the other side closer than ever.</p>
+    <div class="mp-grid">
+      <a href="merch.html" class="mp-card reveal" style="--mc-clr:var(--teal);" data-tilt>
+        <img src="images/brand-1.jpg" alt="GIFTED. Tee" style="object-position:50% 20%;">
+        <div class="mp-card-accent"></div>
+        <div class="mp-card-info">
+          <div class="mp-card-tag">Current Drop</div>
+          <div class="mp-card-name">GIFTED.</div>
+          <div class="mp-card-ref">1 Peter 4:10-11</div>
         </div>
-        <div class="ev-foot">Register Now <div class="ev-foot-arrow">→</div></div>
+        <div class="mp-card-reveal">→</div>
       </a>
-      <a href="events.html#adventure" class="ev-card ev-adventure reveal" style="transition-delay:0.12s">
-        <div class="ev-body">
-          <span class="ev-tag">Women's Experience</span>
-          <div class="ev-title">Adventure<br>Odyssey</div>
-          <p class="ev-desc">An outdoor journey for women ready to face fears, discover strength, and step fully into who they were made to be.</p>
+      <a href="merch.html" class="mp-card reveal" style="--mc-clr:var(--pink);transition-delay:0.1s" data-tilt>
+        <img src="images/founder-1.jpg" alt="Be-YOU-tiful Tee" style="object-position:50% 30%;">
+        <div class="mp-card-accent"></div>
+        <div class="mp-card-info">
+          <div class="mp-card-tag" style="color:var(--pink);">Current Drop</div>
+          <div class="mp-card-name">BE-YOU-TIFUL</div>
+          <div class="mp-card-ref">Psalm 139:14</div>
         </div>
-        <div class="ev-foot">Register Now <div class="ev-foot-arrow">→</div></div>
+        <div class="mp-card-reveal">→</div>
+      </a>
+      <a href="merch.html" class="mp-card reveal" style="--mc-clr:#D4702A;transition-delay:0.2s" data-tilt>
+        <img src="images/women-1.jpg" alt="PURPOSED. Tee" style="object-position:50% 30%;">
+        <div class="mp-card-accent"></div>
+        <div class="mp-card-info">
+          <div class="mp-card-tag" style="color:#D4702A;">Current Drop</div>
+          <div class="mp-card-name">PURPOSED.</div>
+          <div class="mp-card-ref">Psalm 139:13-16</div>
+        </div>
+        <div class="mp-card-reveal">→</div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- PILLARS (INTERACTIVE) -->
+<!-- PILLARS -->
 <section id="pillars">
+  <div class="blob blob-pink" style="position:absolute;width:550px;height:550px;top:-150px;left:-120px;--bd:13s;--bdel:-5s;"></div>
+  <div class="blob blob-teal" style="position:absolute;width:500px;height:500px;bottom:-100px;right:-100px;--bd:16s;--bdel:-11s;"></div>
+  <div class="blob blob-pu" style="position:absolute;width:350px;height:350px;top:40%;left:50%;--bd:19s;--bdel:-2s;opacity:0.7;"></div>
+  <div class="splat-wrap" style="width:300px;height:300px;top:-30px;right:3%;z-index:0;">
+    <svg viewBox="0 0 160 280" fill="none"><circle cx="80" cy="258" r="8" fill="rgba(0,232,200,.90)"/><circle cx="68" cy="266" r="2.5" fill="rgba(0,232,200,.78)"/><circle cx="90" cy="268" r="2" fill="rgba(0,232,200,.72)"/><circle cx="77" cy="228" r="5.5" fill="rgba(0,232,200,.82)"/><ellipse cx="75" cy="200" rx="3.2" ry="4.5" transform="rotate(4,75,200)" fill="rgba(0,232,200,.74)"/><circle cx="73" cy="173" r="3.5" fill="rgba(0,232,200,.67)"/><ellipse cx="72" cy="148" rx="2.2" ry="3.2" transform="rotate(3,72,148)" fill="rgba(0,232,200,.60)"/><circle cx="71" cy="125" r="2.5" fill="rgba(0,232,200,.53)"/><circle cx="70" cy="104" r="2" fill="rgba(0,232,200,.46)"/><circle cx="70" cy="85" r="1.5" fill="rgba(0,232,200,.38)"/><circle cx="69" cy="68" r="1.2" fill="rgba(0,232,200,.30)"/><circle cx="61" cy="221" r="2.5" fill="rgba(0,232,200,.70)"/><circle cx="58" cy="194" r="2" fill="rgba(0,232,200,.62)"/><circle cx="56" cy="169" r="1.5" fill="rgba(0,232,200,.54)"/><circle cx="91" cy="223" r="3" fill="rgba(0,232,200,.68)"/><circle cx="94" cy="196" r="2" fill="rgba(0,232,200,.60)"/><circle cx="96" cy="171" r="1.5" fill="rgba(0,232,200,.52)"/></svg>
+  </div>
+  <div class="splat-wrap" style="width:220px;height:220px;bottom:5%;left:2%;z-index:0;">
+    <svg viewBox="0 0 300 200" fill="none"><circle cx="28" cy="145" r="8" fill="rgba(255,45,158,.90)"/><circle cx="18" cy="134" r="3" fill="rgba(255,45,158,.78)"/><circle cx="38" cy="155" r="2" fill="rgba(255,45,158,.72)"/><circle cx="57" cy="130" r="5.5" fill="rgba(255,45,158,.82)"/><ellipse cx="87" cy="116" rx="4.5" ry="3.2" transform="rotate(-26,87,116)" fill="rgba(255,45,158,.74)"/><circle cx="115" cy="104" r="3.5" fill="rgba(255,45,158,.67)"/><ellipse cx="141" cy="93" rx="3" ry="2.2" transform="rotate(-26,141,93)" fill="rgba(255,45,158,.60)"/><circle cx="165" cy="83" r="2.5" fill="rgba(255,45,158,.53)"/><circle cx="187" cy="75" r="2" fill="rgba(255,45,158,.46)"/><circle cx="207" cy="68" r="1.5" fill="rgba(255,45,158,.38)"/><circle cx="225" cy="63" r="1.2" fill="rgba(255,45,158,.30)"/><circle cx="66" cy="113" r="2.5" fill="rgba(255,45,158,.68)"/><circle cx="94" cy="100" r="2" fill="rgba(255,45,158,.60)"/><circle cx="64" cy="148" r="3" fill="rgba(255,45,158,.65)"/><circle cx="92" cy="156" r="2" fill="rgba(255,45,158,.57)"/><circle cx="118" cy="153" r="1.5" fill="rgba(255,45,158,.49)"/></svg>
+  </div>
   <div class="pl-in">
-    <div class="pl-top reveal">
-      <div>
-        <div class="section-ey">What We Stand For</div>
-        <h2 class="section-sh2">Built on Four<br><em>Unshakeable Pillars</em></h2>
-      </div>
-      <p class="pl-top-right">Everything we do at You Inspire Now flows from these four foundations — each one designed to meet you exactly where you are and move you toward who you were created to become.</p>
+    <div class="pl-header reveal">
+      <div class="section-label" style="justify-content:center;">— What We Stand On</div>
+      <div class="section-h" style="text-align:center;">Daily <span class="tl">Inspiration.</span><br>Four <span class="pk">Pillars.</span></div>
     </div>
-    <div class="pl-layout reveal" style="transition-delay:0.15s">
-      <div class="pl-tabs">
-        <div class="pl-tab pt-active" data-pt="identity" style="--pl-c:#A855F7;">
-          <div class="pl-tab-n">01</div>
-          <div class="pl-tab-l">Identity</div>
-          <div class="pl-tab-dot" style="background:#A855F7;"></div>
-        </div>
-        <div class="pl-tab" data-pt="purpose" style="--pl-c:#06B6D4;">
-          <div class="pl-tab-n">02</div>
-          <div class="pl-tab-l">Purpose</div>
-          <div class="pl-tab-dot" style="background:#06B6D4;"></div>
-        </div>
-        <div class="pl-tab" data-pt="resilience" style="--pl-c:#EC4899;">
-          <div class="pl-tab-n">03</div>
-          <div class="pl-tab-l">Resilience</div>
-          <div class="pl-tab-dot" style="background:#EC4899;"></div>
-        </div>
-        <div class="pl-tab" data-pt="community" style="--pl-c:#FBBF24;">
-          <div class="pl-tab-n">04</div>
-          <div class="pl-tab-l">Community</div>
-          <div class="pl-tab-dot" style="background:#FBBF24;"></div>
-        </div>
+    <div class="pl-grid">
+      <div class="pl-card reveal" style="--pc:var(--pu);">
+        <div class="pl-num">01</div>
+        <span class="pl-icon">🎯</span>
+        <div class="pl-name">Purpose</div>
+        <p class="pl-desc">You were placed here intentionally. Discovering your purpose isn't about finding what you're good at — it's about stepping into what you were created for.</p>
+        <p class="pl-quote">"The purpose of life is to find your gift. The meaning of life is to give it away." — Pablo Picasso</p>
       </div>
-      <div class="pl-panels">
-        <div class="pl-pane pp-active" data-pp="identity" style="--pl-c:#A855F7;">
-          <div class="pl-bg-num">01</div>
-          <h3 class="pl-pane-title" style="--pl-c:#A855F7;">Identity</h3>
-          <p class="pl-pane-text">Helping you rediscover who you truly are — beyond performance, titles, or what you have been through. You were designed with intention from the very start.</p>
-          <p class="pl-pane-truth">"You are not defined by what happened to you. You are defined by who you were made to be."</p>
-        </div>
-        <div class="pl-pane" data-pp="purpose" style="--pl-c:#06B6D4;">
-          <div class="pl-bg-num">02</div>
-          <h3 class="pl-pane-title" style="--pl-c:#06B6D4;">Purpose</h3>
-          <p class="pl-pane-text">Encouraging you to move toward the life and calling you were created for. There is an assignment on your life — and this is your time to step into it.</p>
-          <p class="pl-pane-truth">"Your story is not finished. Your best chapter may still be ahead of you."</p>
-        </div>
-        <div class="pl-pane" data-pp="resilience" style="--pl-c:#EC4899;">
-          <div class="pl-bg-num">03</div>
-          <h3 class="pl-pane-title" style="--pl-c:#EC4899;">Resilience</h3>
-          <p class="pl-pane-text">Building strength through healing, honesty, and courageous next steps. You do not have to stay where pain left you — there is a path forward and you can walk it.</p>
-          <p class="pl-pane-truth">"Healing is not weakness. It is the bravest thing you can do for yourself and everyone you love."</p>
-        </div>
-        <div class="pl-pane" data-pp="community" style="--pl-c:#FBBF24;">
-          <div class="pl-bg-num">04</div>
-          <h3 class="pl-pane-title" style="--pl-c:#FBBF24;">Community</h3>
-          <p class="pl-pane-text">Creating spaces where women feel truly seen, deeply connected, and consistently encouraged. You were not made to walk this road alone.</p>
-          <p class="pl-pane-truth">"When women rise together, the ripple reaches further than any one of us ever could alone."</p>
-        </div>
+      <div class="pl-card reveal" style="--pc:var(--teal);transition-delay:0.1s">
+        <div class="pl-num">02</div>
+        <span class="pl-icon">💚</span>
+        <div class="pl-name">Health</div>
+        <p class="pl-desc">Your body is the vessel for your calling. When you take care of yourself — mind, body, and spirit — you show up fully for what God has placed before you.</p>
+        <p class="pl-quote">"Change your plate, change your fate." — Kris Carr</p>
+      </div>
+      <div class="pl-card reveal" style="--pc:var(--pink);transition-delay:0.2s">
+        <div class="pl-num">03</div>
+        <span class="pl-icon">🏡</span>
+        <div class="pl-name">Family</div>
+        <p class="pl-desc">The greatest impact begins at home. The woman you become ripples out to your children, your marriage, and generations that follow.</p>
+        <p class="pl-quote">"To impact the world you must first impact those in our homes." — The Davis Family</p>
+      </div>
+      <div class="pl-card reveal" style="--pc:#FBBF24;transition-delay:0.3s">
+        <div class="pl-num">04</div>
+        <span class="pl-icon">👑</span>
+        <div class="pl-name">Leadership</div>
+        <p class="pl-desc">You are a leader whether you know it or not. Every woman who steps into her identity becomes a lighthouse for others still searching in the dark.</p>
+        <p class="pl-quote">"What you do has far greater impact than what you say." — Stephen Covey</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PHOTOS EDITORIAL -->
-<div id="photos">
-  <div class="photo-editorial">
-    <div class="pe-cell tall">
-      <img src="images/founder-1.jpg" alt="You Inspire Now" style="object-position:52% 18%;">
+<!-- MERCH DROP TEASER -->
+<section id="home-drop" style="padding:7rem 2.5rem;background:#0A0A0A;position:relative;overflow:hidden;border-top:1px solid rgba(0,232,200,0.08);">
+  <div class="blob blob-teal" style="position:absolute;width:500px;height:500px;top:-100px;right:-100px;--bd:15s;--bdel:-3s;opacity:0.7;"></div>
+  <div class="splat-wrap" style="width:240px;height:240px;bottom:0;left:2%;z-index:0;"><svg viewBox="0 0 160 280" fill="none"><circle cx="80" cy="22" r="8" fill="rgba(255,45,158,.90)"/><circle cx="68" cy="14" r="2.5" fill="rgba(255,45,158,.78)"/><circle cx="90" cy="12" r="2" fill="rgba(255,45,158,.72)"/><circle cx="77" cy="52" r="5.5" fill="rgba(255,45,158,.82)"/><ellipse cx="75" cy="80" rx="3.2" ry="4.5" transform="rotate(4,75,80)" fill="rgba(255,45,158,.74)"/><circle cx="73" cy="107" r="3.5" fill="rgba(255,45,158,.67)"/><ellipse cx="72" cy="132" rx="2.2" ry="3.2" transform="rotate(3,72,132)" fill="rgba(255,45,158,.60)"/><circle cx="71" cy="155" r="2.5" fill="rgba(255,45,158,.53)"/><circle cx="70" cy="176" r="2" fill="rgba(255,45,158,.46)"/><circle cx="70" cy="195" r="1.5" fill="rgba(255,45,158,.38)"/><circle cx="61" cy="59" r="2.5" fill="rgba(255,45,158,.70)"/><circle cx="58" cy="86" r="2" fill="rgba(255,45,158,.62)"/><circle cx="56" cy="111" r="1.5" fill="rgba(255,45,158,.54)"/><circle cx="92" cy="57" r="3" fill="rgba(255,45,158,.68)"/><circle cx="95" cy="84" r="2" fill="rgba(255,45,158,.60)"/><circle cx="96" cy="109" r="1.5" fill="rgba(255,45,158,.52)"/></svg></div>
+  <div style="max-width:1340px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;position:relative;z-index:1;">
+    <div class="reveal-left">
+      <div class="section-label" style="color:var(--teal);">— Monthly Merch Drop</div>
+      <div class="section-h">Next Drop<br><span class="tl">Drops In.</span></div>
+      <p style="font-size:1rem;color:rgba(255,255,255,0.38);line-height:1.9;margin-bottom:2rem;">Every first of the month, a new faith-rooted piece drops. Don't miss it — once it's gone, it's gone.</p>
+      <a href="merch.html" class="btn-teal" data-magnetic>Shop The Collection →</a>
     </div>
-    <div class="pe-cell">
-      <img src="images/women-1.jpg" alt="You Inspire Now">
+    <div class="reveal-right" style="transition-delay:0.1s">
+      <div style="background:var(--card);border:1px solid rgba(0,232,200,0.15);border-radius:20px;padding:3rem;text-align:center;box-shadow:0 0 60px rgba(0,232,200,0.06);">
+        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:rgba(0,232,200,0.7);margin-bottom:1.2rem;">NEW COLLECTION DROPS IN</div>
+        <div style="display:flex;align-items:flex-start;justify-content:center;gap:1rem;margin-bottom:1.5rem;">
+          <div style="text-align:center;"><div id="hd-days" style="font-family:'Bebas Neue',sans-serif;font-size:4.5rem;color:#fff;line-height:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:0.1rem 0.7rem;min-width:1.8ch;text-shadow:0 0 30px rgba(0,232,200,0.25);">00</div><div style="font-size:0.55rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:0.4rem;">Days</div></div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:4.5rem;color:rgba(0,232,200,0.3);line-height:1;padding-top:0.1rem;">:</div>
+          <div style="text-align:center;"><div id="hd-hours" style="font-family:'Bebas Neue',sans-serif;font-size:4.5rem;color:#fff;line-height:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:0.1rem 0.7rem;min-width:1.8ch;text-shadow:0 0 30px rgba(0,232,200,0.25);">00</div><div style="font-size:0.55rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:0.4rem;">Hrs</div></div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:4.5rem;color:rgba(0,232,200,0.3);line-height:1;padding-top:0.1rem;">:</div>
+          <div style="text-align:center;"><div id="hd-mins" style="font-family:'Bebas Neue',sans-serif;font-size:4.5rem;color:#fff;line-height:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:0.1rem 0.7rem;min-width:1.8ch;text-shadow:0 0 30px rgba(0,232,200,0.25);">00</div><div style="font-size:0.55rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:0.4rem;">Min</div></div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:0.88rem;color:rgba(0,232,200,0.5);margin-bottom:1.8rem;" id="hd-label">Monthly Drop</div>
+        <a href="merch.html" class="btn-teal" style="display:block;text-align:center;">Shop This Drop</a>
+      </div>
     </div>
-    <div class="pe-cell">
-      <img src="images/women-2.jpg" alt="You Inspire Now">
-    </div>
-    <div class="pe-cell">
-      <img src="images/women-3.jpg" alt="You Inspire Now">
-    </div>
-    <div class="pe-cell">
-      <img src="images/women-4.jpg" alt="You Inspire Now">
-    </div>
-  </div>
-</div>
-
-<!-- MISSION QUOTE -->
-<section id="mission">
-  <div class="mq-in reveal">
-    <span class="mq-mark">"</span>
-    <p class="mq-text">To inspire women through encouragement, empowerment, community, and mentorship — helping women move forward with <strong>confidence and joy.</strong></p>
-    <div class="mq-line"></div>
   </div>
 </section>
 
-<!-- CTA -->
-<section id="cta">
-  <div class="cta-in">
-    <div class="cta-left reveal-left">
-      <div class="section-ey">Your Next Step</div>
-      <h2 class="section-sh2">Come as<br><em>You Are.</em></h2>
-      <p>You do not need to have it all figured out. You do not need to be ready. This ministry meets you exactly where you are — and walks with you toward where you are going.</p>
-      <div class="cta-btns">
-        <a href="events.html" class="btn-cta-main">Explore Events</a>
-        <a href="about.html" class="btn-cta-sec">Learn About Us</a>
+<!-- ABOUT / QUICK CONNECT -->
+<section id="home-connect" style="padding:7rem 2.5rem;background:#080808;position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="blob blob-pu" style="position:absolute;width:600px;height:600px;top:-150px;left:-150px;--bd:17s;--bdel:-5s;"></div>
+  <div class="blob blob-pink" style="position:absolute;width:450px;height:450px;bottom:-100px;right:-100px;--bd:14s;--bdel:-8s;"></div>
+  <div style="max-width:1340px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;position:relative;z-index:1;">
+    <!-- ABOUT SNIPPET -->
+    <div class="reveal-left">
+      <div class="section-label" style="color:var(--pink);">— About You Inspire Now</div>
+      <div class="section-h">She's Not<br>Just <span class="pk">Inspired.</span><br>She's Moving.</div>
+      <p style="font-size:1rem;color:rgba(255,255,255,0.4);line-height:1.9;margin:1.5rem 0 2rem;">You Inspire Now is a women's faith ministry built on one truth: there is more within every woman than she's yet discovered. Through events, community, and daily inspiration — we call it out.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2.5rem;">
+        <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:1rem;"><div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--teal);">Purpose</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.3);">Pillar I</div></div>
+        <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:1rem;"><div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--pink);">Health</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.3);">Pillar II</div></div>
+        <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:1rem;"><div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--pu);">Family</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.3);">Pillar III</div></div>
+        <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:1rem;"><div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#FBBF24;">Leadership</div><div style="font-size:0.75rem;color:rgba(255,255,255,0.3);">Pillar IV</div></div>
+      </div>
+      <a href="about.html" class="btn-ghost">Our Full Story →</a>
+    </div>
+    <!-- CONNECT FORM + SOCIALS -->
+    <div class="reveal-right" style="transition-delay:0.12s">
+      <div class="section-label" style="color:var(--teal);">— Stay Connected</div>
+      <div class="section-h" style="font-size:clamp(2rem,4vw,3.5rem);margin-bottom:1.5rem;">Connect<br>With <span class="tl">Us.</span></div>
+      <form onsubmit="event.preventDefault();this.innerHTML='<p style=\'color:var(--teal);font-size:1rem;padding:1rem 0;\'>✓ You\'re on the list — we\'ll be in touch!</p>';" style="margin-bottom:2.5rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:0.8rem;">
+          <input type="text" placeholder="First name" required style="width:100%;padding:0.9rem 1.1rem;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.08);border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+          <input type="email" placeholder="Email address" required style="width:100%;padding:0.9rem 1.1rem;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.08);border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+        </div>
+        <button type="submit" style="width:100%;padding:1rem;background:var(--teal);color:#080808;font-weight:700;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;border:none;border-radius:100px;cursor:pointer;box-shadow:0 0 24px rgba(0,232,200,0.4);transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.02)';this.style.boxShadow='0 0 40px rgba(0,232,200,0.6)'" onmouseout="this.style.transform='';this.style.boxShadow='0 0 24px rgba(0,232,200,0.4)'">Join The Community →</button>
+      </form>
+      <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:1rem;">Follow Along</div>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="https://instagram.com/youinspirenow" target="_blank" style="display:flex;align-items:center;gap:0.6rem;padding:0.6rem 1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;text-decoration:none;color:rgba(255,255,255,0.6);font-size:0.72rem;font-weight:600;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(225,48,108,0.5)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.6)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+        <a href="https://facebook.com/youinspirenow" target="_blank" style="display:flex;align-items:center;gap:0.6rem;padding:0.6rem 1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;text-decoration:none;color:rgba(255,255,255,0.6);font-size:0.72rem;font-weight:600;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(24,119,242,0.5)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.6)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook</a>
+        <a href="https://tiktok.com/@youinspirenow" target="_blank" style="display:flex;align-items:center;gap:0.6rem;padding:0.6rem 1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;text-decoration:none;color:rgba(255,255,255,0.6);font-size:0.72rem;font-weight:600;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.6)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.17 8.17 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg>TikTok</a>
+        <a href="https://youtube.com/@youinspirenow" target="_blank" style="display:flex;align-items:center;gap:0.6rem;padding:0.6rem 1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;text-decoration:none;color:rgba(255,255,255,0.6);font-size:0.72rem;font-weight:600;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(255,0,0,0.4)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.6)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#080808"/></svg>YouTube</a>
       </div>
     </div>
-    <div class="cta-right reveal-right" style="transition-delay:0.15s">
-      <div class="cta-photo-main">
-        <img src="images/founder-2.jpg" alt="You Inspire Now Founder" style="object-position:52% 25%;">
-      </div>
-      <div class="cta-badge">
-        <div class="cta-badge-n">Faith</div>
-        <div class="cta-badge-l">Rooted in Purpose</div>
-      </div>
+  </div>
+</section>
+
+<!-- MISSION CTA -->
+<section id="mission-cta">
+  <div class="blob blob-teal" style="position:absolute;width:600px;height:600px;top:-150px;left:-100px;--bd:15s;"></div>
+  <div class="blob blob-pk" style="position:absolute;width:500px;height:500px;bottom:-100px;right:-100px;--bd:18s;--bdel:-6s;background:rgba(255,45,158,0.1);"></div>
+  <div class="mc-in">
+    <div class="mc-tag reveal">Come As You Are</div>
+    <div class="mc-h reveal">HEAR<br><span class="tl">THE</span><br>CALL.</div>
+    <p class="mc-sub reveal">You do not need to be ready. You do not need to have it all together. This ministry meets you where you are and walks with you toward who you were always meant to be.</p>
+    <div class="mc-btns reveal">
+      <a href="events.html" class="btn-teal" data-magnetic>Explore Events</a>
+      <a href="donate.html" class="btn-ghost">Support the Mission</a>
     </div>
   </div>
 </section>
@@ -661,6 +903,20 @@ footer{background:linear-gradient(160deg,#080115,#0D0120 50%,#091828);
       <div class="ft-brand">
         <img src="assets/yin-logo.png" alt="You Inspire Now">
         <p>Faith-rooted encouragement for women becoming who they were created to be.</p>
+        <div class="ft-socials">
+          <a href="https://instagram.com/youinspirenow" target="_blank" class="ft-soc" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://facebook.com/youinspirenow" target="_blank" class="ft-soc" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://tiktok.com/@youinspirenow" target="_blank" class="ft-soc" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.17 8.17 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg>
+          </a>
+          <a href="https://youtube.com/@youinspirenow" target="_blank" class="ft-soc" aria-label="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
       </div>
       <div class="ft-col">
         <h4>Navigate</h4>
@@ -668,58 +924,141 @@ footer{background:linear-gradient(160deg,#080115,#0D0120 50%,#091828);
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a href="events.html">Events</a>
+          <a href="merch.html">Merch</a>
+          <a href="contact.html">Connect</a>
         </div>
       </div>
       <div class="ft-col">
-        <h4>Events</h4>
+        <h4>Experiences</h4>
         <div class="ft-links">
           <a href="events.html#marriage">Extreme Marriage Challenge</a>
           <a href="events.html#adventure">Adventure Odyssey</a>
+          <a href="events.html#snatched">Get Snatched Challenge</a>
+          <a href="events.html#walking">Walking Movement</a>
         </div>
       </div>
       <div class="ft-col">
-        <h4>Give</h4>
+        <h4>Mission</h4>
         <div class="ft-links">
-          <a href="https://goinspirenow.org" target="_blank" style="color:#F9A8D4;">Go Inspire Now</a>
-          <a href="go-inspire-now.html">Donate</a>
+          <a href="donate.html" style="color:var(--teal);opacity:0.9;">Go Inspire Now →</a>
+          <a href="donate.html">Donate</a>
+          <a href="merch.html">Shop Merch</a>
+          <a href="contact.html">Contact Us</a>
         </div>
       </div>
     </div>
     <div class="ft-bot">
-      <p class="ft-copy">© 2026 You Inspire Now. All rights reserved.</p>
-      <p class="ft-copy">Faith · Identity · Purpose · Resilience · Community</p>
+      <p class="ft-copy">© 2026 You Inspire Now. All Rights Reserved.</p>
+      <p class="ft-copy">Gifted · Purposed · Be-YOU-tiful · Inspiring Now</p>
     </div>
   </div>
 </footer>
 
 <script>
-// Nav scroll
+// Intro splash
+(function(){
+  const intro=document.getElementById('intro');
+  if(!intro) return;
+  if(sessionStorage.getItem('yin-intro-seen')){
+    intro.style.display='none'; return;
+  }
+  function dismiss(){
+    sessionStorage.setItem('yin-intro-seen','1');
+    intro.classList.add('out');
+    setTimeout(()=>intro.style.display='none',950);
+  }
+  document.getElementById('intro-enter').addEventListener('click',dismiss);
+  document.getElementById('intro-skip').addEventListener('click',dismiss);
+  setTimeout(dismiss,9000);
+})();
+
+// Nav
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
 document.getElementById('nav-burger').addEventListener('click', () =>
   document.getElementById('nav-links').classList.toggle('open'));
 
-// Pillars tabs
+// Reveal
+const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('in'); }), {threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
+
+// Shoe cursor
 (function(){
-  const tabs  = document.querySelectorAll('.pl-tab');
-  const panes = document.querySelectorAll('.pl-pane');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const t = tab.dataset.pt;
-      tabs.forEach(x => x.classList.remove('pt-active'));
-      panes.forEach(x => x.classList.remove('pp-active'));
-      tab.classList.add('pt-active');
-      const pane = document.querySelector(`.pl-pane[data-pp="${t}"]`);
-      if(pane) pane.classList.add('pp-active');
-    });
+  const c = document.getElementById('cursor');
+  if(!c) return;
+  document.addEventListener('mousemove', e => { c.style.left=e.clientX+'px'; c.style.top=e.clientY+'px'; });
+  document.querySelectorAll('a,button').forEach(el => {
+    el.addEventListener('mouseenter', () => c.classList.add('hov'));
+    el.addEventListener('mouseleave', () => c.classList.remove('hov'));
   });
 })();
 
-// Reveals
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
+// Music — localStorage persistence
+(function(){
+  const btn=document.getElementById('music-btn'),aud=document.getElementById('bg-music');
+  if(!btn||!aud) return;
+  let on=false;
+  function play(){aud.volume=0.38;aud.play().then(()=>{on=true;btn.classList.add('playing');btn.innerHTML='♫';}).catch(()=>{});}
+  function pause(){aud.pause();on=false;btn.classList.remove('playing');btn.innerHTML='♪';}
+  btn.addEventListener('click',()=>{on?pause():play();});
+  window.addEventListener('beforeunload',()=>{localStorage.setItem('yin-playing',on?'1':'0');localStorage.setItem('yin-time',aud.currentTime.toString());});
+  const wasOn=localStorage.getItem('yin-playing')==='1';
+  const t=parseFloat(localStorage.getItem('yin-time')||'0');
+  if(wasOn){aud.currentTime=t;play();}
+  else{document.addEventListener('click',function first(){if(!on)play();document.removeEventListener('click',first);},{once:true});}
+})();
+
+// Particles
+(function(){
+  const hero = document.getElementById('hero');
+  if(!hero) return;
+  const cols=['rgba(0,232,200,','rgba(255,45,158,','rgba(139,47,255,'];
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div'); p.className='ptcl';
+    const c=cols[i%cols.length], op=(Math.random()*0.14+0.04).toFixed(2), sz=Math.random()*4+1.5;
+    const rnd=()=>(Math.random()*70-35).toFixed(0);
+    p.style.cssText=`left:${(Math.random()*90+5).toFixed(1)}%;top:${(Math.random()*80+5).toFixed(1)}%;`+
+      `width:${sz.toFixed(1)}px;height:${sz.toFixed(1)}px;background:${c}${op});`+
+      `--d:${(Math.random()*10+6).toFixed(1)}s;--del:-${(Math.random()*9).toFixed(1)}s;--op:${op};`+
+      `--x1:${rnd()}px;--y1:-${(Math.random()*45+10).toFixed(0)}px;`+
+      `--x2:${rnd()}px;--y2:-${(Math.random()*70+15).toFixed(0)}px;`+
+      `--x3:${rnd()}px;--y3:-${(Math.random()*30+5).toFixed(0)}px;`;
+    hero.appendChild(p);
+  }
+})();
+
+// 3D tilt
+document.querySelectorAll('[data-tilt]').forEach(c => {
+  c.addEventListener('mousemove', e => {
+    const r=c.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
+    c.style.transform=`perspective(900px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-6px) scale(1.01)`;
+    c.style.transition='transform 0.08s linear';
+  });
+  c.addEventListener('mouseleave', () => { c.style.transition='transform 0.5s cubic-bezier(.34,1.56,.64,1)'; c.style.transform=''; });
+});
+
+// Magnetic
+document.querySelectorAll('[data-magnetic]').forEach(b => {
+  b.addEventListener('mousemove', e => {
+    const r=b.getBoundingClientRect();
+    b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.28}px,${(e.clientY-r.top-r.height/2)*0.28}px)`;
+    b.style.transition='transform 0.12s linear';
+  });
+  b.addEventListener('mouseleave', () => { b.style.transition='transform 0.5s cubic-bezier(.34,1.56,.64,1)'; b.style.transform=''; });
+});
+
+// Hero headline word stagger
+(function(){
+  const h=document.querySelector('.hero-h1'); if(!h) return;
+  let d=0;
+  h.childNodes.forEach(n => {
+    const wrap=(el,ws)=>{ el.innerHTML=''; ws.forEach(w=>{ const s=document.createElement('span'); s.className='w-reveal'; s.textContent=w+' '; s.style.transitionDelay=d.toFixed(2)+'s'; d+=0.09; el.appendChild(s); }); };
+    if(n.nodeType===3){ const ws=n.textContent.trim().split(/\s+/).filter(Boolean); if(!ws.length) return;
+      const sp=document.createElement('span'); ws.forEach(w=>{ const s=document.createElement('span'); s.className='w-reveal'; s.textContent=w+' '; s.style.transitionDelay=d.toFixed(2)+'s'; d+=0.09; sp.appendChild(s); }); n.replaceWith(sp);
+    } else if(n.nodeType===1){ const ws=n.textContent.trim().split(/\s+/).filter(Boolean); if(ws.length) wrap(n,ws); }
+  });
+  requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll('.hero-h1 .w-reveal').forEach(s=>s.classList.add('wi'))));
+})();
 </script>
 </body>
 </html>

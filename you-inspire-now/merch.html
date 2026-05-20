@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merch — You Inspire Now</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:#080808;color:#fff;overflow-x:hidden;cursor:none;}
+@media(hover:none){body{cursor:auto;}}
+:root{--teal:#00E8C8;--pink:#FF2D9E;--pu:#8B2FFF;--black:#080808;--card:#111111;--border:rgba(255,255,255,0.07);--muted:rgba(255,255,255,0.38);}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+#cursor{position:fixed;pointer-events:none;z-index:10000;font-size:24px;line-height:1;user-select:none;transform:translate(-6px,-22px) rotate(-20deg);transition:font-size 0.15s ease;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.8));}
+#cursor.hov{font-size:32px;transform:translate(-4px,-24px) rotate(-20deg);}
+@media(hover:none){#cursor{display:none;}}
+.hero-top-shade{position:absolute;top:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,rgba(8,8,8,0.85) 0%,transparent 100%);z-index:1;pointer-events:none;}
+.splat-wrap{position:absolute;pointer-events:none;}
+.blob{position:absolute;border-radius:71% 29% 76% 24% / 42% 68% 32% 58%;filter:blur(80px);pointer-events:none;animation:blob-drift var(--bd,14s) ease-in-out infinite alternate var(--bdel,0s);}
+.blob-teal{background:rgba(0,232,200,0.22);}
+.blob-pink{background:rgba(255,45,158,0.20);}
+.blob-pu{background:rgba(139,47,255,0.18);}
+@keyframes blob-drift{from{transform:translate(0,0) scale(1);border-radius:71% 29% 76% 24% / 42% 68% 32% 58%;}to{transform:translate(var(--btx,30px),var(--bty,-20px)) scale(var(--bs,1.12));border-radius:42% 58% 31% 69% / 70% 35% 65% 30%;}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1rem 2.5rem;background:rgba(8,8,8,0.55);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.4s,box-shadow 0.4s;}
+#nav.scrolled{background:rgba(8,8,8,0.96);backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(255,255,255,0.05);}
+.nav-in{max-width:1340px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo img{height:78px;display:block;filter:invert(1);mix-blend-mode:screen;}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-a{font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.42);text-decoration:none;transition:color 0.2s;position:relative;}
+.nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--teal);transition:width 0.25s;}
+.nav-a:hover,.nav-a.active{color:#fff;}.nav-a:hover::after,.nav-a.active::after{width:100%;}
+.nav-pill{padding:0.45rem 1.3rem;background:var(--teal);color:#080808;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 0 20px rgba(0,232,200,0.35);}
+.nav-pill:hover{transform:scale(1.07);box-shadow:0 0 32px rgba(0,232,200,0.55);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.nav-burger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;}
+
+/* HERO */
+#hero{min-height:80vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding-bottom:6rem;}
+.hero-bg{position:absolute;inset:0;background:url('images/women-3.jpg') center 20%/cover no-repeat;filter:brightness(0.25) saturate(0.7);transform:scale(1.04);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,#080808 0%,rgba(8,8,8,0.7) 40%,rgba(8,8,8,0.2) 100%);}
+.hero-content{position:relative;z-index:2;max-width:1340px;margin:0 auto;padding:0 2.5rem;width:100%;}
+.hero-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:rgba(0,232,200,0.8);display:inline-flex;align-items:center;gap:0.7rem;margin-bottom:2rem;}
+.hero-tag::before{content:'';width:28px;height:1.5px;background:var(--teal);}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,12vw,11rem);line-height:0.88;color:#fff;margin-bottom:1.5rem;}
+.hero-h1 .pk{color:var(--pink);}
+.hero-h1 .tl{color:var(--teal);}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.45);line-height:1.9;max-width:480px;}
+
+/* SECTION */
+.sec-label{font-size:0.68rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem;}
+.sec-label::before{content:'';width:22px;height:1.5px;background:currentColor;}
+.sec-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6vw,5.5rem);line-height:0.92;color:#fff;margin-bottom:1rem;}
+.btn-teal{display:inline-block;padding:0.95rem 2.4rem;background:var(--teal);color:#080808;font-weight:700;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;text-decoration:none;box-shadow:0 0 28px rgba(0,232,200,0.4);transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.btn-teal:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 48px rgba(0,232,200,0.6);}
+.btn-ghost{display:inline-block;padding:0.95rem 2.4rem;background:transparent;color:rgba(255,255,255,0.7);font-weight:600;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.18);transition:all 0.2s;}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff;}
+
+/* DROP COUNTDOWN */
+#drop-countdown{padding:5rem 2.5rem;background:#0D0D0D;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.04);}
+#drop-countdown::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,232,200,0.35),transparent);}
+.dc-in{max-width:1340px;margin:0 auto;text-align:center;position:relative;z-index:1;}
+.dc-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--teal);display:inline-flex;align-items:center;gap:0.8rem;margin-bottom:1.5rem;}
+.dc-eyebrow::before,.dc-eyebrow::after{content:'';width:28px;height:1.5px;background:var(--teal);}
+.dc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.5rem);color:rgba(255,255,255,0.55);letter-spacing:0.08em;margin-bottom:2.5rem;}
+.dc-timer{display:flex;align-items:flex-start;justify-content:center;gap:1.5rem;margin-bottom:3rem;}
+.dc-unit{display:flex;flex-direction:column;align-items:center;gap:0.5rem;}
+.dc-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,10vw,8rem);line-height:1;color:#fff;min-width:2ch;text-align:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:0.2rem 0.8rem;position:relative;text-shadow:0 0 40px rgba(0,232,200,0.2);}
+.dc-num::after{content:'';position:absolute;inset:0;border-radius:12px;background:linear-gradient(180deg,rgba(0,232,200,0.04) 0%,transparent 50%);}
+.dc-sep{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,10vw,8rem);line-height:1;color:rgba(0,232,200,0.3);align-self:flex-start;padding-top:0.15rem;}
+.dc-lbl{font-size:0.58rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+.dc-drop-name{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:rgba(0,232,200,0.6);margin-bottom:2rem;}
+.dc-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-pink{display:inline-block;padding:0.95rem 2.4rem;background:var(--pink);color:#fff;font-weight:700;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;text-decoration:none;box-shadow:0 0 28px rgba(255,45,158,0.4);transition:transform 0.2s cubic-bezier(.34,1.56,.64,1),box-shadow 0.2s;}
+.btn-pink:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 48px rgba(255,45,158,0.6);}
+
+/* FEATURED PRODUCT */
+#featured{padding:8rem 2.5rem;position:relative;overflow:hidden;background:#080808;}
+#featured::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,232,200,0.2),transparent);}
+.feat-in{max-width:1340px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.feat-imgs{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.feat-img{overflow:hidden;border-radius:4px;}
+.feat-img img{width:100%;height:320px;object-fit:cover;display:block;transition:transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+.feat-img:hover img{transform:scale(1.08);}
+.feat-img.tall{grid-row:span 2;}
+.feat-img.tall img{height:644px;}
+.feat-info{}
+.feat-badge{display:inline-block;font-size:0.6rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;padding:0.3rem 0.9rem;border-radius:100px;background:rgba(0,232,200,0.12);border:1px solid rgba(0,232,200,0.25);color:var(--teal);margin-bottom:1.5rem;}
+.feat-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,8vw,7rem);line-height:0.88;color:#fff;margin-bottom:0.5rem;}
+.feat-ref{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--teal);margin-bottom:1.5rem;}
+.feat-desc{font-size:1rem;color:rgba(255,255,255,0.42);line-height:1.9;margin-bottom:2.5rem;}
+.feat-btns{display:flex;flex-wrap:wrap;gap:1rem;}
+
+/* COLLECTION GRID */
+#collection{padding:8rem 2.5rem;background:#0A0A0A;position:relative;overflow:hidden;}
+#collection::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,45,158,0.2),transparent);}
+.col-in{max-width:1340px;margin:0 auto;}
+.col-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.5rem;}
+.col-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;text-decoration:none;display:block;transition:transform 0.4s cubic-bezier(.34,1.56,.64,1),box-shadow 0.4s,border-color 0.3s;}
+.col-card:hover{transform:translateY(-10px);border-color:var(--cc,var(--teal));}
+.col-card:hover{box-shadow:0 30px 80px rgba(0,0,0,0.4);}
+.col-img{overflow:hidden;aspect-ratio:4/5;}
+.col-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+.col-card:hover .col-img img{transform:scale(1.07);}
+.col-info{padding:1.8rem 1.8rem 2rem;}
+.col-tag{font-size:0.58rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--cc,var(--teal));margin-bottom:0.5rem;}
+.col-name{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#fff;line-height:0.95;margin-bottom:0.3rem;}
+.col-ref{font-family:'Playfair Display',serif;font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.32);}
+.col-btn{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--cc,var(--teal));margin-top:1.2rem;text-decoration:none;transition:gap 0.2s;}
+.col-card:hover .col-btn{gap:0.8rem;}
+
+/* COMING SOON */
+#coming-soon{padding:8rem 2.5rem;background:#080808;position:relative;overflow:hidden;text-align:center;}
+.cs-in{max-width:800px;margin:0 auto;position:relative;z-index:1;}
+.cs-drops{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:900px;margin:4rem auto 0;}
+.cs-card{background:var(--card);border:1px solid var(--border);padding:3.5rem 2rem;position:relative;overflow:hidden;transition:border-color 0.3s;}
+.cs-card:hover{border-color:rgba(255,255,255,0.15);}
+.cs-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--cs-clr,var(--teal));transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease;}
+.cs-card:hover::after{transform:scaleX(1);}
+.cs-lock{font-size:2.5rem;margin-bottom:1.5rem;display:block;opacity:0.3;}
+.cs-label{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;margin-bottom:0.5rem;}
+.cs-sub{font-size:0.82rem;color:rgba(255,255,255,0.3);line-height:1.7;}
+.notify-form{display:flex;gap:0.75rem;max-width:480px;margin:3rem auto 0;flex-wrap:wrap;}
+.notify-form input{flex:1;min-width:200px;padding:0.9rem 1.4rem;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1);border-radius:100px;color:#fff;font-size:0.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;}
+.notify-form input:focus{border-color:var(--teal);}
+.notify-form input::placeholder{color:rgba(255,255,255,0.28);}
+.notify-form button{padding:0.9rem 2rem;background:var(--teal);color:#080808;font-weight:700;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;border-radius:100px;border:none;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;}
+.notify-form button:hover{transform:scale(1.05);box-shadow:0 0 24px rgba(0,232,200,0.45);}
+
+/* FOOTER */
+footer{background:#050505;padding:5.5rem 2.5rem 2.5rem;border-top:1px solid rgba(255,255,255,0.04);}
+.ft-in{max-width:1340px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem;}
+.ft-brand img{height:70px;filter:invert(1);mix-blend-mode:screen;opacity:0.8;display:block;margin-bottom:1rem;}
+.ft-brand p{font-size:0.85rem;color:rgba(255,255,255,0.22);line-height:1.9;max-width:240px;}
+.ft-col h4{font-size:0.58rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--teal);opacity:0.6;margin-bottom:1.2rem;}
+.ft-links{display:flex;flex-direction:column;gap:0.65rem;}
+.ft-links a{font-size:0.85rem;color:rgba(255,255,255,0.24);text-decoration:none;transition:color 0.2s;}
+.ft-links a:hover{color:rgba(255,255,255,0.8);}
+.ft-socials{display:flex;gap:0.75rem;margin-top:1.5rem;}
+.ft-soc{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:all 0.2s;}
+.ft-soc:hover{border-color:var(--teal);color:var(--teal);transform:scale(1.12);}
+.ft-bot{border-top:1px solid rgba(255,255,255,0.04);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.ft-copy{font-size:0.7rem;color:rgba(255,255,255,0.14);}
+
+@media(max-width:1024px){.feat-in,.ft-grid{grid-template-columns:1fr 1fr;gap:3rem;}.col-grid{grid-template-columns:1fr 1fr;}.cs-drops{grid-template-columns:1fr 1fr;}}
+@media(max-width:860px){.feat-in{grid-template-columns:1fr;}.feat-imgs{order:2;}.col-grid{grid-template-columns:1fr 1fr;}.cs-drops{grid-template-columns:1fr;}}
+@media(max-width:600px){
+  #nav{padding:0.8rem 1.2rem;}.nav-logo img{height:60px;}.nav-links{display:none;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(8,8,8,0.98);padding:1.5rem;gap:1.2rem;z-index:499;}
+  .nav-a{font-size:0.9rem;}.nav-burger{display:flex;}
+  #featured,#collection,#coming-soon{padding:5rem 1.5rem;}
+  .col-grid{grid-template-columns:1fr;}.ft-grid{grid-template-columns:1fr;gap:2rem;}
+}
+#music-btn{position:fixed;bottom:2rem;right:2rem;z-index:998;width:52px;height:52px;border-radius:50%;background:rgba(8,8,8,0.75);border:1.5px solid rgba(0,232,200,0.45);backdrop-filter:blur(20px);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--teal);transition:all 0.25s ease;box-shadow:0 4px 20px rgba(0,0,0,0.5);}
+#music-btn:hover{background:rgba(0,232,200,0.12);border-color:var(--teal);transform:scale(1.1);box-shadow:0 0 20px rgba(0,232,200,0.4),0 4px 20px rgba(0,0,0,0.5);}
+#music-btn.playing{background:rgba(0,232,200,0.1);border-color:var(--teal);animation:music-pulse 2s ease-in-out infinite;}
+@keyframes music-pulse{0%,100%{box-shadow:0 0 24px rgba(0,232,200,0.5),0 4px 20px rgba(0,0,0,0.5);}50%{box-shadow:0 0 40px rgba(0,232,200,0.7),0 4px 20px rgba(0,0,0,0.5);}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div id="cursor">👟</div>
+<audio id="bg-music" loop preload="none"><source src="audio/brave.mp3" type="audio/mpeg"></audio>
+<button id="music-btn" aria-label="Toggle music">♪</button>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo"><img src="assets/yin-logo.png" alt="You Inspire Now"></a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-a">Home</a>
+      <a href="about.html" class="nav-a">About</a>
+      <a href="events.html" class="nav-a">Events</a>
+      <a href="merch.html" class="nav-a active">Merch</a>
+      <a href="contact.html" class="nav-a">Connect</a>
+      <a href="donate.html" class="nav-pill">Give →</a>
+    </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-top-shade"></div>
+  <div class="blob blob-teal" style="width:600px;height:600px;top:-150px;right:-100px;--bd:14s;"></div>
+  <div class="blob blob-pink" style="width:400px;height:400px;bottom:-50px;left:10%;--bd:17s;--bdel:-4s;"></div>
+  <div class="splat-wrap" style="width:280px;height:280px;top:10%;right:5%;z-index:1;"><svg viewBox="0 0 300 200" fill="none"><circle cx="272" cy="145" r="8" fill="rgba(255,45,158,.90)"/><circle cx="282" cy="134" r="3" fill="rgba(255,45,158,.78)"/><circle cx="262" cy="155" r="2" fill="rgba(255,45,158,.72)"/><circle cx="243" cy="130" r="5.5" fill="rgba(255,45,158,.82)"/><ellipse cx="213" cy="116" rx="4.5" ry="3.2" transform="rotate(26,213,116)" fill="rgba(255,45,158,.74)"/><circle cx="185" cy="104" r="3.5" fill="rgba(255,45,158,.67)"/><ellipse cx="159" cy="93" rx="3" ry="2.2" transform="rotate(26,159,93)" fill="rgba(255,45,158,.60)"/><circle cx="135" cy="83" r="2.5" fill="rgba(255,45,158,.53)"/><circle cx="113" cy="75" r="2" fill="rgba(255,45,158,.46)"/><circle cx="93" cy="68" r="1.5" fill="rgba(255,45,158,.38)"/><circle cx="234" cy="113" r="2.5" fill="rgba(255,45,158,.68)"/><circle cx="206" cy="100" r="2" fill="rgba(255,45,158,.60)"/><circle cx="236" cy="148" r="3" fill="rgba(255,45,158,.65)"/><circle cx="208" cy="156" r="2" fill="rgba(255,45,158,.57)"/></svg></div>
+  <div class="splat-wrap" style="width:200px;height:200px;bottom:10%;left:3%;z-index:1;"><svg viewBox="0 0 160 280" fill="none"><circle cx="80" cy="22" r="8" fill="rgba(0,232,200,.90)"/><circle cx="68" cy="14" r="2.5" fill="rgba(0,232,200,.78)"/><circle cx="77" cy="52" r="5.5" fill="rgba(0,232,200,.82)"/><ellipse cx="75" cy="80" rx="3.2" ry="4.5" transform="rotate(4,75,80)" fill="rgba(0,232,200,.74)"/><circle cx="73" cy="107" r="3.5" fill="rgba(0,232,200,.67)"/><ellipse cx="72" cy="132" rx="2.2" ry="3.2" transform="rotate(3,72,132)" fill="rgba(0,232,200,.60)"/><circle cx="71" cy="155" r="2.5" fill="rgba(0,232,200,.53)"/><circle cx="70" cy="176" r="2" fill="rgba(0,232,200,.46)"/><circle cx="61" cy="59" r="2.5" fill="rgba(0,232,200,.70)"/><circle cx="58" cy="86" r="2" fill="rgba(0,232,200,.62)"/><circle cx="92" cy="57" r="3" fill="rgba(0,232,200,.68)"/><circle cx="95" cy="84" r="2" fill="rgba(0,232,200,.60)"/></svg></div>
+  <div class="hero-content">
+    <div class="hero-tag">The Collection</div>
+    <h1 class="hero-h1">Wear Your<br><span class="tl">Inspiration.</span></h1>
+    <p class="hero-sub">Every piece carries a message. Faith-rooted apparel designed to remind you — and everyone around you — of who you are.</p>
+  </div>
+</section>
+
+<!-- DROP COUNTDOWN -->
+<section id="drop-countdown">
+  <div class="blob blob-teal" style="width:500px;height:500px;top:-200px;left:-100px;--bd:16s;opacity:0.5;"></div>
+  <div class="blob blob-pink" style="width:400px;height:400px;bottom:-150px;right:-80px;--bd:18s;--bdel:-6s;opacity:0.45;"></div>
+  <div class="dc-in">
+    <div class="dc-eyebrow">Next Monthly Drop</div>
+    <div class="dc-title">NEW COLLECTION DROPS IN</div>
+    <div class="dc-timer">
+      <div class="dc-unit"><div class="dc-num" id="cd-days">00</div><div class="dc-lbl">Days</div></div>
+      <div class="dc-sep">:</div>
+      <div class="dc-unit"><div class="dc-num" id="cd-hours">00</div><div class="dc-lbl">Hours</div></div>
+      <div class="dc-sep">:</div>
+      <div class="dc-unit"><div class="dc-num" id="cd-mins">00</div><div class="dc-lbl">Mins</div></div>
+      <div class="dc-sep">:</div>
+      <div class="dc-unit"><div class="dc-num" id="cd-secs">00</div><div class="dc-lbl">Secs</div></div>
+    </div>
+    <div class="dc-drop-name" id="cd-label">Monthly Drop</div>
+    <div class="dc-btns">
+      <a href="#" class="btn-pink" data-magnetic>Shop This Drop</a>
+      <a href="#collection" class="btn-ghost">Browse Current Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED: GIFTED -->
+<section id="featured">
+  <div class="blob blob-teal" style="width:600px;height:600px;top:-150px;right:-150px;--bd:16s;"></div>
+  <div class="blob blob-pink" style="width:450px;height:450px;bottom:-100px;left:-80px;--bd:19s;--bdel:-7s;"></div>
+  <div class="feat-in">
+    <div class="feat-imgs reveal">
+      <div class="feat-img tall">
+        <img src="images/brand-1.jpg" alt="GIFTED. Tee — You Inspire Now" style="object-position:50% 15%;">
+      </div>
+      <div class="feat-img">
+        <img src="images/women-3.jpg" alt="GIFTED. Tee" style="object-position:50% 20%;">
+      </div>
+      <div class="feat-img">
+        <img src="images/women-4.jpg" alt="GIFTED. Tee detail" style="object-position:50% 30%;">
+      </div>
+    </div>
+    <div class="feat-info reveal" style="transition-delay:0.1s">
+      <div class="feat-badge">⚡ Current Drop</div>
+      <div class="feat-name">GIFTED.</div>
+      <div class="feat-ref">1 Peter 4:10–11</div>
+      <p class="feat-desc">Each of us has received a gift — use it to serve others as a faithful steward of God's grace in its various forms. You are not ordinary. You are gifted with intention and purpose.</p>
+      <div class="feat-btns">
+        <a href="#" class="btn-teal" data-magnetic>Shop Now</a>
+        <a href="merch.html#collection" class="btn-ghost">View All</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL COLLECTION -->
+<section id="collection">
+  <div class="blob blob-pu" style="position:absolute;width:600px;height:600px;top:-100px;left:-150px;--bd:15s;--bdel:-4s;"></div>
+  <div class="blob blob-teal" style="position:absolute;width:450px;height:450px;bottom:-80px;right:-100px;--bd:18s;--bdel:-9s;"></div>
+  <div class="col-in">
+    <div class="reveal">
+      <div class="sec-label" style="color:var(--pink);">— The Full Collection</div>
+      <div class="sec-h">Current <span style="color:var(--teal);">Drops.</span></div>
+    </div>
+    <div class="col-grid">
+      <a href="#" class="col-card reveal" style="--cc:var(--teal);">
+        <div class="col-img"><img src="images/women-4.jpg" alt="GIFTED. Tee" style="object-position:50% 25%;"></div>
+        <div class="col-info">
+          <div class="col-tag">Teal Tee</div>
+          <div class="col-name">GIFTED.</div>
+          <div class="col-ref">1 Peter 4:10–11</div>
+          <div class="col-btn">Shop Now →</div>
+        </div>
+      </a>
+      <a href="#" class="col-card reveal" style="--cc:var(--pink);transition-delay:0.1s">
+        <div class="col-img"><img src="images/founder-2.jpg" alt="Be-YOU-tiful Tee" style="object-position:50% 35%;"></div>
+        <div class="col-info">
+          <div class="col-tag" style="color:var(--pink);">Black Tee</div>
+          <div class="col-name">BE-YOU-TIFUL</div>
+          <div class="col-ref">Psalm 139:14</div>
+          <div class="col-btn" style="color:var(--pink);">Shop Now →</div>
+        </div>
+      </a>
+      <a href="#" class="col-card reveal" style="--cc:#D4702A;transition-delay:0.2s">
+        <div class="col-img"><img src="images/women-1.jpg" alt="PURPOSED. Tee" style="object-position:50% 30%;"></div>
+        <div class="col-info">
+          <div class="col-tag" style="color:#D4702A;">Orange Tee</div>
+          <div class="col-name">PURPOSED.</div>
+          <div class="col-ref">Psalm 139:13–16</div>
+          <div class="col-btn" style="color:#D4702A;">Shop Now →</div>
+        </div>
+      </a>
+      <a href="#" class="col-card reveal" style="--cc:#8B2FFF;transition-delay:0.1s">
+        <div class="col-img"><img src="images/brand-2.jpg" alt="Be-YOU-tiful Dark Tee" style="object-position:50% 40%;"></div>
+        <div class="col-info">
+          <div class="col-tag" style="color:#8B2FFF;">Dark Tee</div>
+          <div class="col-name">PSALM 139</div>
+          <div class="col-ref">Psalm 139:13–16</div>
+          <div class="col-btn" style="color:#8B2FFF;">Shop Now →</div>
+        </div>
+      </a>
+      <a href="#" class="col-card reveal" style="--cc:#D4702A;transition-delay:0.2s">
+        <div class="col-img"><img src="images/women-2.jpg" alt="You Inspire Now Towel" style="object-position:50% 50%;"></div>
+        <div class="col-info">
+          <div class="col-tag" style="color:#D4702A;">Accessory</div>
+          <div class="col-name">YIN TOWEL</div>
+          <div class="col-ref">You Inspire Now</div>
+          <div class="col-btn" style="color:#D4702A;">Shop Now →</div>
+        </div>
+      </a>
+      <a href="#" class="col-card reveal" style="--cc:rgba(255,255,255,0.2);transition-delay:0.3s">
+        <div class="col-img" style="display:flex;align-items:center;justify-content:center;background:#111;aspect-ratio:4/5;">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(255,255,255,0.08);letter-spacing:0.05em;">COMING<br>SOON</span>
+        </div>
+        <div class="col-info">
+          <div class="col-tag" style="color:rgba(255,255,255,0.25);">Next Drop</div>
+          <div class="col-name" style="color:rgba(255,255,255,0.3);">?????</div>
+          <div class="col-ref">Drop Alert Coming</div>
+          <div class="col-btn" style="color:rgba(255,255,255,0.25);">Notify Me →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COMING SOON -->
+<section id="coming-soon">
+  <div class="blob blob-pu" style="width:600px;height:600px;top:-100px;left:50%;transform:translateX(-50%);--bd:15s;"></div>
+  <div class="cs-in">
+    <div class="sec-label" style="justify-content:center;color:var(--pu);">— Future Drops</div>
+    <div class="sec-h">What's <span style="color:var(--pu);">Coming.</span></div>
+    <p style="font-size:1rem;color:rgba(255,255,255,0.38);line-height:1.9;margin-top:1rem;">New collections are always in the works. Drop your email below and be the first to know when the next piece goes live.</p>
+    <div class="cs-drops reveal">
+      <div class="cs-card" style="--cs-clr:var(--teal);">
+        <span class="cs-lock">🔒</span>
+        <div class="cs-label">NEW TEE DROP</div>
+        <p class="cs-sub">Next collection dropping soon. Faith-rooted. Purpose-driven. Stay ready.</p>
+      </div>
+      <div class="cs-card" style="--cs-clr:var(--pink);">
+        <span class="cs-lock">🔒</span>
+        <div class="cs-label">NEW ACCESSORY</div>
+        <p class="cs-sub">More ways to wear your inspiration. Coming soon.</p>
+      </div>
+      <div class="cs-card" style="--cs-clr:var(--pu);">
+        <span class="cs-lock">🔒</span>
+        <div class="cs-label">LIMITED COLLAB</div>
+        <p class="cs-sub">Something special in the works. You'll want to be first in line.</p>
+      </div>
+    </div>
+    <form class="notify-form reveal" style="transition-delay:0.15s" onsubmit="event.preventDefault();">
+      <input type="email" placeholder="Your email address">
+      <button type="submit">Notify Me</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-in">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <img src="assets/yin-logo.png" alt="You Inspire Now">
+        <p>Faith-rooted encouragement for women becoming who they were created to be.</p>
+        <div class="ft-socials">
+          <a href="https://instagram.com/youinspirenow" target="_blank" class="ft-soc">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://facebook.com/youinspirenow" target="_blank" class="ft-soc">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://tiktok.com/@youinspirenow" target="_blank" class="ft-soc">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.17 8.17 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-1.01-.08z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="ft-col"><h4>Navigate</h4><div class="ft-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="events.html">Events</a><a href="merch.html">Merch</a><a href="contact.html">Connect</a></div></div>
+      <div class="ft-col"><h4>Collection</h4><div class="ft-links"><a href="#">GIFTED. Tee</a><a href="#">Be-YOU-tiful Tee</a><a href="#">PURPOSED. Tee</a><a href="#">YIN Towel</a></div></div>
+      <div class="ft-col"><h4>Mission</h4><div class="ft-links"><a href="donate.html" style="color:var(--teal);opacity:0.9;">Go Inspire Now →</a><a href="donate.html">Donate</a><a href="contact.html">Contact Us</a></div></div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 You Inspire Now. All Rights Reserved.</p>
+      <p class="ft-copy">Gifted · Purposed · Be-YOU-tiful</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// COUNTDOWN TIMER — counts to 1st of next month
+(function(){
+  function nextDrop(){
+    const now=new Date();
+    const d=new Date(now.getFullYear(),now.getMonth()+1,1,0,0,0);
+    return d;
+  }
+  function pad(n){return String(n).padStart(2,'0');}
+  function tick(){
+    const now=new Date(),target=nextDrop(),diff=target-now;
+    if(diff<=0){document.getElementById('cd-label').textContent='Drop is LIVE — Shop Now!';return;}
+    const days=Math.floor(diff/864e5);
+    const hours=Math.floor((diff%864e5)/36e5);
+    const mins=Math.floor((diff%36e5)/6e4);
+    const secs=Math.floor((diff%6e4)/1e3);
+    document.getElementById('cd-days').textContent=pad(days);
+    document.getElementById('cd-hours').textContent=pad(hours);
+    document.getElementById('cd-mins').textContent=pad(mins);
+    document.getElementById('cd-secs').textContent=pad(secs);
+    const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('cd-label').textContent=months[target.getMonth()]+' '+target.getFullYear()+' Drop';
+  }
+  tick();setInterval(tick,1000);
+})();
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+document.getElementById('nav-burger').addEventListener('click',()=>document.getElementById('nav-links').classList.toggle('open'));
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const c=document.getElementById('cursor');
+if(c){document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});document.querySelectorAll('a,button,input').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hov'));el.addEventListener('mouseleave',()=>c.classList.remove('hov'));});}
+document.querySelectorAll('[data-magnetic]').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.28}px,${(e.clientY-r.top-r.height/2)*0.28}px)`;b.style.transition='transform 0.12s linear';});b.addEventListener('mouseleave',()=>{b.style.transition='transform 0.5s cubic-bezier(.34,1.56,.64,1)';b.style.transform='';});});
+(function(){const btn=document.getElementById('music-btn'),aud=document.getElementById('bg-music');if(!btn||!aud)return;let on=false;function play(){aud.volume=0.38;aud.play().then(()=>{on=true;btn.classList.add('playing');btn.innerHTML='♫';}).catch(()=>{});}function pause(){aud.pause();on=false;btn.classList.remove('playing');btn.innerHTML='♪';}btn.addEventListener('click',()=>{on?pause():play();});window.addEventListener('beforeunload',()=>{localStorage.setItem('yin-playing',on?'1':'0');localStorage.setItem('yin-time',aud.currentTime.toString());});const wasOn=localStorage.getItem('yin-playing')==='1';const t=parseFloat(localStorage.getItem('yin-time')||'0');if(wasOn){aud.currentTime=t;play();}else{document.addEventListener('click',function first(){if(!on)play();document.removeEventListener('click',first);},{once:true});}})();
+</script>
+</body>
+</html>
