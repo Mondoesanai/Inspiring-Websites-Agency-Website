@@ -2506,6 +2506,93 @@
       .hero-sub    { display: none !important; }
       .stats-bar   { display: none !important; }
       .proc-desc   { display: none !important; }
+      /* Show only first 3 service cards — 6 is overwhelming */
+      .service-cell:nth-child(n+4) { display: none !important; }
+      /* Process: hide step checklists (inline style needs !important) and intro paragraph */
+      .proc-step ul { display: none !important; }
+      #process .body-lg { display: none !important; }
+    }
+
+    /* ════════════════════════════════════════════════
+       PROCESS — mobile scroll journey
+    ════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      #process { padding: 64px 0 56px !important; }
+      #process .section-wrap { padding: 0 !important; }
+      #process > .section-wrap > div:first-child { padding: 0 24px; }
+      #process > .section-wrap > div:last-child { padding: 0 24px; }
+
+      .process-steps {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: scroll !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        gap: 16px !important;
+        padding: 8px 24px 32px !important;
+        margin-top: 32px !important;
+        align-items: stretch !important;
+      }
+      .process-steps::-webkit-scrollbar { display: none !important; }
+      .process-steps::before { display: none !important; }
+
+      .proc-step {
+        min-width: calc(100vw - 80px) !important;
+        max-width: calc(100vw - 80px) !important;
+        flex-shrink: 0 !important;
+        scroll-snap-align: center !important;
+        background: linear-gradient(145deg, #0d1a14 0%, #091210 100%) !important;
+        border: 1px solid #1e2c27 !important;
+        border-radius: 24px !important;
+        padding: 36px 28px 32px !important;
+        text-align: left !important;
+        transform: perspective(700px) rotateY(14deg) scale(0.88) !important;
+        opacity: 0.45 !important;
+        transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94),
+                    opacity 0.45s ease !important;
+        will-change: transform, opacity;
+      }
+      .proc-step.step-active {
+        transform: perspective(700px) rotateY(0deg) scale(1) !important;
+        opacity: 1 !important;
+        border-color: rgba(143,209,79,0.25) !important;
+      }
+      .proc-num {
+        margin: 0 0 20px !important;
+        font-size: 48px !important;
+        letter-spacing: -0.05em !important;
+        color: rgba(143,209,79,0.25) !important;
+        line-height: 1 !important;
+        font-family: 'Sora', sans-serif;
+        font-weight: 800;
+      }
+      .proc-step.step-active .proc-num { color: #8FD14F !important; }
+      .proc-title {
+        font-size: 22px !important;
+        margin-bottom: 8px !important;
+        letter-spacing: -0.025em !important;
+      }
+
+      /* Swipe hint dots */
+      .proc-dots {
+        display: flex !important;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 4px;
+        padding: 0 24px;
+      }
+      .proc-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: #26302D;
+        transition: background 0.3s ease, width 0.3s ease;
+      }
+      .proc-dot.dot-active {
+        background: #8FD14F;
+        width: 22px;
+        border-radius: 3px;
+      }
     }
 
     /* Extra tight small phones */
@@ -2898,8 +2985,9 @@
   </div>
 
   <!-- CTA -->
-  <div style="text-align:center;padding:0 24px 72px;background:#050706;" class="reveal">
-    <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green btn-green-lg">Get a Site Like This</a>
+  <div style="text-align:center;padding:56px 24px 80px;background:#050706;" class="reveal">
+    <p style="font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8FD14F;margin-bottom:16px;">Ready to stand out?</p>
+    <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green btn-green-lg">Get a Site Like This →</a>
   </div>
 
 </section>
@@ -3120,7 +3208,14 @@
 
     </div>
 
-    <div style="text-align:center;margin-top:64px;">
+    <!-- Mobile step dots — hidden on desktop via CSS -->
+    <div class="proc-dots" style="display:none;">
+      <div class="proc-dot dot-active" data-step="0"></div>
+      <div class="proc-dot" data-step="1"></div>
+      <div class="proc-dot" data-step="2"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:64px;padding:0 24px;">
       <a href="https://booking.inspiringwebsites.org/" class="btn-green btn-green-lg reveal">Start the Process Today</a>
     </div>
   </div>
@@ -3675,6 +3770,45 @@
   }
 
 
+  /* ════ PROCESS — mobile scroll journey ════ */
+  (function () {
+    if (!window.matchMedia('(max-width: 768px)').matches) return;
+    var steps = document.querySelectorAll('.proc-step');
+    var dots  = document.querySelectorAll('.proc-dot');
+    var container = document.querySelector('.process-steps');
+    if (!steps.length || !container) return;
+
+    // Activate first step and show dots
+    steps[0].classList.add('step-active');
+    var dotsWrap = document.querySelector('.proc-dots');
+    if (dotsWrap) dotsWrap.style.display = 'flex';
+
+    function setActive(idx) {
+      steps.forEach(function(s, i) {
+        s.classList.toggle('step-active', i === idx);
+      });
+      dots.forEach(function(d, i) {
+        d.classList.toggle('dot-active', i === idx);
+      });
+    }
+
+    // Detect which card is centered using scroll position
+    container.addEventListener('scroll', function () {
+      var cardW = steps[0].offsetWidth + 16; // card + gap
+      var idx = Math.round(container.scrollLeft / cardW);
+      setActive(Math.min(Math.max(idx, 0), steps.length - 1));
+    }, { passive: true });
+
+    // Dot tap → scroll to card
+    dots.forEach(function(dot, i) {
+      dot.addEventListener('click', function() {
+        var cardW = steps[0].offsetWidth + 16;
+        container.scrollTo({ left: i * cardW, behavior: 'smooth' });
+      });
+    });
+  }());
+
+
   /* ════ HERO CYCLING TEXT ════ */
   var words   = document.querySelectorAll('.hero-cycle-word');
   var wordIdx = 0;
@@ -3686,7 +3820,7 @@
       setTimeout(function () { leaving.classList.remove('exit'); }, 500);
       wordIdx = (wordIdx + 1) % words.length;
       words[wordIdx].classList.add('active');
-    }, 3000);
+    }, 1800);
   }
 
 
@@ -3710,7 +3844,7 @@
         heroUrl.textContent = site.url;
         heroPreviewImg.style.opacity = '1';
       }, 500);
-    }, 5000);
+    }, 2500);
   }
 
 
