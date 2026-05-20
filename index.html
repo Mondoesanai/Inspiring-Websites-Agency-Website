@@ -7,7 +7,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"></noscript>
   <script>
     tailwind.config = {
       theme: {
@@ -1400,7 +1401,7 @@
       .nav-cta-desk { display: none !important; }
       .nav-hamburger { display: flex; }
 
-      /* Hero — single col, no mockup */
+      /* Hero — single col with mockup below */
       .hero {
         padding: 88px 24px 52px !important;
         min-height: 0 !important;   /* kill 100vh — prevents fullPage scroll loop */
@@ -1416,7 +1417,24 @@
         flex-direction: column;
         align-items: center;
       }
-      .hero-right { display: none !important; }  /* hide mockup entirely */
+      .hero-right {
+        display: flex !important;
+        margin-top: 36px;
+        width: 100%;
+        justify-content: center;
+        perspective: none !important;
+      }
+      .hero-mockup-glow { display: none; }
+      .hero-ring { display: none; }
+      .hero-mockup {
+        animation: none !important;
+        transform: none !important;
+        max-width: 100% !important;
+        width: 100%;
+        border-radius: 12px;
+      }
+      .hero-mockup-viewport { height: 220px !important; }
+      .hero-chip { display: none !important; }
       .hero-sub { max-width: 100%; text-align: center; }
       .hero-ctas { justify-content: center; }
       .hero-trust { justify-content: center; }
@@ -2211,8 +2229,13 @@
     }
     .proc-step:hover .proc-num { animation: stepGlow 2s ease-in-out infinite; }
 
-    /* ── Service bullet lists ── */
-    .sc-bullets {
+    /* ── Service bullet lists — hidden to reduce text density ── */
+    .sc-bullets { display: none; }
+    .impact-desc { display: none; }
+    .proc-step ul { display: none; }
+
+    /* ── Service bullet lists (kept for reference) ── */
+    ._sc-bullets_ref {
       list-style: none;
       margin-top: 10px;
       display: flex;
@@ -2344,47 +2367,11 @@
       transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.2s ease, box-shadow 0.2s ease !important;
     }
 
-    /* ════════════════════════════════════════════════
-       MOBILE STICKY CTA BAR
-    ════════════════════════════════════════════════ */
-    .mob-sticky {
-      display: none;
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 9990;
-      padding: 10px 16px;
-      padding-bottom: max(10px, env(safe-area-inset-bottom));
-      background: linear-gradient(to top, rgba(5,7,6,1) 60%, rgba(5,7,6,0.92) 100%);
-      border-top: 1px solid rgba(143,209,79,0.18);
-      transform: translateY(110%);
-      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
-    }
-    .mob-sticky.is-visible { transform: translateY(0); }
-    .mob-sticky-btn {
-      display: block;
-      background: #8FD14F;
-      color: #070909;
-      font-family: 'Sora', sans-serif;
-      font-size: 15px;
-      font-weight: 800;
-      text-align: center;
-      padding: 15px 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      box-shadow: 0 0 32px rgba(143,209,79,0.25), 0 4px 16px rgba(0,0,0,0.4);
-      transition: background 0.2s ease, transform 0.15s ease;
-    }
-    .mob-sticky-btn:active { transform: scale(0.97); background: #7AC23A; }
 
     /* ════════════════════════════════════════════════
        MOBILE — comprehensive polish (≤768px)
     ════════════════════════════════════════════════ */
     @media (max-width: 768px) {
-
-      /* Sticky bar visible + body padding so content clears it */
-      .mob-sticky { display: block; }
-      body { padding-bottom: 76px; }
 
       /* ── Hero ── */
       .hero-badge { font-size: 11px; padding: 6px 12px; }
@@ -2514,10 +2501,16 @@
       .cport-mobile .section-label { margin-bottom: 10px !important; }
     }
 
+    /* ── Mobile text cuts — reduce verbiage globally on phones ── */
+    @media (max-width: 768px) {
+      .hero-sub    { display: none !important; }
+      .stats-bar   { display: none !important; }
+      .proc-desc   { display: none !important; }
+    }
+
     /* Extra tight small phones */
     @media (max-width: 390px) {
       .hero-h1 { font-size: 34px !important; }
-      .mob-sticky-btn { font-size: 14px; padding: 13px 16px; }
     }
 
     /* ════════════════════════════════════════════════
@@ -2802,7 +2795,7 @@
                 </div>
               </div>
               <div class="cport-viewport">
-                <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="cport-preview-img">
+                <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="cport-preview-img" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -2818,7 +2811,7 @@
                 </div>
               </div>
               <div class="cport-viewport">
-                <img src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" class="cport-preview-img">
+                <img src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" class="cport-preview-img" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -2834,7 +2827,7 @@
                 </div>
               </div>
               <div class="cport-viewport">
-                <img src="Brand_Assets/preview-mondo-davis.jpg" alt="Mondoe Davis" class="cport-preview-img">
+                <img src="Brand_Assets/preview-mondo-davis.jpg" alt="Mondoe Davis" class="cport-preview-img" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -2875,7 +2868,7 @@
       <div style="display:flex;flex-direction:column;gap:20px;">
         <div class="port-card reveal" role="button" tabindex="0" onclick="openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')" onkeydown="if(event.key==='Enter')openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')">
           <div class="port-preview" style="height:200px;">
-            <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+            <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
             <div class="port-overlay"><span class="port-btn">Explore →</span></div>
           </div>
           <div class="port-card-body">
@@ -2884,7 +2877,7 @@
         </div>
         <div class="port-card reveal" role="button" tabindex="0" onclick="openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW')" onkeydown="if(event.key==='Enter')openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW')">
           <div class="port-preview" style="height:200px;">
-            <img src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+            <img src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
             <div class="port-overlay"><span class="port-btn">Explore →</span></div>
           </div>
           <div class="port-card-body">
@@ -2893,7 +2886,7 @@
         </div>
         <div class="port-card reveal" role="button" tabindex="0" onclick="window.open('https://mondoedavis.com','_blank')" onkeydown="if(event.key==='Enter')window.open('https://mondoedavis.com','_blank')">
           <div class="port-preview" style="height:200px;">
-            <img src="Brand_Assets/preview-mondo-davis.jpg" alt="Mondoe Davis" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+            <img src="Brand_Assets/preview-mondo-davis.jpg" alt="Mondoe Davis" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
             <div class="port-overlay"><span class="port-btn">View Site →</span></div>
           </div>
           <div class="port-card-body">
@@ -3794,17 +3787,6 @@
   }
 
 
-  /* ════ MOBILE STICKY CTA ════ */
-  var mobSticky = document.getElementById('mobSticky');
-  if (mobSticky) {
-    var _stickyShown = false;
-    window.addEventListener('scroll', function () {
-      if (!_stickyShown && window.scrollY > 320) {
-        _stickyShown = true;
-        mobSticky.classList.add('is-visible');
-      }
-    }, { passive: true });
-  }
 
 
   /* ════ PORTFOLIO FILTER TABS ════ */
@@ -4033,6 +4015,9 @@
 (function () {
   'use strict';
 
+  /* Skip particle system on mobile/touch — too heavy for phones */
+  if (window.matchMedia('(max-width: 768px)').matches || ('ontouchstart' in window && window.innerWidth <= 768)) return;
+
   /* ── Config ─────────────────────────────────── */
   var COUNT        = 72;
   var CONN_DIST    = 112;
@@ -4197,12 +4182,6 @@
 </script>
 
 
-<!-- ════ MOBILE STICKY CTA BAR ════ -->
-<div class="mob-sticky" id="mobSticky">
-  <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="mob-sticky-btn">
-    Book a Free Call — It's Free →
-  </a>
-</div>
 
 </body>
 </html>
