@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact & SMS Opt-In — Inspiring Websites</title>
+  <meta name="description" content="Contact Inspiring Websites and opt in to receive SMS updates about your project." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #070909;
+      color: #E8EDEA;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    .nav-wrap {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,9,9,0.95);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(143,209,79,0.1);
+    }
+    .nav-inner {
+      max-width: 760px; margin: 0 auto;
+      padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 800;
+      letter-spacing: -0.02em; color: #F5F7F6; text-decoration: none;
+    }
+    .nav-logo span { color: #8FD14F; }
+    .nav-back {
+      font-size: 13px; color: #8FD14F; text-decoration: none;
+      font-weight: 600; transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 0.75; }
+
+    /* HERO */
+    .page-hero {
+      padding: 64px 24px 48px;
+      text-align: center;
+      border-bottom: 1px solid #1A221E;
+    }
+    .page-tag {
+      display: inline-block; font-family: 'Sora', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #8FD14F;
+      background: rgba(143,209,79,0.08); border: 1px solid rgba(143,209,79,0.18);
+      border-radius: 100px; padding: 5px 14px; margin-bottom: 18px;
+    }
+    .page-title {
+      font-family: 'Sora', sans-serif; font-size: clamp(26px, 5vw, 40px);
+      font-weight: 800; letter-spacing: -0.03em; color: #F5F7F6;
+      line-height: 1.15; margin-bottom: 12px;
+    }
+    .page-sub {
+      font-size: 16px; color: #A6B0AC; max-width: 480px; margin: 0 auto;
+    }
+
+    /* FORM WRAP */
+    .form-wrap {
+      max-width: 640px; margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    /* FIELDS */
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+    .field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px; }
+    .field label {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; color: #A6B0AC;
+    }
+    .field label .req { color: #8FD14F; }
+    .field input,
+    .field textarea,
+    .field select {
+      background: #0D1512; border: 1px solid #26302D;
+      border-radius: 10px; padding: 13px 16px;
+      font-size: 15px; color: #F5F7F6;
+      font-family: 'Inter', sans-serif;
+      width: 100%; transition: border-color 0.2s;
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus { outline: none; border-color: #8FD14F; }
+    .field input::placeholder,
+    .field textarea::placeholder { color: #3D4D47; }
+    .field textarea { resize: vertical; min-height: 110px; }
+
+    /* SMS CONSENT BOX */
+    .sms-consent-box {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: rgba(143,209,79,0.05);
+      border: 1.5px solid rgba(143,209,79,0.2);
+      border-radius: 12px; padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+    .sms-consent-box input[type="checkbox"] {
+      width: 18px; height: 18px; flex-shrink: 0;
+      margin-top: 2px; accent-color: #8FD14F; cursor: pointer;
+      border: 2px solid #8FD14F;
+    }
+    .sms-consent-box label {
+      font-size: 13px; color: #A6B0AC; line-height: 1.7;
+      cursor: pointer;
+    }
+    .sms-consent-box label strong { color: #E8EDEA; }
+    .sms-consent-box label a { color: #8FD14F; text-decoration: none; }
+    .sms-consent-box label a:hover { text-decoration: underline; }
+    .sms-consent-note {
+      font-size: 11px; color: #5C6B65; margin-top: 6px; display: block;
+    }
+
+    /* SUBMIT */
+    .btn-submit {
+      width: 100%; padding: 16px 28px; background: #8FD14F;
+      border: none; border-radius: 12px; color: #050706;
+      font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 800;
+      letter-spacing: -0.01em; cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .btn-submit:hover { background: #7DC040; transform: translateY(-2px); }
+    .btn-submit:active { transform: translateY(0); }
+
+    /* SUCCESS */
+    .success-state {
+      display: none; text-align: center;
+      padding: 48px 24px; background: rgba(143,209,79,0.05);
+      border: 1px solid rgba(143,209,79,0.2); border-radius: 16px;
+    }
+    .success-state h3 {
+      font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 800;
+      color: #8FD14F; margin-bottom: 10px;
+    }
+    .success-state p { font-size: 15px; color: #A6B0AC; }
+
+    /* DIVIDER */
+    .divider {
+      border: none; border-top: 1px solid #1A221E;
+      margin: 40px 0;
+    }
+
+    /* CONTACT INFO */
+    .contact-info {
+      display: flex; flex-wrap: wrap; gap: 24px;
+      justify-content: center; margin-top: 40px;
+    }
+    .contact-info a {
+      font-size: 14px; color: #A6B0AC; text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
+    }
+    .contact-info a:hover { color: #8FD14F; }
+
+    /* FOOTER */
+    .page-footer {
+      border-top: 1px solid #1A221E; padding: 32px 24px;
+      text-align: center;
+    }
+    .page-footer p { font-size: 13px; color: #5C6B65; }
+    .footer-links {
+      display: flex; align-items: center; justify-content: center;
+      gap: 24px; flex-wrap: wrap; margin-bottom: 12px;
+    }
+    .footer-links a { font-size: 13px; color: #8FD14F; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+
+    @media (max-width: 560px) {
+      .field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-wrap">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Inspiring<span>Websites</span></a>
+    <a href="/" class="nav-back">← Back to Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-tag">Contact Us</div>
+  <h1 class="page-title">Get in Touch &amp; Stay Connected</h1>
+  <p class="page-sub">Fill out the form below to reach our team. Opt in to receive SMS updates about your project.</p>
+</div>
+
+<!-- FORM -->
+<div class="form-wrap">
+
+  <form id="optin-form" method="POST" action="https://booking.inspiringwebsites.org/">
+
+    <div class="field-row">
+      <div class="field">
+        <label for="first-name">First Name <span class="req">*</span></label>
+        <input type="text" id="first-name" name="first_name" placeholder="Jane" required>
+      </div>
+      <div class="field">
+        <label for="last-name">Last Name <span class="req">*</span></label>
+        <input type="text" id="last-name" name="last_name" placeholder="Smith" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="email">Email Address <span class="req">*</span></label>
+      <input type="email" id="email" name="email" placeholder="you@yourbusiness.com" required>
+    </div>
+
+    <div class="field">
+      <label for="phone">Mobile Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="(817) 000-0000">
+    </div>
+
+    <div class="field">
+      <label for="business">Business Name</label>
+      <input type="text" id="business" name="business" placeholder="Your Business">
+    </div>
+
+    <div class="field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Tell us about your business and what you're looking to accomplish..."></textarea>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+         SMS OPT-IN CHECKBOX
+         • NOT pre-checked
+         • NOT required
+         • Business name in text
+         • Message types listed
+         • Frequency disclosed
+         • Rates disclosed
+         • STOP / HELP instructions
+         • Carrier disclaimer
+         • 18+ requirement
+         • PP + T&C links
+    ═════════════════════════════════════════════ -->
+    <div class="sms-consent-box">
+      <input type="checkbox" id="sms-consent" name="sms_consent" value="yes">
+      <div>
+        <label for="sms-consent">
+          I agree to receive recurring SMS/text messages from <strong>Inspiring Websites</strong> (817-983-3004) including appointment reminders, project status updates, and promotional offers. Message frequency varies. Msg &amp; data rates may apply. Reply <strong>STOP</strong> to cancel at any time. Reply <strong>HELP</strong> for help. Carriers are not liable for delayed or undelivered messages. You must be 18 years or older to opt in.
+          &nbsp;<a href="/privacy-policy.html">Privacy Policy</a>&nbsp;·&nbsp;<a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
+        </label>
+        <span class="sms-consent-note">SMS consent is optional and not required to purchase or receive any service from Inspiring Websites.</span>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">Send Message →</button>
+
+  </form>
+
+  <!-- Success state (shown by JS after submit) -->
+  <div class="success-state" id="success-state">
+    <h3>Message Received!</h3>
+    <p>We'll be in touch within one business day. If you opted in to SMS, you may receive a confirmation text shortly.</p>
+    <p style="margin-top:16px;"><a href="/" style="color:#8FD14F;text-decoration:none;font-weight:600;">← Back to Home</a></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="contact-info">
+    <a href="tel:8179833004">📞 817-983-3004</a>
+    <a href="mailto:info@inspiringwebsites.org">✉️ info@inspiringwebsites.org</a>
+    <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener">📅 Book a Free Call</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
+    <a href="mailto:info@inspiringwebsites.org">Contact</a>
+  </div>
+  <p>© 2026 Inspiring Websites. All rights reserved. · 2200 Driskell Drive, Corinth, TX · 817-983-3004</p>
+</footer>
+
+<script>
+  document.getElementById('optin-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var firstName = document.getElementById('first-name').value.trim();
+    var email     = document.getElementById('email').value.trim();
+    if (!firstName || !email) {
+      alert('Please fill in your first name and email address.');
+      return;
+    }
+    this.style.display = 'none';
+    document.getElementById('success-state').style.display = 'block';
+    var phone   = document.getElementById('phone').value.trim();
+    var url = 'https://booking.inspiringwebsites.org/?firstName=' + encodeURIComponent(firstName)
+            + '&email=' + encodeURIComponent(email);
+    if (phone) url += '&phone=' + encodeURIComponent(phone);
+    setTimeout(function() { window.open(url, '_blank'); }, 1000);
+  });
+</script>
+
+</body>
+</html>
