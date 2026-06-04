@@ -244,14 +244,55 @@
          • 18+ requirement
          • PP + T&C links
     ═════════════════════════════════════════════ -->
-    <div class="sms-consent-box">
-      <input type="checkbox" id="sms-consent" name="sms_consent" value="yes">
-      <div>
-        <label for="sms-consent">
-          I agree to receive recurring SMS/text messages from <strong>Inspiring Websites</strong> (817-983-3004) including appointment reminders, project status updates, and promotional offers. Message frequency varies. Msg &amp; data rates may apply. Reply <strong>STOP</strong> to cancel at any time. Reply <strong>HELP</strong> for help. Carriers are not liable for delayed or undelivered messages. You must be 18 years or older to opt in.
-          &nbsp;<a href="/privacy-policy.html">Privacy Policy</a>&nbsp;·&nbsp;<a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
+    <!-- SMS OPT-IN BLOCK -->
+    <div style="background:rgba(143,209,79,0.05);border:1.5px solid rgba(143,209,79,0.22);border-radius:12px;padding:20px 22px;margin-bottom:24px;">
+
+      <!-- Checkbox row — NOT pre-checked, NOT required -->
+      <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;">
+        <input type="checkbox" id="sms-consent" name="sms_consent" value="yes"
+               style="width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:#8FD14F;cursor:pointer;">
+        <label for="sms-consent" style="font-size:14px;color:#E8EDEA;line-height:1.6;cursor:pointer;">
+          By checking this box, I give my express written consent to receive SMS/text messages from
+          <strong style="color:#F5F7F6;">Inspiring Websites</strong> (817-983-3004).
         </label>
-        <span class="sms-consent-note">SMS consent is optional and not required to purchase or receive any service from Inspiring Websites.</span>
+      </div>
+
+      <!-- Each disclosure as its own clearly visible line -->
+      <div style="padding-left:30px;display:flex;flex-direction:column;gap:7px;">
+
+        <p style="font-size:13px;color:#A6B0AC;line-height:1.55;">
+          <strong style="color:#C8D4CC;">Message Types:</strong>
+          Appointment reminders, project status updates, and promotional offers from Inspiring Websites.
+        </p>
+
+        <p style="font-size:13px;color:#A6B0AC;line-height:1.55;">
+          <strong style="color:#C8D4CC;">Message Frequency:</strong>
+          Message frequency varies based on your interactions with our team.
+        </p>
+
+        <p style="font-size:13px;color:#A6B0AC;line-height:1.55;">
+          <strong style="color:#C8D4CC;">Message &amp; Data Rates:</strong>
+          Message and data rates may apply depending on your mobile carrier plan.
+        </p>
+
+        <p style="font-size:13px;color:#A6B0AC;line-height:1.55;">
+          <strong style="color:#C8D4CC;">Opt-Out:</strong>
+          Reply <strong style="color:#F5F7F6;">STOP</strong> to opt out of SMS messages at any time.
+          Reply <strong style="color:#F5F7F6;">HELP</strong> for help.
+          Carriers are not liable for delayed or undelivered messages.
+        </p>
+
+        <p style="font-size:13px;color:#A6B0AC;line-height:1.55;">
+          You must be <strong style="color:#C8D4CC;">18 years or older</strong> to opt in.
+          SMS consent is <strong style="color:#C8D4CC;">not required</strong> to purchase or receive any service.
+        </p>
+
+        <p style="font-size:13px;color:#A6B0AC;line-height:1.55;">
+          <a href="/privacy-policy.html" style="color:#8FD14F;text-decoration:none;">Privacy Policy</a>
+          &nbsp;·&nbsp;
+          <a href="/terms-and-conditions.html" style="color:#8FD14F;text-decoration:none;">Terms &amp; Conditions</a>
+        </p>
+
       </div>
     </div>
 
