@@ -3674,23 +3674,124 @@
 ════════════════════════════════════════════════ -->
 <section id="contact" style="padding:104px 0;background:#111816;border-top:1px solid #26302D;position:relative;z-index:1;">
   <div class="section-wrap" id="book-call">
-    <div style="max-width:820px;margin:0 auto;">
-      <div class="cta-card">
-        <div class="cta-glow"></div>
-        <div style="position:relative;z-index:1;">
-          <div class="section-label" style="justify-content:center;">Ready to Grow?</div>
-          <h2 class="h-lg" style="margin-bottom:18px;font-size:clamp(28px,3vw,44px);">Your Website Should Be<br>Generating Leads Right Now</h2>
-          <p class="body-lg" style="max-width:480px;margin:0 auto 44px;">
-            Book a free discovery call and we'll show you exactly how to turn your website into your best lead source.
-          </p>
-          <div class="cta-btns">
-            <a href="https://booking.inspiringwebsites.org/" class="btn-green btn-green-lg">Book a Free Call</a>
-            <a href="mailto:info@inspiringwebsites.org" class="btn-ghost">Send a Message</a>
+
+    <!-- Two-column: form + booking card -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+
+      <!-- LEFT: Contact form with SMS opt-in checkbox -->
+      <div>
+        <div class="section-label" style="justify-content:flex-start;">Get in Touch</div>
+        <h2 class="h-lg" style="margin-bottom:12px;font-size:clamp(24px,2.6vw,38px);">Let's Talk About<br>Your Website</h2>
+        <p class="body-lg" style="margin-bottom:32px;">Fill out the form and we'll respond within one business day.</p>
+
+        <style>
+          .iw-form-field { display:flex; flex-direction:column; gap:7px; }
+          .iw-form-field label { font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#A6B0AC; }
+          .iw-form-field input,
+          .iw-form-field textarea {
+            background:#0D1512; border:1px solid #26302D; border-radius:10px;
+            padding:13px 16px; font-size:15px; color:#F5F7F6; font-family:'Inter',sans-serif;
+            transition:border-color 0.2s;
+            width:100%;
+          }
+          .iw-form-field input:focus,
+          .iw-form-field textarea:focus { outline:none; border-color:#8FD14F; }
+          .iw-form-field input::placeholder,
+          .iw-form-field textarea::placeholder { color:#3D4D47; }
+          .iw-form-field textarea { resize:vertical; min-height:100px; }
+          .iw-sms-box {
+            display:flex; gap:13px; align-items:flex-start;
+            background:rgba(143,209,79,0.04); border:1px solid rgba(143,209,79,0.14);
+            border-radius:10px; padding:16px 18px;
+          }
+          .iw-sms-box input[type="checkbox"] {
+            width:17px; height:17px; flex-shrink:0; margin-top:2px;
+            accent-color:#8FD14F; cursor:pointer;
+          }
+          .iw-sms-box label { font-size:11.5px; color:#8C9690; line-height:1.68; cursor:pointer; }
+          .iw-sms-box label strong { color:#C8D4CC; }
+          .iw-sms-box label a { color:#8FD14F; text-decoration:none; }
+          #iw-form-success { display:none; text-align:center; padding:24px 0; }
+          @media (max-width:768px) {
+            #contact > .section-wrap > div { grid-template-columns:1fr !important; gap:48px !important; }
+          }
+        </style>
+
+        <form id="iw-inquiry-form" style="display:flex;flex-direction:column;gap:18px;" novalidate>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="iw-form-field">
+              <label for="iw-name">Full Name <span style="color:#8FD14F;">*</span></label>
+              <input type="text" id="iw-name" name="name" placeholder="Jane Smith" required>
+            </div>
+            <div class="iw-form-field">
+              <label for="iw-phone">Phone Number</label>
+              <input type="tel" id="iw-phone" name="phone" placeholder="(817) 000-0000">
+            </div>
           </div>
-          <p style="font-size:13px;color:#A6B0AC;">No pressure. No pitch. Just a real conversation about your business.</p>
-          <p style="font-size:11px;color:#5C6B65;margin-top:20px;line-height:1.65;max-width:520px;margin-left:auto;margin-right:auto;">By booking a call or submitting an inquiry, you consent to receive SMS/text messages from <strong style="color:#8C9690;">Inspiring Websites</strong> regarding appointment reminders, project updates, and service information. Message frequency varies. Msg &amp; data rates may apply. Reply <strong style="color:#8C9690;">STOP</strong> to opt out at any time. Reply <strong style="color:#8C9690;">HELP</strong> for assistance. Carriers are not liable for delayed or undelivered messages. You must be 18 or older to opt in. SMS consent is not required to purchase services. View our <a href="/privacy-policy.html" style="color:#8FD14F;text-decoration:none;">Privacy Policy</a> and <a href="/terms-and-conditions.html" style="color:#8FD14F;text-decoration:none;">Terms &amp; Conditions</a>.</p>
+          <div class="iw-form-field">
+            <label for="iw-email">Email Address <span style="color:#8FD14F;">*</span></label>
+            <input type="email" id="iw-email" name="email" placeholder="you@yourbusiness.com" required>
+          </div>
+          <div class="iw-form-field">
+            <label for="iw-message">Tell Us About Your Business</label>
+            <textarea id="iw-message" name="message" placeholder="What does your business do, and what are you looking to accomplish with a new website?"></textarea>
+          </div>
+
+          <!-- ── SMS Consent ── NOT pre-checked · NOT required ── -->
+          <div class="iw-sms-box">
+            <input type="checkbox" id="iw-sms-consent" name="sms_consent" value="yes">
+            <label for="iw-sms-consent">
+              I agree to receive SMS/text messages from <strong>Inspiring Websites</strong> regarding appointment reminders, project updates, and service information. Message frequency varies. Msg &amp; data rates may apply. Reply <strong>STOP</strong> to opt out at any time. Reply <strong>HELP</strong> for assistance. Carriers are not liable for delayed or undelivered messages. Consent is not required to receive services. You must be 18+. &nbsp;<a href="/privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-green btn-green-lg" style="width:100%;cursor:pointer;justify-content:center;">Send Message →</button>
+          <div id="iw-form-success">
+            <p style="font-size:15px;color:#8FD14F;font-weight:600;">Message received! We'll be in touch within one business day.</p>
+          </div>
+        </form>
+
+        <script>
+          document.getElementById('iw-inquiry-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var name  = document.getElementById('iw-name').value.trim();
+            var email = document.getElementById('iw-email').value.trim();
+            if (!name || !email) { alert('Please fill in your name and email.'); return; }
+            this.style.display = 'none';
+            document.getElementById('iw-form-success').style.display = 'block';
+            // Build booking URL with prefill params
+            var url = 'https://booking.inspiringwebsites.org/?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
+            var phone = document.getElementById('iw-phone').value.trim();
+            if (phone) url += '&phone=' + encodeURIComponent(phone);
+            setTimeout(function() { window.open(url, '_blank'); }, 800);
+          });
+        </script>
+      </div>
+
+      <!-- RIGHT: Booking CTA card -->
+      <div>
+        <div class="cta-card">
+          <div class="cta-glow"></div>
+          <div style="position:relative;z-index:1;">
+            <div class="section-label" style="justify-content:center;">Ready to Grow?</div>
+            <h2 class="h-lg" style="margin-bottom:18px;font-size:clamp(22px,2.2vw,32px);">Your Website Should Be<br>Generating Leads Right Now</h2>
+            <p class="body-lg" style="max-width:380px;margin:0 auto 36px;font-size:15px;">Book a free discovery call and we'll show you exactly how to turn your site into your best lead source.</p>
+            <div class="cta-btns" style="justify-content:center;">
+              <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green btn-green-lg">Book a Free Call</a>
+            </div>
+            <p style="font-size:13px;color:#A6B0AC;margin-top:16px;">No pressure. No pitch. Just a real conversation.</p>
+            <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(143,209,79,0.1);display:flex;flex-direction:column;gap:10px;">
+              <a href="tel:8179833004" style="font-size:14px;color:#A6B0AC;text-decoration:none;display:flex;align-items:center;gap:10px;" onmouseover="this.style.color='#8FD14F'" onmouseout="this.style.color='#A6B0AC'">
+                <span style="font-size:16px;">📞</span> 817-983-3004
+              </a>
+              <a href="mailto:info@inspiringwebsites.org" style="font-size:14px;color:#A6B0AC;text-decoration:none;display:flex;align-items:center;gap:10px;" onmouseover="this.style.color='#8FD14F'" onmouseout="this.style.color='#A6B0AC'">
+                <span style="font-size:16px;">✉️</span> info@inspiringwebsites.org
+              </a>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
