@@ -1804,7 +1804,9 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      flex-shrink: 0;
+      flex-shrink: 1;
+      min-width: 0;
+      overflow: hidden;
     }
     .modal-cat {
       font-family: 'Inter', sans-serif;
@@ -1817,12 +1819,18 @@
       border: 1px solid rgba(143,209,79,0.22);
       border-radius: 4px;
       padding: 3px 8px;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
     .modal-name {
       font-family: 'Sora', sans-serif;
       font-size: 14px;
       font-weight: 700;
       color: #F5F7F6;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .site-modal-close {
       background: rgba(38,48,45,0.5);
@@ -1837,6 +1845,14 @@
     }
     .site-modal-close:hover { background: rgba(143,209,79,0.12); color: #F5F7F6; }
     .site-modal-frame { flex: 1; width: 100%; border: none; display: block; }
+    @media (max-width: 640px) {
+      .site-modal { padding: 0; }
+      .site-modal-inner { width: 100vw; height: 100dvh; border-radius: 0; }
+      .site-modal-chrome { padding: 10px 12px; gap: 8px; }
+      .site-modal-url { display: none; }
+      .modal-cat { display: none; }
+      .modal-name { font-size: 13px; }
+    }
 
     /* ── Testimonial upgrades ── */
     .testi-card-v2 {
@@ -2447,12 +2463,7 @@
 
       /* ── Portfolio mobile cards ── */
       .port-overlay {
-        opacity: 1 !important;
-        background: linear-gradient(to top, rgba(7,9,9,0.9) 0%, rgba(7,9,9,0.15) 60%, transparent 100%) !important;
-      }
-      .port-btn {
-        font-size: 13px; padding: 9px 20px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        opacity: 0 !important;
       }
       .port-card {
         border-radius: 14px !important;
