@@ -2522,6 +2522,9 @@
       /* Process: hide step checklists (inline style needs !important) and intro paragraph */
       .proc-step ul { display: none !important; }
       #process .body-lg { display: none !important; }
+      /* Zero-risk banner would break the 3-child sticky flex layout below — dropped on mobile;
+         the pledge still lands via the H2 and the open-by-default FAQ item. */
+      .zero-risk-banner { display: none !important; }
     }
 
     /* ════════════════════════════════════════════════
@@ -2848,7 +2851,7 @@
       <li><a href="#results">Results</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
-    <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green nav-cta-desk" style="font-size:14px;padding:10px 22px;border-radius:8px;">Book a Free Call</a>
+    <a href="#contact" class="btn-green nav-cta-desk" style="font-size:14px;padding:10px 22px;border-radius:8px;">Reserve My Free Website</a>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -2866,7 +2869,7 @@
     </ul>
   </nav>
   <div class="mobile-menu-cta">
-    <a href="https://booking.inspiringwebsites.org/" class="btn-green btn-green-lg">Book a Free Call</a>
+    <a href="#contact" class="btn-green btn-green-lg mobile-nav-link">Reserve My Free Website</a>
   </div>
 </div>
 
@@ -2900,11 +2903,12 @@
       </p>
 
       <div class="hero-ctas reveal reveal-delay-3">
-        <a href="#work" class="btn-green btn-green-lg btn-pulse">See Our Work</a>
-        <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-ghost">Book a Free Call</a>
+        <a href="#contact" class="btn-green btn-green-lg btn-pulse">Reserve My Free Website →</a>
+        <a href="#work" class="btn-ghost">See Our Work</a>
       </div>
 
       <div class="hero-trust reveal reveal-delay-4">
+        <span>Pay Nothing Upfront</span>
         <span>14-Day Delivery</span>
         <span>Google-Ready</span>
         <span>You Own It</span>
@@ -3077,7 +3081,7 @@
           <button class="cport-dot" data-slide="1" aria-label="Elara Monroe"></button>
           <button class="cport-dot" data-slide="2" aria-label="Mondoe Davis"></button>
         </div>
-        <button class="cport-explore-btn" id="cportExploreBtn">Explore Full Site →</button>
+        <button class="cport-explore-btn" id="cportExploreBtn" style="display:none;">Explore Full Site →</button>
       </div>
 
       <!-- Scroll hint -->
@@ -3097,19 +3101,17 @@
         <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:12px;">We Built It.<br>They Got <span class="green-accent">Results.</span></h2>
       </div>
       <div style="display:flex;flex-direction:column;gap:20px;">
-        <div class="port-card reveal" role="button" tabindex="0" onclick="openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')" onkeydown="if(event.key==='Enter')openSitePreview('/new-vibez/','New Vibez Barber Shop','Barbershop · Milton, FL')">
+        <div class="port-card reveal">
           <div class="port-preview" style="height:200px;">
             <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
-            <div class="port-overlay"><span class="port-btn">Explore →</span></div>
           </div>
           <div class="port-card-body">
             <div class="port-meta"><span class="port-name-sm">New Vibez Barber Shop</span><span class="slide-cat-tag">Barbershop · Milton, FL</span></div>
           </div>
         </div>
-        <div class="port-card reveal" role="button" tabindex="0" onclick="openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW')" onkeydown="if(event.key==='Enter')openSitePreview('/salon-unwine/','Elara Monroe | Real Estate','Real Estate · DFW')">
+        <div class="port-card reveal">
           <div class="port-preview" style="height:200px;">
             <img src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
-            <div class="port-overlay"><span class="port-btn">Explore →</span></div>
           </div>
           <div class="port-card-body">
             <div class="port-meta"><span class="port-name-sm">Elara Monroe | Real Estate</span><span class="slide-cat-tag">Real Estate · DFW, TX</span></div>
@@ -3131,7 +3133,7 @@
   <!-- CTA -->
   <div style="text-align:center;padding:56px 24px 80px;background:#050706;" class="reveal">
     <p style="font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8FD14F;margin-bottom:16px;">Ready to stand out?</p>
-    <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green btn-green-lg">Get a Site Like This →</a>
+    <a href="#contact" class="btn-green btn-green-lg">Reserve Yours Free →</a>
   </div>
 
 </section>
@@ -3308,8 +3310,13 @@
   <div class="section-wrap">
     <div style="text-align:center;margin-bottom:72px;">
       <div class="section-label reveal" style="justify-content:center;">How It Works</div>
-      <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:18px;">Your Simple, Powerful<br>Path to a New Site</h2>
-      <p class="body-lg reveal reveal-delay-2" style="max-width:480px;margin:0 auto;">Three steps. Fourteen days. A site that works harder than you do. Here's exactly what the process looks like from your first call to your first new client.</p>
+      <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:18px;">We Build It First.<br>You Pay After.</h2>
+      <p class="body-lg reveal reveal-delay-2" style="max-width:520px;margin:0 auto;">We're tired of watching agencies overpromise and underdeliver — so we flipped the model. We design and build your entire website from scratch, you see it live and working, and you only invest once you love what you're getting.</p>
+    </div>
+
+    <div class="zero-risk-banner reveal" style="max-width:900px;margin:0 auto 56px;background:rgba(143,209,79,0.06);border:1px solid rgba(143,209,79,0.22);border-radius:16px;padding:28px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;text-align:center;">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      <p style="font-size:15px;color:#F5F7F6;font-weight:600;max-width:640px;">Zero-Risk Guarantee: your full website is built before a single dollar changes hands. Don't love it? You owe us nothing.</p>
     </div>
 
     <div class="process-steps reveal">
@@ -3329,23 +3336,23 @@
       <div class="proc-step">
         <div class="proc-num">02</div>
         <div style="display:inline-block;background:rgba(143,209,79,0.07);border:1px solid rgba(143,209,79,0.18);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#8FD14F;margin-bottom:16px;">Days 2–13</div>
-        <h3 class="proc-title">Design &amp; Build</h3>
-        <p class="proc-desc">We design, write, and build everything. You review, we refine. Zero micromanaging — just results.</p>
+        <h3 class="proc-title">We Build It — Free</h3>
+        <p class="proc-desc">We design, write, and build your entire site from scratch, on our dime. You review the finished product live. Zero micromanaging, zero invoices — just results.</p>
         <ul style="list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:6px;text-align:left;max-width:200px;margin-left:auto;margin-right:auto;">
           <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Custom design &amp; copy</li>
           <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> SEO &amp; speed baked in</li>
-          <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Your reviews &amp; feedback</li>
+          <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> You pay nothing yet</li>
         </ul>
       </div>
 
       <div class="proc-step">
         <div class="proc-num">03</div>
         <div style="display:inline-block;background:rgba(143,209,79,0.07);border:1px solid rgba(143,209,79,0.18);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#8FD14F;margin-bottom:16px;">Day 14</div>
-        <h3 class="proc-title">Launch &amp; Grow</h3>
-        <p class="proc-desc">Your site goes live, Google indexes it, and leads start coming in. We stay in your corner long after launch.</p>
+        <h3 class="proc-title">Love It? Go Live.</h3>
+        <p class="proc-desc">Only once you approve the finished site do you invest anything. Then our SEO team takes over — ranked #1 locally in 1–3 months, Top 10 nationally in 4–6 months.</p>
         <ul style="list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:6px;text-align:left;max-width:200px;margin-left:auto;margin-right:auto;">
-          <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Live &amp; indexed on Google</li>
-          <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Leads start coming in</li>
+          <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> #1 locally in 1–3 months</li>
+          <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Top 10 nationally in 4–6 months</li>
           <li style="font-size:12.5px;color:#A6B0AC;display:flex;align-items:flex-start;gap:7px;"><span style="color:#8FD14F;flex-shrink:0;">✓</span> Ongoing support &amp; updates</li>
         </ul>
       </div>
@@ -3360,7 +3367,8 @@
     </div>
 
     <div style="text-align:center;margin-top:64px;padding:0 24px;">
-      <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green btn-green-lg reveal">Start the Process Today</a>
+      <a href="#contact" class="btn-green btn-green-lg reveal">Reserve My Free Website →</a>
+      <p style="font-size:13px;color:#A6B0AC;margin-top:14px;">Takes less than 2 minutes · No payment required</p>
     </div>
   </div>
 </section>
@@ -3481,7 +3489,7 @@
         </div>
         <div>
           <h3 style="font-size:17px;font-weight:700;color:#F5F7F6;letter-spacing:-0.01em;margin-bottom:7px;">Local SEO Ready</h3>
-          <p class="body-md">Structured for Google from day one. Technical SEO, local schema, and page speed baked into every build.</p>
+          <p class="body-md">Structured for Google from day one. Our SEO team pushes you to #1 locally within 1–3 months and Top 10 nationally within 4–6 months.</p>
         </div>
       </div>
 
@@ -3504,6 +3512,60 @@
           <p class="body-md">We position every site as an investment that pays back — not an expense. Your website should generate more than it costs.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════
+     MEET THE FOUNDER
+════════════════════════════════════════════════ -->
+<section id="founder" style="padding:104px 0;background:#111816;border-top:1px solid #26302D;border-bottom:1px solid #26302D;position:relative;z-index:1;overflow:hidden;">
+  <style>
+    @media (max-width:900px) {
+      #founder .founder-grid { grid-template-columns:1fr !important; gap:40px !important; text-align:center; }
+      #founder .founder-photo { max-width:280px; margin:0 auto; }
+      #founder .founder-stats { justify-content:center !important; }
+    }
+  </style>
+  <div class="orb orb-1" style="width:340px;height:340px;background:radial-gradient(circle,rgba(143,209,79,0.06),transparent 70%);top:-60px;right:-80px;"></div>
+  <div class="section-wrap">
+    <div class="founder-grid" style="display:grid;grid-template-columns:0.8fr 1.2fr;gap:64px;align-items:center;">
+
+      <!-- Photo -->
+      <div class="founder-photo reveal">
+        <div style="border-radius:20px;overflow:hidden;border:1px solid rgba(143,209,79,0.25);box-shadow:0 40px 90px rgba(0,0,0,0.55),0 0 0 1px rgba(143,209,79,0.08);">
+          <img src="https://placehold.co/640x760/0d1512/8FD14F?text=Mondoe+N.+Davis" alt="Mondoe N. Davis, Founder of Inspiring Websites" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div style="margin-top:16px;text-align:center;">
+          <div style="font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:#F5F7F6;">Mondoe N. Davis</div>
+          <div style="font-size:12.5px;color:#8FD14F;font-weight:600;">Founder &amp; Lead Developer, Age 16</div>
+        </div>
+      </div>
+
+      <!-- Copy -->
+      <div>
+        <div class="section-label reveal">Meet the Founder</div>
+        <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:20px;">Building Websites<br>Since I Was <span class="green-accent">10 Years Old.</span></h2>
+        <p class="body-lg reveal reveal-delay-2" style="margin-bottom:20px;">I'm Mondoe N. Davis. I graduated high school at 14, graduated college at 16 with my Bachelor's in Business Leadership, and I've been building websites since I was 10 years old.</p>
+        <p class="body-lg reveal reveal-delay-3" style="margin-bottom:32px;">Along the way, I watched too many web design companies take a deposit, disappear for months, and hand over a site nobody was proud of — overpromising and underdelivering. So I built Inspiring Websites to work the opposite way: we build your entire website first, you see exactly what you're getting, and you only pay once you love it.</p>
+
+        <div class="founder-stats reveal reveal-delay-4" style="display:flex;gap:32px;flex-wrap:wrap;">
+          <div>
+            <div class="stat-number" style="font-size:32px;">10</div>
+            <div class="stat-label">Age I Started Coding</div>
+          </div>
+          <div>
+            <div class="stat-number" style="font-size:32px;">14</div>
+            <div class="stat-label">Age I Graduated High School</div>
+          </div>
+          <div>
+            <div class="stat-number" style="font-size:32px;">16</div>
+            <div class="stat-label">Age I Earned My B.S. in Business Leadership</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -3616,6 +3678,18 @@
 
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div class="faq-item">
+          <details open>
+            <summary class="faq-summary">
+              <span class="faq-q">Do I really not pay anything upfront?</span>
+              <span class="faq-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </summary>
+            <p class="faq-answer">Correct — nothing. We design and build your entire website from scratch first, on our own time and dime. You get to see and use the finished, live site before you decide whether to invest anything. If it's not what you wanted, you walk away owing us nothing.</p>
+          </details>
+        </div>
+
+        <div class="faq-item">
           <details>
             <summary class="faq-summary">
               <span class="faq-q">How long does it take to build my website?</span>
@@ -3635,7 +3709,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </span>
             </summary>
-            <p class="faq-answer">Every project is scoped to your specific needs. We work with service businesses across a range of investment levels. Book a free call and we'll give you a clear, honest quote — no hidden fees.</p>
+            <p class="faq-answer">Every project is scoped to your specific needs. We work with service businesses across a range of investment levels. Since we build your site before you pay, you won't get a quote until you've seen exactly what you're getting — no hidden fees, no guesswork.</p>
           </details>
         </div>
 
@@ -3647,7 +3721,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8FD14F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </span>
             </summary>
-            <p class="faq-answer">Yes. Every site we build is structured with proper technical SEO, local schema markup, and performance optimization. We also offer ongoing local SEO management as a separate service.</p>
+            <p class="faq-answer">Yes. Every site we build is structured with proper technical SEO, local schema markup, and performance optimization. Our SEO team then works to get you ranked #1 locally within 1–3 months and Top 10 nationally within 4–6 months.</p>
           </details>
         </div>
 
@@ -3683,126 +3757,85 @@
 <!-- ════════════════════════════════════════════════
      CTA
 ════════════════════════════════════════════════ -->
-<section id="contact" style="padding:104px 0;background:#111816;border-top:1px solid #26302D;position:relative;z-index:1;">
+<section id="contact" style="padding:104px 0 88px;background:#111816;border-top:1px solid #26302D;position:relative;z-index:1;overflow:hidden;">
+  <div class="cta-glow" style="top:-100px;"></div>
+  <style>
+    .iw-reserve-frame {
+      position:relative;
+      border-radius:22px;
+      background:linear-gradient(180deg,#8FD14F,#0e1a16 45%);
+      padding:1.5px;
+      box-shadow:0 50px 100px rgba(0,0,0,0.55), 0 0 80px rgba(143,209,79,0.10);
+    }
+    .iw-reserve-frame-inner {
+      border-radius:20px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .iw-reserve-frame iframe {
+      display:block;
+      width:100%;
+      height:2150px;
+      border:none;
+      background:#fff;
+    }
+    @media (max-width:640px) {
+      .iw-reserve-frame iframe { height:2700px; }
+    }
+    .iw-reserve-perks {
+      display:flex; justify-content:center; gap:28px; flex-wrap:wrap;
+      margin:22px 0 40px;
+    }
+    .iw-reserve-perks span {
+      font-size:13.5px; font-weight:600; color:#A6B0AC;
+      display:flex; align-items:center; gap:7px;
+    }
+    .iw-reserve-perks span::before {
+      content:''; display:block; width:14px; height:14px;
+      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238FD14F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .iw-talk-strip {
+      max-width:720px; margin:0 auto; margin-top:48px;
+      background:rgba(143,209,79,0.04); border:1px solid #26302D; border-radius:16px;
+      padding:24px 32px; display:flex; align-items:center; justify-content:space-between;
+      gap:20px; flex-wrap:wrap;
+    }
+    @media (max-width:600px) {
+      .iw-talk-strip { flex-direction:column; text-align:center; }
+    }
+  </style>
+
   <div class="section-wrap" id="book-call">
+    <div style="text-align:center;max-width:640px;margin:0 auto 8px;">
+      <div class="section-label reveal" style="justify-content:center;">Reserve Your Free Website</div>
+      <h2 class="h-lg reveal reveal-delay-1" style="margin-bottom:14px;">Get Your Complimentary<br>Website Reserved</h2>
+      <p class="body-lg reveal reveal-delay-2">Tell us a bit about your business below. It takes less than 2 minutes, and we'll start building your site — completely free — before you ever pay a dollar.</p>
+    </div>
 
-    <!-- Two-column: form + booking card -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+    <div class="iw-reserve-perks reveal reveal-delay-3">
+      <span>100% Free to Start</span>
+      <span>No Payment Required</span>
+      <span>Under 2 Minutes</span>
+    </div>
 
-      <!-- LEFT: Contact form with SMS opt-in checkbox -->
-      <div>
-        <div class="section-label" style="justify-content:flex-start;">Get in Touch</div>
-        <h2 class="h-lg" style="margin-bottom:12px;font-size:clamp(24px,2.6vw,38px);">Let's Talk About<br>Your Website</h2>
-        <p class="body-lg" style="margin-bottom:32px;">Fill out the form and we'll respond within one business day.</p>
-
-        <style>
-          .iw-form-field { display:flex; flex-direction:column; gap:7px; }
-          .iw-form-field label { font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#A6B0AC; }
-          .iw-form-field input,
-          .iw-form-field textarea {
-            background:#0D1512; border:1px solid #26302D; border-radius:10px;
-            padding:13px 16px; font-size:15px; color:#F5F7F6; font-family:'Inter',sans-serif;
-            transition:border-color 0.2s;
-            width:100%;
-          }
-          .iw-form-field input:focus,
-          .iw-form-field textarea:focus { outline:none; border-color:#8FD14F; }
-          .iw-form-field input::placeholder,
-          .iw-form-field textarea::placeholder { color:#3D4D47; }
-          .iw-form-field textarea { resize:vertical; min-height:100px; }
-          .iw-sms-box {
-            display:flex; gap:13px; align-items:flex-start;
-            background:rgba(143,209,79,0.04); border:1px solid rgba(143,209,79,0.14);
-            border-radius:10px; padding:16px 18px;
-          }
-          .iw-sms-box input[type="checkbox"] {
-            width:17px; height:17px; flex-shrink:0; margin-top:2px;
-            accent-color:#8FD14F; cursor:pointer;
-          }
-          .iw-sms-box label { font-size:11.5px; color:#8C9690; line-height:1.68; cursor:pointer; }
-          .iw-sms-box label strong { color:#C8D4CC; }
-          .iw-sms-box label a { color:#8FD14F; text-decoration:none; }
-          #iw-form-success { display:none; text-align:center; padding:24px 0; }
-          @media (max-width:768px) {
-            #contact > .section-wrap > div { grid-template-columns:1fr !important; gap:48px !important; }
-          }
-        </style>
-
-        <form id="iw-inquiry-form" style="display:flex;flex-direction:column;gap:18px;" novalidate>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-            <div class="iw-form-field">
-              <label for="iw-name">Full Name <span style="color:#8FD14F;">*</span></label>
-              <input type="text" id="iw-name" name="name" placeholder="Jane Smith" required>
-            </div>
-            <div class="iw-form-field">
-              <label for="iw-phone">Phone Number</label>
-              <input type="tel" id="iw-phone" name="phone" placeholder="(817) 000-0000">
-            </div>
-          </div>
-          <div class="iw-form-field">
-            <label for="iw-email">Email Address <span style="color:#8FD14F;">*</span></label>
-            <input type="email" id="iw-email" name="email" placeholder="you@yourbusiness.com" required>
-          </div>
-          <div class="iw-form-field">
-            <label for="iw-message">Tell Us About Your Business</label>
-            <textarea id="iw-message" name="message" placeholder="What does your business do, and what are you looking to accomplish with a new website?"></textarea>
-          </div>
-
-          <!-- ── SMS Consent ── NOT pre-checked · NOT required ── -->
-          <div class="iw-sms-box">
-            <input type="checkbox" id="iw-sms-consent" name="sms_consent" value="yes">
-            <label for="iw-sms-consent">
-              I agree to receive SMS/text messages from <strong>Inspiring Websites</strong> regarding appointment reminders, project updates, and service information. Message frequency varies. Msg &amp; data rates may apply. Reply <strong>STOP</strong> to opt out at any time. Reply <strong>HELP</strong> for assistance. Carriers are not liable for delayed or undelivered messages. Consent is not required to receive services. You must be 18+. &nbsp;<a href="/privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
-            </label>
-          </div>
-
-          <button type="submit" class="btn-green btn-green-lg" style="width:100%;cursor:pointer;justify-content:center;">Send Message →</button>
-          <div id="iw-form-success">
-            <p style="font-size:15px;color:#8FD14F;font-weight:600;">Message received! We'll be in touch within one business day.</p>
-          </div>
-        </form>
-
-        <script>
-          document.getElementById('iw-inquiry-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            var name  = document.getElementById('iw-name').value.trim();
-            var email = document.getElementById('iw-email').value.trim();
-            if (!name || !email) { alert('Please fill in your name and email.'); return; }
-            this.style.display = 'none';
-            document.getElementById('iw-form-success').style.display = 'block';
-            // Build booking URL with prefill params
-            var url = 'https://booking.inspiringwebsites.org/?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
-            var phone = document.getElementById('iw-phone').value.trim();
-            if (phone) url += '&phone=' + encodeURIComponent(phone);
-            setTimeout(function() { window.open(url, '_blank'); }, 800);
-          });
-        </script>
+    <div class="iw-reserve-frame reveal reveal-delay-4" style="max-width:720px;margin:0 auto;">
+      <div class="iw-reserve-frame-inner">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf_hX9OK0HjOMUCI8kNb9iZbV7aGNN7ACGF44vzQCDm5JQZ_g/viewform?embedded=true" title="Reserve Your Complimentary Website">Loading…</iframe>
       </div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:#A6B0AC;margin-top:16px;">
+      Form not loading? <a href="https://docs.google.com/forms/d/e/1FAIpQLSf_hX9OK0HjOMUCI8kNb9iZbV7aGNN7ACGF44vzQCDm5JQZ_g/viewform" target="_blank" rel="noopener" style="color:#8FD14F;">Open it in a new tab →</a>
+    </p>
 
-      <!-- RIGHT: Booking CTA card -->
+    <div class="iw-talk-strip">
       <div>
-        <div class="cta-card">
-          <div class="cta-glow"></div>
-          <div style="position:relative;z-index:1;">
-            <div class="section-label" style="justify-content:center;">Ready to Grow?</div>
-            <h2 class="h-lg" style="margin-bottom:18px;font-size:clamp(22px,2.2vw,32px);">Your Website Should Be<br>Generating Leads Right Now</h2>
-            <p class="body-lg" style="max-width:380px;margin:0 auto 36px;font-size:15px;">Book a free discovery call and we'll show you exactly how to turn your site into your best lead source.</p>
-            <div class="cta-btns" style="justify-content:center;">
-              <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-green btn-green-lg">Book a Free Call</a>
-            </div>
-            <p style="font-size:13px;color:#A6B0AC;margin-top:16px;">No pressure. No pitch. Just a real conversation.</p>
-            <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(143,209,79,0.1);display:flex;flex-direction:column;gap:10px;">
-              <a href="tel:8179833004" style="font-size:14px;color:#A6B0AC;text-decoration:none;display:flex;align-items:center;gap:10px;" onmouseover="this.style.color='#8FD14F'" onmouseout="this.style.color='#A6B0AC'">
-                <span style="font-size:16px;">📞</span> 817-983-3004
-              </a>
-              <a href="mailto:info@inspiringwebsites.org" style="font-size:14px;color:#A6B0AC;text-decoration:none;display:flex;align-items:center;gap:10px;" onmouseover="this.style.color='#8FD14F'" onmouseout="this.style.color='#A6B0AC'">
-                <span style="font-size:16px;">✉️</span> info@inspiringwebsites.org
-              </a>
-            </div>
-          </div>
-        </div>
+        <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:#F5F7F6;margin-bottom:4px;">Prefer to talk it through first?</div>
+        <div style="font-size:13.5px;color:#A6B0AC;">No pressure, no pitch — just a real conversation.</div>
       </div>
-
+      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
+        <a href="https://booking.inspiringwebsites.org/" target="_blank" rel="noopener" class="btn-ghost" style="padding:11px 22px;font-size:14px;">Book a Free Call</a>
+        <a href="tel:8179833004" style="font-size:14px;color:#A6B0AC;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#8FD14F'" onmouseout="this.style.color='#A6B0AC'">📞 817-983-3004</a>
+      </div>
     </div>
   </div>
 </section>
@@ -4327,9 +4360,9 @@
 
   var TOTAL = 3;
   var slides = [
-    { name:'New Vibez Barber Shop',       tag:'Barbershop · Milton, FL',      url:'/new-vibez/',             modal:true  },
-    { name:'Elara Monroe | Real Estate',  tag:'Real Estate · DFW, TX',        url:'/salon-unwine/',          modal:true  },
-    { name:'Mondoe Davis',                tag:'Speaker · Author · Athlete',    url:'https://mondoedavis.com', modal:false }
+    { name:'New Vibez Barber Shop',       tag:'Barbershop · Milton, FL',      url:null,                      live:false },
+    { name:'Elara Monroe | Real Estate',  tag:'Real Estate · DFW, TX',        url:null,                      live:false },
+    { name:'Mondoe Davis',                tag:'Speaker · Author · Athlete',    url:'https://mondoedavis.com', live:true  }
   ];
 
   var currentX     = 0;
@@ -4371,10 +4404,14 @@
     });
 
     if (btn) {
-      btn.onclick = (function (s) { return function () {
-        if (s.modal) { window.openSitePreview(s.url, s.name, s.tag); }
-        else         { window.open(s.url, '_blank'); }
-      }; }(sl));
+      if (sl.live) {
+        btn.style.display = '';
+        btn.textContent = 'Visit Live Site ↗';
+        btn.onclick = (function (s) { return function () { window.open(s.url, '_blank', 'noopener'); }; }(sl));
+      } else {
+        btn.style.display = 'none';
+        btn.onclick = null;
+      }
     }
   }
 
@@ -4414,14 +4451,6 @@
       window.scrollTo({ top: driverTop + prog * maxScroll, behavior: 'smooth' });
     });
   });
-
-  /* initial explore btn */
-  var initBtn = document.getElementById('cportExploreBtn');
-  if (initBtn) {
-    initBtn.onclick = function () {
-      window.openSitePreview('/new-vibez/', 'New Vibez Barber Shop', 'Barbershop · Milton, FL');
-    };
-  }
 
   updateUI(0);
 
