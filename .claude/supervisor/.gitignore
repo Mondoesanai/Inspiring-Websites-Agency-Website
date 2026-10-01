@@ -1,0 +1,6 @@
+state.json
+state.json.tmp
+state.backup.json
+supervisor.lock
+supervisor.log
+fixture-*.md
