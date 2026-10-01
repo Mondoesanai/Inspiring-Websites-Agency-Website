@@ -370,6 +370,37 @@ check('it still issues a continuation', r.blocked === true, r.stdout.slice(0, 20
 check('it picks R5.1 from the owner order, not the earlier R2.2', /R5\.1/.test(r.reason), r.reason.slice(0, 240));
 check('and it says the choice came from the owner order', /priority/i.test(r.reason), r.reason.slice(0, 240));
 
+// REGRESSION: priority selection searched the DISPLAY list, which readPlan
+// truncates to five entries. A prioritised family further down a long file was
+// never found, so the controller fell back to document order while still
+// reporting the prioritised requirement as the one "in play". The fixture below
+// puts the prioritised item well past the fifth open item.
+const deepPlan = path.join(HERE, 'fixture-priority-deep.md');
+fs.writeFileSync(
+  deepPlan,
+  [
+    '## Owner-set priority order (test)',
+    '',
+    '1. `R7.*` — replies',
+    '',
+    '## PART 2 — eight open items before the prioritised one',
+    '| Req | Task | Status |',
+    '|---|---|---|',
+    ...['R2.1', 'R2.2', 'R2.4', 'R2.5', 'R2.6', 'R2.7', 'R2.8', 'R2.9'].map((id) => `| ${id} | filler | \`[ ]\` |`),
+    '',
+    '## PART 7 — far down the file',
+    '| Req | Task | Status |',
+    '|---|---|---|',
+    '| R7.1 | Inbound reply pauses follow-ups | `[ ]` |',
+    '',
+  ].join('\n')
+);
+setState({ planFile: deepPlan.replace(/\\/g, '/'), maxCycles: 50 });
+r = fire(goodEvent({ last_assistant_message: 'deep priority check' }));
+check('a prioritised item past the display cut-off is still found', /R7\.1/.test(r.reason), r.reason.slice(0, 260));
+check('and the eight earlier items are not chosen', !/NEXT TASK[^\n]*\n\s+R2\./.test(r.reason), r.reason.slice(0, 260));
+try { fs.unlinkSync(deepPlan); } catch { /* fine */ }
+
 // once the prioritised family is exhausted, it falls back to document order
 const donePrio = path.join(HERE, 'fixture-priority-done.md');
 fs.writeFileSync(

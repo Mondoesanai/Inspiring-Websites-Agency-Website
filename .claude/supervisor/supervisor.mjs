@@ -250,7 +250,12 @@ function readPlan(planFile) {
     openCount: open.length,
     blockedCount: blocked.length,
     nextItem: open[0] ? { section: open[0].section, text: open[0].label } : null,
+    // `openItems` is the short list used for display. Priority selection must
+    // use `allOpen` — searching the truncated list meant a prioritised family
+    // further down the file was never found, and the controller silently fell
+    // back to document order while reporting the wrong requirement as "in play".
     openItems: open.slice(0, 5).map((o) => o.label),
+    allOpen: open.map((o) => ({ label: o.label, section: o.section })),
     blockedItems: blocked.slice(0, 5).map((b) => b.label),
   };
 }
@@ -530,13 +535,13 @@ function review(state, event) {
     if (!m) return [];
     return [...m[0].matchAll(/`(R\d+)\.\*`/g)].map((x) => x[1]);
   })();
-  if (prio.length && plan.openItems.length) {
+  if (prio.length && plan.allOpen.length) {
     for (const fam of prio) {
-      const hit = plan.openItems.find((t) => new RegExp(`^${fam}\\.`).test(t));
+      const hit = plan.allOpen.find((t) => new RegExp(`^${fam}\\.`).test(t.label));
       if (hit) {
-        if (hit !== plan.openItems[0]) {
-          item = { section: `Owner priority: ${fam}.*`, text: hit };
-          selectionBasis = `the owner's stated priority order (${fam}.* before the rest of the file)`;
+        if (hit.label !== plan.allOpen[0].label) {
+          item = { section: `${hit.section} (owner priority ${fam}.*)`, text: hit.label };
+          selectionBasis = `the owner's stated priority order — ${fam}.* comes before the rest of the file`;
         }
         break;
       }
