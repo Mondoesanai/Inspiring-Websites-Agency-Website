@@ -590,7 +590,11 @@ function review(state, event) {
     // reviewer could see the call sites but not the logic they called. Files are
     // now TRIMMED to fit rather than dropped, and the trim is marked inline so
     // the reviewer knows it is looking at part of a file.
-    const BUDGET = 22000;
+    // Raised after truncation became the dominant review complaint for five
+    // consecutive cycles. The reviewer model has a large context; the cost of
+    // 60k characters is trivial next to a cycle spent on a false flag about
+    // code it simply could not see.
+    const BUDGET = 60000;
     const MIN_SLICE = 2500; // never show less than this of a file; skip it instead
     let used = 0;
     const parts = [];

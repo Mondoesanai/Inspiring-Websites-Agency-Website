@@ -4,15 +4,15 @@ Written automatically after each supervised cycle. If work stopped, this is wher
 
 | | |
 |---|---|
-| Written | 2026-10-01T22:35:00.127Z |
+| Written | 2026-10-01T23:04:01.729Z |
 | Status | active |
 | Reason | SUPERVISOR REVIEW (cycle 2/50)
 
 Independent review unavailable this cycle (disabled by SUPERVISOR_NO_MODEL) — deterministic checks only.
-Verified state: HEAD 580f22e, 0 uncommitted file(s), 67 plan items done / 52 open, 400 tests passing, 0 failing.
+Verified state: HEAD 5eaaed7, 0 uncommitted file(s), 84 plan items done / 35 open, 400 tests passing, 0 failing.
 
-NEXT TASK — PART 7 — Reply handling & bookings (owner priority R7.*):
-  R7.6 Loop prevention: max turns, cooldown, dedup, escalation
+NEXT TASK — PART 11 — Reliability & security (owner priority R11.*):
+  R11.6 Rate-limit handling with backoff
 
 Acceptance checks before you stop again:
   1. The code is written and actually wired into a caller (not an orphan module).
@@ -27,9 +27,9 @@ Still open after this: R2.4 Overview = what needs attention only | R2.5 Explicit
 | Window | (none) |
 | Deadline | (none) |
 | Cycles used | 2/50 |
-| HEAD | 580f22e |
+| HEAD | 5eaaed7 |
 | Tests | 400 passing, 0 failing |
-| Plan | 67 done / ? open |
+| Plan | 84 done / ? open |
 
 ## To resume
 
@@ -41,6 +41,6 @@ node .claude/supervisor/supervisor.mjs start --session <NEW_SESSION_ID> \
   --project "C:/Users/mondo/Inspiring Websites website" --hours <REMAINING> --cycles 50
 ```
 
-Then continue from: **R7.6 Loop prevention: max turns, cooldown, dedup, escalation**
+Then continue from: **R11.6 Rate-limit handling with backoff**
 
 The window is never renewed automatically. Re-running `start` is an explicit act.
