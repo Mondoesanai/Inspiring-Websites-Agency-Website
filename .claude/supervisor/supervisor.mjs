@@ -568,14 +568,23 @@ function review(state, event) {
   const worktree = changed ? git(repo, ['diff', '--unified=2']) : '';
   const sourceChanges = `--- files changed (${diffRange}) ---\n${stat}\n\n--- patch ---\n${patch}${worktree ? `\n\n--- UNCOMMITTED working-tree changes ---\n${worktree}` : ''}`;
 
+  // THE TASK BEING REVIEWED is the one assigned LAST cycle, not the one just
+  // selected for the next. Reviewing the diff against the upcoming task made
+  // the reviewer report a "deviation" every single cycle — it was comparing
+  // finished work against instructions that had not been given yet. The newly
+  // selected `item` is what to do NEXT; `state.lastAssignedTask` is what the
+  // diff was actually answering.
+  const reviewedTask = state.lastAssignedTask || null;
+  const reviewedId = reviewedTask ? (reviewedTask.match(/\bR\d+\.\d+\b/) || [])[0] : null;
   const reqId = (item.text.match(/\bR\d+\.\d+\b/) || [])[0] || null;
-  const acceptance = reqId ? acceptanceFor(specFile, reqId) : '';
+  const acceptance = reviewedId ? acceptanceFor(specFile, reviewedId) : '';
 
   const mr = modelReview({
     sourceChanges,
     acceptance,
     facts:
-      `- requirement in play: ${reqId || '(none identified)'}\n` +
+      `- the task that was assigned for THIS work: ${reviewedTask || '(none — this is the first cycle, so judge the diff on its own merits)'}\n` +
+      `- (the NEXT task, not yet started, is ${reqId || 'unidentified'} — do not judge this diff against it)\n` +
       `- git HEAD: ${head} (${changed} uncommitted files)\n` +
       `- last 3 commits: ${git(repo, ['log', '-3', '--format=%h %s']).replace(/\n/g, ' | ') || '(none)'}\n` +
       `- build plan: ${plan.doneCount} done, ${plan.openCount} open, ${plan.blockedCount} blocked\n` +
@@ -597,6 +606,7 @@ function review(state, event) {
     checkpoint,
     progressed,
     modelReview: mr,
+    assignedTask: item.text,
     reason:
       `SUPERVISOR REVIEW (cycle ${state.cycles + 1}/${state.maxCycles})\n` +
       modelNote +
@@ -762,6 +772,7 @@ async function runHook() {
       finish();
     }
 
+    if (r.assignedTask) state.lastAssignedTask = r.assignedTask;
     writeState(state);
     writeResume(state, {
       head: r.checkpoint?.head,

@@ -427,6 +427,21 @@ r = fire(goodEvent({ last_assistant_message: 'and now' }));
 check('with the priority family finished it falls back to document order', /R2\.2/.test(r.reason), r.reason.slice(0, 240));
 try { fs.unlinkSync(prioPlan); fs.unlinkSync(donePrio); } catch { /* fine */ }
 
+section('19  the reviewer judges the task that WAS assigned, not the next one');
+// REGRESSION: the review compared each diff against the task just selected for
+// the UPCOMING cycle, so it reported a "deviation" every single cycle — judging
+// finished work against instructions that had not been given yet.
+setState({ maxCycles: 50 });
+r = fire(goodEvent({ last_assistant_message: 'first turn, nothing assigned yet' }));
+let st19 = JSON.parse(fs.readFileSync(STATE, 'utf8'));
+check('the first continuation records what it assigned', typeof st19.lastAssignedTask === 'string' && st19.lastAssignedTask.length > 5, String(st19.lastAssignedTask));
+const assignedFirst = st19.lastAssignedTask;
+
+r = fire(goodEvent({ last_assistant_message: 'second turn, did the assigned thing' }));
+st19 = JSON.parse(fs.readFileSync(STATE, 'utf8'));
+check('the next cycle records a new assignment', typeof st19.lastAssignedTask === 'string');
+check('and the assignment actually moved on', st19.lastAssignedTask !== assignedFirst || st19.cycles >= 2, `${assignedFirst} -> ${st19.lastAssignedTask}`);
+
 // --- restore ---------------------------------------------------------------
 try { fs.unlinkSync(donePlan); fs.unlinkSync(blockedPlan); } catch { /* fine */ }
 try { fs.unlinkSync(LOCK); } catch { /* fine */ }
