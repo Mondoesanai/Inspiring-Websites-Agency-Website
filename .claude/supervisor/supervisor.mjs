@@ -564,9 +564,43 @@ function review(state, event) {
   const sinceHead = last?.head;
   const diffRange = sinceHead && sinceHead !== head ? `${sinceHead}..HEAD` : 'HEAD~1..HEAD';
   const stat = git(repo, ['diff', '--stat', diffRange]) || '(no committed changes)';
-  const patch = git(repo, ['diff', '--unified=2', diffRange]);
   const worktree = changed ? git(repo, ['diff', '--unified=2']) : '';
-  const sourceChanges = `--- files changed (${diffRange}) ---\n${stat}\n\n--- patch ---\n${patch}${worktree ? `\n\n--- UNCOMMITTED working-tree changes ---\n${worktree}` : ''}`;
+
+  // The diff is truncated to fit the reviewer's budget, and WHICH part survives
+  // decides whether it can answer "is this actually wired in?".
+  //
+  // Twice the reviewer reported it could not see the integration, because the
+  // patch was emitted in git's order — tests first alphabetically, and tests are
+  // by far the largest files. The budget was spent on the least informative
+  // content. Now the call sites come first and tests come last, so a truncation
+  // loses test bodies rather than the wiring.
+  const sourceChanges = (() => {
+    const files = git(repo, ['diff', '--name-only', diffRange]).split('\n').filter(Boolean);
+    const rank = (f) =>
+      /^api\//.test(f) ? 0 // endpoints — where a module becomes reachable
+        : /tick|cron|worker/i.test(f) ? 0 // schedulers — the other call sites
+          : /^public\//.test(f) ? 1 // screens
+            : /^lib\//.test(f) ? 2 // implementation
+              : /^tests?\//.test(f) ? 4 // largest, least informative for wiring
+                : 3;
+    const ordered = [...files].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
+
+    const BUDGET = 11000;
+    let used = 0;
+    const parts = [];
+    const omitted = [];
+    for (const f of ordered) {
+      const d = git(repo, ['diff', '--unified=2', diffRange, '--', f]);
+      if (!d) continue;
+      if (used + d.length > BUDGET) { omitted.push(`${f} (${d.length} chars)`); continue; }
+      parts.push(d);
+      used += d.length;
+    }
+    const note = omitted.length
+      ? `\n\n--- OMITTED for length (call sites and implementation were kept in preference) ---\n${omitted.join('\n')}`
+      : '';
+    return `--- files changed (${diffRange}) ---\n${stat}\n\n--- patch, call sites and implementation first ---\n${parts.join('\n')}${note}${worktree ? `\n\n--- UNCOMMITTED working-tree changes ---\n${worktree.slice(0, 2000)}` : ''}`;
+  })();
 
   // THE TASK BEING REVIEWED is the one assigned LAST cycle, not the one just
   // selected for the next. Reviewing the diff against the upcoming task made
