@@ -338,6 +338,64 @@ const renewals = supSrc.split('\n').filter((l) => /deadlineAt\s*(\+=|=\s*Date\.n
 check('deadlineAt is only ever assigned at start', renewals.length <= 1, renewals.join(' // '));
 check('nothing increments a renewal counter automatically', !/renewals\s*(\+\+|\+=)/.test(supSrc));
 
+section("18  the owner's priority order beats document order");
+// REGRESSION: the controller picked the first unticked line in the file, and
+// then reported "scope creep / misaligned priorities" against work that was
+// following an explicit owner instruction. The order belongs in the plan as
+// data, so the owner changes it by editing the plan, not this file.
+const prioPlan = path.join(HERE, 'fixture-priority.md');
+fs.writeFileSync(
+  prioPlan,
+  [
+    '## Owner-set priority order (test)',
+    '',
+    '1. `R5.*` — campaigns — current',
+    '2. `R7.*` — replies',
+    '',
+    '## PART 2 — earlier in the file',
+    '| Req | Task | Status |',
+    '|---|---|---|',
+    '| R2.2 | Client workspace | `[ ]` |',
+    '',
+    '## PART 5 — later in the file',
+    '| Req | Task | Status |',
+    '|---|---|---|',
+    '| R5.1 | Cold email content rules | `[ ]` |',
+    '',
+  ].join('\n')
+);
+setState({ planFile: prioPlan.replace(/\\/g, '/'), maxCycles: 50 });
+r = fire(goodEvent({ last_assistant_message: 'what should I work on next' }));
+check('it still issues a continuation', r.blocked === true, r.stdout.slice(0, 200));
+check('it picks R5.1 from the owner order, not the earlier R2.2', /R5\.1/.test(r.reason), r.reason.slice(0, 240));
+check('and it says the choice came from the owner order', /priority/i.test(r.reason), r.reason.slice(0, 240));
+
+// once the prioritised family is exhausted, it falls back to document order
+const donePrio = path.join(HERE, 'fixture-priority-done.md');
+fs.writeFileSync(
+  donePrio,
+  [
+    '## Owner-set priority order (test)',
+    '',
+    '1. `R5.*` — campaigns',
+    '',
+    '## PART 2',
+    '| Req | Task | Status |',
+    '|---|---|---|',
+    '| R2.2 | Client workspace | `[ ]` |',
+    '',
+    '## PART 5',
+    '| Req | Task | Status |',
+    '|---|---|---|',
+    '| R5.1 | Done already | `[x]` |',
+    '',
+  ].join('\n')
+);
+setState({ planFile: donePrio.replace(/\\/g, '/'), maxCycles: 50 });
+r = fire(goodEvent({ last_assistant_message: 'and now' }));
+check('with the priority family finished it falls back to document order', /R2\.2/.test(r.reason), r.reason.slice(0, 240));
+try { fs.unlinkSync(prioPlan); fs.unlinkSync(donePrio); } catch { /* fine */ }
+
 // --- restore ---------------------------------------------------------------
 try { fs.unlinkSync(donePlan); fs.unlinkSync(blockedPlan); } catch { /* fine */ }
 try { fs.unlinkSync(LOCK); } catch { /* fine */ }

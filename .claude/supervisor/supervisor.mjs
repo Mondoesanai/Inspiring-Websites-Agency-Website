@@ -519,6 +519,29 @@ function review(state, event) {
 
   let item = plan.nextItem;
   let selectionBasis = 'the next open item in the build plan';
+
+  // The OWNER's priority order wins over document order. Without this the
+  // controller picked the first unticked line in the file, which is how it came
+  // to report "scope creep" against work that was following an explicit
+  // instruction. The order is read from the plan, so the owner changes it by
+  // editing the plan rather than by editing this file.
+  const prio = (() => {
+    const m = planText.match(/## Owner-set priority order[\s\S]*?(?=\n## )/);
+    if (!m) return [];
+    return [...m[0].matchAll(/`(R\d+)\.\*`/g)].map((x) => x[1]);
+  })();
+  if (prio.length && plan.openItems.length) {
+    for (const fam of prio) {
+      const hit = plan.openItems.find((t) => new RegExp(`^${fam}\\.`).test(t));
+      if (hit) {
+        if (hit !== plan.openItems[0]) {
+          item = { section: `Owner priority: ${fam}.*`, text: hit };
+          selectionBasis = `the owner's stated priority order (${fam}.* before the rest of the file)`;
+        }
+        break;
+      }
+    }
+  }
   if (coverage.ok && coverage.unplanned.length) {
     item = { section: 'Specification coverage', text: `Requirement ${coverage.unplanned[0]} from PROJECT_SPEC.md has no corresponding task in BUILD_PLAN.md. Add it (with its acceptance criteria) before building anything else.` };
     selectionBasis = 'a requirement in the spec that the build plan does not cover';
