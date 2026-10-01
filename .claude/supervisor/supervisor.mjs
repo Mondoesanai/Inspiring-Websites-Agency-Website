@@ -585,20 +585,33 @@ function review(state, event) {
                 : 3;
     const ordered = [...files].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
 
-    const BUDGET = 11000;
+    // Dropping a whole file is the worst outcome — one 9.5k implementation file
+    // once pushed the total just over the cap and vanished entirely, so the
+    // reviewer could see the call sites but not the logic they called. Files are
+    // now TRIMMED to fit rather than dropped, and the trim is marked inline so
+    // the reviewer knows it is looking at part of a file.
+    const BUDGET = 22000;
+    const MIN_SLICE = 2500; // never show less than this of a file; skip it instead
     let used = 0;
     const parts = [];
     const omitted = [];
+    const trimmed = [];
     for (const f of ordered) {
       const d = git(repo, ['diff', '--unified=2', diffRange, '--', f]);
       if (!d) continue;
-      if (used + d.length > BUDGET) { omitted.push(`${f} (${d.length} chars)`); continue; }
-      parts.push(d);
-      used += d.length;
+      const room = BUDGET - used;
+      if (d.length <= room) { parts.push(d); used += d.length; continue; }
+      if (room >= MIN_SLICE) {
+        parts.push(d.slice(0, room) + `\n... [${f}: trimmed, ${d.length - room} more chars] ...`);
+        trimmed.push(f);
+        used = BUDGET;
+        continue;
+      }
+      omitted.push(`${f} (${d.length} chars)`);
     }
-    const note = omitted.length
-      ? `\n\n--- OMITTED for length (call sites and implementation were kept in preference) ---\n${omitted.join('\n')}`
-      : '';
+    const note =
+      (trimmed.length ? `\n\n--- TRIMMED to fit (you are seeing part of these files): ${trimmed.join(', ')} ---` : '') +
+      (omitted.length ? `\n\n--- OMITTED entirely (call sites and implementation are kept in preference) ---\n${omitted.join('\n')}` : '');
     return `--- files changed (${diffRange}) ---\n${stat}\n\n--- patch, call sites and implementation first ---\n${parts.join('\n')}${note}${worktree ? `\n\n--- UNCOMMITTED working-tree changes ---\n${worktree.slice(0, 2000)}` : ''}`;
   })();
 
