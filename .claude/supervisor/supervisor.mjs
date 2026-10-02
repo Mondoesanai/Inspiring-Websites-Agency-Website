@@ -373,8 +373,17 @@ Reply with ONLY this JSON, no prose, no code fence:
 {"verdict":"ok"|"concern","concern":"<one specific sentence, or empty>","nextFocus":"<one specific next action, or empty>"}`;
 
   try {
-    const out = execFileSync(CLAUDE_BIN, ['-p', prompt, '--output-format', 'json', '--model', model], {
+    // The prompt goes in on STDIN, not as an argv entry.
+    //
+    // It used to be passed as `-p <prompt>`. Windows caps a command line at
+    // ~32k, so the moment the diff budget was raised to 60k the spawn failed
+    // outright with ENAMETOOLONG and the cycle ran with NO independent review
+    // at all — strictly worse than the truncation it was meant to fix. stdin
+    // has no such limit, so the budget and the transport are now independent.
+    const out = execFileSync(CLAUDE_BIN, ['-p', '--output-format', 'json', '--model', model], {
+      input: prompt,
       encoding: 'utf8',
+      maxBuffer: 32 * 1024 * 1024,
       timeout: timeoutMs,
       cwd: os_tmpdir(),
       env: { ...process.env, CLAUDE_CODE_DISABLE_HOOKS: '1' }, // never let the reviewer trigger hooks
