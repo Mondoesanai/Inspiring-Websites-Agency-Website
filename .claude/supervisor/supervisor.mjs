@@ -332,7 +332,12 @@ const CLAUDE_BIN = process.env.SUPERVISOR_CLAUDE_BIN ||
 // clipped away on the way into the prompt. A budget expressed twice drifts.
 const DIFF_BUDGET = 60000;
 
-function modelReview({ facts, lastMessage, sourceChanges = '', acceptance = '', model = 'claude-haiku-4-5-20251001', timeoutMs = 120000 }) {
+// A 60k-character diff takes the reviewer longer to read than the 12k one it
+// replaced, and 120s was not enough — cycle 33 timed out and ran with no
+// independent review, which is the same outcome as the ENAMETOOLONG failure it
+// followed. The budget, the transport and the time allowed have to move
+// together; two of the three were raised without the third.
+function modelReview({ facts, lastMessage, sourceChanges = '', acceptance = '', model = 'claude-haiku-4-5-20251001', timeoutMs = 300000 }) {
   if (process.env.SUPERVISOR_NO_MODEL === '1') return { available: false, reason: 'disabled by SUPERVISOR_NO_MODEL' };
   if (!fs.existsSync(CLAUDE_BIN)) return { available: false, reason: `claude binary not found at ${CLAUDE_BIN}` };
 
