@@ -1,0 +1,16 @@
+# Inspiring Websites LLC — https://inspiringwebsites.org/
+
+User-agent: *
+Allow: /
+
+# Working files that happen to live at the root. They are not pages anyone
+# should land on from a search result: they have no <title>, no navigation and
+# no way back to the site. Left reachable by direct link, kept out of the index.
+Disallow: /ghl-page.html
+Disallow: /ghl-html-js.html
+Disallow: /html-and-js.html
+Disallow: /hero-animation.html
+Disallow: /temporary%20screenshots/
+Disallow: /.claude/
+
+Sitemap: https://inspiringwebsites.org/sitemap.xml

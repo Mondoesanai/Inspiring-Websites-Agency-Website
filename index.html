@@ -4,6 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inspiring Websites — Premium Web Design for Service Businesses</title>
+
+  <!-- SEARCH & SHARING.
+       None of this existed. Shared to Facebook, LinkedIn, iMessage or Slack the
+       link rendered as a bare grey box, and Google wrote its own snippet from
+       whatever text it found first — on the site of a company whose product is
+       websites. -->
+  <meta name="description" content="We design and build your new website first — free. See the finished site live, then decide. Premium web design for service businesses. 14-day delivery, you own it outright.">
+  <link rel="canonical" href="https://inspiringwebsites.org/">
+  <meta name="theme-color" content="#0E1512">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Inspiring Websites">
+  <meta property="og:url" content="https://inspiringwebsites.org/">
+  <meta property="og:title" content="We Build Sites That Get You More Calls">
+  <meta property="og:description" content="We design and build your new website first — free. See it live, then decide. 14-day delivery, you own it outright.">
+  <meta property="og:image" content="https://inspiringwebsites.org/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Inspiring Websites — premium web design for service businesses">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="We Build Sites That Get You More Calls">
+  <meta name="twitter:description" content="We design and build your new website first — free. See it live, then decide.">
+  <meta name="twitter:image" content="https://inspiringwebsites.org/social-card.png">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Our own tracker, the one we put on client sites. The agency site was the
+       only one with no measurement at all, so "how many leads did the site
+       bring in" had no answer. -->
+  <script defer src="https://agency-dashboard-omega-red.vercel.app/t.js"></script>
+
+
+  <!-- Structured data, generated from the FAQ actually on this page
+       (scratchpad/add-schema.mjs) so the markup and what a visitor reads
+       cannot drift apart. -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://inspiringwebsites.org/#business","name":"Inspiring Websites LLC","url":"https://inspiringwebsites.org/","image":"https://inspiringwebsites.org/social-card.png","description":"Premium web design for local service businesses. We design and build your new website first — free — then you decide.","telephone":"+1-817-983-3004","priceRange":"$","areaServed":{"@type":"Country","name":"United States"},"serviceType":["Web Design","Web Development","Local SEO","Website Maintenance"],"sameAs":[]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I really not pay anything upfront?","acceptedAnswer":{"@type":"Answer","text":"Correct — nothing. We design and build your entire website from scratch first, on our own time and dime. You get to see and use the finished, live site before you decide whether to invest anything. If it's not what you wanted, you walk away owing us nothing."}},{"@type":"Question","name":"How long does it take to build my website?","acceptedAnswer":{"@type":"Answer","text":"Most websites are designed, built, and delivered in 14 days or less. Complex projects with custom integrations may take up to 21 days. We move fast without cutting corners."}},{"@type":"Question","name":"What does a website from Inspiring Websites cost?","acceptedAnswer":{"@type":"Answer","text":"Every project is scoped to your specific needs. We work with service businesses across a range of investment levels. Since we build your site before you pay, you won't get a quote until you've seen exactly what you're getting — no hidden fees, no guesswork."}},{"@type":"Question","name":"Do you offer SEO services?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every site we build is structured with proper technical SEO, local schema markup, and performance optimization. Our SEO team then works to get you ranked #1 locally within 1–3 months and Top 10 nationally within 4–6 months."}},{"@type":"Question","name":"Will I own my website?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. You own 100% of your website, content, and domain. We build it, you own it. No lock-in, no hostage-taking of your digital assets."}},{"@type":"Question","name":"What types of businesses do you work with?","acceptedAnswer":{"@type":"Answer","text":"We specialize in local service-based businesses — roofing, HVAC, plumbing, landscaping, pressure washing, auto detailing, med spas, legal services, and more. If you need leads, we can help."}}]}</script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2833,8 +2873,15 @@
     .cport-hint.gone { opacity:0; }
 
   </style>
+  <style>
+    .iw-skip{position:absolute;left:-9999px;top:0;z-index:9999;background:#8FD14F;color:#070909;
+      font-family:'Sora',sans-serif;font-weight:700;font-size:14px;padding:12px 20px;border-radius:0 0 10px 0;
+      text-decoration:none}
+    .iw-skip:focus{left:0}
+  </style>
 </head>
 <body>
+<a href="#main" class="iw-skip">Skip to content</a>
 
 <!-- ════════════════════════════════════════════════
      NAV
@@ -2842,7 +2889,7 @@
 <nav class="site-nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
-      <img src="Brand_Assets/2-removebg-preview.png" alt="Inspiring Websites Crown" class="logo-green">
+      <img width="500" height="500" src="Brand_Assets/2-removebg-preview.png" alt="Inspiring Websites Crown" class="logo-green">
       <span class="nav-logo-text">Inspiring Websites</span>
     </a>
     <ul class="nav-links">
@@ -2877,7 +2924,7 @@
 <!-- ════════════════════════════════════════════════
      HERO
 ════════════════════════════════════════════════ -->
-<section class="hero">
+<section class="hero" id="main" role="main" tabindex="-1">
   <div class="hero-bg-glow"></div>
   <div class="hero-bg-glow-r"></div>
 
@@ -2925,7 +2972,7 @@
           <div class="chrome-url" id="hero-url">newvibezbarber.com</div>
         </div>
         <div class="hero-mockup-viewport">
-          <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="hero-preview-img" id="hero-preview-img">
+          <img width="1280" height="800" src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="hero-preview-img" id="hero-preview-img">
         </div>
       </div>
       <!-- Floating stat chips -->
@@ -3367,8 +3414,22 @@
 
       <!-- Photo -->
       <div class="founder-photo reveal">
-        <div style="border-radius:20px;overflow:hidden;border:1px solid rgba(143,209,79,0.25);box-shadow:0 40px 90px rgba(0,0,0,0.55),0 0 0 1px rgba(143,209,79,0.08);">
-          <img src="https://placehold.co/640x760/0d1512/8FD14F?text=Mondoe+N.+Davis" alt="Mondoe N. Davis, Founder of Inspiring Websites" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <!-- FOUNDER PHOTO.
+             This was a grey box from placehold.co: a third-party request on the
+             critical path, on the one section meant to make the business feel
+             like a person. No real headshot exists in Brand_Assets yet, so this
+             is a designed, on-brand stand-in that does not look broken — and the
+             moment `Brand_Assets/founder.jpg` exists, the <img> below shows it
+             and the stand-in disappears. Nothing to edit, just drop the file in. -->
+        <div style="position:relative;aspect-ratio:640/760;border-radius:20px;overflow:hidden;border:1px solid rgba(143,209,79,0.25);box-shadow:0 40px 90px rgba(0,0,0,0.55),0 0 0 1px rgba(143,209,79,0.08);background:linear-gradient(165deg,#111A16 0%,#0A110E 60%,#0C1611 100%);">
+          <div aria-hidden="true" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+            <div style="width:50%;max-width:150px;aspect-ratio:1;border-radius:50%;background:rgba(143,209,79,0.09);border:1px solid rgba(143,209,79,0.28);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(34px,7vw,54px);color:#8FD14F;letter-spacing:-0.02em;">MD</div>
+            <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#4E5E56;">Inspiring Websites</div>
+          </div>
+          <img src="Brand_Assets/founder.jpg" alt="Mondoe N. Davis, Founder of Inspiring Websites"
+               width="640" height="760" loading="lazy" decoding="async"
+               onerror="this.style.display='none'"
+               style="position:relative;width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div style="margin-top:16px;text-align:center;">
           <div style="font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:#F5F7F6;">Mondoe N. Davis</div>
@@ -3535,7 +3596,7 @@
                 </div>
               </div>
               <div class="cport-viewport">
-                <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="cport-preview-img" loading="lazy" decoding="async">
+                <img width="1280" height="800" src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" class="cport-preview-img" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -3551,7 +3612,7 @@
                 </div>
               </div>
               <div class="cport-viewport">
-                <img src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" class="cport-preview-img" loading="lazy" decoding="async">
+                <img width="1280" height="800" src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" class="cport-preview-img" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -3567,7 +3628,7 @@
                 </div>
               </div>
               <div class="cport-viewport">
-                <img src="Brand_Assets/preview-mondo-davis.jpg" alt="Mondoe Davis" class="cport-preview-img" loading="lazy" decoding="async">
+                <img width="1280" height="800" src="Brand_Assets/preview-mondo-davis.jpg" alt="Mondoe Davis" class="cport-preview-img" loading="lazy" decoding="async">
               </div>
             </div>
           </div>
@@ -3608,7 +3669,7 @@
       <div style="display:flex;flex-direction:column;gap:20px;">
         <div class="port-card reveal">
           <div class="port-preview" style="height:200px;">
-            <img src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+            <img width="1280" height="800" src="Brand_Assets/preview-new-vibez.jpg" alt="New Vibez Barber Shop" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
           </div>
           <div class="port-card-body">
             <div class="port-meta"><span class="port-name-sm">New Vibez Barber Shop</span><span class="slide-cat-tag">Barbershop · Milton, FL</span></div>
@@ -3616,7 +3677,7 @@
         </div>
         <div class="port-card reveal">
           <div class="port-preview" style="height:200px;">
-            <img src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+            <img width="1280" height="800" src="Brand_Assets/preview-elara-monroe.jpg" alt="Elara Monroe Real Estate" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
           </div>
           <div class="port-card-body">
             <div class="port-meta"><span class="port-name-sm">Elara Monroe | Real Estate</span><span class="slide-cat-tag">Real Estate · DFW, TX</span></div>
@@ -3624,7 +3685,7 @@
         </div>
         <div class="port-card reveal" role="button" tabindex="0" onclick="window.open('https://mondoedavis.com','_blank')" onkeydown="if(event.key==='Enter')window.open('https://mondoedavis.com','_blank')">
           <div class="port-preview" style="height:200px;">
-            <img src="Brand_Assets/preview-mondo-davis.jpg" alt="Mondoe Davis" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+            <img width="1280" height="800" src="Brand_Assets/preview-mondo-davis.jpg" alt="Mondoe Davis" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
             <div class="port-overlay"><span class="port-btn">View Site →</span></div>
           </div>
           <div class="port-card-body">
@@ -3794,6 +3855,74 @@
       content:''; display:block; width:14px; height:14px;
       background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238FD14F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
     }
+    /* ---- the reserve form (ours, replacing the Google Form iframe) ---- */
+    .iw-form {
+      max-width:720px; margin:0 auto;
+      background:#0E1512; border:1px solid #26302D; border-radius:22px;
+      padding:34px 30px 30px;
+      box-shadow:0 50px 100px rgba(0,0,0,0.45), 0 0 80px rgba(143,209,79,0.07);
+    }
+    .iw-field-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .iw-field { display:block; margin-bottom:16px; }
+    .iw-field > span {
+      display:block; font-family:'Sora',sans-serif; font-size:12.5px; font-weight:600;
+      letter-spacing:0.02em; color:#C9D3CE; margin-bottom:7px;
+    }
+    .iw-field > span i { font-style:normal; color:#8FD14F; }
+    .iw-field > span i.iw-opt { color:#6B7D73; font-weight:500; }
+    .iw-form input, .iw-form textarea {
+      width:100%; min-height:48px; padding:13px 15px;
+      background:#070909; border:1px solid #2C3733; border-radius:10px;
+      color:#F5F7F6; font-family:'Inter',sans-serif; font-size:15px; line-height:1.5;
+      transition:border-color .16s ease, box-shadow .16s ease;
+    }
+    .iw-form textarea { min-height:92px; resize:vertical; }
+    .iw-form input::placeholder, .iw-form textarea::placeholder { color:#55645D; }
+    .iw-form input:hover, .iw-form textarea:hover { border-color:#3C4A44; }
+    .iw-form input:focus, .iw-form textarea:focus {
+      outline:none; border-color:#8FD14F; box-shadow:0 0 0 3px rgba(143,209,79,0.16);
+    }
+    .iw-form input:focus-visible, .iw-form textarea:focus-visible,
+    .iw-form button:focus-visible, .iw-form summary:focus-visible {
+      outline:2px solid #8FD14F; outline-offset:2px;
+    }
+    .iw-form input.bad, .iw-form textarea.bad { border-color:#E87A5A; }
+    .iw-err { display:none; font-style:normal; font-size:12.5px; color:#E87A5A; margin-top:6px; }
+    .iw-err.on { display:block; }
+
+    .iw-consent { display:flex; gap:12px; align-items:flex-start; margin:6px 0 22px; }
+    .iw-consent input {
+      width:20px; height:20px; min-width:20px; margin:2px 0 0;
+      accent-color:#8FD14F; cursor:pointer;
+    }
+    .iw-consent label { font-size:14px; color:#C9D3CE; cursor:pointer; display:block; }
+    .iw-more { margin-top:4px; }
+    .iw-more > summary {
+      cursor:pointer; color:#8FD14F; font-size:12.5px; list-style:none; display:inline-block;
+    }
+    .iw-more > summary::-webkit-details-marker { display:none; }
+    .iw-more > summary::after { content:' ▾'; }
+    .iw-more[open] > summary::after { content:' ▴'; }
+    .iw-more > div { font-size:12.5px; color:#8E9B95; line-height:1.7; margin-top:7px; }
+    .iw-more a { color:#8FD14F; }
+
+    .iw-submit { width:100%; justify-content:center; min-height:54px; font-size:16px; }
+    .iw-submit:disabled { opacity:.55; cursor:not-allowed; }
+    .iw-formnote { text-align:center; font-size:12.5px; color:#6B7D73; margin-top:12px; }
+    .iw-result { display:none; margin-top:18px; padding:16px 18px; border-radius:12px; font-size:14.5px; line-height:1.6; }
+    .iw-result.ok { display:block; background:rgba(143,209,79,0.10); border:1px solid #8FD14F; color:#CDEBA9; }
+    .iw-result.err { display:block; background:rgba(232,122,90,0.10); border:1px solid #E87A5A; color:#F0B8A4; }
+    .iw-fallback {
+      max-width:720px; margin:18px auto 0; text-align:center;
+      background:rgba(232,122,90,0.07); border:1px solid #4A3A33; border-radius:14px; padding:20px;
+    }
+    .iw-fallback p { font-size:13.5px; color:#C9D3CE; margin-bottom:14px; }
+
+    @media (max-width:640px) {
+      .iw-form { padding:26px 20px 24px; border-radius:18px; }
+      .iw-field-row { grid-template-columns:1fr; gap:0; }
+    }
+
     .iw-talk-strip {
       max-width:720px; margin:0 auto; margin-top:48px;
       background:rgba(143,209,79,0.04); border:1px solid #26302D; border-radius:16px;
@@ -3818,18 +3947,204 @@
       <span>Under 2 Minutes</span>
     </div>
 
-    <div class="iw-reserve-frame reveal reveal-delay-4" style="max-width:720px;margin:0 auto;">
-      <div class="iw-reserve-frame-inner">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf_hX9OK0HjOMUCI8kNb9iZbV7aGNN7ACGF44vzQCDm5JQZ_g/viewform?embedded=true" title="Reserve Your Complimentary Website">Loading…</iframe>
+    <!-- RESERVE FORM — ours, on our own page, in our own brand.
+         This was a Google Form in a 2150px iframe (2700px on mobile): off-brand
+         on a page selling web design, and cross-origin, so nothing about it
+         could be validated, prefilled, measured or recovered when somebody
+         abandoned it. It posts to our own API now, which creates the contact,
+         the preview task and the consent record in one go.
+         The Google Form is kept as a fallback, shown only if our endpoint
+         cannot be reached — a lead is never lost to our own outage. -->
+    <form id="iwReserve" class="iw-form reveal reveal-delay-4" novalidate>
+      <div class="iw-field-row">
+        <label class="iw-field">
+          <span>Your name <i>*</i></span>
+          <input type="text" id="iwName" name="name" autocomplete="name" required>
+          <em class="iw-err" id="iwErrName"></em>
+        </label>
+        <label class="iw-field">
+          <span>Business name <i>*</i></span>
+          <input type="text" id="iwBusiness" name="businessName" autocomplete="organization" required>
+          <em class="iw-err" id="iwErrBusiness"></em>
+        </label>
       </div>
-    </div>
-    <p style="text-align:center;font-size:13px;color:#A6B0AC;margin-top:16px;">
-      Form not loading? <a href="https://docs.google.com/forms/d/e/1FAIpQLSf_hX9OK0HjOMUCI8kNb9iZbV7aGNN7ACGF44vzQCDm5JQZ_g/viewform" target="_blank" rel="noopener" style="color:#8FD14F;">Open it in a new tab →</a>
-    </p>
+      <div class="iw-field-row">
+        <label class="iw-field">
+          <span>Email <i>*</i></span>
+          <input type="email" id="iwEmail" name="email" inputmode="email" autocomplete="email" required>
+          <em class="iw-err" id="iwErrEmail"></em>
+        </label>
+        <label class="iw-field">
+          <span>Phone</span>
+          <input type="tel" id="iwPhone" name="phone" inputmode="tel" autocomplete="tel">
+          <em class="iw-err" id="iwErrPhone"></em>
+        </label>
+      </div>
+      <label class="iw-field">
+        <span>Your current website <i class="iw-opt">(if you have one)</i></span>
+        <input type="url" id="iwWebsite" name="website" inputmode="url" placeholder="yourbusiness.com">
+        <em class="iw-err" id="iwErrWebsite"></em>
+      </label>
+      <label class="iw-field">
+        <span>What do you need? <i class="iw-opt">(optional)</i></span>
+        <textarea id="iwNotes" name="notes" rows="3" placeholder="A few words about your business and what you're hoping for."></textarea>
+      </label>
 
-    <p style="text-align:center;font-size:12px;color:#6B7D73;line-height:1.7;max-width:720px;margin:14px auto 0;">
-      Submitting this form does not subscribe you to text messages. To receive SMS from Inspiring Websites LLC,
-      opt in separately on our <a href="/sms-opt-in.html" style="color:#8FD14F;">SMS opt-in page</a>.
+      <!-- Optional, unticked, and never a condition of submitting. Same
+           standard as the booking form: this creates a PENDING record only. -->
+      <div class="iw-consent">
+        <input type="checkbox" id="iwSms">
+        <div>
+          <label for="iwSms"><b>Text me about my website</b></label>
+          <details class="iw-more">
+            <summary>See more</summary>
+            <div>
+              Updates about this request only — confirmation, reminders, scheduling, and a link to
+              your preview when it&rsquo;s ready. Message &amp; data rates may apply. Reply
+              <b>STOP</b> to opt out or <b>HELP</b> for help. Texts are optional and are not
+              required. <a href="/sms-opt-in.html">SMS opt-in</a> ·
+              <a href="/privacy-policy.html">Privacy</a> ·
+              <a href="/terms-and-conditions.html">Terms</a>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-green btn-green-lg iw-submit" id="iwSubmit">Reserve My Free Website →</button>
+      <p class="iw-formnote">No payment. No contract. We build it before you pay a dollar.</p>
+      <div class="iw-result" id="iwResult" role="status" aria-live="polite"></div>
+    </form>
+
+    <!-- Only revealed if our own endpoint cannot be reached. -->
+    <div class="iw-fallback" id="iwFallback" hidden>
+      <p>Our form isn&rsquo;t responding right now — sorry. You can use this one instead, and it comes straight to us:</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSf_hX9OK0HjOMUCI8kNb9iZbV7aGNN7ACGF44vzQCDm5JQZ_g/viewform" target="_blank" rel="noopener" class="btn-ghost">Open the backup form →</a>
+    </div>
+
+    <script>
+    (function () {
+      var API = 'https://agency-dashboard-omega-red.vercel.app/api/collect?hook=request';
+      var f = document.getElementById('iwReserve');
+      if (!f) return;
+      var $ = function (id) { return document.getElementById(id); };
+      var btn = $('iwSubmit'), out = $('iwResult'), fallback = $('iwFallback');
+      var label = btn.textContent;
+
+      // Nothing a visitor typed is ever thrown away. If the page is reloaded,
+      // or our endpoint is down and they come back later, it is still here.
+      var KEY = 'iw_reserve_draft';
+      var fields = ['iwName', 'iwBusiness', 'iwEmail', 'iwPhone', 'iwWebsite', 'iwNotes'];
+      try {
+        var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+        fields.forEach(function (id) { if (saved[id] && $(id)) $(id).value = saved[id]; });
+      } catch (e) { /* private mode, or cleared storage — the form still works */ }
+      var saveDraft = function () {
+        try {
+          var d = {};
+          fields.forEach(function (id) { if ($(id)) d[id] = $(id).value; });
+          localStorage.setItem(KEY, JSON.stringify(d));
+        } catch (e) { /* not worth failing a submission over */ }
+      };
+      fields.forEach(function (id) { if ($(id)) $(id).addEventListener('input', saveDraft); });
+
+      var ERR = { iwName: 'iwErrName', iwBusiness: 'iwErrBusiness', iwEmail: 'iwErrEmail', iwPhone: 'iwErrPhone', iwWebsite: 'iwErrWebsite' };
+      function clearErrors() {
+        Object.keys(ERR).forEach(function (k) {
+          var e = $(ERR[k]); if (e) { e.textContent = ''; e.className = 'iw-err'; }
+          var i = $(k); if (i) i.classList.remove('bad');
+        });
+      }
+      function showError(id, msg) {
+        var e = $(ERR[id]); if (e) { e.textContent = msg; e.className = 'iw-err on'; }
+        var i = $(id); if (i) i.classList.add('bad');
+      }
+
+      f.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        clearErrors();
+        out.className = 'iw-result';
+
+        // Checked here so somebody is told immediately, and checked again on
+        // the server, which is the one that counts.
+        var bad = false;
+        if (!$('iwName').value.trim()) { showError('iwName', 'Please tell us your name.'); bad = true; }
+        if (!$('iwBusiness').value.trim()) { showError('iwBusiness', 'Please tell us your business name.'); bad = true; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('iwEmail').value.trim())) { showError('iwEmail', 'Please check that email address.'); bad = true; }
+        if (bad) { var first = f.querySelector('input.bad'); if (first) first.focus(); return; }
+
+        btn.disabled = true; btn.textContent = 'Sending…';
+
+        var payload = {
+          name: $('iwName').value, businessName: $('iwBusiness').value,
+          email: $('iwEmail').value, phone: $('iwPhone').value,
+          website: $('iwWebsite').value, notes: $('iwNotes').value,
+          smsOptIn: $('iwSms').checked,
+          timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''),
+          sourceRef: 'inspiringwebsites.org'
+        };
+
+        // A real timeout. Without one a hung request leaves the button on
+        // "Sending…" for ever and the visitor simply leaves.
+        var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
+
+        fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: ctrl ? ctrl.signal : undefined
+        })
+          .then(function (r) { return r.json().then(function (j) { return { status: r.status, j: j }; }); })
+          .then(function (res) {
+            clearTimeout(timer);
+            var j = res.j || {};
+            if (j.fieldErrors) {
+              Object.keys(j.fieldErrors).forEach(function (k) {
+                var map = { name: 'iwName', businessName: 'iwBusiness', email: 'iwEmail', phone: 'iwPhone', website: 'iwWebsite' };
+                if (map[k]) showError(map[k], j.fieldErrors[k]);
+              });
+              out.className = 'iw-result err';
+              out.textContent = j.error || 'Please check the highlighted fields.';
+              btn.disabled = false; btn.textContent = label;
+              return;
+            }
+            if (j.ok) {
+              out.className = 'iw-result ok';
+              out.innerHTML = '<b>Got it — your website is reserved.</b><br>'
+                + 'We’ll email ' + String($('iwEmail').value).replace(/[<>&]/g, '') + ' shortly to confirm and ask anything we need. '
+                + 'Nothing to pay, and nothing else for you to do right now.'
+                + (j.consent && j.consent.sms === 'pending-handset-confirmation'
+                  ? '<br><br>You asked for texts: to switch them on, ' + (j.consent.confirmBy || 'text us from that phone') + '. We won’t text you until you do.'
+                  : '');
+              // Submitted — the draft has served its purpose.
+              try { localStorage.removeItem(KEY); } catch (e) { /* nothing to clean up */ }
+              Array.prototype.forEach.call(f.querySelectorAll('input,textarea,button'), function (i) { i.disabled = true; });
+              btn.textContent = 'Reserved ✓';
+              if (window.iwTrack) window.iwTrack('reserve_submitted');
+              return;
+            }
+            // A refusal we understand: say it, keep everything they typed.
+            out.className = 'iw-result err';
+            out.textContent = j.error || 'That didn’t go through. Please try again.';
+            btn.disabled = false; btn.textContent = label;
+          })
+          .catch(function () {
+            clearTimeout(timer);
+            // OUR failure, not theirs. Never lose the lead: their typing is
+            // saved, and the backup form appears so they can still reach us.
+            out.className = 'iw-result err';
+            out.innerHTML = '<b>We couldn’t send that — our end, not yours.</b><br>'
+              + 'Everything you typed has been kept. Try again in a moment, use the backup form below, '
+              + 'or call <a href="tel:8179833004" style="color:#8FD14F;">817-983-3004</a>.';
+            fallback.hidden = false;
+            btn.disabled = false; btn.textContent = label;
+          });
+      });
+    })();
+    </script>
+
+    <p style="text-align:center;font-size:12px;color:#6B7D73;line-height:1.7;max-width:720px;margin:20px auto 0;">
+      Submitting this form does not subscribe you to text messages unless you tick the box above.
       Message frequency varies. Message &amp; data rates may apply. Reply STOP to unsubscribe, HELP for help.
       <a href="/privacy-policy.html" style="color:#8FD14F;">Privacy Policy</a> ·
       <a href="/terms-and-conditions.html" style="color:#8FD14F;">Terms &amp; Conditions</a>
@@ -3857,14 +4172,14 @@
     <div class="footer-grid">
       <div>
         <a href="/" class="nav-logo" style="margin-bottom:18px;display:inline-flex;">
-          <img src="Brand_Assets/2-removebg-preview.png" alt="Inspiring Websites" class="logo-green" style="height:28px;width:auto;">
+          <img loading="lazy" decoding="async" width="500" height="500" src="Brand_Assets/2-removebg-preview.png" alt="Inspiring Websites" class="logo-green" style="height:28px;width:auto;">
           <span class="nav-logo-text" style="margin-left:10px;">Inspiring Websites</span>
         </a>
         <p style="font-size:14px;line-height:1.72;color:#A6B0AC;max-width:260px;margin-top:4px;">Premium websites built for service businesses that want authority, leads, and growth.</p>
       </div>
 
       <div>
-        <h4 style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#F5F7F6;margin-bottom:20px;">Services</h4>
+        <h3 style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#F5F7F6;margin-bottom:20px;">Services</h3>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
           <li><a href="#services" class="footer-link">Web Design</a></li>
           <li><a href="#services" class="footer-link">Local SEO</a></li>
@@ -3874,7 +4189,7 @@
       </div>
 
       <div>
-        <h4 style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#F5F7F6;margin-bottom:20px;">Company</h4>
+        <h3 style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#F5F7F6;margin-bottom:20px;">Company</h3>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
           <li><a href="#process" class="footer-link">Our Process</a></li>
           <li><a href="#results" class="footer-link">Results</a></li>
@@ -3884,7 +4199,7 @@
       </div>
 
       <div>
-        <h4 style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#F5F7F6;margin-bottom:20px;">Contact</h4>
+        <h3 style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#F5F7F6;margin-bottom:20px;">Contact</h3>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
           <li><a href="https://booking.inspiringwebsites.org/" class="footer-link">Call Us</a></li>
           <li><a href="/sms-opt-in.html" class="footer-link">Send a Message</a></li>
