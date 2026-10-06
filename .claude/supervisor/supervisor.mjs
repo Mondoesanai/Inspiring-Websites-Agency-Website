@@ -59,8 +59,9 @@ import { fileURLToPath } from 'node:url';
 // import.meta.url percent-encodes. Using .pathname produced "Inspiring%20Websites"
 // and every file operation failed with ENOENT.
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const STATE_FILE = path.join(HERE, 'state.json');
-const LOCK_FILE = path.join(HERE, 'supervisor.lock');
+// `let`, because a second session supervised out of this same directory needs its own state and its own lock. See routeToSession below.
+let STATE_FILE = path.join(HERE, 'state.json');
+let LOCK_FILE = path.join(HERE, 'supervisor.lock');
 const LOG_FILE = path.join(HERE, 'supervisor.log');
 
 // ---------------------------------------------------------------------------
@@ -105,6 +106,39 @@ const DEFAULT_STATE = {
   history: [],
   usageNote: 'Development usage is whatever this session consumes on the owner\'s Claude plan. No separate metering is available to this process, so no dollar figure is claimed.',
 };
+
+/**
+ * SIDECAR BINDINGS — one supervisor directory, more than one supervised session.
+ *
+ * Claude Code loads hooks from the PROJECT's .claude/settings.json, and a session's project is fixed at startup. A session whose work lives in
+ * a different repo on disk still fires THIS hook, and the single bound-session guard then discards it — which is exactly what happened: a build
+ * running out of C:/Users/mondo/personal-agent logged `IGNORED session 61c7745b` on every stop, because state.json is bound to another session.
+ * Repointing that binding would have hijacked a live 39-cycle run, so instead each extra session gets its own state file beside this one.
+ *
+ * FAIL-SAFE BY CONSTRUCTION: a session with no entry here, or any error at all, leaves STATE_FILE and LOCK_FILE exactly as they were. The
+ * originally bound session's code path is unchanged.
+ */
+function routeToSession(sessionId, cwd) {
+  try {
+    const f = path.join(HERE, 'bindings.json');
+    if (!sessionId || !fs.existsSync(f)) return;
+    const all = JSON.parse(fs.readFileSync(f, 'utf8'));
+    // EXACT session id. No prefix matching: an 8-character prefix is what the log prints, not an identity.
+    const b = all[sessionId];
+    if (!b || !b.state) return;
+    // AND a canonical project match. Both, or nothing — a session id alone could be replayed from anywhere on disk.
+    const projects = (b.projects ?? []).map(canonical);
+    if (!projects.length) { log(`sidecar ${b.state} has no projects listed; refusing to route`); return; }
+    if (!projects.some((p) => isInside(cwd, p))) {
+      // the cwd is logged because it is the one fact that cannot be known without a real event, and it is needed to finish the binding
+      log(`sidecar ${b.state} NOT routed: cwd ${cwd} is not inside ${projects.join(' | ')}`);
+      return;
+    }
+    STATE_FILE = path.join(HERE, b.state);
+    LOCK_FILE = path.join(HERE, b.lock || `${b.state}.lock`);
+    log(`routed session ${String(sessionId).slice(0, 8)} (cwd ${cwd}) -> ${b.state}`);
+  } catch { /* routing must never break the hook for anyone else */ }
+}
 
 function readState() {
   try {
@@ -730,6 +764,10 @@ async function runHook() {
   const continuedByUs = ev.stop_hook_active === true;
   if (continuedByUs) log('note: this stop follows our own continuation (cycle caps govern)');
 
+  // Before any state is read: a session with its own sidecar binding is supervised from its own files. A session without one is untouched, and
+  // so is every guard below — this only chooses WHICH state.json the guards then run against.
+  routeToSession(ev.session_id, ev.cwd);
+
   const state = readState();
 
   // guard 3 — bound session only. This is the critical one: another live
@@ -882,6 +920,35 @@ function cmdStart(args) {
   const sessionId = args.session || process.env.CLAUDE_SESSION_ID;
   const project = canonical(args.project || process.cwd());
   if (!sessionId) { console.error('refusing to start: --session <id> is required (never infer the target)'); process.exit(1); }
+
+  /**
+   * `--state` — START A SECOND SUPERVISED SESSION WITHOUT TOUCHING THE FIRST.
+   *
+   * `routeToSession` only runs inside the hook, because only a real Stop event carries a session id and a cwd. The CLI had no equivalent, so
+   * `start` always wrote `state.json` — which meant the only way to supervise a second session was to overwrite the binding of a live one. That
+   * is precisely the hijack the sidecar design was built to avoid, and it would have silently ended a run already in progress.
+   *
+   * So the target is now NAMED rather than inferred, and it is checked against `bindings.json`: a state file that no binding claims is refused,
+   * because a sidecar the hook will never route to would sit there looking active and supervise nothing at all.
+   */
+  if (args.state && args.state !== true) {
+    const name = path.basename(String(args.state));
+    const bindings = (() => {
+      try {
+        return JSON.parse(fs.readFileSync(path.join(HERE, 'bindings.json'), 'utf8'));
+      } catch {
+        return {};
+      }
+    })();
+    const bound = bindings[sessionId];
+    if (!bound) { console.error(`refusing to start: session ${sessionId} has no entry in bindings.json, so the hook could never route to it`); process.exit(1); }
+    if (path.basename(String(bound.state)) !== name) { console.error(`refusing to start: bindings.json maps ${sessionId} to ${bound.state}, not ${name}`); process.exit(1); }
+    if (name === 'state.json') { console.error('refusing to start: state.json is the originally bound session; name a sidecar instead'); process.exit(1); }
+    STATE_FILE = path.join(HERE, name);
+    LOCK_FILE = path.join(HERE, bound.lock || `${name}.lock`);
+    log(`START targeting sidecar ${name} (session ${String(sessionId).slice(0, 8)}) — state.json untouched`);
+  }
+
   const repoPath = canonical(args.repo || path.join(project, 'client-dashboard'));
   const planFile = canonical(args.plan || path.join(repoPath, 'BUILD_PLAN.md'));
   if (!fs.existsSync(planFile)) { console.error(`refusing to start: no build plan at ${planFile}`); process.exit(1); }
@@ -921,7 +988,14 @@ function cmdStart(args) {
   }, null, 2));
 }
 
-function cmdStatus() {
+function cmdStatus(args = {}) {
+  /** `--state <file>` so a sidecar can be inspected; without it this reads the originally bound session, exactly as before */
+  if (args.state && args.state !== true) {
+    const name = path.basename(String(args.state));
+    const f = path.join(HERE, name);
+    if (!fs.existsSync(f)) { console.error(`no such state file: ${name}`); process.exit(1); }
+    STATE_FILE = f;
+  }
   const s0 = readState();
   const s = s0;
   const elapsed = s.startedAt ? Math.round((Date.now() - s.startedAt) / 60000) : 0;
@@ -981,13 +1055,14 @@ const argv = Object.fromEntries(
 
 if (sub === 'hook') runHook();
 else if (sub === 'start') cmdStart(argv);
-else if (sub === 'status') cmdStatus();
+else if (sub === 'status') cmdStatus(argv);
 else if (sub === 'pause') cmdPause();
 else if (sub === 'disable') cmdDisable();
 else {
   console.log(`session supervisor
   node supervisor.mjs start --session <id> [--project <path>] [--cycles 3] [--minutes 30]
-  node supervisor.mjs status
+  node supervisor.mjs start --session <id> --state <sidecar.json> --repo <path> --plan <file>   (a second session; never touches state.json)
+  node supervisor.mjs status [--state <sidecar.json>]
   node supervisor.mjs pause
   node supervisor.mjs disable
   (the Stop hook calls: node supervisor.mjs hook)`);

@@ -1,0 +1,8 @@
+{
+  "61c7745b-10ab-4629-b9cd-4c44cb8e8665": {
+    "state": "state-jarvis.json",
+    "lock": "supervisor-jarvis.lock",
+    "note": "The Jarvis build. Its Claude Code PROJECT is this websites directory, which is why this hook fires for it at all, but the cwd a real Stop event actually delivers is the repository it builds. Observed in the log at 2026-10-02T04:37:18Z: 'routed session 61c7745b (cwd C:\\Users\\mondo\\personal-agent)'. Tightened to that one exact path rather than guessed.",
+    "projects": ["C:/Users/mondo/personal-agent"]
+  }
+}
