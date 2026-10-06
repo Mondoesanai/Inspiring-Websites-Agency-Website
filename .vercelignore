@@ -1,7 +1,26 @@
+# This repository holds every client project, so the deployment is an ALLOW
+# LIST, not a deny list: exclude everything, then name what the agency site
+# actually needs. Anything not listed here will 404 on the live site even
+# though it is committed — which is exactly what happened to the social card,
+# the favicon and robots.txt until they were added below.
+
 *
+
+# Pages
 !index.html
 !privacy-policy.html
 !terms-and-conditions.html
 !sms-opt-in.html
+
+# Images used by the site
 !Brand_Assets
 !Brand_Assets/**
+
+# Search, sharing and browser chrome. The og:image in particular is only as
+# good as its URL: a 404 here means links shared to Facebook, LinkedIn or
+# iMessage render blank, which is the problem it was added to solve.
+!social-card.png
+!favicon.svg
+!apple-touch-icon.png
+!robots.txt
+!sitemap.xml
